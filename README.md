@@ -1,4 +1,4 @@
-# Terminal — Soheil Aghayani
+# Terminal - Soheil Aghayani
 
 An authored, bilingual terminal-style portfolio for Soheil Aghayani: environmental engineer, researcher, and software builder.
 
@@ -6,14 +6,14 @@ The interface is designed as a quiet research studio rather than a conventional 
 
 ## What is inside
 
-- **Live research departure board** — animated, character-by-character signal changes with pause controls and reduced-motion support.
-- **Project archive** — all public projects in one searchable index, with live links where available.
-- **Project case studies** — each project has a focused brief, format, repository metadata, live/API facts, and related public work.
-- **Research timeline** — chronological research threads that open into the existing detail view instead of duplicating content.
-- **Bilingual interface** — English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
-- **Command palette** — keyboard-friendly global search and route navigation with `Ctrl`/`⌘` + `K`.
-- **Public evidence** — selected publications, courses, field practice, recognition, and Google Scholar links.
-- **Print profile** — a compact profile view for applications and offline review.
+- **Live research departure board** - animated, character-by-character signal changes with pause controls and reduced-motion support.
+- **Project archive** - all public projects in one searchable index, with live links where available.
+- **Project case studies** - each project has a focused brief, format, repository metadata, live/API facts, and related public work.
+- **Research timeline** - chronological research threads that open into the existing detail view instead of duplicating content.
+- **Bilingual interface** - English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
+- **Command palette** - keyboard-friendly global search and route navigation with `Ctrl`/`⌘` + `K`.
+- **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
+- **Print profiles** - general, academic, and software-focused dossiers for applications and offline review.
 
 ## Design principles
 
@@ -34,7 +34,7 @@ The numeric shortcuts mirror the visible terminal file rail:
 | `2` | `02` FIELD NOTES / research |
 | `3` | `03` SKILLS |
 | `4` | `04` CONTACT |
-| `5–9` | No shortcut; the terminal reports it with a toast |
+| `5-9` | No shortcut; the terminal reports it with a toast |
 | `C` | Contact |
 | `?` | Help on the home surface |
 | `M` | Toggle terminal MAX / MIN |

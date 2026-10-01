@@ -152,6 +152,10 @@ const translations = {
     "palette.actionCopyRouteMeta": "Share this view",
     "palette.actionPrint": "Print profile",
     "palette.actionPrintMeta": "Application-ready dossier",
+    "palette.actionPrintAcademic": "Print academic profile",
+    "palette.actionPrintAcademicMeta": "Research and education dossier",
+    "palette.actionPrintTechnical": "Print software profile",
+    "palette.actionPrintTechnicalMeta": "Projects and working stack",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
     "palette.actionAbout": "Inspect personal signal",
@@ -185,6 +189,13 @@ const translations = {
     "print.research": "RESEARCH DIRECTION",
     "print.education": "EDUCATION",
     "print.skills": "WORKING STACK",
+    "print.evidence": "PUBLIC EVIDENCE",
+    "print.academicLabel": "ACADEMIC PROFILE / PRINT",
+    "print.academicSubtitle": "Environmental engineering / research dossier",
+    "print.academicSummary": "Research-focused profile covering waste systems, biofuel, life-cycle thinking, and public evidence.",
+    "print.technicalLabel": "SOFTWARE PROFILE / PRINT",
+    "print.technicalSubtitle": "Projects / interfaces / research tools",
+    "print.technicalSummary": "A practical software profile built from public projects, research tools, and working methods.",
     "footer.left": "Environmental engineer / researcher / builder",
     "footer.right": "GitHub"
   },
@@ -341,6 +352,10 @@ const translations = {
     "palette.actionCopyRouteMeta": "اشتراک‌گذاری این نما",
     "palette.actionPrint": "چاپ پروفایل",
     "palette.actionPrintMeta": "پرونده‌ی آماده‌ی اپلای",
+    "palette.actionPrintAcademic": "چاپ پروفایل دانشگاهی",
+    "palette.actionPrintAcademicMeta": "پرونده‌ی پژوهش و تحصیلات",
+    "palette.actionPrintTechnical": "چاپ پروفایل نرم‌افزار",
+    "palette.actionPrintTechnicalMeta": "پروژه‌ها و جعبه‌ابزار کاری",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
     "palette.actionAbout": "بررسی سیگنال شخصی",
@@ -374,6 +389,13 @@ const translations = {
     "print.research": "مسیر پژوهش",
     "print.education": "تحصیلات",
     "print.skills": "جعبه‌ابزار کاری",
+    "print.evidence": "شواهد عمومی",
+    "print.academicLabel": "پروفایل دانشگاهی / چاپ",
+    "print.academicSubtitle": "مهندسی محیط‌زیست / پرونده‌ی پژوهشی",
+    "print.academicSummary": "پروفایلی پژوهش‌محور درباره‌ی سیستم‌های پسماند، سوخت زیستی، تفکر چرخه‌ی عمر و شواهد عمومی.",
+    "print.technicalLabel": "پروفایل نرم‌افزار / چاپ",
+    "print.technicalSubtitle": "پروژه‌ها / رابط‌ها / ابزارهای پژوهشی",
+    "print.technicalSummary": "پروفایلی عملی از پروژه‌های عمومی، ابزارهای پژوهشی و روش‌های کاری.",
     "footer.left": "مهندس محیط‌زیست / پژوهشگر / سازنده",
     "footer.right": "گیت‌هاب"
   }
@@ -419,7 +441,7 @@ const content = {
       title: "The route so far.",
       description: "A civil engineering foundation moving toward environmental research and computational tools.",
       items: [
-        { title: "MSc Environmental Engineering (in progress)", meta: "University of Tehran · 2024–present", detail: "Focused on solid waste management and a thesis on waste-derived catalyst systems for biofuel." },
+        { title: "MSc Environmental Engineering (in progress)", meta: "University of Tehran · 2024-present", detail: "Focused on solid waste management and a thesis on waste-derived catalyst systems for biofuel." },
         { title: "BSc Civil Engineering", meta: "Shahed University", detail: "The starting point for a path that connects infrastructure, materials, and environmental responsibility." },
         { title: "Methods in progress", meta: "LCA / Python / modelling", detail: "Building a practical toolkit across LCA software, Python, environmental models, and visual explanation." }
       ]
@@ -557,8 +579,8 @@ const relatedProjectMap = {
 const archiveEvidence = {
   en: [
     [
-      { title: "4 journal papers", meta: "2025–2026 / selected record" },
-      { title: "8 conference papers", meta: "2023–2025 / selected record" },
+      { title: "4 journal papers", meta: "2025-2026 / selected record" },
+      { title: "8 conference papers", meta: "2023-2025 / selected record" },
       { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: "https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en" },
       { title: "Assessment of Biomass Resources in Iran and Worldwide: Diversity Analysis in Rural Areas with a Focus on Municipal Solid Waste and Livestock Manure", meta: "Pollution · 2026 · Aghayani et al. · 2 citations · DOI 10.22059/poll.2025.393545.2928", href: "https://jpoll.ut.ac.ir/article_105139.html" },
       { title: "Assessment of Landfill Gas Production in Saveh City Using the LandGEM Model: A Comprehensive Analysis", meta: "Advances in Environmental Technology · 2026 · Mollasalehi et al. · indexed record", href: "https://aet.irost.ir/article_1686.html" },
@@ -585,8 +607,8 @@ const archiveEvidence = {
   ],
   fa: [
     [
-      { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴–۱۴۰۵ / رکورد منتخب" },
-      { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲–۱۴۰۴ / رکورد منتخب" },
+      { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
+      { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲-۱۴۰۴ / رکورد منتخب" },
       { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: "https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en" },
       { title: "ارزیابی منابع زیست‌توده در ایران و جهان: تحلیل تنوع در نواحی روستایی با تمرکز بر پسماند جامد شهری و کود دام", meta: "Pollution · ۲۰۲۶ · Aghayani و همکاران · ۲ استناد · DOI 10.22059/poll.2025.393545.2928", href: "https://jpoll.ut.ac.ir/article_105139.html" },
       { title: "ارزیابی تولید گاز دفنگاه در شهر ساوه با استفاده از مدل LandGEM: تحلیلی جامع", meta: "Advances in Environmental Technology · ۲۰۲۶ · Mollasalehi و همکاران · رکورد نمایه‌شده", href: "https://aet.irost.ir/article_1686.html" },
@@ -620,8 +642,8 @@ const researchEvidence = {
       { title: "Waste cooking oil to biofuel", meta: "Transesterification / waste-shell catalyst" },
     ],
     [
-      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025–2026" },
-      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025–2026" },
+      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026" },
+      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026" },
     ],
     [
       { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024" },
@@ -634,8 +656,8 @@ const researchEvidence = {
       { title: "روغن پخت‌وپز تا سوخت زیستی", meta: "ترانس‌استریفیکاسیون / کاتالیست پوسته‌ی صدف" },
     ],
     [
-      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴–۱۴۰۵" },
-      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴–۱۴۰۵" },
+      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵" },
+      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵" },
     ],
     [
       { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳" },
@@ -1426,6 +1448,20 @@ const commandActionDefinitions = [
     searchKeys: ["palette.actionPrint", "palette.actionPrintMeta", "cv", "resume", "dossier", "print"],
   },
   {
+    id: "print-academic",
+    icon: "pixel-research",
+    titleKey: "palette.actionPrintAcademic",
+    metaKey: "palette.actionPrintAcademicMeta",
+    searchKeys: ["palette.actionPrintAcademic", "palette.actionPrintAcademicMeta", "academic", "research", "university"],
+  },
+  {
+    id: "print-technical",
+    icon: "pixel-project",
+    titleKey: "palette.actionPrintTechnical",
+    metaKey: "palette.actionPrintTechnicalMeta",
+    searchKeys: ["palette.actionPrintTechnical", "palette.actionPrintTechnicalMeta", "software", "projects", "developer"],
+  },
+  {
     id: "github",
     icon: "pixel-github",
     titleKey: "palette.actionGithub",
@@ -1932,38 +1968,65 @@ async function copyCurrentRoute() {
   }
 }
 
-function renderPrintProfile() {
+const printProfileDefinitions = {
+  general: {
+    labelKey: "print.label",
+    subtitleKey: "print.subtitle",
+    summaryKey: "print.summary",
+    sections: [
+      { titleKey: "print.projects", source: (language) => content[language].build.items, limit: 6 },
+      { titleKey: "print.research", source: (language) => content[language].research.items, limit: 3 },
+      { titleKey: "print.education", source: (language) => content[language].education.items, limit: 3 },
+      { titleKey: "print.skills", source: (language) => content[language].skills.items, limit: 5 },
+    ],
+  },
+  academic: {
+    labelKey: "print.academicLabel",
+    subtitleKey: "print.academicSubtitle",
+    summaryKey: "print.academicSummary",
+    sections: [
+      { titleKey: "print.research", source: (language) => content[language].research.items, limit: 3 },
+      { titleKey: "print.education", source: (language) => content[language].education.items, limit: 3 },
+      { titleKey: "print.evidence", source: (language) => archiveEvidence[language].flat(), limit: 8 },
+      { titleKey: "print.skills", source: (language) => content[language].skills.items, limit: 4 },
+    ],
+  },
+  technical: {
+    labelKey: "print.technicalLabel",
+    subtitleKey: "print.technicalSubtitle",
+    summaryKey: "print.technicalSummary",
+    sections: [
+      { titleKey: "print.projects", source: (language) => content[language].build.items, limit: 8 },
+      { titleKey: "print.skills", source: (language) => content[language].skills.items, limit: 8 },
+      { titleKey: "print.research", source: (language) => content[language].research.items, limit: 2 },
+      { titleKey: "print.education", source: (language) => content[language].education.items, limit: 2 },
+    ],
+  },
+};
+
+function renderPrintProfile(profile = "general") {
   if (!printProfile) return;
 
-  const selected = content[currentLang];
+  const definition = printProfileDefinitions[profile] || printProfileDefinitions.general;
   const renderPrintItems = (items, limit) => items.slice(0, limit).map((item) => `
     <li><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.meta)}</span></li>
   `).join("");
 
+  printProfile.dataset.profile = profile;
   printProfile.innerHTML = `
     <header class="print-profile-header">
-      <p class="print-profile-label">${escapeHtml(translate("print.label"))}</p>
+      <p class="print-profile-label">${escapeHtml(translate(definition.labelKey))}</p>
       <h1>${escapeHtml(translate("print.title"))}</h1>
-      <p class="print-profile-subtitle">${escapeHtml(translate("print.subtitle"))}</p>
-      <p class="print-profile-summary">${escapeHtml(translate("print.summary"))}</p>
+      <p class="print-profile-subtitle">${escapeHtml(translate(definition.subtitleKey))}</p>
+      <p class="print-profile-summary">${escapeHtml(translate(definition.summaryKey))}</p>
     </header>
     <div class="print-profile-grid">
-      <section>
-        <h2>${escapeHtml(translate("print.projects"))}</h2>
-        <ul>${renderPrintItems(selected.build.items, 6)}</ul>
-      </section>
-      <section>
-        <h2>${escapeHtml(translate("print.research"))}</h2>
-        <ul>${renderPrintItems(selected.research.items, 3)}</ul>
-      </section>
-      <section>
-        <h2>${escapeHtml(translate("print.education"))}</h2>
-        <ul>${renderPrintItems(selected.education.items, 3)}</ul>
-      </section>
-      <section>
-        <h2>${escapeHtml(translate("print.skills"))}</h2>
-        <ul>${renderPrintItems(selected.skills.items, 5)}</ul>
-      </section>
+      ${definition.sections.map(({ titleKey, source, limit }) => `
+        <section>
+          <h2>${escapeHtml(translate(titleKey))}</h2>
+          <ul>${renderPrintItems(source(currentLang), limit)}</ul>
+        </section>
+      `).join("")}
     </div>
   `;
 }
@@ -2383,8 +2446,13 @@ function activateCommandAction(actionId) {
     return;
   }
 
-  if (actionId === "print") {
-    renderPrintProfile();
+  if (["print", "print-academic", "print-technical"].includes(actionId)) {
+    const printProfileType = actionId === "print-academic"
+      ? "academic"
+      : actionId === "print-technical"
+        ? "technical"
+        : "general";
+    renderPrintProfile(printProfileType);
     window.setTimeout(() => window.print(), 0);
     return;
   }
