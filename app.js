@@ -158,8 +158,8 @@ const translations = {
     "palette.actionMaximizeMeta": "Expand the active surface",
     "palette.actionMinimize": "Minimize terminal",
     "palette.actionMinimizeMeta": "Restore the surface size",
-    "palette.actionCopyRoute": "Copy current route",
-    "palette.actionCopyRouteMeta": "Share this view",
+    "palette.actionShareRoute": "Share current route",
+    "palette.actionShareRouteMeta": "Native share on mobile / copy on desktop",
     "palette.actionPrint": "Print profile",
     "palette.actionPrintMeta": "Application-ready dossier",
     "palette.actionPrintAcademic": "Print academic profile",
@@ -194,6 +194,7 @@ const translations = {
     "detail.previousProjectAria": "Open previous project",
     "detail.nextProjectAria": "Open next project",
     "toast.routeCopied": "ROUTE COPIED",
+    "toast.routeShared": "ROUTE READY TO SHARE",
     "toast.routeCopyFailed": "COPY FAILED",
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
@@ -375,8 +376,8 @@ const translations = {
     "palette.actionMaximizeMeta": "باز کردن سطح فعال",
     "palette.actionMinimize": "کوچک‌نمایی ترمینال",
     "palette.actionMinimizeMeta": "برگرداندن اندازه‌ی سطح",
-    "palette.actionCopyRoute": "کپی مسیر فعلی",
-    "palette.actionCopyRouteMeta": "اشتراک‌گذاری این نما",
+    "palette.actionShareRoute": "اشتراک‌گذاری مسیر فعلی",
+    "palette.actionShareRouteMeta": "اشتراک‌گذاری در گوشی / کپی در دسکتاپ",
     "palette.actionPrint": "چاپ پروفایل",
     "palette.actionPrintMeta": "پرونده‌ی آماده‌ی اپلای",
     "palette.actionPrintAcademic": "چاپ پروفایل دانشگاهی",
@@ -411,6 +412,7 @@ const translations = {
     "detail.previousProjectAria": "باز کردن پروژه‌ی قبلی",
     "detail.nextProjectAria": "باز کردن پروژه‌ی بعدی",
     "toast.routeCopied": "مسیر کپی شد",
+    "toast.routeShared": "مسیر آماده‌ی اشتراک‌گذاری است",
     "toast.routeCopyFailed": "کپی انجام نشد",
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
@@ -1505,11 +1507,11 @@ const commandActionDefinitions = [
     searchKeys: ["palette.actionMaximize", "palette.actionMinimize", "palette.actionMaximizeMeta", "palette.actionMinimizeMeta", "max", "min", "terminal"],
   },
   {
-    id: "copy-route",
+    id: "share-route",
     icon: "pixel-external",
-    titleKey: "palette.actionCopyRoute",
-    metaKey: "palette.actionCopyRouteMeta",
-    searchKeys: ["palette.actionCopyRoute", "palette.actionCopyRouteMeta", "share", "copy", "link"],
+    titleKey: "palette.actionShareRoute",
+    metaKey: "palette.actionShareRouteMeta",
+    searchKeys: ["palette.actionShareRoute", "palette.actionShareRouteMeta", "share", "copy", "link"],
   },
   {
     id: "print",
@@ -2047,28 +2049,51 @@ function showToast(message) {
   }, 2600);
 }
 
-async function copyCurrentRoute() {
+function currentShareUrl() {
   const shareUrl = new URL(window.location.href);
   shareUrl.searchParams.delete("preview");
   shareUrl.searchParams.delete("cache");
+  return shareUrl.toString();
+}
+
+async function copyRouteToClipboard(shareUrl) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(shareUrl);
+    return;
+  }
+
+  const fallback = document.createElement("textarea");
+  fallback.value = shareUrl;
+  fallback.setAttribute("readonly", "true");
+  fallback.style.position = "fixed";
+  fallback.style.opacity = "0";
+  document.body.append(fallback);
+  fallback.select();
+  const copied = document.execCommand("copy");
+  fallback.remove();
+  if (!copied) throw new Error("Clipboard unavailable");
+}
+
+async function shareCurrentRoute() {
+  const shareUrl = currentShareUrl();
+  const supportsNativeShare = typeof navigator.share === "function"
+    && (navigator.maxTouchPoints > 0 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent));
 
   try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(shareUrl.toString());
-    } else {
-      const fallback = document.createElement("textarea");
-      fallback.value = shareUrl.toString();
-      fallback.setAttribute("readonly", "true");
-      fallback.style.position = "fixed";
-      fallback.style.opacity = "0";
-      document.body.append(fallback);
-      fallback.select();
-      const copied = document.execCommand("copy");
-      fallback.remove();
-      if (!copied) throw new Error("Clipboard unavailable");
+    if (supportsNativeShare) {
+      await navigator.share({
+        title: document.title,
+        text: translate("home.description"),
+        url: shareUrl,
+      });
+      showToast(translate("toast.routeShared"));
+      return;
     }
+
+    await copyRouteToClipboard(shareUrl);
     showToast(translate("toast.routeCopied"));
-  } catch {
+  } catch (error) {
+    if (error?.name === "AbortError") return;
     showToast(translate("toast.routeCopyFailed"));
   }
 }
@@ -2573,8 +2598,8 @@ function activateCommandAction(actionId) {
     return;
   }
 
-  if (actionId === "copy-route") {
-    copyCurrentRoute();
+  if (actionId === "share-route") {
+    shareCurrentRoute();
     return;
   }
 
