@@ -154,6 +154,10 @@ const translations = {
     "palette.actionPauseMeta": "Freeze departure signals",
     "palette.actionResume": "Resume live board",
     "palette.actionResumeMeta": "Restart departure signals",
+    "palette.actionMaximize": "Maximize terminal",
+    "palette.actionMaximizeMeta": "Expand the active surface",
+    "palette.actionMinimize": "Minimize terminal",
+    "palette.actionMinimizeMeta": "Restore the surface size",
     "palette.actionCopyRoute": "Copy current route",
     "palette.actionCopyRouteMeta": "Share this view",
     "palette.actionPrint": "Print profile",
@@ -366,6 +370,10 @@ const translations = {
     "palette.actionPauseMeta": "توقف سیگنال‌های حرکت",
     "palette.actionResume": "ادامه‌ی بورد زنده",
     "palette.actionResumeMeta": "شروع دوباره‌ی سیگنال‌ها",
+    "palette.actionMaximize": "بزرگ‌نمایی ترمینال",
+    "palette.actionMaximizeMeta": "باز کردن سطح فعال",
+    "palette.actionMinimize": "کوچک‌نمایی ترمینال",
+    "palette.actionMinimizeMeta": "برگرداندن اندازه‌ی سطح",
     "palette.actionCopyRoute": "کپی مسیر فعلی",
     "palette.actionCopyRouteMeta": "اشتراک‌گذاری این نما",
     "palette.actionPrint": "چاپ پروفایل",
@@ -1482,6 +1490,13 @@ const commandActionDefinitions = [
     ],
   },
   {
+    id: "terminal-size",
+    icon: () => surfaceMaximized ? "pixel-collapse" : "pixel-expand",
+    titleKey: () => surfaceMaximized ? "palette.actionMinimize" : "palette.actionMaximize",
+    metaKey: () => surfaceMaximized ? "palette.actionMinimizeMeta" : "palette.actionMaximizeMeta",
+    searchKeys: ["palette.actionMaximize", "palette.actionMinimize", "palette.actionMaximizeMeta", "palette.actionMinimizeMeta", "max", "min", "terminal"],
+  },
+  {
     id: "copy-route",
     icon: "pixel-external",
     titleKey: "palette.actionCopyRoute",
@@ -1542,6 +1557,7 @@ const curiosityCommandDefinition = {
 
 function commandActionEntries() {
   return commandActionDefinitions.map((definition) => {
+    const icon = typeof definition.icon === "function" ? definition.icon() : definition.icon;
     const titleKey = typeof definition.titleKey === "function" ? definition.titleKey() : definition.titleKey;
     const metaKey = typeof definition.metaKey === "function" ? definition.metaKey() : definition.metaKey;
     const title = translate(titleKey);
@@ -1558,7 +1574,7 @@ function commandActionEntries() {
       actionId: definition.id,
       view: null,
       itemIndex: null,
-      icon: definition.icon,
+      icon,
       kindKey: "palette.kindCommand",
       title,
       meta,
@@ -2506,6 +2522,11 @@ function activateCommandAction(actionId) {
 
   if (actionId === "board") {
     toggleBoardPause();
+    return;
+  }
+
+  if (actionId === "terminal-size") {
+    toggleSurfaceMaximized();
     return;
   }
 
