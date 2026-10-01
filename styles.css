@@ -2309,7 +2309,8 @@ html[dir="rtl"] .project-filter input {
 }
 
 .surface-help-link,
-.surface-command-link {
+.surface-command-link,
+.surface-maximize-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2329,7 +2330,10 @@ html[dir="rtl"] .project-filter input {
 .surface-help-link:focus-visible,
 .surface-command-link:hover,
 .surface-command-link:focus-visible,
-.surface-command-link[aria-expanded="true"] {
+.surface-command-link[aria-expanded="true"],
+.surface-maximize-link:hover,
+.surface-maximize-link:focus-visible,
+.surface-maximize-link[aria-pressed="true"] {
   color: var(--ink);
 }
 
@@ -2342,6 +2346,15 @@ html[dir="rtl"] .project-filter input {
   direction: ltr;
   font-size: 8px;
   letter-spacing: 0.04em;
+}
+
+.surface-maximize-icon {
+  display: block;
+  width: 11px;
+  height: 11px;
+  flex: 0 0 11px;
+  color: currentColor;
+  shape-rendering: crispEdges;
 }
 
 .surface-center {
@@ -2901,6 +2914,35 @@ html[dir="rtl"] .project-filter input {
   }
 }
 
+body.is-terminal-maximized {
+  overflow: hidden;
+}
+
+body.is-terminal-maximized::before {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  background: rgba(8, 11, 12, 0.78);
+  content: "";
+  pointer-events: none;
+}
+
+.studio-surface.is-maximized {
+  position: fixed;
+  z-index: 31;
+  inset: clamp(12px, 2vw, 28px);
+  width: auto;
+  min-height: 0;
+  max-height: none;
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.48);
+}
+
+body.is-terminal-maximized .command-palette-layer {
+  z-index: 60;
+}
+
 /* Project archive: keep the terminal index readable at compact desktop widths. */
 .surface-list-projects {
   row-gap: 0;
@@ -3173,6 +3215,7 @@ html[dir="rtl"] .project-filter input {
 
   .surface-help-link,
   .surface-home-link,
+  .surface-maximize-link,
   .detail-back {
     display: inline-flex;
     min-height: 44px;
@@ -3181,6 +3224,11 @@ html[dir="rtl"] .project-filter input {
   }
 
   .surface-help-link {
+    min-width: 44px;
+    justify-content: center;
+  }
+
+  .surface-maximize-link {
     min-width: 44px;
     justify-content: center;
   }
@@ -4190,6 +4238,10 @@ body.is-command-open {
   }
 
   .surface-command-link:hover:not(:focus-visible) {
+    color: var(--ink-faint);
+  }
+
+  .surface-maximize-link:hover:not(:focus-visible) {
     color: var(--ink-faint);
   }
 

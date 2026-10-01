@@ -28,6 +28,10 @@ const translations = {
     "surface.status": "Open",
     "surface.help": "Help",
     "surface.helpClose": "Close",
+    "surface.maximize": "MAX",
+    "surface.minimize": "MIN",
+    "surface.maximizeAria": "Maximize terminal",
+    "surface.minimizeAria": "Minimize terminal",
     "surface.helpAria": "Open terminal help",
     "surface.helpCloseAria": "Close terminal help",
     "surface.helpRegionAria": "Terminal keyboard shortcuts",
@@ -203,6 +207,10 @@ const translations = {
     "surface.status": "باز",
     "surface.help": "راهنما",
     "surface.helpClose": "بستن",
+    "surface.maximize": "MAX",
+    "surface.minimize": "MIN",
+    "surface.maximizeAria": "بزرگ‌نمایی ترمینال",
+    "surface.minimizeAria": "کوچک‌نمایی ترمینال",
     "surface.helpAria": "باز کردن راهنمای ترمینال",
     "surface.helpCloseAria": "بستن راهنمای ترمینال",
     "surface.helpRegionAria": "میانبرهای صفحه‌کلید ترمینال",
@@ -830,6 +838,7 @@ let currentItem = null;
 let indexOpen = false;
 let helpOpen = false;
 let commandPaletteOpen = false;
+let surfaceMaximized = false;
 const filterableSections = new Set(["build", "skills", "archive"]);
 const sectionFilterQueries = { build: "", skills: "", archive: "" };
 let indexReturnFocus = null;
@@ -863,6 +872,9 @@ const surfaceContent = document.getElementById("surfaceContent");
 const surfaceHomeButton = document.getElementById("surfaceHomeButton");
 const surfaceHelpButton = document.getElementById("surfaceHelpButton");
 const commandToggle = document.getElementById("commandToggle");
+const surfaceMaximizeButton = document.getElementById("surfaceMaximizeButton");
+const surfaceMaximizeIcon = document.getElementById("surfaceMaximizeIcon");
+const surfaceMaximizeLabel = document.getElementById("surfaceMaximizeLabel");
 const surfaceHelpLabel = document.querySelector(".surface-help-label");
 const surfaceHelp = document.getElementById("surfaceHelp");
 const departureBoard = document.getElementById("departureBoard");
@@ -1632,6 +1644,7 @@ function applyTranslations() {
   );
 
   updateSurfaceHelpToggleLabel();
+  updateSurfaceMaximizeControl();
   updateBoardProjectCount();
   updateBoardLiveToggle();
   refreshBoardLanguage();
@@ -1657,6 +1670,35 @@ function updateSurfaceHelpToggleLabel() {
   const ariaKey = helpOpen ? "surface.helpCloseAria" : "surface.helpAria";
   if (surfaceHelpLabel) surfaceHelpLabel.textContent = translate(labelKey);
   surfaceHelpButton.setAttribute("aria-label", translate(ariaKey));
+}
+
+function updateSurfaceMaximizeControl() {
+  if (!surfaceMaximizeButton) return;
+
+  const labelKey = surfaceMaximized ? "surface.minimize" : "surface.maximize";
+  const ariaKey = surfaceMaximized ? "surface.minimizeAria" : "surface.maximizeAria";
+  surfaceMaximizeButton.setAttribute("aria-pressed", String(surfaceMaximized));
+  surfaceMaximizeButton.setAttribute("aria-label", translate(ariaKey));
+  if (surfaceMaximizeLabel) surfaceMaximizeLabel.textContent = translate(labelKey);
+  surfaceMaximizeIcon?.querySelector("use")?.setAttribute(
+    "href",
+    surfaceMaximized ? "#pixel-collapse" : "#pixel-expand",
+  );
+}
+
+function setSurfaceMaximized(maximized, { restoreFocus = false } = {}) {
+  surfaceMaximized = Boolean(maximized);
+  surface?.classList.toggle("is-maximized", surfaceMaximized);
+  document.body.classList.toggle("is-terminal-maximized", surfaceMaximized);
+  updateSurfaceMaximizeControl();
+
+  if (!surfaceMaximized && restoreFocus) {
+    surfaceMaximizeButton?.focus({ preventScroll: true });
+  }
+}
+
+function toggleSurfaceMaximized() {
+  setSurfaceMaximized(!surfaceMaximized);
 }
 
 function setSurfaceStatus(text = "", visible = true) {
@@ -2367,6 +2409,11 @@ document.addEventListener("click", (event) => {
 
   if (target.id === "commandToggle") {
     toggleCommandPalette();
+    return;
+  }
+
+  if (target.dataset.action === "surface-toggle-maximize") {
+    toggleSurfaceMaximized();
     return;
   }
 

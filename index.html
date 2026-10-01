@@ -24,7 +24,7 @@
     <meta name="twitter:title" content="Soheil Aghayani / Quiet Research Studio" />
     <meta name="twitter:description" content="Environmental engineer, researcher, and software builder." />
     <title>Soheil Aghayani / Quiet Research Studio</title>
-    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261001-113" />
+    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261001-114" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -103,6 +103,12 @@
       </symbol>
       <symbol id="pixel-external" viewBox="0 0 15 15">
         <path fill="currentColor" d="M8 0h7v7h-2V4.5L7.7 9.8 6.2 8.3 11.5 3H8zM0 2h6v2H2v9h9V9h2v6H0z" />
+      </symbol>
+      <symbol id="pixel-expand" viewBox="0 0 15 15">
+        <path fill="currentColor" d="M0 0h6v2H2v4H0zm9 0h6v6h-2V2H9zM0 9h2v4h4v2H0zm13 0h2v6H9v-2h4z" />
+      </symbol>
+      <symbol id="pixel-collapse" viewBox="0 0 15 15">
+        <path fill="currentColor" d="M0 0h2v4h4v2H0zm9 0h2v4h4v2H9zM0 9h6v2H2v4H0zm9 0h6v6h-2v-4H9z" />
       </symbol>
     </svg>
     <a class="skip-link" href="#mainStage" data-i18n="nav.skip">Skip to main content</a>
@@ -188,6 +194,10 @@
                   <button class="surface-command-link" id="commandToggle" type="button" data-action="command-open" aria-expanded="false" aria-haspopup="dialog" aria-controls="commandPalette" aria-keyshortcuts="Control+K Meta+K" data-i18n-aria="nav.commandsAria">
                     <span class="surface-command-key" aria-hidden="true">CTRL K</span>
                     <span class="surface-command-label" data-i18n="nav.commands">Commands</span>
+                  </button>
+                  <button class="surface-maximize-link" id="surfaceMaximizeButton" type="button" data-action="surface-toggle-maximize" aria-pressed="false" aria-controls="studioSurface" aria-label="Maximize terminal">
+                    <svg class="surface-maximize-icon" id="surfaceMaximizeIcon" aria-hidden="true" focusable="false"><use href="#pixel-expand"></use></svg>
+                    <span id="surfaceMaximizeLabel">MAX</span>
                   </button>
                   <span class="surface-status" id="surfaceStatus" data-i18n="surface.status" hidden>Open</span>
                 </div>
@@ -299,6 +309,6 @@
       </section>
     </div>
 
-    <script src="app.js?v=studio-terminal-20261001-116"></script>
+    <script src="app.js?v=studio-terminal-20261001-117"></script>
   </body>
 </html>
