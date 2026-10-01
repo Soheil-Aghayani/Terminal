@@ -1290,6 +1290,52 @@ html[dir="rtl"] .project-filter input {
   line-height: 1.7;
 }
 
+.detail-artifact {
+  max-width: 720px;
+  padding-top: 18px;
+  margin: 20px 0 24px;
+  border-top: 1px solid var(--line);
+}
+
+.detail-artifact-topline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  color: var(--ink-faint);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.detail-artifact-topline span:first-child {
+  flex: 0 0 auto;
+  color: var(--accent);
+}
+
+.detail-artifact-frame {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: #eeeade;
+}
+
+.detail-artifact-frame img {
+  display: block;
+  width: 100%;
+  max-height: 310px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.detail-artifact figcaption {
+  margin-top: 9px;
+  color: var(--ink-faint);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
 .detail-back {
   display: inline-flex;
   margin-bottom: 24px;

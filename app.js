@@ -88,6 +88,9 @@ const translations = {
     "detail.githubLanguage": "LANGUAGE",
     "detail.relatedWork": "RELATED PUBLIC WORK",
     "detail.evidence": "SELECTED EVIDENCE",
+    "detail.artifactLabel": "THESIS ARTIFACT",
+    "detail.artifactAlt": "Thesis infographic showing waste cooking oil converted to biodiesel with a catalyst made from waste seashells.",
+    "detail.artifactCaption": "A visual map of the waste cooking oil to biodiesel workflow and the waste-shell catalyst route.",
     "board.title": "RESEARCH DEPARTURES",
     "board.live": "LIVE",
     "board.paused": "PAUSED",
@@ -306,6 +309,9 @@ const translations = {
     "detail.githubLanguage": "زبان",
     "detail.relatedWork": "کارهای عمومی مرتبط",
     "detail.evidence": "شواهد منتخب",
+    "detail.artifactLabel": "اثر پایان‌نامه",
+    "detail.artifactAlt": "اینفوگرافیک پایان‌نامه درباره‌ی تبدیل روغن پخت‌وپز به بیودیزل با کاتالیستی ساخته‌شده از پوسته‌ی دورریختنی صدف.",
+    "detail.artifactCaption": "نقشه‌ای بصری از مسیر روغن پخت‌وپز تا بیودیزل و مسیر کاتالیست حاصل از پسماند صدف.",
     "board.title": "حرکت‌های پژوهش",
     "board.live": "زنده",
     "board.paused": "مکث",
@@ -716,6 +722,12 @@ const detailEvidenceSources = {
   research: researchEvidence,
 };
 
+const publicArtifacts = Object.freeze({
+  research: Object.freeze({
+    0: "assets/thesis-infographic.jpg",
+  }),
+});
+
 function updatePortfolioStructuredData() {
   const structuredData = document.getElementById("portfolioStructuredData");
   if (!structuredData) return;
@@ -951,6 +963,23 @@ function renderEvidenceRow(evidence) {
     <a class="detail-evidence-row" href="${escapeRawHtml(evidence.href)}" target="_blank" rel="noreferrer">
       ${content}
     </a>
+  `;
+}
+
+function renderPublicArtifact(section, itemIndex) {
+  const src = publicArtifacts[section]?.[itemIndex];
+  if (!src) return "";
+
+  return `
+    <figure class="detail-artifact">
+      <div class="detail-artifact-topline">
+        <span>${escapeHtml(translate("detail.artifactLabel"))}</span>
+      </div>
+      <div class="detail-artifact-frame">
+        <img src="${escapeRawHtml(src)}" alt="${escapeRawHtml(translate("detail.artifactAlt"))}" loading="lazy" decoding="async" />
+      </div>
+      <figcaption>${escapeHtml(translate("detail.artifactCaption"))}</figcaption>
+    </figure>
   `;
 }
 
@@ -2455,6 +2484,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
       ${section === "build" ? renderProjectDetailNavigation(itemIndex) : ""}
       <h2>${escapeHtml(item.title)}</h2>
       ${section === "build" ? renderProjectCaseStudy(item, itemIndex) : `<p>${escapeHtml(item.detail)}</p>`}
+      ${renderPublicArtifact(section, itemIndex)}
       ${section === "build" ? renderGithubSignal(itemIndex) : ""}
       ${relatedProjects.length ? `
         <div class="detail-related">
