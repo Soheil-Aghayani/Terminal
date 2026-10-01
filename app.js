@@ -2158,6 +2158,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
   syncViewHistory(section, itemIndex, historyMode);
   currentItem = itemIndex;
   prepareSurfaceContentView(section, { modeLabel: viewLabel(section), statusText: item.meta });
+  setSurfaceHomeButtonVisible(false);
   const repositoryUrl = projectRepositoryUrl(section, itemIndex);
   const liveUrl = projectLiveUrl(section, itemIndex);
   const relatedProjects = relatedProjectItems(section, itemIndex);
