@@ -2962,6 +2962,13 @@ html[dir="rtl"] .project-filter input {
   transition: color 180ms ease, border-color 180ms ease;
 }
 
+.detail-share-button {
+  width: 100%;
+  cursor: pointer;
+  background: transparent;
+  text-align: start;
+}
+
 .detail-link:hover,
 .detail-link:focus-visible {
   border-color: var(--line-strong);

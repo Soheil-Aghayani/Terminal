@@ -201,6 +201,8 @@ const translations = {
     "detail.nextProject": "NEXT ]",
     "detail.previousProjectAria": "Open previous project",
     "detail.nextProjectAria": "Open next project",
+    "detail.shareRoute": "SHARE / COPY ROUTE",
+    "detail.shareRouteAria": "Share or copy this route",
     "toast.routeCopied": "ROUTE COPIED",
     "toast.routeShared": "ROUTE READY TO SHARE",
     "toast.routeCopyFailed": "COPY FAILED",
@@ -427,6 +429,8 @@ const translations = {
     "detail.nextProject": "بعدی ]",
     "detail.previousProjectAria": "باز کردن پروژه‌ی قبلی",
     "detail.nextProjectAria": "باز کردن پروژه‌ی بعدی",
+    "detail.shareRoute": "اشتراک / کپی مسیر",
+    "detail.shareRouteAria": "اشتراک‌گذاری یا کپی کردن این مسیر",
     "toast.routeCopied": "مسیر کپی شد",
     "toast.routeShared": "مسیر آماده‌ی اشتراک‌گذاری است",
     "toast.routeCopyFailed": "کپی انجام نشد",
@@ -2632,8 +2636,12 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
           </div>
         </div>
       ` : ""}
-      ${repositoryUrl || liveUrl ? `
-        <div class="detail-links">
+      <div class="detail-links">
+        <button class="detail-link detail-share-button" type="button" data-action="share-route" aria-label="${escapeHtml(translate("detail.shareRouteAria"))}">
+          <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-external"></use></svg><span>${escapeHtml(translate("detail.shareRoute"))}</span></span>
+          ${externalIconMarkup()}
+        </button>
+        ${repositoryUrl || liveUrl ? `
           ${repositoryUrl ? `
             <a class="detail-link" href="${repositoryUrl}" target="_blank" rel="noreferrer">
               <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-github"></use></svg><span>${escapeHtml(translate("detail.repository"))}</span></span>
@@ -2646,8 +2654,8 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
               ${externalIconMarkup()}
             </a>
           ` : ""}
-        </div>
-      ` : ""}
+        ` : ""}
+      </div>
     </div>
   `;
   updateDocumentTitle();
@@ -2977,6 +2985,11 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "surface-help") {
     setSurfaceHelpOpen(!helpOpen, { restoreFocus: helpOpen });
+    return;
+  }
+
+  if (target.dataset.action === "share-route") {
+    shareCurrentRoute();
     return;
   }
 
