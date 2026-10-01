@@ -2031,7 +2031,7 @@ function focusSurfaceContext() {
 
   const compactViewport = window.matchMedia("(max-width: 960px)").matches;
   if (compactViewport) {
-    target.scrollIntoView({
+    surface?.scrollIntoView({
       block: "start",
       inline: "nearest",
       behavior: reducedMotionQuery.matches ? "auto" : "smooth",

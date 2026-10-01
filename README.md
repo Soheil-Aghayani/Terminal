@@ -89,6 +89,7 @@ The document includes route-aware descriptions and titles, a canonical URL, robo
 - the live board exposes changing values through labels rather than relying only on animation
 - the command palette supports keyboard navigation
 - motion pauses when the board is focused, hovered, paused, hidden, or when reduced motion is requested
+- route changes keep the terminal frame in view on compact screens so detail pages retain their context
 - mobile layouts allow natural document scrolling without introducing horizontal overflow
 
 ## License and typefaces
