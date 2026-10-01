@@ -3010,6 +3010,275 @@ html[dir="rtl"] .project-filter input {
   display: none;
 }
 
+.profile-preview-layer {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vw, 32px);
+  background: rgba(8, 11, 12, 0.82);
+}
+
+.profile-preview-scrim {
+  position: absolute;
+  inset: 0;
+}
+
+.profile-preview-dialog {
+  display: flex;
+  position: relative;
+  width: min(900px, 100%);
+  max-height: calc(100dvh - 24px);
+  flex-direction: column;
+  border: 1px solid var(--line-strong);
+  background: #101416;
+  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.52);
+}
+
+.profile-preview-topline {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.profile-preview-topline > span::before {
+  color: var(--accent);
+  content: "> ";
+}
+
+.profile-preview-close,
+.profile-preview-print {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  color: var(--ink-faint);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.profile-preview-close span:first-child,
+.profile-preview-print {
+  color: var(--accent);
+}
+
+.profile-preview-close:hover,
+.profile-preview-close:focus-visible,
+.profile-preview-print:hover,
+.profile-preview-print:focus-visible {
+  color: var(--ink);
+}
+
+.profile-preview-hint {
+  margin: 0;
+  padding: 12px 18px 0;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.profile-preview-content {
+  min-height: 0;
+  overflow: auto;
+  padding: 16px 18px 22px;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.profile-preview-content .print-profile {
+  display: block;
+  color: var(--ink);
+  font-family: var(--mono);
+}
+
+.profile-preview-content .print-profile-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-preview-content .print-profile-label,
+.profile-preview-content .print-profile-subtitle,
+.profile-preview-content .print-profile-summary,
+.profile-preview-content .print-profile-grid h2,
+.profile-preview-content .print-profile-grid li span {
+  font-family: var(--mono);
+}
+
+.profile-preview-content .print-profile-label {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.profile-preview-content .print-profile h1 {
+  margin: 0;
+  color: var(--ink);
+  font-family: "MatrixType Display", var(--mono);
+  font-size: clamp(34px, 5vw, 62px);
+  font-weight: 400;
+  letter-spacing: 0.035em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.profile-preview-content .print-profile-subtitle {
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.profile-preview-content .print-profile-summary {
+  max-width: 680px;
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.profile-preview-content .print-profile-contact {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.profile-preview-content .print-profile-contact-label,
+.profile-preview-content .print-profile-grid h2 {
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.profile-preview-content .print-profile-contact-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.profile-preview-content .print-profile-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 18px;
+}
+
+.profile-preview-content .print-profile-contact-links a {
+  display: inline-flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 5px;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 9px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.profile-preview-content .print-profile-contact-links a:hover,
+.profile-preview-content .print-profile-contact-links a:focus-visible,
+.profile-preview-content .print-profile-item-link:hover,
+.profile-preview-content .print-profile-item-link:focus-visible {
+  color: var(--accent);
+}
+
+.profile-preview-content .print-profile-contact-links a span,
+.profile-preview-content .print-profile-grid li span {
+  color: var(--ink-faint);
+}
+
+.profile-preview-content .print-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 28px;
+  padding-top: 20px;
+}
+
+.profile-preview-content .print-profile-grid section {
+  min-width: 0;
+}
+
+.profile-preview-content .print-profile-grid h2 {
+  margin: 0 0 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-preview-content .print-profile-grid ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-preview-content .print-profile-grid li {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-preview-content .print-profile-grid li strong {
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.profile-preview-content .print-profile-grid li span {
+  overflow-wrap: anywhere;
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+.profile-preview-content .print-profile-item-link {
+  color: inherit;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 2px;
+}
+
+.profile-preview-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 18px;
+  border-top: 1px solid var(--line);
+}
+
+html[dir="rtl"] .profile-preview-content .print-profile {
+  direction: rtl;
+  font-family: "IRANSharp", Arial, sans-serif;
+}
+
+html[dir="rtl"] .profile-preview-content .print-profile-grid li,
+html[dir="rtl"] .profile-preview-content .print-profile-summary,
+html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
+  font-family: "IRANSharp", Arial, sans-serif;
+}
+
 @media (max-width: 960px) {
   .surface-content h2,
   .detail-copy h2 {
@@ -3055,6 +3324,25 @@ html[dir="rtl"] .project-filter input {
   .detail-link {
     min-height: 44px;
     padding-block: 8px;
+  }
+
+  .profile-preview-layer {
+    padding: 8px;
+  }
+
+  .profile-preview-dialog {
+    max-height: calc(100dvh - 16px);
+  }
+
+  .profile-preview-topline,
+  .profile-preview-content,
+  .profile-preview-actions {
+    padding-inline: 12px;
+  }
+
+  .profile-preview-content .print-profile-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 
   .detail-evidence-list {
@@ -4245,7 +4533,8 @@ body.is-command-open {
 
   .studio-shell,
   .command-palette-layer,
-  .studio-toast {
+  .studio-toast,
+  .profile-preview-layer {
     display: none !important;
   }
 

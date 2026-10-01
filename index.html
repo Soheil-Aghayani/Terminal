@@ -36,7 +36,7 @@
     <meta name="twitter:image" content="https://agseyl.ir/social-card.svg" />
     <meta name="twitter:image:alt" content="Soheil Aghayani / Quiet Research Studio" />
     <title>Soheil Aghayani / Quiet Research Studio</title>
-    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261002-001" />
+    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261002-002" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -320,6 +320,26 @@
 
     <section class="print-profile" id="printProfile" aria-hidden="true"></section>
 
+    <div class="profile-preview-layer" id="profilePreview" hidden aria-hidden="true">
+      <div class="profile-preview-scrim" data-action="profile-close" aria-hidden="true"></div>
+      <section class="profile-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="profilePreviewTitle" aria-describedby="profilePreviewHint">
+        <div class="profile-preview-topline">
+          <span id="profilePreviewTitle" data-i18n="profile.previewLabel">PROFILE / VIEW</span>
+          <button class="profile-preview-close" id="profilePreviewClose" type="button" data-action="profile-close">
+            <span aria-hidden="true">ESC</span>
+            <span data-i18n="profile.close">CLOSE</span>
+          </button>
+        </div>
+        <p class="profile-preview-hint" id="profilePreviewHint" data-i18n="profile.previewHint">PUBLIC PROFILE / PRINT OR SAVE AS PDF</p>
+        <div class="profile-preview-content" id="profilePreviewContent"></div>
+        <div class="profile-preview-actions">
+          <button class="profile-preview-print" id="profilePreviewPrint" type="button" data-action="profile-print" data-profile="general" aria-label="Print or save this profile as PDF" data-i18n-aria="profile.printAria">
+            <span data-i18n="profile.print">PRINT / PDF</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
     <div class="command-palette-layer" id="commandPalette" hidden aria-hidden="true">
       <div class="command-palette-scrim" data-action="command-close" aria-hidden="true"></div>
       <section class="command-palette" role="dialog" aria-modal="true" aria-labelledby="commandPaletteTitle" aria-describedby="commandPaletteHint">
@@ -342,6 +362,6 @@
       </section>
     </div>
 
-    <script src="app.js?v=studio-terminal-20261002-004"></script>
+    <script src="app.js?v=studio-terminal-20261002-006"></script>
   </body>
 </html>

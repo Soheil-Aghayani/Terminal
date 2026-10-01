@@ -130,9 +130,14 @@ const translations = {
     "contact.profileOutputs": "PROFILE OUTPUTS",
     "contact.academicProfile": "Academic profile",
     "contact.technicalProfile": "Software profile",
-    "contact.profilePrintMeta": "PRINT / PDF",
-    "contact.academicProfileAria": "Print the academic profile",
-    "contact.technicalProfileAria": "Print the software profile",
+    "contact.profilePrintMeta": "VIEW / PRINT",
+    "contact.academicProfileAria": "Open the academic profile",
+    "contact.technicalProfileAria": "Open the software profile",
+    "profile.previewLabel": "PROFILE / VIEW",
+    "profile.previewHint": "PUBLIC PROFILE / PRINT OR SAVE AS PDF",
+    "profile.close": "CLOSE",
+    "profile.print": "PRINT / PDF",
+    "profile.printAria": "Print or save this profile as PDF",
     "palette.label": "Command palette",
     "palette.title": "Find a signal.",
     "palette.close": "Close",
@@ -351,9 +356,14 @@ const translations = {
     "contact.profileOutputs": "خروجی پروفایل",
     "contact.academicProfile": "پروفایل دانشگاهی",
     "contact.technicalProfile": "پروفایل نرم‌افزار",
-    "contact.profilePrintMeta": "چاپ / PDF",
-    "contact.academicProfileAria": "چاپ پروفایل دانشگاهی",
-    "contact.technicalProfileAria": "چاپ پروفایل نرم‌افزار",
+    "contact.profilePrintMeta": "مشاهده / چاپ",
+    "contact.academicProfileAria": "باز کردن پروفایل دانشگاهی",
+    "contact.technicalProfileAria": "باز کردن پروفایل نرم‌افزار",
+    "profile.previewLabel": "پروفایل / مشاهده",
+    "profile.previewHint": "پروفایل عمومی / چاپ یا ذخیره به‌صورت PDF",
+    "profile.close": "بستن",
+    "profile.print": "چاپ / PDF",
+    "profile.printAria": "چاپ یا ذخیره‌ی این پروفایل به‌صورت PDF",
     "palette.label": "پالت فرمان",
     "palette.title": "یک سیگنال پیدا کن.",
     "palette.close": "بستن",
@@ -1027,6 +1037,9 @@ let commandPaletteReturnFocus = null;
 let commandQuery = "";
 let commandSelectedIndex = 0;
 let commandResultEntries = [];
+let profilePreviewOpen = false;
+let profilePreviewReturnFocus = null;
+let activeProfile = "general";
 
 const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
 
@@ -1083,6 +1096,10 @@ const commandSearch = document.getElementById("commandSearch");
 const commandResults = document.getElementById("commandResults");
 const studioToast = document.getElementById("studioToast");
 const printProfile = document.getElementById("printProfile");
+const profilePreview = document.getElementById("profilePreview");
+const profilePreviewClose = document.getElementById("profilePreviewClose");
+const profilePreviewContent = document.getElementById("profilePreviewContent");
+const profilePreviewPrint = document.getElementById("profilePreviewPrint");
 let toastTimer = null;
 
 const projectDepartures = [
@@ -1415,7 +1432,7 @@ function renderProfileActions() {
       <p class="contact-profile-label">${escapeHtml(translate("contact.profileOutputs"))}</p>
       <div class="contact-profile-list">
         ${profiles.map(({ id, key, icon }) => `
-          <button class="contact-profile-button" type="button" data-action="profile-print" data-profile="${id}" aria-label="${escapeHtml(translate(`contact.${key}Aria`))}">
+          <button class="contact-profile-button" type="button" data-action="profile-preview" data-profile="${id}" aria-label="${escapeHtml(translate(`contact.${key}Aria`))}">
             <span class="contact-profile-button-label">
               <svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#${icon}"></use></svg>
               <span>${escapeHtml(translate(`contact.${key}`))}</span>
@@ -1897,6 +1914,8 @@ function applyTranslations() {
   refreshBoardLanguage();
   updateBoardClock();
   if (commandPaletteOpen) renderCommandResults();
+  if (profilePreviewOpen) renderPrintProfile(activeProfile);
+  profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   updateDocumentTitle();
 }
 
@@ -2237,9 +2256,7 @@ const printProfileDefinitions = {
   },
 };
 
-function renderPrintProfile(profile = "general") {
-  if (!printProfile) return;
-
+function renderProfileMarkup(profile = "general") {
   const definition = printProfileDefinitions[profile] || printProfileDefinitions.general;
   const printableContactKeys = new Set(["github", "portfolio", "email", "linkedin", "scholar", "orcid"]);
   const printableContacts = contactLinks.filter(({ key }) => printableContactKeys.has(key));
@@ -2256,8 +2273,7 @@ function renderPrintProfile(profile = "general") {
     </li>
   `).join("");
 
-  printProfile.dataset.profile = profile;
-  printProfile.innerHTML = `
+  return `
     <header class="print-profile-header">
       <p class="print-profile-label">${escapeHtml(translate(definition.labelKey))}</p>
       <h1>${escapeHtml(translate("print.title"))}</h1>
@@ -2284,6 +2300,67 @@ function renderPrintProfile(profile = "general") {
       `).join("")}
     </div>
   `;
+}
+
+function renderPrintProfile(profile = "general") {
+  const markup = renderProfileMarkup(profile);
+  if (printProfile) {
+    printProfile.dataset.profile = profile;
+    printProfile.innerHTML = markup;
+  }
+  if (profilePreviewContent) {
+    profilePreviewContent.dataset.profile = profile;
+    profilePreviewContent.innerHTML = markup;
+  }
+}
+
+function profilePreviewFocusableElements() {
+  if (!profilePreview) return [];
+
+  return [...profilePreview.querySelectorAll("button, a[href], input, select, textarea, [tabindex]:not([tabindex='-1'])")]
+    .filter((element) => !element.disabled && element.getAttribute("aria-hidden") !== "true");
+}
+
+function openProfilePreview(profile = "general") {
+  if (!profilePreview || profilePreviewOpen) return;
+
+  const activeElement = document.activeElement;
+  profilePreviewReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body
+    ? activeElement
+    : null;
+  activeProfile = profile;
+  renderPrintProfile(profile);
+  profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
+  profilePreviewOpen = true;
+  profilePreview.hidden = false;
+  profilePreview.setAttribute("aria-hidden", "false");
+  profilePreviewPrint?.setAttribute("data-profile", profile);
+  studioShell.inert = true;
+  document.body.classList.add("is-profile-preview-open");
+  syncBoardRotation();
+
+  window.requestAnimationFrame(() => {
+    if (profilePreviewOpen) profilePreviewClose?.focus({ preventScroll: true });
+  });
+}
+
+function closeProfilePreview({ restoreFocus = false } = {}) {
+  if (!profilePreview || !profilePreviewOpen) return;
+
+  profilePreviewOpen = false;
+  profilePreview.hidden = true;
+  profilePreview.setAttribute("aria-hidden", "true");
+  studioShell.inert = false;
+  document.body.classList.remove("is-profile-preview-open");
+  syncBoardRotation();
+
+  if (restoreFocus) {
+    const target = profilePreviewReturnFocus && document.contains(profilePreviewReturnFocus)
+      ? profilePreviewReturnFocus
+      : null;
+    profilePreviewReturnFocus = null;
+    target?.focus({ preventScroll: true });
+  }
 }
 
 function printProfileAndOpen(profile = "general") {
@@ -2775,6 +2852,12 @@ function toggleIndex() {
 }
 
 document.addEventListener("click", (event) => {
+  const profileCloseTarget = event.target.closest("[data-action='profile-close']");
+  if (profileCloseTarget) {
+    closeProfilePreview({ restoreFocus: true });
+    return;
+  }
+
   const commandCloseTarget = event.target.closest("[data-action='command-close']");
   if (commandCloseTarget) {
     closeCommandPalette({ restoreFocus: true });
@@ -2840,6 +2923,11 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  if (target.dataset.action === "profile-preview") {
+    openProfilePreview(target.dataset.profile);
+    return;
+  }
+
   if (target.dataset.action === "profile-print") {
     printProfileAndOpen(target.dataset.profile);
     return;
@@ -2882,6 +2970,28 @@ document.addEventListener("input", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (profilePreviewOpen) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeProfilePreview({ restoreFocus: true });
+      return;
+    }
+
+    if (event.key === "Tab") {
+      const focusableElements = profilePreviewFocusableElements();
+      const currentFocusIndex = focusableElements.indexOf(document.activeElement);
+      const nextFocusIndex = event.shiftKey
+        ? (currentFocusIndex <= 0 ? focusableElements.length - 1 : currentFocusIndex - 1)
+        : (currentFocusIndex === focusableElements.length - 1 ? 0 : currentFocusIndex + 1);
+
+      event.preventDefault();
+      focusableElements[nextFocusIndex]?.focus({ preventScroll: true });
+      return;
+    }
+
+    return;
+  }
+
   if (commandPaletteOpen) {
     if (event.key.toLowerCase() === "k" && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
