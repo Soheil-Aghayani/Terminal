@@ -14,6 +14,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Command palette** - keyboard-friendly global search, route navigation, share/copy links, and direct public-profile links with `Ctrl`/`⌘` + `K`.
 - **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
 - **Print profiles** - general, academic, and software-focused dossiers for applications and offline review, with shared public contact links and no private application data.
+- **Installable shell** - web app metadata lets mobile visitors add the terminal portfolio to a home screen without claiming offline support.
 
 ## Design principles
 
@@ -69,6 +70,7 @@ Then open `http://127.0.0.1:4174/`.
 | `app.js` | Shared content records, translations, routes, interaction, animation, and GitHub enrichment |
 | `styles.css` | Terminal layout, responsive behavior, typography, pixel board motion, and reduced-motion rules |
 | `favicon.svg` | Pixel mark used by the browser tab |
+| `site.webmanifest` | Mobile install metadata and terminal theme settings |
 | `social-card.svg` | Terminal-style Open Graph and Twitter share image |
 | `llms.txt` | Curated public summary for retrieval and generative search |
 | `robots.txt` / `sitemap.xml` | Crawl guidance for the canonical public site |

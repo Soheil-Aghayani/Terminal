@@ -1,0 +1,21 @@
+{
+  "name": "Soheil Aghayani / Quiet Research Studio",
+  "short_name": "Soheil Studio",
+  "description": "A personal research portfolio for environmental systems, public software, and selected evidence.",
+  "start_url": "/#home",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121416",
+  "theme_color": "#121416",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
