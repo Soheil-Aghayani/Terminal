@@ -69,6 +69,7 @@ Then open `http://127.0.0.1:4174/`.
 | `app.js` | Shared content records, translations, routes, interaction, animation, and GitHub enrichment |
 | `styles.css` | Terminal layout, responsive behavior, typography, pixel board motion, and reduced-motion rules |
 | `favicon.svg` | Pixel mark used by the browser tab |
+| `social-card.svg` | Terminal-style Open Graph and Twitter share image |
 | `llms.txt` | Curated public summary for retrieval and generative search |
 | `robots.txt` / `sitemap.xml` | Crawl guidance for the canonical public site |
 | `MatrixType*.ttf` | Licensed display and terminal typefaces |
