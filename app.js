@@ -716,6 +716,61 @@ const detailEvidenceSources = {
   research: researchEvidence,
 };
 
+function updatePortfolioStructuredData() {
+  const structuredData = document.getElementById("portfolioStructuredData");
+  if (!structuredData) return;
+
+  const projectItems = portfolioCatalog.map((record, index) => {
+    const repositoryUrl = `https://github.com/${githubUsername}/${record.repo}`;
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "SoftwareSourceCode",
+        name: record.en.title,
+        description: record.en.detail,
+        codeRepository: repositoryUrl,
+        url: record.live || repositoryUrl,
+      },
+    };
+  });
+
+  const researchItems = archiveEvidence.en[0]
+    .filter((item) => item.href && item.title !== "Google Scholar profile")
+    .map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "ScholarlyArticle",
+        name: item.title,
+        url: item.href,
+        author: { "@id": "https://agseyl.ir/#person" },
+      },
+    }));
+
+  structuredData.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://agseyl.ir/#public-work",
+    name: "Public work by Soheil Aghayani",
+    url: "https://agseyl.ir/",
+    isPartOf: { "@id": "https://agseyl.ir/#website" },
+    about: { "@id": "https://agseyl.ir/#person" },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Public software projects",
+      numberOfItems: projectItems.length,
+      itemListElement: projectItems,
+    },
+    hasPart: {
+      "@type": "ItemList",
+      name: "Selected public research records",
+      numberOfItems: researchItems.length,
+      itemListElement: researchItems,
+    },
+  });
+}
+
 function projectRepositoryUrl(section, itemIndex) {
   if (section !== "build") return "";
   const slug = projectRecord(itemIndex)?.repo;
@@ -1463,6 +1518,7 @@ function renderTerminalNavigation() {
 }
 
 renderTerminalNavigation();
+updatePortfolioStructuredData();
 
 const terminalShortcutViews = Object.fromEntries(
   viewDefinitions
