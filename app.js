@@ -477,7 +477,8 @@ const content = {
         { title: "dodge-game", repo: "dodge-game", meta: "Arcade experiment", detail: "Ashfall Embers Trial: a PyQt5 arcade survival game about dodging falling blocks, hazards, and abnormal events." },
         { title: "pahlavan", repo: "pahlavan", live: "https://soheil-aghayani.github.io/pahlavan/", meta: "Musical web", detail: "An atmospheric 3D musical manuscript inspired by Persian mythology, epic storytelling, and immersive web audio." },
         { title: "x-clone", repo: "x-clone", meta: "Java client", detail: "A native JavaFX social client inspired by X, backed by a shared Java API and Turso/libSQL." },
-        { title: "iriswa", repo: "iriswa", live: "https://soheil-aghayani.github.io/iriswa/", meta: "Publishing system", detail: "A static publishing system and website for the Iranian Solid Waste Management Association." }
+        { title: "iriswa", repo: "iriswa", live: "https://soheil-aghayani.github.io/iriswa/", meta: "Publishing system", detail: "A static publishing system and website for the Iranian Solid Waste Management Association." },
+        { title: "Terminal", repo: "Terminal", live: "https://agseyl.ir/", meta: "This portfolio", detail: "The bilingual terminal portfolio itself: a public research studio for environmental systems, software, and selected evidence." }
       ]
     },
     research: {
@@ -547,7 +548,8 @@ const content = {
         { title: "بازی داج", meta: "آزمایش آرکید", detail: "Ashfall Embers Trial؛ بازی بقای آرکیدی با PyQt5 درباره‌ی جاخالی دادن از بلوک‌ها، خطرها و رویدادهای غیرعادی." },
         { title: "پهلوان", meta: "وب موسیقایی", detail: "دستنوشته‌ای موسیقایی و سه‌بعدی با الهام از اسطوره‌شناسی فارسی، روایت حماسی و صدای فراگیر وب." },
         { title: "کلون ایکس", meta: "کلاینت جاوا", detail: "کلاینت اجتماعی بومی JavaFX با الهام از X که به یک API جاوا و Turso/libSQL متصل است." },
-        { title: "ایریسوا", meta: "سیستم انتشار", detail: "سیستم انتشار ایستا و وب‌سایت انجمن مدیریت پسماند جامد ایران." }
+        { title: "ایریسوا", meta: "سیستم انتشار", detail: "سیستم انتشار ایستا و وب‌سایت انجمن مدیریت پسماند جامد ایران." },
+        { title: "ترمینال", meta: "این پرتفولیو", detail: "خودِ پرتفولیوی ترمینال دوزبانه؛ استودیویی عمومی برای سیستم‌های محیط‌زیستی، نرم‌افزار و شواهد منتخب." }
       ]
     },
     research: {
@@ -1121,6 +1123,7 @@ const projectDepartures = [
   { value: "PAHLAVAN", faValue: "پهلوان", signal: "OPEN", faSignal: "باز" },
   { value: "X CLONE", faValue: "کلون ایکس", signal: "BUILD", faSignal: "ساخت" },
   { value: "IRISWA", faValue: "ایریسوا", signal: "LIVE", faSignal: "زنده" },
+  { value: "TERMINAL", faValue: "ترمینال", signal: "LIVE", faSignal: "زنده" },
   { value: "PROFILE HUB", faValue: "هاب پروفایل", signal: "GATE OPEN", faSignal: "درگاه باز" },
 ];
 

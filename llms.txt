@@ -34,6 +34,7 @@ The Projects route in the portfolio is the authoritative index of public reposit
 - Pahlavan: https://github.com/Soheil-Aghayani/pahlavan
 - X Clone: https://github.com/Soheil-Aghayani/x-clone
 - IRISWA: https://github.com/Soheil-Aghayani/iriswa
+- Terminal portfolio: https://github.com/Soheil-Aghayani/Terminal
 
 ## Research
 
