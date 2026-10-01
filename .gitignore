@@ -1,0 +1,8 @@
+# Local editor and operating-system noise
+.DS_Store
+Thumbs.db
+*.log
+
+# Local preview/cache files
+.cache/
+*.local
