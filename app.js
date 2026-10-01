@@ -2210,7 +2210,12 @@ function renderPrintProfile(profile = "general") {
     .replace(/^https?:\/\//, "")
     .replace(/\/$/, "");
   const renderPrintItems = (items, limit) => items.slice(0, limit).map((item) => `
-    <li><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.meta)}</span></li>
+    <li>
+      ${item.href
+        ? `<a class="print-profile-item-link" href="${escapeRawHtml(item.href)}" target="_blank" rel="noreferrer"><strong>${escapeHtml(item.title)}</strong></a>`
+        : `<strong>${escapeHtml(item.title)}</strong>`}
+      <span>${escapeHtml(item.meta)}</span>
+    </li>
   `).join("");
 
   printProfile.dataset.profile = profile;

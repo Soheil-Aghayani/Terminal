@@ -4345,6 +4345,18 @@ body.is-command-open {
     line-height: 1.35;
   }
 
+  .print-profile-item-link {
+    color: inherit;
+    text-decoration-color: #999;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .print-profile-item-link:hover,
+  .print-profile-item-link:focus-visible {
+    color: #b2382d;
+  }
+
   .print-profile-grid li span {
     overflow-wrap: anywhere;
     color: #666;
