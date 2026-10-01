@@ -38,6 +38,7 @@ The numeric shortcuts mirror the visible terminal file rail:
 | `C` | Contact |
 | `?` | Help on the home surface |
 | `M` | Toggle terminal MAX / MIN |
+| `[` / `]` | Previous / next project while reading a case study |
 | `Ctrl`/`⌘` + `K` | Command palette |
 
 ## Technology

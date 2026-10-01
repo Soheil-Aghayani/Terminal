@@ -53,6 +53,8 @@ const translations = {
     "surface.helpPaletteMeta": "PALETTE",
     "surface.helpMaximize": "M  MAX / MIN TERMINAL",
     "surface.helpMaximizeMeta": "RESIZE",
+    "surface.helpBrowse": "[ ]  NEXT / PREVIOUS PROJECT",
+    "surface.helpBrowseMeta": "BROWSE",
     "surface.railAria": "Studio terminal files",
     "surface.railPathAria": "Return to the studio root",
     "surface.railCommandAria": "Show the studio file list",
@@ -165,6 +167,12 @@ const translations = {
     "detail.githubUpdated": "updated",
     "detail.githubStars": "stars",
     "detail.githubForks": "forks",
+    "detail.notAvailable": "N/A",
+    "detail.projectPosition": "PROJECTS / {{current}} / {{total}}",
+    "detail.previousProject": "PREV [",
+    "detail.nextProject": "NEXT ]",
+    "detail.previousProjectAria": "Open previous project",
+    "detail.nextProjectAria": "Open next project",
     "toast.routeCopied": "ROUTE COPIED",
     "toast.routeCopyFailed": "COPY FAILED",
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
@@ -234,6 +242,8 @@ const translations = {
     "surface.helpPaletteMeta": "پالت",
     "surface.helpMaximize": "M  بزرگ / کوچک ترمینال",
     "surface.helpMaximizeMeta": "اندازه",
+    "surface.helpBrowse": "[ ]  پروژه‌ی بعد / قبل",
+    "surface.helpBrowseMeta": "مرور",
     "surface.railAria": "فایل‌های ترمینال استودیو",
     "surface.railPathAria": "بازگشت به ریشه‌ی استودیو",
     "surface.railCommandAria": "نمایش فهرست فایل‌های استودیو",
@@ -346,6 +356,12 @@ const translations = {
     "detail.githubUpdated": "به‌روزرسانی",
     "detail.githubStars": "ستاره",
     "detail.githubForks": "فورک",
+    "detail.notAvailable": "ندارد",
+    "detail.projectPosition": "پروژه‌ها / {{current}} / {{total}}",
+    "detail.previousProject": "قبلی [",
+    "detail.nextProject": "بعدی ]",
+    "detail.previousProjectAria": "باز کردن پروژه‌ی قبلی",
+    "detail.nextProjectAria": "باز کردن پروژه‌ی بعدی",
     "toast.routeCopied": "مسیر کپی شد",
     "toast.routeCopyFailed": "کپی انجام نشد",
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
@@ -697,10 +713,10 @@ function renderGithubSignal(itemIndex) {
 
   const stats = record
     ? [
-      [translate("detail.githubLanguage"), record.language || "—"],
+      [translate("detail.githubLanguage"), record.language || translate("detail.notAvailable")],
       [translate("detail.githubStars"), localizeDigits(record.stars)],
       [translate("detail.githubForks"), localizeDigits(record.forks)],
-      [translate("detail.githubUpdated"), formatGithubDate(record.updatedAt) || "—"],
+      [translate("detail.githubUpdated"), formatGithubDate(record.updatedAt) || translate("detail.notAvailable")],
     ]
     : [];
 
@@ -2055,6 +2071,31 @@ function renderResearchTimeline(items) {
   `;
 }
 
+function renderProjectDetailNavigation(itemIndex) {
+  const total = portfolioCatalog.length;
+  const previousIndex = itemIndex - 1;
+  const nextIndex = itemIndex + 1;
+  const previousDisabled = previousIndex < 0;
+  const nextDisabled = nextIndex >= total;
+
+  return `
+    <nav class="detail-navigation" aria-label="${escapeHtml(translate("detail.caseStudyAria"))}">
+      <span class="detail-navigation-position">${escapeHtml(translate("detail.projectPosition", {
+        current: localizeDigits(itemIndex + 1),
+        total: localizeDigits(total),
+      }))}</span>
+      <div class="detail-navigation-actions">
+        <button class="detail-navigation-button" type="button" data-action="project-previous" data-project-index="${previousIndex}" aria-label="${escapeHtml(translate("detail.previousProjectAria"))}"${previousDisabled ? " disabled" : ""}>
+          ${escapeHtml(translate("detail.previousProject"))}
+        </button>
+        <button class="detail-navigation-button" type="button" data-action="project-next" data-project-index="${nextIndex}" aria-label="${escapeHtml(translate("detail.nextProjectAria"))}"${nextDisabled ? " disabled" : ""}>
+          ${escapeHtml(translate("detail.nextProject"))}
+        </button>
+      </div>
+    </nav>
+  `;
+}
+
 function renderSectionList(section, items) {
   if (section === "research") return renderResearchTimeline(items);
 
@@ -2125,6 +2166,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
   surfaceContent.innerHTML = `
     <div class="detail-copy${detailClass}">
       <button class="detail-back" type="button" data-action="section-back">${escapeHtml(translate("surface.backToList"))}</button>
+      ${section === "build" ? renderProjectDetailNavigation(itemIndex) : ""}
       <h2>${escapeHtml(item.title)}</h2>
       ${section === "build" ? renderProjectCaseStudy(item, itemIndex) : `<p>${escapeHtml(item.detail)}</p>`}
       ${section === "build" ? renderGithubSignal(itemIndex) : ""}
@@ -2375,6 +2417,14 @@ function toggleCommandPalette() {
   else openCommandPalette();
 }
 
+function moveProjectDetail(direction) {
+  if (currentSection !== "build" || currentItem === null) return;
+
+  const nextIndex = currentItem + direction;
+  if (nextIndex < 0 || nextIndex >= portfolioCatalog.length) return;
+  renderDetail("build", nextIndex);
+}
+
 function toggleIndex() {
   if (indexOpen) closeIndex({ restoreFocus: true });
   else openIndex();
@@ -2448,6 +2498,16 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "section-back") {
     renderView(currentSection);
+    return;
+  }
+
+  if (target.dataset.action === "project-previous") {
+    moveProjectDetail(-1);
+    return;
+  }
+
+  if (target.dataset.action === "project-next") {
+    moveProjectDetail(1);
     return;
   }
 
@@ -2593,6 +2653,12 @@ document.addEventListener("keydown", (event) => {
   if (event.key.toLowerCase() === "m") {
     event.preventDefault();
     toggleSurfaceMaximized();
+    return;
+  }
+
+  if (currentSection === "build" && currentItem !== null && (event.key === "[" || event.key === "]")) {
+    event.preventDefault();
+    moveProjectDetail(event.key === "]" ? 1 : -1);
     return;
   }
 
