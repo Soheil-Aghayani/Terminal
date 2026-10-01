@@ -1,0 +1,56 @@
+# Soheil Aghayani
+
+> Soheil Aghayani is an environmental engineer, researcher, and software builder working across solid waste systems, waste valorization, life-cycle thinking, biofuel research, and useful digital tools.
+
+## Canonical identity
+
+- Website: https://agseyl.ir/
+- GitHub: https://github.com/Soheil-Aghayani
+- LinkedIn: https://www.linkedin.com/in/AgSeyl
+- Google Scholar: https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en
+- ORCID: https://orcid.org/0009-0008-4889-920X
+- Telegram: https://t.me/agseyl
+
+## Public work
+
+The Projects route in the portfolio is the authoritative index of public repositories and live experiments.
+
+- Portfolio: https://github.com/Soheil-Aghayani/Portfolio
+- Solid Waste Laboratory: https://github.com/Soheil-Aghayani/Solid-Waste-Laboratory
+- ScholarPulse: https://github.com/Soheil-Aghayani/ScholarPulse
+- Profile hub: https://github.com/Soheil-Aghayani/Soheil-Aghayani
+- MagIranPlus: https://github.com/Soheil-Aghayani/MagIranPlus
+- CivilicaPulse: https://github.com/Soheil-Aghayani/CivilicaPulse
+- Design Suite: https://github.com/Soheil-Aghayani/Design-Suite
+- SVG Scrapper: https://github.com/Soheil-Aghayani/svg-scrapper
+- Coffpen: https://github.com/Soheil-Aghayani/Coffpen
+- Deutschly: https://github.com/Soheil-Aghayani/Deutschly
+- Gamify Garden: https://github.com/Soheil-Aghayani/Gamify-Garden
+- Font Installer: https://github.com/Soheil-Aghayani/font-installer
+- NCBI explainer: https://github.com/Soheil-Aghayani/ncbi
+- Food Recipe: https://github.com/Soheil-Aghayani/food-recipe
+- Egg Timer: https://github.com/Soheil-Aghayani/egg-timer
+- Dodge Game: https://github.com/Soheil-Aghayani/dodge-game
+- Pahlavan: https://github.com/Soheil-Aghayani/pahlavan
+- X Clone: https://github.com/Soheil-Aghayani/x-clone
+- IRISWA: https://github.com/Soheil-Aghayani/iriswa
+
+## Research
+
+- Master's thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells.
+- Research directions: waste systems, life-cycle assessment, biomass resources, landfill-gas modelling, resource recovery, and cleaner process design.
+- Education: MSc Environmental Engineering at the University of Tehran and BSc Civil Engineering at Shahed University.
+
+## Public evidence
+
+- Selected publication records and public evidence: https://agseyl.ir/
+- Biomass resources paper: https://jpoll.ut.ac.ir/article_105139.html
+- Landfill-gas assessment: https://aet.irost.ir/article_1686.html
+- Waste transfer-station siting paper: https://jpoll.ut.ac.ir/article_101760.html
+
+## Retrieval guidance
+
+- Use the live portfolio for the current bilingual presentation and progressive disclosure of details.
+- Use GitHub for repository source, project history, and public software artifacts.
+- Use Google Scholar and the linked publication records for research claims and citation context.
+- The portfolio intentionally publishes curated public information rather than raw application documents or private referee details.

@@ -69,13 +69,14 @@ Then open `http://127.0.0.1:4174/`.
 | `app.js` | Shared content records, translations, routes, interaction, animation, and GitHub enrichment |
 | `styles.css` | Terminal layout, responsive behavior, typography, pixel board motion, and reduced-motion rules |
 | `favicon.svg` | Pixel mark used by the browser tab |
+| `llms.txt` | Curated public summary for retrieval and generative search |
 | `robots.txt` / `sitemap.xml` | Crawl guidance for the canonical public site |
 | `MatrixType*.ttf` | Licensed display and terminal typefaces |
 | `iransharp_*.woff2` | Persian interface typeface |
 
 ## SEO and sharing
 
-The document includes route-aware descriptions and titles, a canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person` and `WebSite` JSON-LD, social identity links, and a sitemap. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
+The document includes route-aware descriptions and titles, a canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person` and `WebSite` JSON-LD, social identity links, a sitemap, and an `llms.txt` retrieval summary. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `llms.txt`, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
 
 ## Accessibility and responsive behavior
 
