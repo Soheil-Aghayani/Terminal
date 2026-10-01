@@ -51,7 +51,7 @@ const translations = {
     "surface.helpCloseMeta": "CLOSE",
     "surface.helpPalette": "CTRL K COMMANDS",
     "surface.helpPaletteMeta": "PALETTE",
-    "surface.helpMaximize": "M  MAX / MIN TERMINAL",
+    "surface.helpMaximize": "M  MAX / MIN TERMINAL · ESC MINIMIZE",
     "surface.helpMaximizeMeta": "RESIZE",
     "surface.helpBrowse": "[ ]  NEXT / PREVIOUS PROJECT",
     "surface.helpBrowseMeta": "BROWSE",
@@ -269,7 +269,7 @@ const translations = {
     "surface.helpCloseMeta": "بستن",
     "surface.helpPalette": "CTRL K فرمان‌ها",
     "surface.helpPaletteMeta": "پالت",
-    "surface.helpMaximize": "M  بزرگ / کوچک ترمینال",
+    "surface.helpMaximize": "M  بزرگ / کوچک ترمینال · ESC کوچک‌نمایی",
     "surface.helpMaximizeMeta": "اندازه",
     "surface.helpBrowse": "[ ]  پروژه‌ی بعد / قبل",
     "surface.helpBrowseMeta": "مرور",
@@ -2925,6 +2925,12 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "Escape" && indexOpen) {
     closeIndex({ restoreFocus: true });
+    return;
+  }
+
+  if (event.key === "Escape" && surfaceMaximized) {
+    event.preventDefault();
+    setSurfaceMaximized(false, { restoreFocus: true });
     return;
   }
 

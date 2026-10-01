@@ -38,7 +38,7 @@ The numeric shortcuts mirror the visible terminal file rail:
 | `5-9` | No shortcut; the terminal reports it with a toast |
 | `C` | Contact |
 | `?` | Help on the home surface |
-| `M` | Toggle terminal MAX / MIN |
+| `M` | Toggle terminal MAX / MIN; `Esc` minimizes an expanded terminal |
 | `[` / `]` | Previous / next project while reading a case study |
 | `Ctrl`/`⌘` + `K` | Command palette |
 
