@@ -25,16 +25,16 @@ The interface is designed as a quiet research studio rather than a conventional 
 
 ## Keyboard map
 
-The numeric shortcuts mirror the visible departure-board numbering:
+The numeric shortcuts mirror the visible terminal file rail:
 
 | Key | Destination |
 | --- | --- |
-| `0` or `H` | Home / root |
-| `1` | `NO.01` Projects |
-| `2` | `NO.02` Research |
-| `3` | `NO.03` Education |
-| `4` | `NO.04` Skills |
-| `5` | `NO.05` Archive |
+| `0` or `H` | `00` README / home |
+| `1` | `01` SIGNALS / projects |
+| `2` | `02` FIELD NOTES / research |
+| `3` | `03` SKILLS |
+| `4` | `04` CONTACT |
+| `5–9` | No shortcut; the terminal reports it with a toast |
 | `C` | Contact |
 | `?` | Help on the home surface |
 | `Ctrl`/`⌘` + `K` | Command palette |

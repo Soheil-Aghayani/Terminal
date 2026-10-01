@@ -35,7 +35,7 @@ const translations = {
     "surface.helpReady": "READY / ESC",
     "surface.helpHome": "0 / H  HOME",
     "surface.helpHomeMeta": "RETURN",
-    "surface.helpRoute": "1-{{sectionCount}}  SECTIONS",
+    "surface.helpRoute": "{{shortcutRange}}  TERMINAL FILES",
     "surface.helpRouteMeta": "OPEN",
     "surface.helpInspect": "CLICK / ENTER",
     "surface.helpInspectMeta": "INSPECT",
@@ -161,6 +161,7 @@ const translations = {
     "detail.githubForks": "forks",
     "toast.routeCopied": "ROUTE COPIED",
     "toast.routeCopyFailed": "COPY FAILED",
+    "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
     "print.label": "PROFILE / PRINT",
     "print.title": "Soheil Aghayani",
@@ -209,7 +210,7 @@ const translations = {
     "surface.helpReady": "آماده / ESC",
     "surface.helpHome": "۰ / H  خانه",
     "surface.helpHomeMeta": "بازگشت",
-    "surface.helpRoute": "۱ تا {{sectionCount}}  بخش‌ها",
+    "surface.helpRoute": "{{shortcutRange}}  فایل‌های ترمینال",
     "surface.helpRouteMeta": "باز کردن",
     "surface.helpInspect": "کلیک / Enter",
     "surface.helpInspectMeta": "بررسی",
@@ -335,6 +336,7 @@ const translations = {
     "detail.githubForks": "فورک",
     "toast.routeCopied": "مسیر کپی شد",
     "toast.routeCopyFailed": "کپی انجام نشد",
+    "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
     "print.label": "پروفایل / چاپ",
     "print.title": "سهیل آقایانی",
@@ -1153,12 +1155,14 @@ function refreshBoardLanguage() {
   });
 }
 
-function translate(key) {
+function translate(key, extraValues = {}) {
   const template = translations[currentLang][key] || key;
   const values = {
     projectCount: projectRepositorySlugs.length,
     terminalFileCount: railEntries.length,
     sectionCount: boardRows.length,
+    shortcutRange: `0-${Math.max(railEntries.length - 1, 0)}`,
+    ...extraValues,
   };
 
   return Object.entries(values).reduce(
@@ -1293,7 +1297,7 @@ function renderTerminalNavigation() {
   surfaceRailTree.innerHTML = viewDefinitions
     .filter(({ rail }) => rail)
     .map(({ view, rail }, railPosition) => {
-      const number = String(railPosition + 1).padStart(2, "0");
+      const number = String(railPosition).padStart(2, "0");
       return `
         <button class="surface-rail-entry${view === "home" ? " is-active" : ""}" type="button" data-view="${view}" data-rail-view="${rail.views.join(" ")}">
           <span data-number="${number}">${number}</span>
@@ -1330,6 +1334,12 @@ function renderTerminalNavigation() {
 }
 
 renderTerminalNavigation();
+
+const terminalShortcutViews = Object.fromEntries(
+  viewDefinitions
+    .filter(({ rail }) => rail)
+    .map(({ view }, railPosition) => [String(railPosition), view]),
+);
 
 const sectionIconIds = Object.fromEntries(viewDefinitions.map(({ view, icon }) => [view, icon]));
 const viewLabelKeys = Object.fromEntries(viewDefinitions.map(({ view, labelKey }) => [view, labelKey]));
@@ -2529,14 +2539,19 @@ document.addEventListener("keydown", (event) => {
     return;
   }
 
+  if (/^\d$/.test(event.key)) {
+    const numericShortcutView = terminalShortcutViews[event.key];
+    if (numericShortcutView) {
+      event.preventDefault();
+      renderView(numericShortcutView);
+    } else {
+      showToast(translate("toast.shortcutUnavailable", { shortcut: event.key }));
+    }
+    return;
+  }
+
   const shortcutViews = {
-    "0": "home",
     h: "home",
-    "1": "build",
-    "2": "research",
-    "3": "education",
-    "4": "skills",
-    "5": "archive",
     c: "contact",
   };
   const shortcutView = shortcutViews[event.key.toLowerCase()];
