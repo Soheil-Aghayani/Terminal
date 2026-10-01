@@ -195,7 +195,7 @@
                     <span class="surface-command-key" aria-hidden="true">CTRL K</span>
                     <span class="surface-command-label" data-i18n="nav.commands">Commands</span>
                   </button>
-                  <button class="surface-maximize-link" id="surfaceMaximizeButton" type="button" data-action="surface-toggle-maximize" aria-pressed="false" aria-controls="studioSurface" aria-label="Maximize terminal">
+                  <button class="surface-maximize-link" id="surfaceMaximizeButton" type="button" data-action="surface-toggle-maximize" aria-pressed="false" aria-controls="studioSurface" aria-keyshortcuts="M" aria-label="Maximize terminal">
                     <svg class="surface-maximize-icon" id="surfaceMaximizeIcon" aria-hidden="true" focusable="false"><use href="#pixel-expand"></use></svg>
                     <span id="surfaceMaximizeLabel">MAX</span>
                   </button>
@@ -265,6 +265,11 @@
                       <strong data-i18n="surface.helpPalette">CTRL K COMMANDS</strong>
                       <small data-i18n="surface.helpPaletteMeta">PALETTE</small>
                     </div>
+                    <div class="surface-help-line">
+                      <span data-number="08">08</span>
+                      <strong data-i18n="surface.helpMaximize">M  MAX / MIN TERMINAL</strong>
+                      <small data-i18n="surface.helpMaximizeMeta">RESIZE</small>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -309,6 +314,6 @@
       </section>
     </div>
 
-    <script src="app.js?v=studio-terminal-20261001-117"></script>
+    <script src="app.js?v=studio-terminal-20261001-118"></script>
   </body>
 </html>

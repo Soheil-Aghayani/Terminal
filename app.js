@@ -51,6 +51,8 @@ const translations = {
     "surface.helpCloseMeta": "CLOSE",
     "surface.helpPalette": "CTRL K COMMANDS",
     "surface.helpPaletteMeta": "PALETTE",
+    "surface.helpMaximize": "M  MAX / MIN TERMINAL",
+    "surface.helpMaximizeMeta": "RESIZE",
     "surface.railAria": "Studio terminal files",
     "surface.railPathAria": "Return to the studio root",
     "surface.railCommandAria": "Show the studio file list",
@@ -230,6 +232,8 @@ const translations = {
     "surface.helpCloseMeta": "بستن",
     "surface.helpPalette": "CTRL K فرمان‌ها",
     "surface.helpPaletteMeta": "پالت",
+    "surface.helpMaximize": "M  بزرگ / کوچک ترمینال",
+    "surface.helpMaximizeMeta": "اندازه",
     "surface.railAria": "فایل‌های ترمینال استودیو",
     "surface.railPathAria": "بازگشت به ریشه‌ی استودیو",
     "surface.railCommandAria": "نمایش فهرست فایل‌های استودیو",
@@ -2583,6 +2587,12 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "?" && currentMode === "home") {
     setSurfaceHelpOpen(!helpOpen, { restoreFocus: helpOpen });
+    return;
+  }
+
+  if (event.key.toLowerCase() === "m") {
+    event.preventDefault();
+    toggleSurfaceMaximized();
     return;
   }
 
