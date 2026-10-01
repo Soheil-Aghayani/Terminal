@@ -164,6 +164,12 @@ const translations = {
     "palette.actionPrintTechnicalMeta": "Projects and working stack",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
+    "palette.actionLinkedin": "Open LinkedIn",
+    "palette.actionLinkedinMeta": "Professional profile",
+    "palette.actionTelegram": "Open Telegram",
+    "palette.actionTelegramMeta": "Direct line / @agseyl",
+    "palette.actionScholar": "Open Google Scholar",
+    "palette.actionScholarMeta": "Public papers and citations",
     "palette.actionAbout": "Inspect personal signal",
     "palette.actionAboutMeta": "A quiet note for curious visitors",
     "sections.filterLabel": "FILTER RECORDS",
@@ -370,6 +376,12 @@ const translations = {
     "palette.actionPrintTechnicalMeta": "پروژه‌ها و جعبه‌ابزار کاری",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
+    "palette.actionLinkedin": "باز کردن لینکدین",
+    "palette.actionLinkedinMeta": "پروفایل حرفه‌ای",
+    "palette.actionTelegram": "باز کردن تلگرام",
+    "palette.actionTelegramMeta": "راه مستقیم / @agseyl",
+    "palette.actionScholar": "باز کردن گوگل اسکالر",
+    "palette.actionScholarMeta": "مقاله‌ها و استنادهای عمومی",
     "palette.actionAbout": "بررسی سیگنال شخصی",
     "palette.actionAboutMeta": "یادداشتی آرام برای کنجکاوها",
     "sections.filterLabel": "فیلتر رکوردها",
@@ -1504,6 +1516,20 @@ const commandActionDefinitions = [
     metaKey: "palette.actionGithubMeta",
     searchKeys: ["palette.actionGithub", "palette.actionGithubMeta", "github", "source", "repositories"],
   },
+  ...[
+    { key: "linkedin", metaKey: "palette.actionLinkedinMeta", searchKeys: ["linkedin", "professional profile"] },
+    { key: "telegram", metaKey: "palette.actionTelegramMeta", searchKeys: ["telegram", "direct line", "agseyl"] },
+    { key: "scholar", metaKey: "palette.actionScholarMeta", searchKeys: ["google scholar", "papers", "citations"] },
+  ].map(({ key, metaKey, searchKeys }) => {
+    const contactLink = contactLinks.find((link) => link.key === key);
+    return {
+      id: key,
+      icon: contactLink?.icon || "pixel-external",
+      titleKey: `contact.${key}`,
+      metaKey,
+      searchKeys: [`contact.${key}`, metaKey, ...searchKeys],
+    };
+  }),
 ];
 
 const curiosityCommandDefinition = {
@@ -2500,6 +2526,16 @@ function activateCommandAction(actionId) {
 
   if (actionId === "github") {
     window.open(`https://github.com/${githubUsername}`, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  const contactLink = contactLinks.find(({ key }) => key === actionId);
+  if (contactLink) {
+    if (contactLink.external) {
+      window.open(contactLink.href, "_blank", "noopener,noreferrer");
+    } else {
+      window.location.href = contactLink.href;
+    }
     return;
   }
 
