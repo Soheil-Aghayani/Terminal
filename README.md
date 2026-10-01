@@ -23,6 +23,22 @@ The interface is designed as a quiet research studio rather than a conventional 
 4. **Readable terminal language.** MatrixType gives the interface its pixel-display voice while IRANSharp keeps Persian content readable.
 5. **No decorative dead ends.** Labels and controls either reveal information, move to a route, filter content, or link to public evidence.
 
+## Keyboard map
+
+The numeric shortcuts mirror the visible departure-board numbering:
+
+| Key | Destination |
+| --- | --- |
+| `0` or `H` | Home / root |
+| `1` | `NO.01` Projects |
+| `2` | `NO.02` Research |
+| `3` | `NO.03` Education |
+| `4` | `NO.04` Skills |
+| `5` | `NO.05` Archive |
+| `C` | Contact |
+| `?` | Help on the home surface |
+| `Ctrl`/`⌘` + `K` | Command palette |
+
 ## Technology
 
 This is a dependency-free static site:
