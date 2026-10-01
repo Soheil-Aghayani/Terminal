@@ -38,8 +38,14 @@ The Projects route in the portfolio is the authoritative index of public reposit
 ## Research
 
 - Master's thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells.
+- Public thesis artifact: https://agseyl.ir/assets/thesis-infographic.jpg
 - Research directions: waste systems, life-cycle assessment, biomass resources, landfill-gas modelling, resource recovery, and cleaner process design.
 - Education: MSc Environmental Engineering at the University of Tehran and BSc Civil Engineering at Shahed University.
+
+## Profile outputs
+
+- The Contact route exposes academic and software profile outputs designed for print or PDF export.
+- These outputs are curated from public work and do not publish raw application documents or private referee details.
 
 ## Public evidence
 

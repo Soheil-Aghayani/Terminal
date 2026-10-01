@@ -768,6 +768,7 @@ function updatePortfolioStructuredData() {
     url: "https://agseyl.ir/",
     isPartOf: { "@id": "https://agseyl.ir/#website" },
     about: { "@id": "https://agseyl.ir/#person" },
+    image: { "@id": "https://agseyl.ir/#thesis-artifact" },
     mainEntity: {
       "@type": "ItemList",
       name: "Public software projects",
@@ -779,6 +780,14 @@ function updatePortfolioStructuredData() {
       name: "Selected public research records",
       numberOfItems: researchItems.length,
       itemListElement: researchItems,
+    },
+    subjectOf: {
+      "@type": "CreativeWork",
+      "@id": "https://agseyl.ir/#thesis",
+      name: "Waste cooking oil to biodiesel thesis",
+      description: "Research on transesterification using a catalyst synthesized from waste seashells.",
+      author: { "@id": "https://agseyl.ir/#person" },
+      image: { "@id": "https://agseyl.ir/#thesis-artifact" },
     },
   });
 }
