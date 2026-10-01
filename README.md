@@ -13,7 +13,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Bilingual interface** - English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
 - **Command palette** - keyboard-friendly global search, route navigation, and direct public-profile links with `Ctrl`/`⌘` + `K`.
 - **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
-- **Print profiles** - general, academic, and software-focused dossiers for applications and offline review.
+- **Print profiles** - general, academic, and software-focused dossiers for applications and offline review, with shared public contact links and no private application data.
 
 ## Design principles
 

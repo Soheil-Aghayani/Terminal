@@ -4256,6 +4256,50 @@ body.is-command-open {
     line-height: 1.6;
   }
 
+  .print-profile-contact {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px solid #999;
+  }
+
+  .print-profile-contact-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #b2382d;
+    font-family: "MatrixType", "Courier New", monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .print-profile-contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+  }
+
+  .print-profile-contact-links a {
+    display: inline-flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 5px;
+    color: #333;
+    font-family: "MatrixType", "Courier New", monospace;
+    font-size: 9px;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .print-profile-contact-links a:hover,
+  .print-profile-contact-links a:focus-visible {
+    color: #b2382d;
+  }
+
+  .print-profile-contact-links a span {
+    overflow-wrap: anywhere;
+    color: #666;
+  }
+
   .print-profile-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4314,7 +4358,8 @@ body.is-command-open {
   }
 
   html[dir="rtl"] .print-profile-grid li,
-  html[dir="rtl"] .print-profile-summary {
+  html[dir="rtl"] .print-profile-summary,
+  html[dir="rtl"] .print-profile-contact-links a {
     font-family: "IRANSharp", Arial, sans-serif;
   }
 }

@@ -206,6 +206,7 @@ const translations = {
     "print.education": "EDUCATION",
     "print.skills": "WORKING STACK",
     "print.evidence": "PUBLIC EVIDENCE",
+    "print.contactLabel": "PUBLIC CONTACT",
     "print.academicLabel": "ACADEMIC PROFILE / PRINT",
     "print.academicSubtitle": "Environmental engineering / research dossier",
     "print.academicSummary": "Research-focused profile covering waste systems, biofuel, life-cycle thinking, and public evidence.",
@@ -422,6 +423,7 @@ const translations = {
     "print.education": "تحصیلات",
     "print.skills": "جعبه‌ابزار کاری",
     "print.evidence": "شواهد عمومی",
+    "print.contactLabel": "راه‌های تماس عمومی",
     "print.academicLabel": "پروفایل دانشگاهی / چاپ",
     "print.academicSubtitle": "مهندسی محیط‌زیست / پرونده‌ی پژوهشی",
     "print.academicSummary": "پروفایلی پژوهش‌محور درباره‌ی سیستم‌های پسماند، سوخت زیستی، تفکر چرخه‌ی عمر و شواهد عمومی.",
@@ -2111,6 +2113,12 @@ function renderPrintProfile(profile = "general") {
   if (!printProfile) return;
 
   const definition = printProfileDefinitions[profile] || printProfileDefinitions.general;
+  const printableContactKeys = new Set(["github", "portfolio", "email", "linkedin", "scholar", "orcid"]);
+  const printableContacts = contactLinks.filter(({ key }) => printableContactKeys.has(key));
+  const printContactLabel = (href) => String(href)
+    .replace(/^mailto:/, "")
+    .replace(/^https?:\/\//, "")
+    .replace(/\/$/, "");
   const renderPrintItems = (items, limit) => items.slice(0, limit).map((item) => `
     <li><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.meta)}</span></li>
   `).join("");
@@ -2122,6 +2130,17 @@ function renderPrintProfile(profile = "general") {
       <h1>${escapeHtml(translate("print.title"))}</h1>
       <p class="print-profile-subtitle">${escapeHtml(translate(definition.subtitleKey))}</p>
       <p class="print-profile-summary">${escapeHtml(translate(definition.summaryKey))}</p>
+      <div class="print-profile-contact" aria-label="${escapeHtml(translate("print.contactLabel"))}">
+        <span class="print-profile-contact-label">${escapeHtml(translate("print.contactLabel"))}</span>
+        <div class="print-profile-contact-links">
+          ${printableContacts.map(({ key, href }) => `
+            <a href="${escapeRawHtml(href)}"${href.startsWith("http") ? ' target="_blank" rel="noreferrer"' : ""}>
+              <strong>${escapeHtml(translate(`contact.${key}`))}</strong>
+              <span>${escapeHtml(printContactLabel(href))}</span>
+            </a>
+          `).join("")}
+        </div>
+      </div>
     </header>
     <div class="print-profile-grid">
       ${definition.sections.map(({ titleKey, source, limit }) => `
