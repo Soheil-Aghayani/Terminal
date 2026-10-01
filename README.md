@@ -75,7 +75,7 @@ Then open `http://127.0.0.1:4174/`.
 
 ## SEO and sharing
 
-The document includes a concise description, canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person` and `WebSite` JSON-LD, social identity links, and a sitemap. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
+The document includes route-aware descriptions and titles, a canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person` and `WebSite` JSON-LD, social identity links, and a sitemap. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
 
 ## Accessibility and responsive behavior
 

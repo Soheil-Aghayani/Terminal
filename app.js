@@ -937,6 +937,12 @@ function localizeDigits(value) {
 }
 
 const root = document.documentElement;
+const descriptionMeta = document.querySelector('meta[name="description"]');
+const openGraphTitleMeta = document.querySelector('meta[property="og:title"]');
+const openGraphDescriptionMeta = document.querySelector('meta[property="og:description"]');
+const openGraphLocaleMeta = document.querySelector('meta[property="og:locale"]');
+const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]');
+const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
 const homeView = document.querySelector('[data-view-panel="home"]');
 const surface = document.getElementById("studioSurface");
 const surfaceModeLabel = document.getElementById("surfaceModeLabel");
@@ -1953,26 +1959,44 @@ function syncRailSelection(view) {
   });
 }
 
+function clipMetadata(value, maxLength = 160) {
+  const normalized = String(value || "").replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+  return `${normalized.slice(0, maxLength - 3).trim()}...`;
+}
+
 function updateDocumentTitle() {
+  let title;
+  let description;
+
   if (currentMode === "home") {
-    document.title = currentLang === "fa"
+    title = currentLang === "fa"
       ? "سهیل آقایانی / استودیوی پژوهش شخصی"
       : "Soheil Aghayani / Quiet Research Studio";
-    return;
-  }
-
-  if (currentMode === "contact") {
-    document.title = currentLang === "fa"
+    description = translate("home.description");
+  } else if (currentMode === "contact") {
+    title = currentLang === "fa"
       ? "تماس / سهیل آقایانی"
       : "Contact / Soheil Aghayani";
-    return;
+    description = translate("contact.description");
+  } else {
+    const selected = currentContent(currentMode);
+    const item = currentItem === null ? null : selected.items[currentItem];
+    const subject = item?.title || "";
+    title = subject
+      ? `${subject} / ${viewLabel(currentMode)} / Soheil Aghayani`
+      : `${viewLabel(currentMode)} / Soheil Aghayani`;
+    description = item ? `${item.title}. ${item.detail}` : formatContentText(selected.description);
   }
 
-  const selected = currentContent(currentMode);
-  const subject = currentItem === null ? "" : selected.items[currentItem]?.title || "";
-  document.title = subject
-    ? `${subject} / ${viewLabel(currentMode)} / Soheil Aghayani`
-    : `${viewLabel(currentMode)} / Soheil Aghayani`;
+  document.title = title;
+  const clippedDescription = clipMetadata(description);
+  descriptionMeta?.setAttribute("content", clippedDescription);
+  openGraphTitleMeta?.setAttribute("content", title);
+  openGraphDescriptionMeta?.setAttribute("content", clippedDescription);
+  openGraphLocaleMeta?.setAttribute("content", currentLang === "fa" ? "fa_IR" : "en_US");
+  twitterTitleMeta?.setAttribute("content", title);
+  twitterDescriptionMeta?.setAttribute("content", clippedDescription);
 }
 
 function renderHomeSurface() {
