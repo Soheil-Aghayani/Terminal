@@ -2584,6 +2584,75 @@ html[dir="rtl"] .project-filter input {
   max-width: 510px;
 }
 
+.contact-profile-actions {
+  max-width: 510px;
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.contact-profile-label {
+  margin: 0;
+  padding: 8px 0;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.contact-profile-list {
+  display: grid;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-profile-button {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 7px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+  text-align: start;
+  cursor: pointer;
+}
+
+.contact-profile-button:hover,
+.contact-profile-button:focus-visible {
+  color: var(--accent);
+}
+
+.contact-profile-button-label {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+}
+
+.contact-profile-button-label > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact-profile-button small {
+  flex: 0 0 auto;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
 .contact-copy .contact-link {
   padding: 3px 0;
   font-size: 11px;
@@ -2934,6 +3003,7 @@ html[dir="rtl"] .project-filter input {
   }
 
   .contact-copy .contact-link,
+  .contact-profile-button,
   .detail-related-link,
   .detail-evidence-row,
   .detail-link {
@@ -4284,6 +4354,10 @@ body.is-command-open {
 
   .contact-link:hover:not(:focus-visible) {
     color: var(--ink);
+  }
+
+  .contact-profile-button:hover:not(:focus-visible) {
+    color: var(--ink-soft);
   }
 
   .site-footer-link:hover:not(:focus-visible) {

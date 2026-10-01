@@ -124,6 +124,12 @@ const translations = {
     "contact.linkedin": "LinkedIn",
     "contact.telegram": "Telegram",
     "contact.scholar": "Google Scholar",
+    "contact.profileOutputs": "PROFILE OUTPUTS",
+    "contact.academicProfile": "Academic profile",
+    "contact.technicalProfile": "Software profile",
+    "contact.profilePrintMeta": "PRINT / PDF",
+    "contact.academicProfileAria": "Print the academic profile",
+    "contact.technicalProfileAria": "Print the software profile",
     "palette.label": "Command palette",
     "palette.title": "Find a signal.",
     "palette.close": "Close",
@@ -324,6 +330,12 @@ const translations = {
     "contact.linkedin": "لینکدین",
     "contact.telegram": "تلگرام",
     "contact.scholar": "گوگل اسکالر",
+    "contact.profileOutputs": "خروجی پروفایل",
+    "contact.academicProfile": "پروفایل دانشگاهی",
+    "contact.technicalProfile": "پروفایل نرم‌افزار",
+    "contact.profilePrintMeta": "چاپ / PDF",
+    "contact.academicProfileAria": "چاپ پروفایل دانشگاهی",
+    "contact.technicalProfileAria": "چاپ پروفایل نرم‌افزار",
     "palette.label": "پالت فرمان",
     "palette.title": "یک سیگنال پیدا کن.",
     "palette.close": "بستن",
@@ -1260,6 +1272,30 @@ function renderContactLinks() {
   `).join("");
 }
 
+function renderProfileActions() {
+  const profiles = [
+    { id: "academic", key: "academicProfile", icon: "pixel-research" },
+    { id: "technical", key: "technicalProfile", icon: "pixel-project" },
+  ];
+
+  return `
+    <section class="contact-profile-actions" aria-label="${escapeHtml(translate("contact.profileOutputs"))}">
+      <p class="contact-profile-label">${escapeHtml(translate("contact.profileOutputs"))}</p>
+      <div class="contact-profile-list">
+        ${profiles.map(({ id, key, icon }) => `
+          <button class="contact-profile-button" type="button" data-action="profile-print" data-profile="${id}" aria-label="${escapeHtml(translate(`contact.${key}Aria`))}">
+            <span class="contact-profile-button-label">
+              <svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#${icon}"></use></svg>
+              <span>${escapeHtml(translate(`contact.${key}`))}</span>
+            </span>
+            <small>${escapeHtml(translate("contact.profilePrintMeta"))}</small>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function formatContentText(value) {
   return String(value).replaceAll("{{projectCount}}", localizeDigits(projectRepositorySlugs.length));
 }
@@ -1926,6 +1962,7 @@ function renderContact() {
       <h2 id="contactTitle">${escapeHtml(translate("contact.title"))}</h2>
       <p class="plain-description">${escapeHtml(translate("contact.description"))}</p>
       <div class="contact-links">${renderContactLinks()}</div>
+      ${renderProfileActions()}
     </div>
   `;
   updateDocumentTitle();
@@ -2029,6 +2066,11 @@ function renderPrintProfile(profile = "general") {
       `).join("")}
     </div>
   `;
+}
+
+function printProfileAndOpen(profile = "general") {
+  renderPrintProfile(profile);
+  window.setTimeout(() => window.print(), 0);
 }
 
 function filterSectionList(section, query = sectionFilterQueries[section] || "") {
@@ -2452,8 +2494,7 @@ function activateCommandAction(actionId) {
       : actionId === "print-technical"
         ? "technical"
         : "general";
-    renderPrintProfile(printProfileType);
-    window.setTimeout(() => window.print(), 0);
+    printProfileAndOpen(printProfileType);
     return;
   }
 
@@ -2562,6 +2603,11 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "surface-help") {
     setSurfaceHelpOpen(!helpOpen, { restoreFocus: helpOpen });
+    return;
+  }
+
+  if (target.dataset.action === "profile-print") {
+    printProfileAndOpen(target.dataset.profile);
     return;
   }
 
