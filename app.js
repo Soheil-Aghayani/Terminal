@@ -612,15 +612,24 @@ const relatedProjectMap = {
   ],
 };
 
+const publicEvidenceLinks = Object.freeze({
+  scholar: "https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en",
+  biomass: "https://jpoll.ut.ac.ir/article_105139.html",
+  landfill: "https://aet.irost.ir/article_1686.html",
+  transfer: "https://jpoll.ut.ac.ir/article_101760.html",
+  lcaCourse: "https://coursera.org/verify/TSN51X42BCZR",
+  sustainableCourse: "https://www.coursera.org/account/accomplishments/verify/97ENWJ7STLNH",
+});
+
 const archiveEvidence = {
   en: [
     [
       { title: "4 journal papers", meta: "2025-2026 / selected record" },
       { title: "8 conference papers", meta: "2023-2025 / selected record" },
-      { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: "https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en" },
-      { title: "Assessment of Biomass Resources in Iran and Worldwide: Diversity Analysis in Rural Areas with a Focus on Municipal Solid Waste and Livestock Manure", meta: "Pollution · 2026 · Aghayani et al. · 2 citations · DOI 10.22059/poll.2025.393545.2928", href: "https://jpoll.ut.ac.ir/article_105139.html" },
-      { title: "Assessment of Landfill Gas Production in Saveh City Using the LandGEM Model: A Comprehensive Analysis", meta: "Advances in Environmental Technology · 2026 · Mollasalehi et al. · indexed record", href: "https://aet.irost.ir/article_1686.html" },
-      { title: "Siting a Waste Transfer Station in District 6 of Karaj Municipality to Reduce Pollution", meta: "Pollution · 2025 · Samiee-Zafarghandi & Aghayani · 1 citation · DOI 10.22059/poll.2025.388834.2751", href: "https://jpoll.ut.ac.ir/article_101760.html" },
+      { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: publicEvidenceLinks.scholar },
+      { title: "Assessment of Biomass Resources in Iran and Worldwide: Diversity Analysis in Rural Areas with a Focus on Municipal Solid Waste and Livestock Manure", meta: "Pollution · 2026 · Aghayani et al. · 2 citations · DOI 10.22059/poll.2025.393545.2928", href: publicEvidenceLinks.biomass },
+      { title: "Assessment of Landfill Gas Production in Saveh City Using the LandGEM Model: A Comprehensive Analysis", meta: "Advances in Environmental Technology · 2026 · Mollasalehi et al. · indexed record", href: publicEvidenceLinks.landfill },
+      { title: "Siting a Waste Transfer Station in District 6 of Karaj Municipality to Reduce Pollution", meta: "Pollution · 2025 · Samiee-Zafarghandi & Aghayani · 1 citation · DOI 10.22059/poll.2025.388834.2751", href: publicEvidenceLinks.transfer },
       { title: "Biofuel production from biomass by transesterification", meta: "National conference record · 2025" },
       { title: "Pharmaceutical-waste management strategies", meta: "National conference record · 2025" },
       { title: "Textile-industry pollution assessment", meta: "National conference record · 2024" },
@@ -634,8 +643,8 @@ const archiveEvidence = {
       { title: "Certificate of Appreciation", meta: "26th Research, Technology & Tech-Market Exhibition · Dec 2025" },
     ],
     [
-      { title: "Life Cycle Assessment", meta: "University of Michigan · 35 hours", href: "https://coursera.org/verify/TSN51X42BCZR" },
-      { title: "Sustainable Regional Principles", meta: "Johns Hopkins University · 7 hours", href: "https://www.coursera.org/account/accomplishments/verify/97ENWJ7STLNH" },
+      { title: "Life Cycle Assessment", meta: "University of Michigan · 35 hours", href: publicEvidenceLinks.lcaCourse },
+      { title: "Sustainable Regional Principles", meta: "Johns Hopkins University · 7 hours", href: publicEvidenceLinks.sustainableCourse },
     ],
     [
       { title: "COP29 Summit Delegation", meta: "Baku, Azerbaijan · Nov 2024" },
@@ -645,10 +654,10 @@ const archiveEvidence = {
     [
       { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
       { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲-۱۴۰۴ / رکورد منتخب" },
-      { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: "https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en" },
-      { title: "ارزیابی منابع زیست‌توده در ایران و جهان: تحلیل تنوع در نواحی روستایی با تمرکز بر پسماند جامد شهری و کود دام", meta: "Pollution · ۲۰۲۶ · Aghayani و همکاران · ۲ استناد · DOI 10.22059/poll.2025.393545.2928", href: "https://jpoll.ut.ac.ir/article_105139.html" },
-      { title: "ارزیابی تولید گاز دفنگاه در شهر ساوه با استفاده از مدل LandGEM: تحلیلی جامع", meta: "Advances in Environmental Technology · ۲۰۲۶ · Mollasalehi و همکاران · رکورد نمایه‌شده", href: "https://aet.irost.ir/article_1686.html" },
-      { title: "مکان‌یابی ایستگاه انتقال پسماند در منطقه‌ی ۶ شهرداری کرج برای کاهش آلودگی", meta: "Pollution · ۲۰۲۵ · Samiee-Zafarghandi و آقایانی · ۱ استناد · DOI 10.22059/poll.2025.388834.2751", href: "https://jpoll.ut.ac.ir/article_101760.html" },
+      { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: publicEvidenceLinks.scholar },
+      { title: "ارزیابی منابع زیست‌توده در ایران و جهان: تحلیل تنوع در نواحی روستایی با تمرکز بر پسماند جامد شهری و کود دام", meta: "Pollution · ۲۰۲۶ · Aghayani و همکاران · ۲ استناد · DOI 10.22059/poll.2025.393545.2928", href: publicEvidenceLinks.biomass },
+      { title: "ارزیابی تولید گاز دفنگاه در شهر ساوه با استفاده از مدل LandGEM: تحلیلی جامع", meta: "Advances in Environmental Technology · ۲۰۲۶ · Mollasalehi و همکاران · رکورد نمایه‌شده", href: publicEvidenceLinks.landfill },
+      { title: "مکان‌یابی ایستگاه انتقال پسماند در منطقه‌ی ۶ شهرداری کرج برای کاهش آلودگی", meta: "Pollution · ۲۰۲۵ · Samiee-Zafarghandi و آقایانی · ۱ استناد · DOI 10.22059/poll.2025.388834.2751", href: publicEvidenceLinks.transfer },
       { title: "تولید سوخت زیستی از زیست‌توده با ترانس‌استریفیکاسیون", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "راهبردهای مدیریت پسماند دارویی", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "ارزیابی آلاینده‌های صنعت نساجی", meta: "رکورد کنفرانسی ملی · ۱۴۰۳" },
@@ -662,8 +671,8 @@ const archiveEvidence = {
       { title: "گواهی تقدیر", meta: "بیست‌وششمین نمایشگاه پژوهش، فناوری و فن‌بازار · آذر ۱۴۰۴" },
     ],
     [
-      { title: "ارزیابی چرخه‌ی عمر", meta: "دانشگاه میشیگان · ۳۵ ساعت", href: "https://coursera.org/verify/TSN51X42BCZR" },
-      { title: "اصول منطقه‌ی پایدار", meta: "دانشگاه جانز هاپکینز · ۷ ساعت", href: "https://www.coursera.org/account/accomplishments/verify/97ENWJ7STLNH" },
+      { title: "ارزیابی چرخه‌ی عمر", meta: "دانشگاه میشیگان · ۳۵ ساعت", href: publicEvidenceLinks.lcaCourse },
+      { title: "اصول منطقه‌ی پایدار", meta: "دانشگاه جانز هاپکینز · ۷ ساعت", href: publicEvidenceLinks.sustainableCourse },
     ],
     [
       { title: "هیئت اجلاس COP29", meta: "باکو، جمهوری آذربایجان · نوامبر ۱۴۰۳" },
@@ -678,11 +687,11 @@ const researchEvidence = {
       { title: "Waste cooking oil to biofuel", meta: "Transesterification / waste-shell catalyst" },
     ],
     [
-      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026" },
-      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026" },
+      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026", href: publicEvidenceLinks.biomass },
+      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026", href: publicEvidenceLinks.landfill },
     ],
     [
-      { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024" },
+      { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024", href: publicEvidenceLinks.transfer },
       { title: "Conference writing", meta: "Biofuel, pharmaceutical, textile and steel systems" },
     ],
   ],
@@ -692,11 +701,11 @@ const researchEvidence = {
       { title: "روغن پخت‌وپز تا سوخت زیستی", meta: "ترانس‌استریفیکاسیون / کاتالیست پوسته‌ی صدف" },
     ],
     [
-      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵" },
-      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵" },
+      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.biomass },
+      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.landfill },
     ],
     [
-      { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳" },
+      { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳", href: publicEvidenceLinks.transfer },
       { title: "نوشتن مقاله‌های کنفرانسی", meta: "سوخت زیستی، پسماند دارویی، نساجی و فولاد" },
     ],
   ],
