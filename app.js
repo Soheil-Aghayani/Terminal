@@ -2333,20 +2333,22 @@ function profilePreviewFocusableElements() {
     .filter((element) => !element.disabled && element.getAttribute("aria-hidden") !== "true");
 }
 
-function openProfilePreview(profile = "general") {
+function openProfilePreview(profile = "general", { historyMode = "push" } = {}) {
   if (!profilePreview || profilePreviewOpen) return;
 
+  const nextProfile = profileOutputDefinitions.some(({ id }) => id === profile) ? profile : "general";
   const activeElement = document.activeElement;
   profilePreviewReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body
     ? activeElement
     : null;
-  activeProfile = profile;
-  renderPrintProfile(profile);
+  activeProfile = nextProfile;
+  renderPrintProfile(nextProfile);
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   profilePreviewOpen = true;
   profilePreview.hidden = false;
   profilePreview.setAttribute("aria-hidden", "false");
-  profilePreviewPrint?.setAttribute("data-profile", profile);
+  profilePreviewPrint?.setAttribute("data-profile", nextProfile);
+  syncProfilePreviewHistory(nextProfile, historyMode);
   studioShell.inert = true;
   document.body.classList.add("is-profile-preview-open");
   syncBoardRotation();
@@ -2356,12 +2358,13 @@ function openProfilePreview(profile = "general") {
   });
 }
 
-function closeProfilePreview({ restoreFocus = false } = {}) {
+function closeProfilePreview({ restoreFocus = false, historyMode = "replace" } = {}) {
   if (!profilePreview || !profilePreviewOpen) return;
 
   profilePreviewOpen = false;
   profilePreview.hidden = true;
   profilePreview.setAttribute("aria-hidden", "true");
+  syncProfilePreviewHistory(null, historyMode);
   studioShell.inert = false;
   document.body.classList.remove("is-profile-preview-open");
   syncBoardRotation();
@@ -2371,7 +2374,28 @@ function closeProfilePreview({ restoreFocus = false } = {}) {
       ? profilePreviewReturnFocus
       : null;
     profilePreviewReturnFocus = null;
-    target?.focus({ preventScroll: true });
+    if (target) target.focus({ preventScroll: true });
+    else focusSurfaceContext();
+  }
+}
+
+function syncProfilePreviewFromLocation({ restoreFocus = false } = {}) {
+  const profile = profilePreviewFromLocation();
+
+  if (!profile) {
+    if (profilePreviewOpen) closeProfilePreview({ restoreFocus, historyMode: "none" });
+    return;
+  }
+
+  if (!profilePreviewOpen) {
+    openProfilePreview(profile, { historyMode: "none" });
+    return;
+  }
+
+  if (activeProfile !== profile) {
+    activeProfile = profile;
+    renderPrintProfile(profile);
+    profilePreviewPrint?.setAttribute("data-profile", profile);
   }
 }
 
@@ -2640,6 +2664,28 @@ function routeStateFromLocation() {
     view: routableViews.has(view) ? view : "home",
     itemIndex: sectionViews.has(view) ? itemIndex : null,
   };
+}
+
+function profilePreviewFromLocation() {
+  const profile = new URL(window.location.href).searchParams.get("profile");
+  return profileOutputDefinitions.some(({ id }) => id === profile) ? profile : null;
+}
+
+function syncProfilePreviewHistory(profile, historyMode) {
+  if (historyMode === "none") return;
+
+  const nextUrl = new URL(window.location.href);
+  const currentProfile = nextUrl.searchParams.get("profile");
+  const nextProfile = profile || null;
+  if ((currentProfile || null) === nextProfile) return;
+
+  if (nextProfile) nextUrl.searchParams.set("profile", nextProfile);
+  else nextUrl.searchParams.delete("profile");
+
+  window.history[`${historyMode}State`]({
+    ...(window.history.state || {}),
+    profile: nextProfile,
+  }, "", nextUrl);
 }
 
 function syncViewHistory(view, itemIndex, historyMode) {
@@ -3185,6 +3231,7 @@ const restoreViewFromLocation = ({ focus = false } = {}) => {
     itemIndex,
     focus: focus || view !== "home" || itemIndex !== null,
   });
+  syncProfilePreviewFromLocation({ restoreFocus: focus });
 };
 window.addEventListener("popstate", () => restoreViewFromLocation({ focus: true }));
 window.addEventListener("hashchange", () => restoreViewFromLocation({ focus: true }));
