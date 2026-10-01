@@ -168,11 +168,11 @@ const translations = {
     "palette.actionMinimizeMeta": "Restore the surface size",
     "palette.actionShareRoute": "Share current route",
     "palette.actionShareRouteMeta": "Native share on mobile / copy on desktop",
-    "palette.actionPrint": "Print profile",
-    "palette.actionPrintMeta": "Application-ready dossier",
-    "palette.actionPrintAcademic": "Print academic profile",
+    "palette.actionPrint": "Open profile / PDF",
+    "palette.actionPrintMeta": "Public dossier preview",
+    "palette.actionPrintAcademic": "Open academic profile",
     "palette.actionPrintAcademicMeta": "Research and education dossier",
-    "palette.actionPrintTechnical": "Print software profile",
+    "palette.actionPrintTechnical": "Open software profile",
     "palette.actionPrintTechnicalMeta": "Projects and working stack",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
@@ -394,11 +394,11 @@ const translations = {
     "palette.actionMinimizeMeta": "برگرداندن اندازه‌ی سطح",
     "palette.actionShareRoute": "اشتراک‌گذاری مسیر فعلی",
     "palette.actionShareRouteMeta": "اشتراک‌گذاری در گوشی / کپی در دسکتاپ",
-    "palette.actionPrint": "چاپ پروفایل",
-    "palette.actionPrintMeta": "پرونده‌ی آماده‌ی اپلای",
-    "palette.actionPrintAcademic": "چاپ پروفایل دانشگاهی",
+    "palette.actionPrint": "باز کردن پروفایل / PDF",
+    "palette.actionPrintMeta": "پیش‌نمایش پرونده‌ی عمومی",
+    "palette.actionPrintAcademic": "باز کردن پروفایل دانشگاهی",
     "palette.actionPrintAcademicMeta": "پرونده‌ی پژوهش و تحصیلات",
-    "palette.actionPrintTechnical": "چاپ پروفایل نرم‌افزار",
+    "palette.actionPrintTechnical": "باز کردن پروفایل نرم‌افزار",
     "palette.actionPrintTechnicalMeta": "پروژه‌ها و جعبه‌ابزار کاری",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
@@ -1421,21 +1421,47 @@ function renderContactLinks() {
   `).join("");
 }
 
+const profileOutputDefinitions = [
+  {
+    id: "general",
+    commandId: "print",
+    icon: "pixel-archive",
+    paletteTitleKey: "palette.actionPrint",
+    paletteMetaKey: "palette.actionPrintMeta",
+    searchKeys: ["cv", "resume", "dossier", "print", "pdf"],
+  },
+  {
+    id: "academic",
+    commandId: "print-academic",
+    contactKey: "academicProfile",
+    icon: "pixel-research",
+    paletteTitleKey: "palette.actionPrintAcademic",
+    paletteMetaKey: "palette.actionPrintAcademicMeta",
+    searchKeys: ["academic", "research", "university", "cv", "resume"],
+  },
+  {
+    id: "technical",
+    commandId: "print-technical",
+    contactKey: "technicalProfile",
+    icon: "pixel-project",
+    paletteTitleKey: "palette.actionPrintTechnical",
+    paletteMetaKey: "palette.actionPrintTechnicalMeta",
+    searchKeys: ["software", "projects", "developer", "cv", "resume"],
+  },
+];
+
 function renderProfileActions() {
-  const profiles = [
-    { id: "academic", key: "academicProfile", icon: "pixel-research" },
-    { id: "technical", key: "technicalProfile", icon: "pixel-project" },
-  ];
+  const profiles = profileOutputDefinitions.filter(({ contactKey }) => contactKey);
 
   return `
     <section class="contact-profile-actions" aria-label="${escapeHtml(translate("contact.profileOutputs"))}">
       <p class="contact-profile-label">${escapeHtml(translate("contact.profileOutputs"))}</p>
       <div class="contact-profile-list">
-        ${profiles.map(({ id, key, icon }) => `
-          <button class="contact-profile-button" type="button" data-action="profile-preview" data-profile="${id}" aria-label="${escapeHtml(translate(`contact.${key}Aria`))}">
+        ${profiles.map(({ id, contactKey, icon }) => `
+          <button class="contact-profile-button" type="button" data-action="profile-preview" data-profile="${id}" aria-label="${escapeHtml(translate(`contact.${contactKey}Aria`))}">
             <span class="contact-profile-button-label">
               <svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#${icon}"></use></svg>
-              <span>${escapeHtml(translate(`contact.${key}`))}</span>
+              <span>${escapeHtml(translate(`contact.${contactKey}`))}</span>
             </span>
             <small>${escapeHtml(translate("contact.profilePrintMeta"))}</small>
           </button>
@@ -1633,27 +1659,13 @@ const commandActionDefinitions = [
     metaKey: "palette.actionShareRouteMeta",
     searchKeys: ["palette.actionShareRoute", "palette.actionShareRouteMeta", "share", "copy", "link"],
   },
-  {
-    id: "print",
-    icon: "pixel-archive",
-    titleKey: "palette.actionPrint",
-    metaKey: "palette.actionPrintMeta",
-    searchKeys: ["palette.actionPrint", "palette.actionPrintMeta", "cv", "resume", "dossier", "print"],
-  },
-  {
-    id: "print-academic",
-    icon: "pixel-research",
-    titleKey: "palette.actionPrintAcademic",
-    metaKey: "palette.actionPrintAcademicMeta",
-    searchKeys: ["palette.actionPrintAcademic", "palette.actionPrintAcademicMeta", "academic", "research", "university"],
-  },
-  {
-    id: "print-technical",
-    icon: "pixel-project",
-    titleKey: "palette.actionPrintTechnical",
-    metaKey: "palette.actionPrintTechnicalMeta",
-    searchKeys: ["palette.actionPrintTechnical", "palette.actionPrintTechnicalMeta", "software", "projects", "developer"],
-  },
+  ...profileOutputDefinitions.map(({ commandId, icon, paletteTitleKey, paletteMetaKey, searchKeys }) => ({
+    id: commandId,
+    icon,
+    titleKey: paletteTitleKey,
+    metaKey: paletteMetaKey,
+    searchKeys: [paletteTitleKey, paletteMetaKey, ...searchKeys],
+  })),
   {
     id: "github",
     icon: "pixel-github",
@@ -2789,13 +2801,9 @@ function activateCommandAction(actionId) {
     return;
   }
 
-  if (["print", "print-academic", "print-technical"].includes(actionId)) {
-    const printProfileType = actionId === "print-academic"
-      ? "academic"
-      : actionId === "print-technical"
-        ? "technical"
-        : "general";
-    printProfileAndOpen(printProfileType);
+  const profileOutput = profileOutputDefinitions.find(({ commandId }) => commandId === actionId);
+  if (profileOutput) {
+    openProfilePreview(profileOutput.id);
     return;
   }
 

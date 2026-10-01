@@ -12,7 +12,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Research timeline** - chronological research threads that open into the existing detail view instead of duplicating content.
 - **Thesis artifact** - the public research detail can reveal a metadata-stripped visual summary of the thesis workflow without placing it on the first screen.
 - **Bilingual interface** - English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
-- **Command palette** - keyboard-friendly global search, route navigation, share/copy links, and direct public-profile links with `Ctrl`/`⌘` + `K`.
+- **Command palette** - keyboard-friendly global search, route navigation, share/copy links, public-profile previews, and external links with `Ctrl`/`⌘` + `K`.
 - **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
 - **Profile outputs** - general, academic, and software-focused dossiers open in an in-terminal preview and can be printed or saved as PDF, with shared public contact links and no private application data.
 - **Installable shell** - web app metadata lets mobile visitors add the terminal portfolio to a home screen without claiming offline support.
