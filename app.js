@@ -79,6 +79,8 @@ const translations = {
     "surface.backToList": "Back to the list",
     "detail.repository": "View GitHub repository",
     "detail.liveSite": "Open live site",
+    "detail.openPublicSource": "OPEN PUBLIC SOURCE",
+    "detail.openPublicSourceAria": "Open the public source",
     "detail.caseStudy": "PROJECT / CASE STUDY",
     "detail.caseStudyAria": "Project case study",
     "detail.brief": "BRIEF",
@@ -307,6 +309,8 @@ const translations = {
     "surface.backToList": "بازگشت به فهرست",
     "detail.repository": "مشاهده‌ی مخزن گیت‌هاب",
     "detail.liveSite": "باز کردن نسخه‌ی آنلاین",
+    "detail.openPublicSource": "باز کردن منبع عمومی",
+    "detail.openPublicSourceAria": "باز کردن منبع عمومی",
     "detail.caseStudy": "پروژه / مطالعه‌ی موردی",
     "detail.caseStudyAria": "مطالعه‌ی موردی پروژه",
     "detail.brief": "خلاصه",
@@ -457,6 +461,8 @@ const translations = {
   }
 };
 
+const publicWritingUrl = "https://soheil-aghayani.github.io/Coffpen/";
+
 const content = {
   en: {
     build: {
@@ -471,7 +477,7 @@ const content = {
         { title: "CivilicaPulse", repo: "CivilicaPulse", live: "https://soheil-aghayani.github.io/CivilicaPulse/", meta: "Academic tool", detail: "A Persian academic tool for Civilica researcher profiles, co-author metadata, citation formatting, and Word bibliography exports." },
         { title: "Design-Suite", repo: "Design-Suite", live: "https://soheil-aghayani.github.io/Design-Suite/", meta: "Creative workspace", detail: "A no-build browser workspace for diagrams, visual generators, technical utilities, and fast creative work." },
         { title: "svg-scrapper", repo: "svg-scrapper", live: "https://soheil-aghayani.github.io/svg-scrapper/", meta: "Icon workbench", detail: "A Chrome-styled SVG icon workbench for searching, customizing, extracting, and batch-downloading icons." },
-        { title: "Coffpen", repo: "Coffpen", live: "https://soheil-aghayani.github.io/Coffpen/", meta: "Writing space", detail: "A Persian writing space for short stories, series, and reflective notes: where coffee meets the pen." },
+        { title: "Coffpen", repo: "Coffpen", live: publicWritingUrl, meta: "Writing space", detail: "A Persian writing space for short stories, series, and reflective notes: where coffee meets the pen." },
         { title: "Deutschly", repo: "Deutschly", live: "https://soheil-aghayani.github.io/Deutschly/", meta: "Language PWA", detail: "A focused German flashcard PWA for Menschen A1.1 with adaptive review, drills, word banks, and sync." },
         { title: "Gamify-Garden", repo: "Gamify-Garden", live: "https://soheil-aghayani.github.io/Gamify-Garden/", meta: "Daily garden", detail: "Apricity: a gentle RTL daily-gamification garden for tiny steps, visible growth, and no-pressure progress." },
         { title: "font-installer", repo: "font-installer", meta: "Desktop utility", detail: "A PyQt5 terminal-style font library manager with preview, search, duplicate cleanup, backups, and safe installation." },
@@ -525,7 +531,8 @@ const content = {
         { title: "Field practice", meta: "HSE / R&D / construction", detail: "Technical practice across HSE training, energy-efficient building research and construction supervision for industrial systems." },
         { title: "Research recognition", meta: "University of Tehran / Dec 2025", detail: "A certificate of appreciation from the 26th Exhibition of Research, Technology, and Tech-Market Achievements." },
         { title: "2 verified courses", meta: "LCA / sustainable regions", detail: "Two verified learning records covering life-cycle assessment, SimaPro, sustainable planning, and regional principles." },
-        { title: "COP29 delegation", meta: "Baku / Nov 2024", detail: "A public record of participation in the COP29 summit delegation, kept here as part of the wider professional archive." }
+        { title: "COP29 delegation", meta: "Baku / Nov 2024", detail: "A public record of participation in the COP29 summit delegation, kept here as part of the wider professional archive." },
+        { title: "Field notes", meta: "Coffpen / public writing", href: publicWritingUrl, detail: "A separate public writing space for short stories, series, and reflective notes: the quieter side of the studio." }
       ]
     }
   },
@@ -596,7 +603,8 @@ const content = {
         { title: "تجربه‌ی حرفه‌ای", meta: "HSE / تحقیق‌وتوسعه / ساخت", detail: "تجربه‌ی فنی در آموزش HSE، پژوهش ساختمان‌های کم‌مصرف و نظارت بر ساخت سامانه‌های صنعتی." },
         { title: "تقدیر پژوهشی", meta: "دانشگاه تهران / آذر ۱۴۰۴", detail: "گواهی تقدیر از بیست‌وششمین نمایشگاه دستاوردهای پژوهش، فناوری و فن‌بازار دانشگاه تهران." },
         { title: "۲ دوره‌ی تأییدشده", meta: "چرخه‌ی عمر / منطقه‌ی پایدار", detail: "دو سابقه‌ی آموزشی تأییدشده درباره‌ی ارزیابی چرخه‌ی عمر، سیمَپرو، برنامه‌ریزی پایدار و اصول منطقه‌ای." },
-        { title: "هیئت COP29", meta: "باکو / نوامبر ۱۴۰۳", detail: "سابقه‌ی عمومی حضور در هیئت اجلاس COP29 که به‌عنوان بخشی از آرشیو حرفه‌ای نگه داشته شده است." }
+        { title: "هیئت COP29", meta: "باکو / نوامبر ۱۴۰۳", detail: "سابقه‌ی عمومی حضور در هیئت اجلاس COP29 که به‌عنوان بخشی از آرشیو حرفه‌ای نگه داشته شده است." },
+        { title: "یادداشت‌های میدانی", meta: "کاف‌پن / نوشتن عمومی", href: publicWritingUrl, detail: "فضایی عمومی و جدا برای داستان کوتاه، مجموعه‌داستان و یادداشت‌های تأملی؛ سویه‌ی آرام‌تر استودیو." }
       ]
     }
   }
@@ -2451,6 +2459,7 @@ function sectionSearchText(section, index, item) {
     item.title,
     item.meta,
     item.detail,
+    item.href || "",
     ...languageItems.flatMap((record) => [record.title, record.meta, record.detail]),
   ].join(" ");
 }
@@ -2604,6 +2613,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
   setSurfaceHomeButtonVisible(false);
   const repositoryUrl = projectRepositoryUrl(section, itemIndex);
   const liveUrl = projectLiveUrl(section, itemIndex);
+  const publicSourceUrl = item.href || "";
   const relatedProjects = relatedProjectItems(section, itemIndex);
   const evidence = detailEvidenceItems(section, itemIndex);
   const detailClass = ["skills", "research", "education", "archive"].includes(section) ? ` ${section}-detail` : "";
@@ -2641,7 +2651,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
           <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-external"></use></svg><span>${escapeHtml(translate("detail.shareRoute"))}</span></span>
           ${externalIconMarkup()}
         </button>
-        ${repositoryUrl || liveUrl ? `
+        ${repositoryUrl || liveUrl || publicSourceUrl ? `
           ${repositoryUrl ? `
             <a class="detail-link" href="${repositoryUrl}" target="_blank" rel="noreferrer">
               <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-github"></use></svg><span>${escapeHtml(translate("detail.repository"))}</span></span>
@@ -2651,6 +2661,12 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
           ${liveUrl ? `
             <a class="detail-link" href="${liveUrl}" target="_blank" rel="noreferrer">
               <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-person"></use></svg><span>${escapeHtml(translate("detail.liveSite"))}</span></span>
+              ${externalIconMarkup()}
+            </a>
+          ` : ""}
+          ${publicSourceUrl ? `
+            <a class="detail-link" href="${escapeRawHtml(publicSourceUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(translate("detail.openPublicSourceAria"))}">
+              <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-archive"></use></svg><span>${escapeHtml(translate("detail.openPublicSource"))}</span></span>
               ${externalIconMarkup()}
             </a>
           ` : ""}
