@@ -2640,6 +2640,10 @@ function focusSurfaceContext() {
 }
 
 function syncRailSelection(view) {
+  indexNav?.querySelectorAll("[data-view]").forEach((control) => {
+    control.classList.toggle("is-active", control.dataset.view === view);
+  });
+
   railEntries.forEach((entry) => {
     const views = entry.dataset.railView.split(" ");
     entry.classList.toggle("is-active", views.includes(view));

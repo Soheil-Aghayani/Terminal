@@ -371,8 +371,13 @@ a {
 }
 
 .index-nav button:hover,
-.index-nav button:focus-visible {
+.index-nav button:focus-visible,
+.index-nav button.is-active {
   color: var(--ink);
+}
+
+.index-nav button.is-active span {
+  color: var(--accent);
 }
 
 .index-nav button span {
