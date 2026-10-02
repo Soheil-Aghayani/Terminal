@@ -15,7 +15,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Thesis artifacts** - the public research detail can reveal a metadata-stripped infographic and FTIR visual references without placing them on the first screen.
 - **Bilingual interface** - English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
 - **Command palette** - keyboard-friendly global search across routes, projects, research evidence, share/copy links, public-profile previews, and external links with `Ctrl`/`⌘` + `K`.
-- **Terminal command line** - the Help surface accepts direct commands such as `help`, `ls`, `open projects`, `max`, `min`, `pause`, `resume`, `lang fa`, and `share`.
+- **Terminal command line** - the Help surface accepts direct commands such as `help`, `ls`, `history`, `open projects`, `max`, `min`, `pause`, `resume`, `lang fa`, and `share`, with ↑/↓ history navigation.
 - **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
 - **Profile outputs** - general, academic, and software-focused dossiers open in an in-terminal preview, switch without leaving the preview, support shareable `?profile=` deep links, and can be printed/saved as PDF or downloaded as plain text, with shared public contact links and no private application data.
 - **Installable shell** - web app metadata lets mobile visitors add the terminal portfolio to a home screen without claiming offline support.
@@ -46,7 +46,7 @@ The numeric shortcuts mirror the visible terminal file rail:
 | `[` / `]` | Previous / next project while reading a case study |
 | `Ctrl`/`⌘` + `K` | Command palette |
 
-The Help surface also accepts direct terminal commands; commands are intentionally limited to local navigation, presentation state, language, board state, and route sharing.
+The Help surface also accepts direct terminal commands; commands are intentionally limited to local navigation, presentation state, language, board state, route sharing, and the current-session command history.
 
 ## Technology
 

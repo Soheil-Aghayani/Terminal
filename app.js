@@ -62,6 +62,8 @@ const translations = {
     "surface.commandReady": "READY / TYPE HELP",
     "surface.commandHelp": "HELP / LS / OPEN ROUTE / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
+    "surface.commandHistory": "HISTORY: {{commands}}",
+    "surface.commandHistoryEmpty": "EMPTY",
     "surface.commandResized": "TERMINAL {{state}}",
     "surface.commandBoard": "LIVE BOARD {{state}}",
     "surface.commandLanguage": "LANGUAGE: {{language}}",
@@ -321,6 +323,8 @@ const translations = {
     "surface.commandReady": "آماده / HELP را بنویس",
     "surface.commandHelp": "HELP / LS / OPEN ROUTE / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
+    "surface.commandHistory": "تاریخچه: {{commands}}",
+    "surface.commandHistoryEmpty": "خالی",
     "surface.commandResized": "ترمینال: {{state}}",
     "surface.commandBoard": "بورد زنده: {{state}}",
     "surface.commandLanguage": "زبان: {{language}}",
@@ -1295,6 +1299,8 @@ const profilePreviewDownload = document.getElementById("profilePreviewDownload")
 let toastTimer = null;
 let surfaceCommandStatusKey = "surface.commandReady";
 let surfaceCommandStatusValues = {};
+const surfaceCommandHistory = [];
+let surfaceCommandHistoryIndex = -1;
 
 const projectDepartures = [
   { value: "PORTFOLIO", faValue: "پرتفولیو", signal: "LIVE", faSignal: "زنده" },
@@ -1855,6 +1861,34 @@ function resolveTerminalCommandView(value) {
   return terminalCommandViews[query] || null;
 }
 
+function rememberSurfaceCommand(rawCommand) {
+  const command = normalizeSearchText(rawCommand).trim().replace(/\s+/g, " ");
+  if (!command) return;
+
+  if (surfaceCommandHistory.at(-1) !== command) surfaceCommandHistory.push(command);
+  if (surfaceCommandHistory.length > 12) surfaceCommandHistory.shift();
+  surfaceCommandHistoryIndex = -1;
+}
+
+function moveSurfaceCommandHistory(direction) {
+  if (!surfaceCommandInput || !surfaceCommandHistory.length) return;
+
+  if (direction < 0) {
+    surfaceCommandHistoryIndex = surfaceCommandHistoryIndex === -1
+      ? surfaceCommandHistory.length - 1
+      : Math.max(surfaceCommandHistoryIndex - 1, 0);
+    surfaceCommandInput.value = surfaceCommandHistory[surfaceCommandHistoryIndex];
+  } else if (surfaceCommandHistoryIndex !== -1) {
+    if (surfaceCommandHistoryIndex >= surfaceCommandHistory.length - 1) {
+      surfaceCommandHistoryIndex = -1;
+      surfaceCommandInput.value = "";
+    } else {
+      surfaceCommandHistoryIndex += 1;
+      surfaceCommandInput.value = surfaceCommandHistory[surfaceCommandHistoryIndex];
+    }
+  }
+}
+
 function runSurfaceCommand(rawCommand) {
   const normalized = normalizeSearchText(rawCommand).trim().replace(/\s+/g, " ");
   if (!normalized) {
@@ -1872,6 +1906,12 @@ function runSurfaceCommand(rawCommand) {
 
   if (verb === "ls" || verb === "dir") {
     setSurfaceCommandStatus("surface.commandList");
+    return;
+  }
+
+  if (verb === "history") {
+    const commands = surfaceCommandHistory.slice(-5).join(" / ") || translate("surface.commandHistoryEmpty");
+    setSurfaceCommandStatus("surface.commandHistory", { commands });
     return;
   }
 
@@ -3331,8 +3371,12 @@ function toggleIndex() {
 surfaceCommandForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const command = surfaceCommandInput?.value || "";
+  rememberSurfaceCommand(command);
   runSurfaceCommand(command);
-  if (surfaceCommandInput) surfaceCommandInput.value = "";
+  if (surfaceCommandInput) {
+    surfaceCommandInput.value = "";
+    surfaceCommandHistoryIndex = -1;
+  }
 });
 
 document.addEventListener("click", (event) => {
@@ -3548,6 +3592,12 @@ document.addEventListener("keydown", (event) => {
       return;
     }
 
+    return;
+  }
+
+  if (event.target === surfaceCommandInput && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+    event.preventDefault();
+    moveSurfaceCommandHistory(event.key === "ArrowUp" ? -1 : 1);
     return;
   }
 
