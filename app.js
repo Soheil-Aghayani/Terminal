@@ -156,6 +156,7 @@ const translations = {
     "palette.kindArchive": "Archive",
     "palette.kindContact": "Contact",
     "palette.kindCommand": "Command",
+    "palette.kindEvidence": "Public evidence",
     "palette.actionHelp": "Open help",
     "palette.actionHelpMeta": "Keyboard commands",
     "palette.actionLanguage": "Switch to Persian",
@@ -386,6 +387,7 @@ const translations = {
     "palette.kindArchive": "آرشیو",
     "palette.kindContact": "تماس",
     "palette.kindCommand": "فرمان",
+    "palette.kindEvidence": "شاهد عمومی",
     "palette.actionHelp": "باز کردن راهنما",
     "palette.actionHelpMeta": "فرمان‌های صفحه‌کلید",
     "palette.actionLanguage": "تغییر به انگلیسی",
@@ -1786,6 +1788,37 @@ function commandSectionSearchText(view) {
   return [viewLabel(view), selected.title, selected.description].join(" ");
 }
 
+function commandEvidenceEntries() {
+  return Object.entries(detailEvidenceSources).flatMap(([view, source]) => {
+    const currentEvidenceGroups = source[currentLang] || [];
+
+    return currentEvidenceGroups.flatMap((evidenceItems, itemIndex) => evidenceItems.map((evidence, evidenceIndex) => {
+      const englishEvidence = source.en?.[itemIndex]?.[evidenceIndex] || evidence;
+      const persianEvidence = source.fa?.[itemIndex]?.[evidenceIndex] || evidence;
+
+      return {
+        id: `command-evidence-${view}-${itemIndex}-${evidenceIndex}`,
+        type: "evidence",
+        view,
+        itemIndex,
+        icon: sectionIconIds[view] || "pixel-archive",
+        kindKey: "palette.kindEvidence",
+        title: evidence.title,
+        meta: evidence.meta,
+        search: [
+          evidence.title,
+          evidence.meta,
+          evidence.href || "",
+          englishEvidence.title,
+          englishEvidence.meta,
+          persianEvidence.title,
+          persianEvidence.meta,
+        ].join(" "),
+      };
+    }));
+  });
+}
+
 function commandEntries() {
   const normalizedQuery = normalizeSearchText(commandQuery.trim());
   const hiddenCuriosity = normalizedQuery.includes("about") || normalizedQuery.includes("inspect");
@@ -1835,7 +1868,8 @@ function commandEntries() {
     return [sectionEntry, ...sectionItems];
   });
 
-  return [...commandActionEntries(), ...(hiddenCuriosity ? [curiosityCommandEntry()] : []), ...sectionEntries];
+  const evidenceEntries = normalizedQuery ? commandEvidenceEntries() : [];
+  return [...commandActionEntries(), ...(hiddenCuriosity ? [curiosityCommandEntry()] : []), ...evidenceEntries, ...sectionEntries];
 }
 
 function syncCommandSelection() {
