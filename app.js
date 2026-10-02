@@ -724,6 +724,14 @@ const relatedProjectMap = {
   ],
 };
 
+const projectRelationGroups = Object.freeze([
+  Object.freeze(["Terminal", "Portfolio", "Soheil-Aghayani", "Design-Suite"]),
+  Object.freeze(["ScholarPulse", "MagIranPlus", "CivilicaPulse", "NCBI"]),
+  Object.freeze(["Solid-Waste-Laboratory", "IRISWA", "NCBI"]),
+  Object.freeze(["Design-Suite", "svg-scrapper", "font-installer", "x-clone"]),
+  Object.freeze(["Coffpen", "Deutschly", "Gamify-Garden", "food-recipe", "egg-timer", "dodge-game", "pahlavan"]),
+]);
+
 const publicEvidenceLinks = Object.freeze({
   scholar: "https://scholar.google.com/citations?user=bnprOf8AAAAJ&hl=en",
   biomass: "https://jpoll.ut.ac.ir/article_105139.html",
@@ -1174,6 +1182,41 @@ function externalIconMarkup() {
 }
 
 function relatedProjectItems(section, itemIndex) {
+  if (section === "build") {
+    const project = projectRecord(itemIndex);
+    if (!project) return [];
+
+    const groupPeers = new Set(
+      projectRelationGroups
+        .filter((group) => group.includes(project.repo))
+        .flat()
+        .filter((repo) => repo !== project.repo),
+    );
+    const currentGithubRecord = githubRecordFor(itemIndex);
+    const currentTopics = new Set((currentGithubRecord?.topics || []).map((topic) => topic.toLocaleLowerCase()));
+    const currentLanguage = currentGithubRecord?.language?.toLocaleLowerCase() || "";
+    const rankedProjects = portfolioCatalog
+      .map((candidate, candidateIndex) => {
+        if (candidateIndex === itemIndex) return null;
+
+        const candidateGithubRecord = githubMetadata.get(candidate.repo.toLocaleLowerCase());
+        const candidateTopics = new Set((candidateGithubRecord?.topics || []).map((topic) => topic.toLocaleLowerCase()));
+        const sharedTopicCount = [...currentTopics].filter((topic) => candidateTopics.has(topic)).length;
+        const sameLanguage = Boolean(currentLanguage && candidateGithubRecord?.language?.toLocaleLowerCase() === currentLanguage);
+        const score = (groupPeers.has(candidate.repo) ? 5 : 0) + (sharedTopicCount * 3) + (sameLanguage ? 1 : 0);
+
+        return score > 0 ? { projectIndex: candidateIndex, score } : null;
+      })
+      .filter(Boolean)
+      .sort((left, right) => right.score - left.score || left.projectIndex - right.projectIndex)
+      .slice(0, 3);
+
+    return rankedProjects.map(({ projectIndex }) => ({
+      projectIndex,
+      item: content[currentLang].build.items[projectIndex],
+    })).filter(({ item }) => item);
+  }
+
   const projectIndexes = relatedProjectMap[section]?.[itemIndex] || [];
 
   return projectIndexes
