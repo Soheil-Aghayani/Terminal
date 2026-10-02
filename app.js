@@ -60,7 +60,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "RUN",
     "surface.commandReady": "READY / TYPE HELP",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / CV / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
@@ -74,6 +74,8 @@ const translations = {
     "surface.commandLanguage": "LANGUAGE: {{language}}",
     "surface.commandShared": "ROUTE COPIED",
     "surface.commandShareFailed": "ROUTE COPY FAILED",
+    "surface.commandOpenedProject": "PROJECT OPENED: {{project}}",
+    "surface.commandProjectUnknown": "PROJECT SIGNAL NOT FOUND: {{project}}",
     "surface.commandUnknown": "COMMAND NOT FOUND: {{command}}",
     "surface.railAria": "Studio terminal files",
     "surface.railPathAria": "Return to the studio root",
@@ -344,7 +346,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "اجرا",
     "surface.commandReady": "آماده / HELP را بنویس",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / CV / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
@@ -358,6 +360,8 @@ const translations = {
     "surface.commandLanguage": "زبان: {{language}}",
     "surface.commandShared": "مسیر کپی شد",
     "surface.commandShareFailed": "کپی مسیر ناموفق بود",
+    "surface.commandOpenedProject": "پروژه باز شد: {{project}}",
+    "surface.commandProjectUnknown": "سیگنال پروژه پیدا نشد: {{project}}",
     "surface.commandUnknown": "فرمان پیدا نشد: {{command}}",
     "surface.railAria": "فایل‌های ترمینال استودیو",
     "surface.railPathAria": "بازگشت به ریشه‌ی استودیو",
@@ -2038,6 +2042,34 @@ function resolveTerminalCommandProfile(value) {
   return terminalCommandProfiles[query] || null;
 }
 
+function normalizeProjectCommandKey(value) {
+  return normalizeSearchText(value).replace(/[\s_\-/.]+/g, "");
+}
+
+function resolveTerminalProject(value) {
+  const rawQuery = normalizeSearchText(value).trim().replace(/\s+/g, " ");
+  const query = rawQuery.replace(/^(?:project|projects|repo|repository)\s+/, "").trim();
+  if (!query || /^(?:project|projects|repo|repository)$/.test(query)) return null;
+
+  const queryKey = normalizeProjectCommandKey(query);
+  if (!queryKey) return null;
+
+  const candidates = portfolioCatalog.flatMap((record, index) => {
+    const labels = [
+      record.repo,
+      record.en.title,
+      record.fa.title,
+    ].map(normalizeProjectCommandKey);
+    const exact = labels.some((label) => label === queryKey);
+    const partial = labels.some((label) => label.includes(queryKey) || queryKey.includes(label));
+    return exact || partial ? [{ index, exact }] : [];
+  });
+
+  const exactMatch = candidates.find((candidate) => candidate.exact);
+  if (exactMatch) return exactMatch.index;
+  return candidates.length === 1 ? candidates[0].index : null;
+}
+
 function rememberSurfaceCommand(rawCommand) {
   const command = normalizeSearchText(rawCommand).trim().replace(/\s+/g, " ");
   if (!command) return;
@@ -2126,9 +2158,22 @@ function runSurfaceCommand(rawCommand) {
       return;
     }
 
+    const projectIndex = resolveTerminalProject(argument);
+    if (projectIndex !== null) {
+      setSurfaceHelpOpen(false, { restoreFocus: false });
+      renderView("build", { itemIndex: projectIndex });
+      setSurfaceCommandStatus("surface.commandOpenedProject", {
+        project: content[currentLang].build.items[projectIndex]?.title || argument,
+      });
+      return;
+    }
+
     const view = resolveTerminalCommandView(argument);
     if (!view) {
-      setSurfaceCommandStatus("surface.commandUnknown", { command: normalized });
+      const explicitProject = /^(?:project|projects|repo|repository)\b/.test(argument);
+      setSurfaceCommandStatus(explicitProject ? "surface.commandProjectUnknown" : "surface.commandUnknown", {
+        [explicitProject ? "project" : "command"]: explicitProject ? argument.replace(/^(?:project|projects|repo|repository)\s*/i, "") : normalized,
+      });
       return;
     }
 
@@ -2148,6 +2193,16 @@ function runSurfaceCommand(rawCommand) {
   if (directView) {
     setSurfaceHelpOpen(false, { restoreFocus: false });
     renderView(directView);
+    return;
+  }
+
+  const directProjectIndex = resolveTerminalProject(normalized);
+  if (directProjectIndex !== null) {
+    setSurfaceHelpOpen(false, { restoreFocus: false });
+    renderView("build", { itemIndex: directProjectIndex });
+    setSurfaceCommandStatus("surface.commandOpenedProject", {
+      project: content[currentLang].build.items[directProjectIndex]?.title || normalized,
+    });
     return;
   }
 
