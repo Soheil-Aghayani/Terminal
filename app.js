@@ -60,7 +60,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "RUN",
     "surface.commandReady": "READY / TYPE HELP",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / CV / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
@@ -326,7 +326,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "اجرا",
     "surface.commandReady": "آماده / HELP را بنویس",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / CV / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
@@ -1866,9 +1866,28 @@ const terminalCommandViews = Object.freeze({
   contacts: "contact",
 });
 
+const terminalCommandProfiles = Object.freeze({
+  cv: "general",
+  resume: "general",
+  dossier: "general",
+  general: "general",
+  academic: "academic",
+  "academic profile": "academic",
+  "research profile": "academic",
+  software: "technical",
+  technical: "technical",
+  developer: "technical",
+  "software profile": "technical",
+});
+
 function resolveTerminalCommandView(value) {
   const query = normalizeSearchText(value).trim().replace(/\s+/g, " ");
   return terminalCommandViews[query] || null;
+}
+
+function resolveTerminalCommandProfile(value) {
+  const query = normalizeSearchText(value).trim().replace(/\s+/g, " ");
+  return terminalCommandProfiles[query] || null;
 }
 
 function rememberSurfaceCommand(rawCommand) {
@@ -1952,6 +1971,13 @@ function runSurfaceCommand(rawCommand) {
   }
 
   if (verb === "open" || verb === "go" || verb === "cd") {
+    const profile = resolveTerminalCommandProfile(argument);
+    if (profile) {
+      setSurfaceHelpOpen(false, { restoreFocus: false });
+      openProfilePreview(profile);
+      return;
+    }
+
     const view = resolveTerminalCommandView(argument);
     if (!view) {
       setSurfaceCommandStatus("surface.commandUnknown", { command: normalized });
@@ -1960,6 +1986,13 @@ function runSurfaceCommand(rawCommand) {
 
     setSurfaceHelpOpen(false, { restoreFocus: false });
     renderView(view);
+    return;
+  }
+
+  const directProfile = resolveTerminalCommandProfile(normalized);
+  if (directProfile) {
+    setSurfaceHelpOpen(false, { restoreFocus: false });
+    openProfilePreview(directProfile);
     return;
   }
 
