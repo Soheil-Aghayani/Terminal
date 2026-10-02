@@ -3167,6 +3167,7 @@ html[dir="rtl"] .project-filter input {
 }
 
 .profile-preview-close,
+.profile-preview-share,
 .profile-preview-download,
 .profile-preview-print {
   display: inline-flex;
@@ -3184,6 +3185,7 @@ html[dir="rtl"] .project-filter input {
 }
 
 .profile-preview-close span:first-child,
+.profile-preview-share,
 .profile-preview-download,
 .profile-preview-print {
   color: var(--accent);
@@ -3191,6 +3193,8 @@ html[dir="rtl"] .project-filter input {
 
 .profile-preview-close:hover,
 .profile-preview-close:focus-visible,
+.profile-preview-share:hover,
+.profile-preview-share:focus-visible,
 .profile-preview-download:hover,
 .profile-preview-download:focus-visible,
 .profile-preview-print:hover,
