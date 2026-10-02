@@ -1131,6 +1131,7 @@ function refreshGithubMetadataUI() {
     if (item) button.dataset.search = sectionSearchText("build", itemIndex, item);
   });
   if (currentSection === "build") filterSectionList("build", sectionFilterQueries.build || "");
+  if (commandPaletteOpen) renderCommandResults();
   updatePortfolioStructuredData();
 }
 
