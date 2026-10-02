@@ -154,7 +154,7 @@ const translations = {
     "projects.sortUpdated": "RECENTLY UPDATED",
     "projects.sortStars": "MOST STARRED",
     "projects.sortAlpha": "A–Z",
-    "projects.githubMetaAria": "GitHub metadata",
+    "projects.githubMetaAria": "GitHub metadata: {{summary}}",
     "board.openBuild": "Open projects",
     "board.openResearch": "Open research",
     "board.openEducation": "Open education",
@@ -441,7 +441,7 @@ const translations = {
     "projects.sortUpdated": "تازه‌ترین به‌روزرسانی",
     "projects.sortStars": "بیشترین ستاره",
     "projects.sortAlpha": "الفبا",
-    "projects.githubMetaAria": "فراداده‌ی گیت‌هاب",
+    "projects.githubMetaAria": "فراداده‌ی گیت‌هاب: {{summary}}",
     "board.openBuild": "باز کردن پروژه‌ها",
     "board.openResearch": "باز کردن پژوهش",
     "board.openEducation": "باز کردن تحصیلات",
@@ -1070,6 +1070,10 @@ function projectGithubSummary(itemIndex) {
   ].filter(Boolean).join(" · ");
 }
 
+function projectGithubAriaLabel(summary) {
+  return translate("projects.githubMetaAria", { summary });
+}
+
 function sortProjectEntries(entries) {
   if (projectSortMode === "catalog") return entries;
 
@@ -1196,6 +1200,7 @@ function refreshGithubMetadataUI() {
   document.querySelectorAll("[data-project-github-meta]").forEach((element) => {
     const summary = projectGithubSummary(Number(element.dataset.projectGithubMeta));
     element.textContent = summary;
+    element.setAttribute("aria-label", projectGithubAriaLabel(summary));
     element.hidden = !summary;
   });
   if (currentSection === "build" && currentItem === null && projectSortMode !== "catalog") {
@@ -3315,6 +3320,7 @@ function renderSectionFilter(section, itemCount) {
 function renderSectionItem(section, item, index, displayIndex = index) {
   const liveUrl = projectLiveUrl(section, index);
   const githubSummary = section === "build" ? projectGithubSummary(index) : "";
+  const githubAriaLabel = projectGithubAriaLabel(githubSummary);
   const searchableText = [sectionSearchText(section, index, item), liveUrl ? translate("projects.liveDemo") : ""].join(" ");
 
   return `
@@ -3324,7 +3330,7 @@ function renderSectionItem(section, item, index, displayIndex = index) {
         <small>
           <span>${escapeHtml(item.meta)}</span>
           ${liveUrl ? `<span class="project-live-mark" aria-label="${escapeHtml(translate("projects.liveDemo"))}"><i aria-hidden="true"></i>${escapeHtml(translate("projects.liveDemo"))}</span>` : ""}
-          ${section === "build" ? `<span class="project-record-github-meta" data-project-github-meta="${index}" aria-label="${escapeHtml(translate("projects.githubMetaAria"))}"${githubSummary ? "" : " hidden"}>${escapeHtml(githubSummary)}</span>` : ""}
+          ${section === "build" ? `<span class="project-record-github-meta" data-project-github-meta="${index}" aria-label="${escapeHtml(githubAriaLabel)}"${githubSummary ? "" : " hidden"}>${escapeHtml(githubSummary)}</span>` : ""}
         </small>
       ${section === "build" ? "</span>" : ""}
     </button>
