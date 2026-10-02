@@ -116,6 +116,10 @@ const translations = {
     "detail.evidence": "SELECTED EVIDENCE",
     "detail.scholarRecord": "PUBLIC SCHOLAR RECORD",
     "detail.artifactLabel": "THESIS ARTIFACT",
+    "detail.artifactOpen": "OPEN",
+    "detail.artifactOpenAria": "Open public artifact full view",
+    "detail.artifactViewerLabel": "PUBLIC ARTIFACT / VIEW",
+    "detail.artifactClose": "CLOSE",
     "detail.artifactAlt": "Thesis infographic showing waste cooking oil converted to biodiesel with a catalyst made from waste seashells.",
     "detail.artifactCaption": "A visual map of the waste cooking oil to biodiesel workflow and the waste-shell catalyst route.",
     "detail.ftirPeaksLabel": "FTIR / PEAK SIGNAL",
@@ -390,6 +394,10 @@ const translations = {
     "detail.evidence": "شواهد منتخب",
     "detail.scholarRecord": "رکورد عمومی اسکالر",
     "detail.artifactLabel": "اثر پایان‌نامه",
+    "detail.artifactOpen": "باز کردن",
+    "detail.artifactOpenAria": "باز کردن نمای کامل اثر عمومی",
+    "detail.artifactViewerLabel": "اثر عمومی / مشاهده",
+    "detail.artifactClose": "بستن",
     "detail.artifactAlt": "اینفوگرافیک پایان‌نامه درباره‌ی تبدیل روغن پخت‌وپز به بیودیزل با کاتالیستی ساخته‌شده از پوسته‌ی دورریختنی صدف.",
     "detail.artifactCaption": "نقشه‌ای بصری از مسیر روغن پخت‌وپز تا بیودیزل و مسیر کاتالیست حاصل از پسماند صدف.",
     "detail.ftirPeaksLabel": "FTIR / سیگنال قله‌ها",
@@ -1270,10 +1278,13 @@ function renderPublicArtifact(section, itemIndex) {
         <figure class="detail-artifact">
           <div class="detail-artifact-topline">
             <span>${escapeHtml(translate(labelKey))}</span>
+            <span class="detail-artifact-action"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-expand"></use></svg>${escapeHtml(translate("detail.artifactOpen"))}</span>
           </div>
-          <div class="detail-artifact-frame">
-            <img src="${escapeRawHtml(src)}" alt="${escapeRawHtml(translate(altKey))}" loading="lazy" decoding="async" />
-          </div>
+          <button class="detail-artifact-open" type="button" data-action="artifact-open" data-artifact-src="${escapeRawHtml(src)}" data-artifact-alt="${escapeRawHtml(translate(altKey))}" data-artifact-caption="${escapeRawHtml(translate(captionKey))}" aria-label="${escapeRawHtml(translate("detail.artifactOpenAria"))}">
+            <span class="detail-artifact-frame">
+              <img src="${escapeRawHtml(src)}" alt="${escapeRawHtml(translate(altKey))}" loading="lazy" decoding="async" />
+            </span>
+          </button>
           <figcaption>${escapeHtml(translate(captionKey))}</figcaption>
         </figure>
       `).join("")}
@@ -1319,6 +1330,8 @@ let commandResultEntries = [];
 let profilePreviewOpen = false;
 let profilePreviewReturnFocus = null;
 let activeProfile = "general";
+let artifactPreviewOpen = false;
+let artifactPreviewReturnFocus = null;
 let surfaceMaximizedScrollY = 0;
 
 const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
@@ -1385,6 +1398,10 @@ const profilePreviewSwitch = document.getElementById("profilePreviewSwitch");
 const profilePreviewContent = document.getElementById("profilePreviewContent");
 const profilePreviewPrint = document.getElementById("profilePreviewPrint");
 const profilePreviewDownload = document.getElementById("profilePreviewDownload");
+const artifactPreview = document.getElementById("artifactPreview");
+const artifactPreviewClose = document.getElementById("artifactPreviewClose");
+const artifactPreviewImage = document.getElementById("artifactPreviewImage");
+const artifactPreviewCaption = document.getElementById("artifactPreviewCaption");
 let toastTimer = null;
 let surfaceCommandStatusKey = "surface.commandReady";
 let surfaceCommandStatusValues = {};
@@ -2935,11 +2952,19 @@ function downloadProfileText(profile = activeProfile) {
   showToast(translate("toast.profileDownloaded"));
 }
 
-function profilePreviewFocusableElements() {
-  if (!profilePreview) return [];
+function dialogFocusableElements(dialog) {
+  if (!dialog) return [];
 
-  return [...profilePreview.querySelectorAll("button, a[href], input, select, textarea, [tabindex]:not([tabindex='-1'])")]
+  return [...dialog.querySelectorAll("button, a[href], input, select, textarea, [tabindex]:not([tabindex='-1'])")]
     .filter((element) => !element.disabled && element.getAttribute("aria-hidden") !== "true");
+}
+
+function profilePreviewFocusableElements() {
+  return dialogFocusableElements(profilePreview);
+}
+
+function artifactPreviewFocusableElements() {
+  return dialogFocusableElements(artifactPreview);
 }
 
 function openProfilePreview(profile = "general", { historyMode = "push" } = {}) {
@@ -3003,6 +3028,51 @@ function closeProfilePreview({ restoreFocus = false, historyMode = "replace" } =
       ? profilePreviewReturnFocus
       : null;
     profilePreviewReturnFocus = null;
+    if (target) target.focus({ preventScroll: true });
+    else focusSurfaceContext();
+  }
+}
+
+function openArtifactPreview({ src, alt, caption } = {}) {
+  if (!artifactPreview || artifactPreviewOpen || !src) return;
+
+  const activeElement = document.activeElement;
+  artifactPreviewReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body
+    ? activeElement
+    : null;
+  artifactPreviewImage.src = src;
+  artifactPreviewImage.alt = alt || "";
+  artifactPreviewCaption.textContent = caption || "";
+  artifactPreviewOpen = true;
+  artifactPreview.hidden = false;
+  artifactPreview.setAttribute("aria-hidden", "false");
+  studioShell.inert = true;
+  document.body.classList.add("is-artifact-preview-open");
+  syncBoardRotation();
+
+  window.requestAnimationFrame(() => {
+    if (artifactPreviewOpen) artifactPreviewClose?.focus({ preventScroll: true });
+  });
+}
+
+function closeArtifactPreview({ restoreFocus = false } = {}) {
+  if (!artifactPreview || !artifactPreviewOpen) return;
+
+  artifactPreviewOpen = false;
+  artifactPreview.hidden = true;
+  artifactPreview.setAttribute("aria-hidden", "true");
+  artifactPreviewImage.removeAttribute("src");
+  artifactPreviewImage.alt = "";
+  artifactPreviewCaption.textContent = "";
+  studioShell.inert = false;
+  document.body.classList.remove("is-artifact-preview-open");
+  syncBoardRotation();
+
+  if (restoreFocus) {
+    const target = artifactPreviewReturnFocus && document.contains(artifactPreviewReturnFocus)
+      ? artifactPreviewReturnFocus
+      : null;
+    artifactPreviewReturnFocus = null;
     if (target) target.focus({ preventScroll: true });
     else focusSurfaceContext();
   }
@@ -3580,6 +3650,22 @@ surfaceCommandForm?.addEventListener("submit", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+  const artifactCloseTarget = event.target.closest("[data-action='artifact-close']");
+  if (artifactCloseTarget) {
+    closeArtifactPreview({ restoreFocus: true });
+    return;
+  }
+
+  const artifactTarget = event.target.closest("[data-action='artifact-open']");
+  if (artifactTarget) {
+    openArtifactPreview({
+      src: artifactTarget.dataset.artifactSrc,
+      alt: artifactTarget.dataset.artifactAlt,
+      caption: artifactTarget.dataset.artifactCaption,
+    });
+    return;
+  }
+
   const profileCloseTarget = event.target.closest("[data-action='profile-close']");
   if (profileCloseTarget) {
     closeProfilePreview({ restoreFocus: true });
@@ -3713,6 +3799,28 @@ document.addEventListener("input", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (artifactPreviewOpen) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeArtifactPreview({ restoreFocus: true });
+      return;
+    }
+
+    if (event.key === "Tab") {
+      const focusableElements = artifactPreviewFocusableElements();
+      const currentFocusIndex = focusableElements.indexOf(document.activeElement);
+      const nextFocusIndex = event.shiftKey
+        ? (currentFocusIndex <= 0 ? focusableElements.length - 1 : currentFocusIndex - 1)
+        : (currentFocusIndex === focusableElements.length - 1 ? 0 : currentFocusIndex + 1);
+
+      event.preventDefault();
+      focusableElements[nextFocusIndex]?.focus({ preventScroll: true });
+      return;
+    }
+
+    return;
+  }
+
   if (profilePreviewOpen) {
     if (event.key === "Escape") {
       event.preventDefault();

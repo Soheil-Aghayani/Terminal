@@ -36,7 +36,7 @@
     <meta name="twitter:image" content="https://agseyl.ir/social-card.svg" />
     <meta name="twitter:image:alt" content="Soheil Aghayani / Quiet Research Studio" />
     <title>Soheil Aghayani / Quiet Research Studio</title>
-    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261002-013" />
+    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261003-014" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -433,6 +433,23 @@
       </section>
     </div>
 
+    <div class="artifact-preview-layer" id="artifactPreview" hidden aria-hidden="true">
+      <div class="artifact-preview-scrim" data-action="artifact-close" aria-hidden="true"></div>
+      <section class="artifact-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="artifactPreviewTitle" aria-describedby="artifactPreviewCaption">
+        <div class="artifact-preview-topline">
+          <span id="artifactPreviewTitle" data-i18n="detail.artifactViewerLabel">PUBLIC ARTIFACT / VIEW</span>
+          <button class="artifact-preview-close" id="artifactPreviewClose" type="button" data-action="artifact-close">
+            <span aria-hidden="true">ESC</span>
+            <span data-i18n="detail.artifactClose">CLOSE</span>
+          </button>
+        </div>
+        <div class="artifact-preview-content">
+          <img id="artifactPreviewImage" alt="" />
+          <p id="artifactPreviewCaption"></p>
+        </div>
+      </section>
+    </div>
+
     <div class="command-palette-layer" id="commandPalette" hidden aria-hidden="true">
       <div class="command-palette-scrim" data-action="command-close" aria-hidden="true"></div>
       <section class="command-palette" role="dialog" aria-modal="true" aria-labelledby="commandPaletteTitle" aria-describedby="commandPaletteHint">
@@ -455,6 +472,6 @@
       </section>
     </div>
 
-    <script src="app.js?v=studio-terminal-20261002-039"></script>
+    <script src="app.js?v=studio-terminal-20261003-040"></script>
   </body>
 </html>

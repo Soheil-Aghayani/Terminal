@@ -12,7 +12,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Research timeline** - chronological research threads that open into the existing detail view instead of duplicating content.
 - **Verified public publication records** - the archive and scholarly JSON-LD share one small registry for the three public Google Scholar records, with venue, year, DOI, and citation metadata where available.
 - **Field notes bridge** - the Archive exposes a separate public writing space without copying its content into the portfolio.
-- **Thesis artifacts** - the public research detail can reveal a metadata-stripped infographic and FTIR visual references without placing them on the first screen.
+- **Thesis artifacts** - the public research detail can reveal a metadata-stripped infographic and FTIR visual references without placing them on the first screen; each artifact opens in an accessible in-terminal viewer for a closer look.
 - **Bilingual interface** - English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
 - **Command palette** - keyboard-friendly global search across routes, projects, research evidence, share/copy links, public-profile previews, and external links with `Ctrl`/`⌘` + `K`.
 - **Terminal command line** - the Help surface accepts direct commands such as `help`, `ls`, `history`, `status`, `sync`, `open projects`, `cv`, `academic`, `software`, `max`, `min`, `pause`, `resume`, `lang fa`, and `share`, with ↑/↓ history navigation.

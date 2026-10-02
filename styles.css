@@ -1332,10 +1332,40 @@ html[dir="rtl"] .project-filter input {
   color: var(--accent);
 }
 
+.detail-artifact-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-faint);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.detail-artifact-action .pixel-icon {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+}
+
 .detail-artifact-frame {
   overflow: hidden;
   border: 1px solid var(--line-strong);
   background: #eeeade;
+}
+
+.detail-artifact-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.detail-artifact-open:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .detail-artifact-frame img {
@@ -1351,6 +1381,16 @@ html[dir="rtl"] .project-filter input {
   color: var(--ink-faint);
   font-size: 11px;
   line-height: 1.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .detail-artifact-open:hover .detail-artifact-frame img {
+    filter: brightness(1.04);
+  }
+
+  .detail-artifact-open:hover + figcaption {
+    color: var(--ink-soft);
+  }
 }
 
 .detail-back {
@@ -3416,6 +3456,111 @@ html[dir="rtl"] .project-filter input {
   flex: 0 0 11px;
 }
 
+.artifact-preview-layer {
+  --artifact-preview-inset: clamp(12px, 3vw, 32px);
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--artifact-preview-inset);
+  background: rgba(8, 11, 12, 0.88);
+}
+
+.artifact-preview-scrim {
+  position: absolute;
+  inset: 0;
+}
+
+.artifact-preview-dialog {
+  display: flex;
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: calc(100dvh - var(--artifact-preview-inset) - var(--artifact-preview-inset));
+  flex-direction: column;
+  border: 1px solid var(--line-strong);
+  background: #101416;
+  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.56);
+}
+
+.artifact-preview-topline {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.artifact-preview-topline > span::before {
+  color: var(--accent);
+  content: "> ";
+}
+
+.artifact-preview-close {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  color: var(--ink-faint);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.artifact-preview-close span:first-child {
+  color: var(--accent);
+}
+
+.artifact-preview-close:hover,
+.artifact-preview-close:focus-visible {
+  color: var(--ink);
+}
+
+.artifact-preview-content {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  overflow: auto;
+  padding: 18px;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.artifact-preview-content img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 170px);
+  object-fit: contain;
+  background: #eeeade;
+}
+
+.artifact-preview-content p {
+  width: min(720px, 100%);
+  margin: 0;
+  color: var(--ink-faint);
+  font-family: var(--body);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+body.is-artifact-preview-open {
+  overflow: hidden;
+}
+
 html[dir="rtl"] .profile-preview-content .print-profile {
   direction: rtl;
   font-family: "IRANSharp", Arial, sans-serif;
@@ -3479,6 +3624,11 @@ html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
     padding: var(--profile-preview-inset);
   }
 
+  .artifact-preview-layer {
+    --artifact-preview-inset: 8px;
+    padding: var(--artifact-preview-inset);
+  }
+
   .profile-preview-dialog {
     max-height: calc(100dvh - var(--profile-preview-inset) - var(--profile-preview-inset));
   }
@@ -3493,6 +3643,15 @@ html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
   .profile-preview-content .print-profile-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
+  }
+
+  .artifact-preview-topline,
+  .artifact-preview-content {
+    padding-inline: 12px;
+  }
+
+  .artifact-preview-content img {
+    max-height: calc(100dvh - 142px);
   }
 
   .detail-evidence-list {
@@ -4736,7 +4895,8 @@ body.is-command-open {
   .studio-shell,
   .command-palette-layer,
   .studio-toast,
-  .profile-preview-layer {
+  .profile-preview-layer,
+  .artifact-preview-layer {
     display: none !important;
   }
 
