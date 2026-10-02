@@ -4396,7 +4396,7 @@ body.is-command-open {
 
 .detail-github-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   margin-top: 0;
   border-top: 1px solid var(--line);
 }
@@ -4610,6 +4610,12 @@ body.is-command-open {
 
   .detail-github-stat:nth-child(n + 3) {
     border-top: 1px solid var(--line);
+  }
+
+  .detail-github-stat:last-child {
+    padding-inline-start: 0;
+    padding-inline-end: 10px;
+    border-inline-end: 1px solid var(--line);
   }
 
   .detail-github-topics {

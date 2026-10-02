@@ -8,7 +8,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 
 - **Live research departure board** - animated, character-by-character signal changes with pause controls and reduced-motion support.
 - **Project archive** - all public projects in one searchable index, with live links where available.
-- **Project case studies** - each project has a focused brief, repository metadata, live/API facts, public GitHub topics, related public work, and a visible share/copy route action.
+- **Project case studies** - each project has a focused brief, repository metadata, live/API facts, public GitHub topics and license when available, related public work, and a visible share/copy route action.
 - **Research timeline** - chronological research threads that open into the existing detail view instead of duplicating content.
 - **Verified public publication records** - the archive and scholarly JSON-LD share one small registry for the three public Google Scholar records, with venue, year, DOI, and citation metadata where available.
 - **Field notes bridge** - the Archive exposes a separate public writing space without copying its content into the portfolio.

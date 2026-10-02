@@ -211,6 +211,7 @@ const translations = {
     "detail.githubUpdated": "updated",
     "detail.githubStars": "stars",
     "detail.githubForks": "forks",
+    "detail.githubLicense": "license",
     "detail.notAvailable": "N/A",
     "detail.projectPosition": "PROJECTS / {{current}} / {{total}}",
     "detail.previousProject": "PREV [",
@@ -456,6 +457,7 @@ const translations = {
     "detail.githubUpdated": "به‌روزرسانی",
     "detail.githubStars": "ستاره",
     "detail.githubForks": "فورک",
+    "detail.githubLicense": "مجوز",
     "detail.notAvailable": "ندارد",
     "detail.projectPosition": "پروژه‌ها / {{current}} / {{total}}",
     "detail.previousProject": "قبلی [",
@@ -651,7 +653,7 @@ const portfolioCatalog = content.en.build.items.map((item, index) => ({
 
 const projectRepositorySlugs = portfolioCatalog.map(({ repo }) => repo);
 const githubUsername = "Soheil-Aghayani";
-const githubMetadataCacheKey = "soheil-studio-github-metadata-v2";
+const githubMetadataCacheKey = "soheil-studio-github-metadata-v3";
 const githubMetadataCacheTtl = 1000 * 60 * 60;
 const githubMetadata = new Map();
 let githubSyncState = "idle";
@@ -1000,6 +1002,7 @@ function renderGithubSignal(itemIndex) {
       [translate("detail.githubStars"), localizeDigits(record.stars)],
       [translate("detail.githubForks"), localizeDigits(record.forks)],
       [translate("detail.githubUpdated"), formatGithubDate(record.updatedAt) || translate("detail.notAvailable")],
+      [translate("detail.githubLicense"), record.license || translate("detail.notAvailable")],
     ]
     : [];
   const topics = record?.topics?.filter(Boolean).slice(0, 6) || [];
@@ -1083,6 +1086,7 @@ async function syncGithubMetadata() {
         stars: Number(repository.stargazers_count) || 0,
         forks: Number(repository.forks_count) || 0,
         updatedAt: repository.pushed_at || repository.updated_at || "",
+        license: repository.license?.spdx_id || repository.license?.name || "",
         topics: Array.isArray(repository.topics) ? repository.topics : [],
       }));
 
