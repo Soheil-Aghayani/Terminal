@@ -55,6 +55,19 @@ const translations = {
     "surface.helpMaximizeMeta": "RESIZE",
     "surface.helpBrowse": "[ ]  NEXT / PREVIOUS PROJECT",
     "surface.helpBrowseMeta": "BROWSE",
+    "surface.commandLabel": "TERMINAL INPUT",
+    "surface.commandInputAria": "Type a terminal command",
+    "surface.commandPlaceholder": "help / open projects / max",
+    "surface.commandRun": "RUN",
+    "surface.commandReady": "READY / TYPE HELP",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / MAX / MIN",
+    "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
+    "surface.commandResized": "TERMINAL {{state}}",
+    "surface.commandBoard": "LIVE BOARD {{state}}",
+    "surface.commandLanguage": "LANGUAGE: {{language}}",
+    "surface.commandShared": "ROUTE COPIED",
+    "surface.commandShareFailed": "ROUTE COPY FAILED",
+    "surface.commandUnknown": "COMMAND NOT FOUND: {{command}}",
     "surface.railAria": "Studio terminal files",
     "surface.railPathAria": "Return to the studio root",
     "surface.railCommandAria": "Show the studio file list",
@@ -301,6 +314,19 @@ const translations = {
     "surface.helpMaximizeMeta": "اندازه",
     "surface.helpBrowse": "[ ]  پروژه‌ی بعد / قبل",
     "surface.helpBrowseMeta": "مرور",
+    "surface.commandLabel": "ورودی ترمینال",
+    "surface.commandInputAria": "نوشتن فرمان ترمینال",
+    "surface.commandPlaceholder": "help / open projects / max",
+    "surface.commandRun": "اجرا",
+    "surface.commandReady": "آماده / HELP را بنویس",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / MAX / MIN",
+    "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
+    "surface.commandResized": "ترمینال: {{state}}",
+    "surface.commandBoard": "بورد زنده: {{state}}",
+    "surface.commandLanguage": "زبان: {{language}}",
+    "surface.commandShared": "مسیر کپی شد",
+    "surface.commandShareFailed": "کپی مسیر ناموفق بود",
+    "surface.commandUnknown": "فرمان پیدا نشد: {{command}}",
     "surface.railAria": "فایل‌های ترمینال استودیو",
     "surface.railPathAria": "بازگشت به ریشه‌ی استودیو",
     "surface.railCommandAria": "نمایش فهرست فایل‌های استودیو",
@@ -1237,6 +1263,9 @@ const surfaceMaximizeIcon = document.getElementById("surfaceMaximizeIcon");
 const surfaceMaximizeLabel = document.getElementById("surfaceMaximizeLabel");
 const surfaceHelpLabel = document.querySelector(".surface-help-label");
 const surfaceHelp = document.getElementById("surfaceHelp");
+const surfaceCommandForm = document.getElementById("surfaceCommandForm");
+const surfaceCommandInput = document.getElementById("surfaceCommandInput");
+const surfaceCommandStatus = document.getElementById("surfaceCommandStatus");
 const departureBoard = document.getElementById("departureBoard");
 const indexPanel = document.getElementById("indexPanel");
 const indexToggle = document.getElementById("indexToggle");
@@ -1264,6 +1293,8 @@ const profilePreviewContent = document.getElementById("profilePreviewContent");
 const profilePreviewPrint = document.getElementById("profilePreviewPrint");
 const profilePreviewDownload = document.getElementById("profilePreviewDownload");
 let toastTimer = null;
+let surfaceCommandStatusKey = "surface.commandReady";
+let surfaceCommandStatusValues = {};
 
 const projectDepartures = [
   { value: "PORTFOLIO", faValue: "پرتفولیو", signal: "LIVE", faSignal: "زنده" },
@@ -1799,6 +1830,106 @@ function viewLabel(view) {
   return translate(viewLabelKeys[view]);
 }
 
+const terminalCommandViews = Object.freeze({
+  home: "home",
+  readme: "home",
+  profile: "home",
+  projects: "build",
+  project: "build",
+  signals: "build",
+  research: "research",
+  "field notes": "research",
+  "field-notes": "research",
+  education: "education",
+  edu: "education",
+  skills: "skills",
+  stack: "skills",
+  archive: "archive",
+  records: "archive",
+  contact: "contact",
+  contacts: "contact",
+});
+
+function resolveTerminalCommandView(value) {
+  const query = normalizeSearchText(value).trim().replace(/\s+/g, " ");
+  return terminalCommandViews[query] || null;
+}
+
+function runSurfaceCommand(rawCommand) {
+  const normalized = normalizeSearchText(rawCommand).trim().replace(/\s+/g, " ");
+  if (!normalized) {
+    setSurfaceCommandStatus("surface.commandReady");
+    return;
+  }
+
+  const [verb, ...rest] = normalized.split(" ");
+  const argument = rest.join(" ");
+
+  if (verb === "help" || verb === "?") {
+    setSurfaceCommandStatus("surface.commandHelp");
+    return;
+  }
+
+  if (verb === "ls" || verb === "dir") {
+    setSurfaceCommandStatus("surface.commandList");
+    return;
+  }
+
+  if (verb === "open" || verb === "go" || verb === "cd") {
+    const view = resolveTerminalCommandView(argument);
+    if (!view) {
+      setSurfaceCommandStatus("surface.commandUnknown", { command: normalized });
+      return;
+    }
+
+    setSurfaceHelpOpen(false, { restoreFocus: false });
+    renderView(view);
+    return;
+  }
+
+  const directView = resolveTerminalCommandView(normalized);
+  if (directView) {
+    setSurfaceHelpOpen(false, { restoreFocus: false });
+    renderView(directView);
+    return;
+  }
+
+  if (["max", "maximize", "expand"].includes(verb)) {
+    setSurfaceMaximized(true);
+    setSurfaceCommandStatus("surface.commandResized", { state: translate("surface.minimize") });
+    return;
+  }
+
+  if (["min", "minimize", "restore"].includes(verb)) {
+    setSurfaceMaximized(false);
+    setSurfaceCommandStatus("surface.commandResized", { state: translate("surface.maximize") });
+    return;
+  }
+
+  if (verb === "pause" || verb === "resume") {
+    const shouldPause = verb === "pause";
+    if (boardPaused !== shouldPause) toggleBoardPause();
+    setSurfaceCommandStatus("surface.commandBoard", { state: translate(boardPaused ? "board.paused" : "board.live") });
+    return;
+  }
+
+  if (verb === "lang" || verb === "language") {
+    const requestedLanguage = argument === "fa" || argument === "en" ? argument : null;
+    if (!requestedLanguage || requestedLanguage !== currentLang) toggleLanguage();
+    setSurfaceCommandStatus("surface.commandLanguage", { language: currentLang === "fa" ? "فارسی" : "ENGLISH" });
+    return;
+  }
+
+  if (verb === "share") {
+    shareCurrentRoute().then((shared) => {
+      setSurfaceCommandStatus(shared ? "surface.commandShared" : "surface.commandShareFailed");
+    });
+    return;
+  }
+
+  setSurfaceCommandStatus("surface.commandUnknown", { command: normalized });
+}
+
 const commandActionDefinitions = [
   {
     id: "help",
@@ -2138,6 +2269,7 @@ function applyTranslations() {
 
   updateSurfaceHelpToggleLabel();
   updateSurfaceMaximizeControl();
+  updateSurfaceCommandStatus();
   updateBoardProjectCount();
   updateBoardLiveToggle();
   refreshBoardLanguage();
@@ -2201,6 +2333,17 @@ function toggleSurfaceMaximized() {
   setSurfaceMaximized(!surfaceMaximized);
 }
 
+function updateSurfaceCommandStatus() {
+  if (!surfaceCommandStatus) return;
+  surfaceCommandStatus.textContent = localizeDigits(translate(surfaceCommandStatusKey, surfaceCommandStatusValues));
+}
+
+function setSurfaceCommandStatus(key, values = {}) {
+  surfaceCommandStatusKey = key;
+  surfaceCommandStatusValues = values;
+  updateSurfaceCommandStatus();
+}
+
 function setSurfaceStatus(text = "", visible = true) {
   if (!surfaceStatus) return;
   const statusText = localizeDigits(text);
@@ -2212,7 +2355,8 @@ function setSurfaceStatus(text = "", visible = true) {
 }
 
 function setSurfaceHelpOpen(open, { restoreFocus = false } = {}) {
-  if (open && !helpOpen) {
+  const opening = open && !helpOpen;
+  if (opening) {
     const activeElement = document.activeElement;
     helpReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body
       ? activeElement
@@ -2224,6 +2368,10 @@ function setSurfaceHelpOpen(open, { restoreFocus = false } = {}) {
   if (surfaceCenter) surfaceCenter.classList.toggle("is-help", open);
   if (departureBoard) departureBoard.hidden = false;
   if (surfaceHelpButton) surfaceHelpButton.setAttribute("aria-expanded", String(open));
+  if (opening) {
+    if (surfaceCommandInput) surfaceCommandInput.value = "";
+    setSurfaceCommandStatus("surface.commandReady");
+  }
   updateSurfaceHelpToggleLabel();
   syncBoardRotation();
 
@@ -2443,14 +2591,16 @@ async function shareCurrentRoute() {
         url: shareUrl,
       });
       showToast(translate("toast.routeShared"));
-      return;
+      return true;
     }
 
     await copyRouteToClipboard(shareUrl);
     showToast(translate("toast.routeCopied"));
+    return true;
   } catch (error) {
-    if (error?.name === "AbortError") return;
+    if (error?.name === "AbortError") return false;
     showToast(translate("toast.routeCopyFailed"));
+    return false;
   }
 }
 
@@ -3177,6 +3327,13 @@ function toggleIndex() {
   if (indexOpen) closeIndex({ restoreFocus: true });
   else openIndex();
 }
+
+surfaceCommandForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const command = surfaceCommandInput?.value || "";
+  runSurfaceCommand(command);
+  if (surfaceCommandInput) surfaceCommandInput.value = "";
+});
 
 document.addEventListener("click", (event) => {
   const profileCloseTarget = event.target.closest("[data-action='profile-close']");

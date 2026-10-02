@@ -2585,6 +2585,85 @@ html[dir="rtl"] .project-filter input {
   display: none;
 }
 
+.surface-command-line {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+}
+
+.surface-command-line > label {
+  color: var(--ink-faint);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.surface-command-shell {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.surface-command-prompt {
+  color: var(--accent);
+  font-size: 11px;
+}
+
+.surface-command-shell input {
+  min-width: 0;
+  padding: 5px 0;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  font: 400 10px/1.4 var(--mono);
+  letter-spacing: 0.05em;
+}
+
+.surface-command-shell input::placeholder {
+  color: var(--ink-faint);
+  opacity: 1;
+}
+
+.surface-command-shell input:focus-visible {
+  color: var(--ink);
+}
+
+.surface-command-run {
+  padding: 4px 0 4px 8px;
+  border: 0;
+  border-inline-start: 1px solid var(--line);
+  color: var(--accent);
+  background: transparent;
+  font: 400 8px/1.4 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.surface-command-run:hover,
+.surface-command-run:focus-visible {
+  color: var(--ink);
+}
+
+.surface-command-line > p {
+  min-height: 1.3em;
+  margin: 0;
+  color: var(--ink-faint);
+  font-size: 8px;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
 .surface-center.is-help {
   gap: clamp(6px, 1.1vh, 10px);
 }
@@ -3744,6 +3823,18 @@ body.is-terminal-maximized .command-palette-layer {
   .header-actions {
     gap: 10px;
     flex: 0 1 auto;
+  }
+
+  .surface-command-shell {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .surface-command-run {
+    grid-column: 1 / -1;
+    padding: 6px 0 0;
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+    text-align: start;
   }
 
   .header-link:first-child {

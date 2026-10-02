@@ -36,7 +36,7 @@
     <meta name="twitter:image" content="https://agseyl.ir/social-card.svg" />
     <meta name="twitter:image:alt" content="Soheil Aghayani / Quiet Research Studio" />
     <title>Soheil Aghayani / Quiet Research Studio</title>
-    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261002-010" />
+    <link rel="stylesheet" href="styles.css?v=studio-terminal-20261002-011" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -327,6 +327,15 @@
                       <small data-i18n="surface.helpBrowseMeta">BROWSE</small>
                     </div>
                   </div>
+                  <form class="surface-command-line" id="surfaceCommandForm" autocomplete="off">
+                    <label for="surfaceCommandInput" data-i18n="surface.commandLabel">TERMINAL INPUT</label>
+                    <div class="surface-command-shell">
+                      <span class="surface-command-prompt" aria-hidden="true">&gt;</span>
+                      <input id="surfaceCommandInput" type="text" inputmode="text" autocomplete="off" spellcheck="false" data-i18n-placeholder="surface.commandPlaceholder" data-i18n-aria="surface.commandInputAria" aria-describedby="surfaceCommandStatus" />
+                      <button class="surface-command-run" type="submit" data-i18n="surface.commandRun">RUN</button>
+                    </div>
+                    <p id="surfaceCommandStatus" role="status" aria-live="polite" data-i18n="surface.commandReady">READY / TYPE HELP</p>
+                  </form>
                 </div>
               </div>
 
@@ -395,6 +404,6 @@
       </section>
     </div>
 
-    <script src="app.js?v=studio-terminal-20261002-022"></script>
+    <script src="app.js?v=studio-terminal-20261002-023"></script>
   </body>
 </html>
