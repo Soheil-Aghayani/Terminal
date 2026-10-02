@@ -2356,7 +2356,7 @@ const printProfileDefinitions = {
 
 function renderProfileMarkup(profile = "general") {
   const definition = printProfileDefinitions[profile] || printProfileDefinitions.general;
-  const printableContactKeys = new Set(["github", "portfolio", "email", "linkedin", "scholar", "orcid"]);
+  const printableContactKeys = new Set(["github", "portfolio", "email", "linkedin", "telegram", "scholar", "orcid"]);
   const printableContacts = contactLinks.filter(({ key }) => printableContactKeys.has(key));
   const printContactLabel = (href) => String(href)
     .replace(/^mailto:/, "")
