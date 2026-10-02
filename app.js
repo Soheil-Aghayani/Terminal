@@ -914,16 +914,26 @@ function updatePortfolioStructuredData() {
 
   const projectItems = portfolioCatalog.map((record, index) => {
     const repositoryUrl = `https://github.com/${githubUsername}/${record.repo}`;
+    const githubRecord = githubMetadata.get(record.repo.toLocaleLowerCase());
+    const projectItem = {
+      "@type": "SoftwareSourceCode",
+      name: record.en.title,
+      description: record.en.detail,
+      codeRepository: repositoryUrl,
+      url: record.live || repositoryUrl,
+      author: { "@id": "https://agseyl.ir/#person" },
+      sameAs: [repositoryUrl, ...(record.live ? [record.live] : [])],
+    };
+
+    if (githubRecord?.language) projectItem.programmingLanguage = githubRecord.language;
+    if (githubRecord?.topics?.length) projectItem.keywords = githubRecord.topics;
+    if (githubRecord?.license) projectItem.license = githubRecord.license;
+    if (githubRecord?.updatedAt) projectItem.dateModified = githubRecord.updatedAt;
+
     return {
       "@type": "ListItem",
       position: index + 1,
-      item: {
-        "@type": "SoftwareSourceCode",
-        name: record.en.title,
-        description: record.en.detail,
-        codeRepository: repositoryUrl,
-        url: record.live || repositoryUrl,
-      },
+      item: projectItem,
     };
   });
 
@@ -1100,6 +1110,7 @@ function refreshGithubMetadataUI() {
     if (item) button.dataset.search = sectionSearchText("build", itemIndex, item);
   });
   if (currentSection === "build") filterSectionList("build", sectionFilterQueries.build || "");
+  updatePortfolioStructuredData();
 }
 
 async function syncGithubMetadata() {
