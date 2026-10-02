@@ -1039,6 +1039,13 @@ function githubRecordFor(itemIndex) {
   return repo ? githubMetadata.get(repo.toLocaleLowerCase()) : null;
 }
 
+function githubSearchTerms(itemIndex) {
+  const record = githubRecordFor(itemIndex);
+  if (!record) return [];
+
+  return [record.language, record.license, ...(record.topics || [])].filter(Boolean);
+}
+
 function formatGithubDate(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -2269,7 +2276,7 @@ function commandEntries() {
       const englishItem = content.en[view]?.items?.[itemIndex] || item;
       const persianItem = content.fa[view]?.items?.[itemIndex] || item;
       const repository = view === "build" ? projectRepositorySlugs[itemIndex] || "" : "";
-      const topics = view === "build" ? githubRecordFor(itemIndex)?.topics || [] : [];
+      const githubTerms = view === "build" ? githubSearchTerms(itemIndex) : [];
 
       return {
         id: `command-${view}-${itemIndex}`,
@@ -2290,7 +2297,7 @@ function commandEntries() {
           persianItem.meta,
           persianItem.detail,
           repository,
-          ...topics,
+          ...githubTerms,
         ].join(" "),
       };
     });
@@ -2985,7 +2992,7 @@ function sectionSearchText(section, index, item) {
   const languageItems = [content.en[section]?.items[index], content.fa[section]?.items[index]].filter(Boolean);
   const repository = section === "build" ? projectRecord(index)?.repo || "" : "";
   const liveUrl = section === "build" ? projectLiveUrl(section, index) : "";
-  const topics = section === "build" ? githubRecordFor(index)?.topics || [] : [];
+  const githubTerms = section === "build" ? githubSearchTerms(index) : [];
 
   return [
     section,
@@ -2995,7 +3002,7 @@ function sectionSearchText(section, index, item) {
     item.meta,
     item.detail,
     item.href || "",
-    ...topics,
+    ...githubTerms,
     ...languageItems.flatMap((record) => [record.title, record.meta, record.detail]),
   ].join(" ");
 }
