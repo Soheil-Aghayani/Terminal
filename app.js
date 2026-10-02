@@ -1479,7 +1479,7 @@ const projectDepartures = [
   { value: "X CLONE", faValue: "کلون ایکس", signal: "BUILD", faSignal: "ساخت" },
   { value: "IRISWA", faValue: "ایریسوا", signal: "LIVE", faSignal: "زنده" },
   { value: "TERMINAL", faValue: "ترمینال", signal: "LIVE", faSignal: "زنده" },
-  { value: "PROFILE HUB", faValue: "هاب پروفایل", signal: "GATE OPEN", faSignal: "درگاه باز" },
+  { value: "SOHEIL AGHAYANI", faValue: "هاب پروفایل سهیل", signal: "GATE OPEN", faSignal: "درگاه باز" },
 ];
 
 const boardCycles = {
