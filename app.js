@@ -1319,6 +1319,7 @@ let commandResultEntries = [];
 let profilePreviewOpen = false;
 let profilePreviewReturnFocus = null;
 let activeProfile = "general";
+let surfaceMaximizedScrollY = 0;
 
 const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
 
@@ -2506,11 +2507,19 @@ function updateSurfaceMaximizeControl() {
 }
 
 function setSurfaceMaximized(maximized, { restoreFocus = false } = {}) {
-  surfaceMaximized = Boolean(maximized);
+  const nextState = Boolean(maximized);
+  const wasMaximized = surfaceMaximized;
+  if (nextState && !wasMaximized) surfaceMaximizedScrollY = window.scrollY;
+  surfaceMaximized = nextState;
   surface?.classList.toggle("is-maximized", surfaceMaximized);
   document.body.classList.toggle("is-terminal-maximized", surfaceMaximized);
   root.classList.toggle("is-terminal-maximized", surfaceMaximized);
   updateSurfaceMaximizeControl();
+
+  if (wasMaximized && !surfaceMaximized) {
+    const scrollY = surfaceMaximizedScrollY;
+    window.requestAnimationFrame(() => window.scrollTo({ top: scrollY, left: 0, behavior: "auto" }));
+  }
 
   if (!surfaceMaximized && restoreFocus) {
     surfaceMaximizeButton?.focus({ preventScroll: true });
@@ -2895,6 +2904,17 @@ function renderPrintProfile(profile = "general") {
   }
 }
 
+function resetProfilePreviewScroll({ defer = false } = {}) {
+  const reset = () => profilePreviewContent?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  reset();
+
+  if (defer) {
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+      if (profilePreviewOpen) reset();
+    }));
+  }
+}
+
 function downloadProfileText(profile = activeProfile) {
   const definition = profileOutputDefinitions.find(({ id }) => id === profile) || profileOutputDefinitions[0];
   const source = document.createElement("div");
@@ -2933,7 +2953,7 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
   activeProfile = nextProfile;
   renderPrintProfile(nextProfile);
   renderProfilePreviewSwitch(nextProfile);
-  profilePreviewContent?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  resetProfilePreviewScroll({ defer: true });
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   profilePreviewDownload?.setAttribute("aria-label", localizeDigits(translate("profile.downloadAria")));
   profilePreviewOpen = true;
@@ -2958,7 +2978,7 @@ function switchProfilePreview(profile) {
   activeProfile = profile;
   renderPrintProfile(activeProfile);
   renderProfilePreviewSwitch(activeProfile);
-  profilePreviewContent?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  resetProfilePreviewScroll();
   profilePreviewPrint?.setAttribute("data-profile", activeProfile);
   profilePreviewDownload?.setAttribute("data-profile", activeProfile);
   syncProfilePreviewHistory(activeProfile, "replace");
@@ -3005,6 +3025,7 @@ function syncProfilePreviewFromLocation({ restoreFocus = false } = {}) {
     activeProfile = profile;
     renderPrintProfile(profile);
     renderProfilePreviewSwitch(profile);
+    resetProfilePreviewScroll({ defer: true });
     profilePreviewPrint?.setAttribute("data-profile", profile);
     profilePreviewDownload?.setAttribute("data-profile", profile);
     updateDocumentTitle();
