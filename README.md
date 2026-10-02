@@ -87,6 +87,8 @@ Then open `http://127.0.0.1:4174/`.
 
 The document includes route-aware descriptions and titles, a canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person`, `WebSite`, project, and public research JSON-LD, social identity links, a sitemap, and an `llms.txt` retrieval summary. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `llms.txt`, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
 
+Profile preview deep links also update the document title and social description for the selected general, academic, or software output.
+
 ## Accessibility and responsive behavior
 
 - keyboard focus states are visible

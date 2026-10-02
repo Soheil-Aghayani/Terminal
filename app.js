@@ -2586,7 +2586,11 @@ function updateDocumentTitle() {
   let title;
   let description;
 
-  if (currentMode === "home") {
+  if (profilePreviewOpen) {
+    const definition = printProfileDefinitions[activeProfile] || printProfileDefinitions.general;
+    title = `${translate(definition.labelKey)} / ${translate("print.title")}`;
+    description = translate(definition.summaryKey);
+  } else if (currentMode === "home") {
     title = currentLang === "fa"
       ? "سهیل آقایانی / استودیوی پژوهش شخصی"
       : "Soheil Aghayani / Quiet Research Studio";
@@ -2855,6 +2859,7 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
   syncProfilePreviewHistory(nextProfile, historyMode);
   studioShell.inert = true;
   document.body.classList.add("is-profile-preview-open");
+  updateDocumentTitle();
   syncBoardRotation();
 
   window.requestAnimationFrame(() => {
@@ -2871,6 +2876,7 @@ function switchProfilePreview(profile) {
   profilePreviewPrint?.setAttribute("data-profile", activeProfile);
   profilePreviewDownload?.setAttribute("data-profile", activeProfile);
   syncProfilePreviewHistory(activeProfile, "replace");
+  updateDocumentTitle();
   profilePreviewSwitch?.querySelector(`[data-profile="${activeProfile}"]`)?.focus({ preventScroll: true });
 }
 
@@ -2883,6 +2889,7 @@ function closeProfilePreview({ restoreFocus = false, historyMode = "replace" } =
   syncProfilePreviewHistory(null, historyMode);
   studioShell.inert = false;
   document.body.classList.remove("is-profile-preview-open");
+  updateDocumentTitle();
   syncBoardRotation();
 
   if (restoreFocus) {
@@ -2914,6 +2921,7 @@ function syncProfilePreviewFromLocation({ restoreFocus = false } = {}) {
     renderProfilePreviewSwitch(profile);
     profilePreviewPrint?.setAttribute("data-profile", profile);
     profilePreviewDownload?.setAttribute("data-profile", profile);
+    updateDocumentTitle();
   }
 }
 
