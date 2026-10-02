@@ -140,6 +140,9 @@ const translations = {
     "profile.close": "CLOSE",
     "profile.print": "PRINT / PDF",
     "profile.printAria": "Print or save this profile as PDF",
+    "profile.switchLabel": "PROFILE VIEW",
+    "profile.switchAria": "Choose profile output",
+    "profile.general": "General",
     "palette.label": "Command palette",
     "palette.title": "Find a signal.",
     "palette.close": "Close",
@@ -371,6 +374,9 @@ const translations = {
     "profile.close": "بستن",
     "profile.print": "چاپ / PDF",
     "profile.printAria": "چاپ یا ذخیره‌ی این پروفایل به‌صورت PDF",
+    "profile.switchLabel": "نمایش پروفایل",
+    "profile.switchAria": "انتخاب خروجی پروفایل",
+    "profile.general": "عمومی",
     "palette.label": "پالت فرمان",
     "palette.title": "یک سیگنال پیدا کن.",
     "palette.close": "بستن",
@@ -1114,6 +1120,7 @@ const studioToast = document.getElementById("studioToast");
 const printProfile = document.getElementById("printProfile");
 const profilePreview = document.getElementById("profilePreview");
 const profilePreviewClose = document.getElementById("profilePreviewClose");
+const profilePreviewSwitch = document.getElementById("profilePreviewSwitch");
 const profilePreviewContent = document.getElementById("profilePreviewContent");
 const profilePreviewPrint = document.getElementById("profilePreviewPrint");
 let toastTimer = null;
@@ -1443,6 +1450,7 @@ const profileOutputDefinitions = [
     id: "general",
     commandId: "print",
     icon: "pixel-archive",
+    switchLabelKey: "profile.general",
     paletteTitleKey: "palette.actionPrint",
     paletteMetaKey: "palette.actionPrintMeta",
     searchKeys: ["cv", "resume", "dossier", "print", "pdf"],
@@ -1452,6 +1460,7 @@ const profileOutputDefinitions = [
     commandId: "print-academic",
     contactKey: "academicProfile",
     icon: "pixel-research",
+    switchLabelKey: "contact.academicProfile",
     paletteTitleKey: "palette.actionPrintAcademic",
     paletteMetaKey: "palette.actionPrintAcademicMeta",
     searchKeys: ["academic", "research", "university", "cv", "resume"],
@@ -1461,11 +1470,28 @@ const profileOutputDefinitions = [
     commandId: "print-technical",
     contactKey: "technicalProfile",
     icon: "pixel-project",
+    switchLabelKey: "contact.technicalProfile",
     paletteTitleKey: "palette.actionPrintTechnical",
     paletteMetaKey: "palette.actionPrintTechnicalMeta",
     searchKeys: ["software", "projects", "developer", "cv", "resume"],
   },
 ];
+
+function renderProfilePreviewSwitch(profile = activeProfile) {
+  if (!profilePreviewSwitch) return;
+
+  profilePreviewSwitch.innerHTML = `
+    <span class="profile-preview-switch-label">${escapeHtml(translate("profile.switchLabel"))}</span>
+    <div class="profile-preview-switch-options" role="group" aria-label="${escapeHtml(translate("profile.switchAria"))}">
+      ${profileOutputDefinitions.map(({ id, icon, switchLabelKey }) => `
+        <button class="profile-preview-switch-button${id === profile ? " is-active" : ""}" type="button" data-action="profile-switch" data-profile="${id}" aria-pressed="${id === profile}">
+          <svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#${icon}"></use></svg>
+          <span>${escapeHtml(translate(switchLabelKey))}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
 
 function renderProfileActions() {
   const profiles = profileOutputDefinitions.filter(({ contactKey }) => contactKey);
@@ -1975,7 +2001,10 @@ function applyTranslations() {
   refreshBoardLanguage();
   updateBoardClock();
   if (commandPaletteOpen) renderCommandResults();
-  if (profilePreviewOpen) renderPrintProfile(activeProfile);
+  if (profilePreviewOpen) {
+    renderPrintProfile(activeProfile);
+    renderProfilePreviewSwitch(activeProfile);
+  }
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   updateDocumentTitle();
 }
@@ -2392,6 +2421,7 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
     : null;
   activeProfile = nextProfile;
   renderPrintProfile(nextProfile);
+  renderProfilePreviewSwitch(nextProfile);
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   profilePreviewOpen = true;
   profilePreview.hidden = false;
@@ -2405,6 +2435,17 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
   window.requestAnimationFrame(() => {
     if (profilePreviewOpen) profilePreviewClose?.focus({ preventScroll: true });
   });
+}
+
+function switchProfilePreview(profile) {
+  if (!profilePreviewOpen || !profileOutputDefinitions.some(({ id }) => id === profile)) return;
+
+  activeProfile = profile;
+  renderPrintProfile(activeProfile);
+  renderProfilePreviewSwitch(activeProfile);
+  profilePreviewPrint?.setAttribute("data-profile", activeProfile);
+  syncProfilePreviewHistory(activeProfile, "replace");
+  profilePreviewSwitch?.querySelector(`[data-profile="${activeProfile}"]`)?.focus({ preventScroll: true });
 }
 
 function closeProfilePreview({ restoreFocus = false, historyMode = "replace" } = {}) {
@@ -2444,6 +2485,7 @@ function syncProfilePreviewFromLocation({ restoreFocus = false } = {}) {
   if (activeProfile !== profile) {
     activeProfile = profile;
     renderPrintProfile(profile);
+    renderProfilePreviewSwitch(profile);
     profilePreviewPrint?.setAttribute("data-profile", profile);
   }
 }
@@ -3045,6 +3087,11 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "profile-preview") {
     openProfilePreview(target.dataset.profile);
+    return;
+  }
+
+  if (target.dataset.action === "profile-switch") {
+    switchProfilePreview(target.dataset.profile);
     return;
   }
 

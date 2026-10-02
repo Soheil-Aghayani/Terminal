@@ -3102,6 +3102,54 @@ html[dir="rtl"] .project-filter input {
   text-transform: uppercase;
 }
 
+.profile-preview-switch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 12px;
+  padding: 12px 18px 0;
+}
+
+.profile-preview-switch-label {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.profile-preview-switch-options {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.profile-preview-switch-button {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  color: var(--ink-faint);
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.profile-preview-switch-button:hover,
+.profile-preview-switch-button:focus-visible,
+.profile-preview-switch-button.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .profile-preview-content {
   min-height: 0;
   overflow: auto;
@@ -3342,6 +3390,7 @@ html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
   }
 
   .profile-preview-topline,
+  .profile-preview-switch,
   .profile-preview-content,
   .profile-preview-actions {
     padding-inline: 12px;
