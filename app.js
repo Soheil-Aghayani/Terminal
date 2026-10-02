@@ -146,6 +146,12 @@ const translations = {
     "projects.filterCount": "SHOWING",
     "projects.filterEmpty": "NO SIGNALS MATCH",
     "projects.liveDemo": "LIVE",
+    "projects.sortLabel": "SORT",
+    "projects.sortAria": "Sort public projects",
+    "projects.sortCatalog": "STUDIO ORDER",
+    "projects.sortUpdated": "RECENTLY UPDATED",
+    "projects.sortStars": "MOST STARRED",
+    "projects.sortAlpha": "A–Z",
     "board.openBuild": "Open projects",
     "board.openResearch": "Open research",
     "board.openEducation": "Open education",
@@ -424,6 +430,12 @@ const translations = {
     "projects.filterCount": "نمایش",
     "projects.filterEmpty": "سیگنالی پیدا نشد",
     "projects.liveDemo": "زنده",
+    "projects.sortLabel": "مرتب‌سازی",
+    "projects.sortAria": "مرتب‌سازی پروژه‌های عمومی",
+    "projects.sortCatalog": "ترتیب استودیو",
+    "projects.sortUpdated": "تازه‌ترین به‌روزرسانی",
+    "projects.sortStars": "بیشترین ستاره",
+    "projects.sortAlpha": "الفبا",
     "board.openBuild": "باز کردن پروژه‌ها",
     "board.openResearch": "باز کردن پژوهش",
     "board.openEducation": "باز کردن تحصیلات",
@@ -1031,6 +1043,32 @@ function projectRecord(itemIndex) {
   return portfolioCatalog[itemIndex] || null;
 }
 
+function githubUpdatedTimestamp(itemIndex) {
+  const timestamp = Date.parse(githubRecordFor(itemIndex)?.updatedAt || "");
+  return Number.isFinite(timestamp) ? timestamp : 0;
+}
+
+function githubStarCount(itemIndex) {
+  const stars = Number(githubRecordFor(itemIndex)?.stars);
+  return Number.isFinite(stars) ? stars : -1;
+}
+
+function sortProjectEntries(entries) {
+  if (projectSortMode === "catalog") return entries;
+
+  return [...entries].sort((left, right) => {
+    if (projectSortMode === "updated") {
+      return githubUpdatedTimestamp(right.index) - githubUpdatedTimestamp(left.index) || left.index - right.index;
+    }
+
+    if (projectSortMode === "stars") {
+      return githubStarCount(right.index) - githubStarCount(left.index) || left.index - right.index;
+    }
+
+    return normalizeSearchText(left.item.title).localeCompare(normalizeSearchText(right.item.title)) || left.index - right.index;
+  });
+}
+
 function readGithubMetadataCache() {
   try {
     const saved = JSON.parse(window.localStorage.getItem(githubMetadataCacheKey) || "null");
@@ -1138,7 +1176,18 @@ function refreshGithubMetadataUI() {
     const item = content[currentLang].build.items[itemIndex];
     if (item) button.dataset.search = sectionSearchText("build", itemIndex, item);
   });
-  if (currentSection === "build") filterSectionList("build", sectionFilterQueries.build || "");
+  if (currentSection === "build" && currentItem === null && projectSortMode !== "catalog") {
+    const activeElement = document.activeElement;
+    const restoreFilterFocus = activeElement?.matches("[data-section-filter='build']");
+    const restoreSortFocus = activeElement?.matches("[data-project-sort]");
+    renderSection("build");
+    window.requestAnimationFrame(() => {
+      const selector = restoreSortFocus ? "[data-project-sort]" : restoreFilterFocus ? "[data-section-filter='build']" : "";
+      if (selector) document.querySelector(selector)?.focus({ preventScroll: true });
+    });
+  } else if (currentSection === "build") {
+    filterSectionList("build", sectionFilterQueries.build || "");
+  }
   if (commandPaletteOpen) renderCommandResults();
   updatePortfolioStructuredData();
 }
@@ -1321,6 +1370,8 @@ let commandPaletteOpen = false;
 let surfaceMaximized = false;
 const filterableSections = new Set(["build", "skills", "archive"]);
 const sectionFilterQueries = { build: "", skills: "", archive: "" };
+const projectSortModes = new Set(["catalog", "updated", "stars", "alpha"]);
+let projectSortMode = "catalog";
 let indexReturnFocus = null;
 let helpReturnFocus = null;
 let commandPaletteReturnFocus = null;
@@ -3161,26 +3212,40 @@ function renderSectionFilter(section, itemCount) {
   const prefix = isProjects ? "projects" : "sections";
   const inputId = isProjects ? "projectFilter" : `sectionFilter-${section}`;
   const query = sectionFilterQueries[section] || "";
+  const sortOptions = [
+    ["catalog", "projects.sortCatalog"],
+    ["updated", "projects.sortUpdated"],
+    ["stars", "projects.sortStars"],
+    ["alpha", "projects.sortAlpha"],
+  ];
 
   return `
-    <div class="project-filter section-filter" data-filter-shell="${section}" role="search">
+    <div class="project-filter section-filter${isProjects ? " project-filter-projects" : ""}" data-filter-shell="${section}" role="search">
       <div class="project-filter-line">
         <label class="project-filter-label" for="${inputId}"><span class="project-filter-caret" aria-hidden="true">&gt;</span>${escapeHtml(translate(`${prefix}.filterLabel`))}</label>
         <span class="project-filter-count" data-section-filter-count="${section}" role="status" aria-live="polite" aria-atomic="true">${escapeHtml(translate(`${prefix}.filterCount`))} ${localizeDigits(itemCount)} / ${localizeDigits(itemCount)}</span>
       </div>
       <input id="${inputId}" data-section-filter="${section}" type="search" autocomplete="off" spellcheck="false" value="${escapeHtml(query)}" placeholder="${escapeHtml(translate(`${prefix}.filterPlaceholder`))}" aria-label="${escapeHtml(translate(`${prefix}.filterAria`))}" aria-keyshortcuts="/" />
+      ${isProjects ? `
+        <label class="project-sort-control" for="projectSort">
+          <span class="project-sort-label">${escapeHtml(translate("projects.sortLabel"))}</span>
+          <select id="projectSort" data-project-sort aria-label="${escapeHtml(translate("projects.sortAria"))}">
+            ${sortOptions.map(([value, key]) => `<option value="${value}"${projectSortMode === value ? " selected" : ""}>${escapeHtml(translate(key))}</option>`).join("")}
+          </select>
+        </label>
+      ` : ""}
       <p class="project-filter-empty" data-section-filter-empty="${section}" hidden>${escapeHtml(translate(`${prefix}.filterEmpty`))}</p>
     </div>
   `;
 }
 
-function renderSectionItem(section, item, index) {
+function renderSectionItem(section, item, index, displayIndex = index) {
   const liveUrl = projectLiveUrl(section, index);
   const searchableText = [sectionSearchText(section, index, item), liveUrl ? translate("projects.liveDemo") : ""].join(" ");
 
   return `
     <button class="surface-list-item${section === "build" ? " project-record" : ""}" type="button" data-item="${index}" data-live="${liveUrl ? "true" : "false"}" data-search="${escapeRawHtml(searchableText)}">
-      ${section === "build" ? `<span class="project-record-index" aria-hidden="true">${escapeHtml(String(index + 1).padStart(2, "0"))}</span><span class="project-record-main">` : ""}
+      ${section === "build" ? `<span class="project-record-index" aria-hidden="true">${escapeHtml(String(displayIndex + 1).padStart(2, "0"))}</span><span class="project-record-main">` : ""}
         <strong>${escapeHtml(item.title)}</strong>
         <small>
           <span>${escapeHtml(item.meta)}</span>
@@ -3250,9 +3315,13 @@ function renderProjectDetailNavigation(itemIndex) {
 function renderSectionList(section, items) {
   if (section === "research") return renderResearchTimeline(items);
 
+  const entries = section === "build"
+    ? sortProjectEntries(items.map((item, index) => ({ item, index })))
+    : items.map((item, index) => ({ item, index }));
+
   return `
     <div class="surface-list${section === "build" ? " surface-list-projects" : ""}" data-section-list="${section}">
-      ${items.map((item, index) => renderSectionItem(section, item, index)).join("")}
+      ${entries.map(({ item, index }, displayIndex) => renderSectionItem(section, item, index, displayIndex)).join("")}
     </div>
   `;
 }
@@ -3796,6 +3865,15 @@ document.addEventListener("input", (event) => {
   if (!filterableSections.has(section)) return;
   sectionFilterQueries[section] = target.value;
   filterSectionList(section, target.value);
+});
+
+document.addEventListener("change", (event) => {
+  const target = event.target;
+  if (!target.matches("[data-project-sort]")) return;
+
+  projectSortMode = projectSortModes.has(target.value) ? target.value : "catalog";
+  renderSection("build");
+  window.requestAnimationFrame(() => document.querySelector("[data-project-sort]")?.focus({ preventScroll: true }));
 });
 
 document.addEventListener("keydown", (event) => {

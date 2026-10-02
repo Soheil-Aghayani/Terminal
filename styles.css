@@ -1091,6 +1091,11 @@ html[dir="rtl"] .flap-word {
   border-bottom: 1px solid var(--line);
 }
 
+.project-filter-projects {
+  max-width: none;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px) minmax(138px, 190px);
+}
+
 .project-filter-line {
   display: flex;
   min-width: 0;
@@ -1144,6 +1149,41 @@ html[dir="rtl"] .flap-word {
 }
 
 .project-filter input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.project-sort-control {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.project-sort-label {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.project-sort-control select {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  outline: 0;
+  color: var(--ink);
+  background: #080b0c;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.project-sort-control select:focus-visible {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
@@ -3599,6 +3639,7 @@ html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
 
   .project-filter-line,
   .project-filter input,
+  .project-sort-control,
   .project-filter-empty {
     grid-column: 1;
   }
