@@ -91,6 +91,7 @@ const translations = {
     "detail.githubTopics": "TOPICS",
     "detail.relatedWork": "RELATED PUBLIC WORK",
     "detail.evidence": "SELECTED EVIDENCE",
+    "detail.scholarRecord": "PUBLIC SCHOLAR RECORD",
     "detail.artifactLabel": "THESIS ARTIFACT",
     "detail.artifactAlt": "Thesis infographic showing waste cooking oil converted to biodiesel with a catalyst made from waste seashells.",
     "detail.artifactCaption": "A visual map of the waste cooking oil to biodiesel workflow and the waste-shell catalyst route.",
@@ -335,6 +336,7 @@ const translations = {
     "detail.githubTopics": "موضوع‌ها",
     "detail.relatedWork": "کارهای عمومی مرتبط",
     "detail.evidence": "شواهد منتخب",
+    "detail.scholarRecord": "رکورد عمومی اسکالر",
     "detail.artifactLabel": "اثر پایان‌نامه",
     "detail.artifactAlt": "اینفوگرافیک پایان‌نامه درباره‌ی تبدیل روغن پخت‌وپز به بیودیزل با کاتالیستی ساخته‌شده از پوسته‌ی دورریختنی صدف.",
     "detail.artifactCaption": "نقشه‌ای بصری از مسیر روغن پخت‌وپز تا بیودیزل و مسیر کاتالیست حاصل از پسماند صدف.",
@@ -679,15 +681,72 @@ const publicEvidenceLinks = Object.freeze({
   sustainableCourse: "https://www.coursera.org/account/accomplishments/verify/97ENWJ7STLNH",
 });
 
+/* Verified public Scholar records feed the archive and structured data from one source. */
+const scholarPublicationRecords = Object.freeze([
+  {
+    href: publicEvidenceLinks.biomass,
+    year: "2026",
+    venue: "Pollution",
+    citations: 2,
+    doi: "10.22059/poll.2025.393545.2928",
+    en: {
+      title: "Assessment of Biomass Resources in Iran and Worldwide: Diversity Analysis in Rural Areas with a Focus on Municipal Solid Waste and Livestock Manure",
+      meta: "Pollution · 2026 · Aghayani et al. · 2 citations · DOI 10.22059/poll.2025.393545.2928",
+    },
+    fa: {
+      title: "ارزیابی منابع زیست‌توده در ایران و جهان: تحلیل تنوع در نواحی روستایی با تمرکز بر پسماند جامد شهری و کود دام",
+      meta: "Pollution · ۲۰۲۶ · Aghayani و همکاران · ۲ استناد · DOI 10.22059/poll.2025.393545.2928",
+    },
+  },
+  {
+    href: publicEvidenceLinks.landfill,
+    year: "2026",
+    venue: "Advances in Environmental Technology",
+    citations: 0,
+    en: {
+      title: "Assessment of Landfill Gas Production in Saveh City Using the LandGEM Model: A Comprehensive Analysis",
+      meta: "Advances in Environmental Technology · 2026 · Mollasalehi et al. · indexed record",
+    },
+    fa: {
+      title: "ارزیابی تولید گاز دفنگاه در شهر ساوه با استفاده از مدل LandGEM: تحلیلی جامع",
+      meta: "Advances in Environmental Technology · ۲۰۲۶ · Mollasalehi و همکاران · رکورد نمایه‌شده",
+    },
+  },
+  {
+    href: publicEvidenceLinks.transfer,
+    year: "2025",
+    venue: "Pollution",
+    citations: 1,
+    doi: "10.22059/poll.2025.388834.2751",
+    en: {
+      title: "Siting a Waste Transfer Station in District 6 of Karaj Municipality to Reduce Pollution",
+      meta: "Pollution · 2025 · Samiee-Zafarghandi & Aghayani · 1 citation · DOI 10.22059/poll.2025.388834.2751",
+    },
+    fa: {
+      title: "مکان‌یابی ایستگاه انتقال پسماند در منطقه‌ی ۶ شهرداری کرج برای کاهش آلودگی",
+      meta: "Pollution · ۲۰۲۵ · Samiee-Zafarghandi و آقایانی · ۱ استناد · DOI 10.22059/poll.2025.388834.2751",
+    },
+  },
+]);
+
+const scholarEvidence = Object.fromEntries(
+  ["en", "fa"].map((language) => [
+    language,
+    scholarPublicationRecords.map((record) => ({
+      ...record[language],
+      href: record.href,
+      sourceKey: "detail.scholarRecord",
+    })),
+  ]),
+);
+
 const archiveEvidence = {
   en: [
     [
       { title: "4 journal papers", meta: "2025-2026 / selected record" },
       { title: "8 conference papers", meta: "2023-2025 / selected record" },
       { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: publicEvidenceLinks.scholar },
-      { title: "Assessment of Biomass Resources in Iran and Worldwide: Diversity Analysis in Rural Areas with a Focus on Municipal Solid Waste and Livestock Manure", meta: "Pollution · 2026 · Aghayani et al. · 2 citations · DOI 10.22059/poll.2025.393545.2928", href: publicEvidenceLinks.biomass },
-      { title: "Assessment of Landfill Gas Production in Saveh City Using the LandGEM Model: A Comprehensive Analysis", meta: "Advances in Environmental Technology · 2026 · Mollasalehi et al. · indexed record", href: publicEvidenceLinks.landfill },
-      { title: "Siting a Waste Transfer Station in District 6 of Karaj Municipality to Reduce Pollution", meta: "Pollution · 2025 · Samiee-Zafarghandi & Aghayani · 1 citation · DOI 10.22059/poll.2025.388834.2751", href: publicEvidenceLinks.transfer },
+      ...scholarEvidence.en,
       { title: "Biofuel production from biomass by transesterification", meta: "National conference record · 2025" },
       { title: "Pharmaceutical-waste management strategies", meta: "National conference record · 2025" },
       { title: "Textile-industry pollution assessment", meta: "National conference record · 2024" },
@@ -713,9 +772,7 @@ const archiveEvidence = {
       { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
       { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲-۱۴۰۴ / رکورد منتخب" },
       { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: publicEvidenceLinks.scholar },
-      { title: "ارزیابی منابع زیست‌توده در ایران و جهان: تحلیل تنوع در نواحی روستایی با تمرکز بر پسماند جامد شهری و کود دام", meta: "Pollution · ۲۰۲۶ · Aghayani و همکاران · ۲ استناد · DOI 10.22059/poll.2025.393545.2928", href: publicEvidenceLinks.biomass },
-      { title: "ارزیابی تولید گاز دفنگاه در شهر ساوه با استفاده از مدل LandGEM: تحلیلی جامع", meta: "Advances in Environmental Technology · ۲۰۲۶ · Mollasalehi و همکاران · رکورد نمایه‌شده", href: publicEvidenceLinks.landfill },
-      { title: "مکان‌یابی ایستگاه انتقال پسماند در منطقه‌ی ۶ شهرداری کرج برای کاهش آلودگی", meta: "Pollution · ۲۰۲۵ · Samiee-Zafarghandi و آقایانی · ۱ استناد · DOI 10.22059/poll.2025.388834.2751", href: publicEvidenceLinks.transfer },
+      ...scholarEvidence.fa,
       { title: "تولید سوخت زیستی از زیست‌توده با ترانس‌استریفیکاسیون", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "راهبردهای مدیریت پسماند دارویی", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "ارزیابی آلاینده‌های صنعت نساجی", meta: "رکورد کنفرانسی ملی · ۱۴۰۳" },
@@ -818,18 +875,30 @@ function updatePortfolioStructuredData() {
     };
   });
 
-  const researchItems = archiveEvidence.en[0]
-    .filter((item) => item.href && item.title !== "Google Scholar profile")
-    .map((item, index) => ({
+  const researchItems = scholarPublicationRecords.map((record, index) => {
+    const scholarlyArticle = {
+      "@type": "ScholarlyArticle",
+      name: record.en.title,
+      url: record.href,
+      datePublished: record.year,
+      isPartOf: { "@type": "Periodical", name: record.venue },
+      author: { "@id": "https://agseyl.ir/#person" },
+    };
+
+    if (record.doi) {
+      scholarlyArticle.identifier = {
+        "@type": "PropertyValue",
+        propertyID: "DOI",
+        value: record.doi,
+      };
+    }
+
+    return {
       "@type": "ListItem",
       position: index + 1,
-      item: {
-        "@type": "ScholarlyArticle",
-        name: item.title,
-        url: item.href,
-        author: { "@id": "https://agseyl.ir/#person" },
-      },
-    }));
+      item: scholarlyArticle,
+    };
+  });
 
   structuredData.textContent = JSON.stringify({
     "@context": "https://schema.org",
@@ -1051,6 +1120,7 @@ function renderEvidenceRow(evidence) {
   const content = `
     <strong>${escapeHtml(evidence.title)}</strong>
     <span class="detail-evidence-meta">
+      ${evidence.sourceKey ? `<span class="detail-evidence-source">${escapeHtml(translate(evidence.sourceKey))}</span>` : ""}
       <small>${escapeHtml(evidence.meta)}</small>
       ${evidence.href ? externalIconMarkup() : ""}
     </span>

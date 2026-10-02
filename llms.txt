@@ -51,9 +51,10 @@ The Projects route in the portfolio is the authoritative index of public reposit
 ## Public evidence
 
 - Selected publication records and public evidence: https://agseyl.ir/
-- Biomass resources paper: https://jpoll.ut.ac.ir/article_105139.html
-- Landfill-gas assessment: https://aet.irost.ir/article_1686.html
-- Waste transfer-station siting paper: https://jpoll.ut.ac.ir/article_101760.html
+- Google Scholar public snapshot: 3 indexed papers and h-index 1.
+- Biomass resources paper: 2026, Pollution, 2 citations, DOI 10.22059/poll.2025.393545.2928 — https://jpoll.ut.ac.ir/article_105139.html
+- Landfill-gas assessment: 2026, Advances in Environmental Technology — https://aet.irost.ir/article_1686.html
+- Waste transfer-station siting paper: 2025, Pollution, 1 citation, DOI 10.22059/poll.2025.388834.2751 — https://jpoll.ut.ac.ir/article_101760.html
 
 ## Retrieval guidance
 
