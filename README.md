@@ -15,7 +15,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Bilingual interface** - English and Persian content, RTL layout support, localized numerals, and language-specific board signals.
 - **Command palette** - keyboard-friendly global search across routes, projects, research evidence, share/copy links, public-profile previews, and external links with `Ctrl`/`⌘` + `K`.
 - **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
-- **Profile outputs** - general, academic, and software-focused dossiers open in an in-terminal preview, switch without leaving the preview, support shareable `?profile=` deep links, and can be printed or saved as PDF, with shared public contact links and no private application data.
+- **Profile outputs** - general, academic, and software-focused dossiers open in an in-terminal preview, switch without leaving the preview, support shareable `?profile=` deep links, and can be printed/saved as PDF or downloaded as plain text, with shared public contact links and no private application data.
 - **Installable shell** - web app metadata lets mobile visitors add the terminal portfolio to a home screen without claiming offline support.
 
 ## Design principles

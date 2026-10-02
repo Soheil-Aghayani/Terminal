@@ -3018,12 +3018,13 @@ html[dir="rtl"] .project-filter input {
 }
 
 .profile-preview-layer {
+  --profile-preview-inset: clamp(12px, 3vw, 32px);
   position: fixed;
   z-index: 70;
   inset: 0;
   display: grid;
   place-items: center;
-  padding: clamp(12px, 3vw, 32px);
+  padding: var(--profile-preview-inset);
   background: rgba(8, 11, 12, 0.82);
 }
 
@@ -3036,7 +3037,7 @@ html[dir="rtl"] .project-filter input {
   display: flex;
   position: relative;
   width: min(900px, 100%);
-  max-height: calc(100dvh - 24px);
+  max-height: calc(100dvh - var(--profile-preview-inset) - var(--profile-preview-inset));
   flex-direction: column;
   border: 1px solid var(--line-strong);
   background: #101416;
@@ -3064,6 +3065,7 @@ html[dir="rtl"] .project-filter input {
 }
 
 .profile-preview-close,
+.profile-preview-download,
 .profile-preview-print {
   display: inline-flex;
   min-height: 42px;
@@ -3080,12 +3082,15 @@ html[dir="rtl"] .project-filter input {
 }
 
 .profile-preview-close span:first-child,
+.profile-preview-download,
 .profile-preview-print {
   color: var(--accent);
 }
 
 .profile-preview-close:hover,
 .profile-preview-close:focus-visible,
+.profile-preview-download:hover,
+.profile-preview-download:focus-visible,
 .profile-preview-print:hover,
 .profile-preview-print:focus-visible {
   color: var(--ink);
@@ -3318,9 +3323,17 @@ html[dir="rtl"] .project-filter input {
 
 .profile-preview-actions {
   display: flex;
+  align-items: center;
+  gap: 18px;
   justify-content: flex-end;
   padding: 0 18px;
   border-top: 1px solid var(--line);
+}
+
+.profile-preview-download .pixel-icon {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 11px;
 }
 
 html[dir="rtl"] .profile-preview-content .print-profile {
@@ -3382,11 +3395,12 @@ html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
   }
 
   .profile-preview-layer {
-    padding: 8px;
+    --profile-preview-inset: 8px;
+    padding: var(--profile-preview-inset);
   }
 
   .profile-preview-dialog {
-    max-height: calc(100dvh - 16px);
+    max-height: calc(100dvh - var(--profile-preview-inset) - var(--profile-preview-inset));
   }
 
   .profile-preview-topline,

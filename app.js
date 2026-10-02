@@ -140,6 +140,8 @@ const translations = {
     "profile.close": "CLOSE",
     "profile.print": "PRINT / PDF",
     "profile.printAria": "Print or save this profile as PDF",
+    "profile.download": "DOWNLOAD .TXT",
+    "profile.downloadAria": "Download this public profile as text",
     "profile.switchLabel": "PROFILE VIEW",
     "profile.switchAria": "Choose profile output",
     "profile.general": "General",
@@ -214,6 +216,7 @@ const translations = {
     "toast.routeCopyFailed": "COPY FAILED",
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
+    "toast.profileDownloaded": "PROFILE TEXT DOWNLOADED",
     "print.label": "PROFILE / PRINT",
     "print.title": "Soheil Aghayani",
     "print.subtitle": "Environmental engineer / researcher / builder",
@@ -374,6 +377,8 @@ const translations = {
     "profile.close": "بستن",
     "profile.print": "چاپ / PDF",
     "profile.printAria": "چاپ یا ذخیره‌ی این پروفایل به‌صورت PDF",
+    "profile.download": "دانلود TXT.",
+    "profile.downloadAria": "دانلود متن این پروفایل عمومی",
     "profile.switchLabel": "نمایش پروفایل",
     "profile.switchAria": "انتخاب خروجی پروفایل",
     "profile.general": "عمومی",
@@ -448,6 +453,7 @@ const translations = {
     "toast.routeCopyFailed": "کپی انجام نشد",
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
+    "toast.profileDownloaded": "متن پروفایل دانلود شد",
     "print.label": "پروفایل / چاپ",
     "print.title": "سهیل آقایانی",
     "print.subtitle": "مهندس محیط‌زیست / پژوهشگر / سازنده",
@@ -1123,6 +1129,7 @@ const profilePreviewClose = document.getElementById("profilePreviewClose");
 const profilePreviewSwitch = document.getElementById("profilePreviewSwitch");
 const profilePreviewContent = document.getElementById("profilePreviewContent");
 const profilePreviewPrint = document.getElementById("profilePreviewPrint");
+const profilePreviewDownload = document.getElementById("profilePreviewDownload");
 let toastTimer = null;
 
 const projectDepartures = [
@@ -2006,6 +2013,7 @@ function applyTranslations() {
     renderProfilePreviewSwitch(activeProfile);
   }
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
+  profilePreviewDownload?.setAttribute("aria-label", localizeDigits(translate("profile.downloadAria")));
   updateDocumentTitle();
 }
 
@@ -2404,6 +2412,26 @@ function renderPrintProfile(profile = "general") {
   }
 }
 
+function downloadProfileText(profile = activeProfile) {
+  const definition = profileOutputDefinitions.find(({ id }) => id === profile) || profileOutputDefinitions[0];
+  const source = document.createElement("div");
+  source.innerHTML = renderProfileMarkup(definition.id);
+  const lines = [...source.querySelectorAll("h1, h2, p, li, a")]
+    .map((element) => element.textContent.replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+  const text = `${lines.join("\n")}\n`;
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const objectUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = objectUrl;
+  link.download = `soheil-aghayani-${definition.id}-profile-${currentLang}.txt`;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+  showToast(translate("toast.profileDownloaded"));
+}
+
 function profilePreviewFocusableElements() {
   if (!profilePreview) return [];
 
@@ -2423,10 +2451,12 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
   renderPrintProfile(nextProfile);
   renderProfilePreviewSwitch(nextProfile);
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
+  profilePreviewDownload?.setAttribute("aria-label", localizeDigits(translate("profile.downloadAria")));
   profilePreviewOpen = true;
   profilePreview.hidden = false;
   profilePreview.setAttribute("aria-hidden", "false");
   profilePreviewPrint?.setAttribute("data-profile", nextProfile);
+  profilePreviewDownload?.setAttribute("data-profile", nextProfile);
   syncProfilePreviewHistory(nextProfile, historyMode);
   studioShell.inert = true;
   document.body.classList.add("is-profile-preview-open");
@@ -2444,6 +2474,7 @@ function switchProfilePreview(profile) {
   renderPrintProfile(activeProfile);
   renderProfilePreviewSwitch(activeProfile);
   profilePreviewPrint?.setAttribute("data-profile", activeProfile);
+  profilePreviewDownload?.setAttribute("data-profile", activeProfile);
   syncProfilePreviewHistory(activeProfile, "replace");
   profilePreviewSwitch?.querySelector(`[data-profile="${activeProfile}"]`)?.focus({ preventScroll: true });
 }
@@ -2487,6 +2518,7 @@ function syncProfilePreviewFromLocation({ restoreFocus = false } = {}) {
     renderPrintProfile(profile);
     renderProfilePreviewSwitch(profile);
     profilePreviewPrint?.setAttribute("data-profile", profile);
+    profilePreviewDownload?.setAttribute("data-profile", profile);
   }
 }
 
@@ -3097,6 +3129,11 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "profile-print") {
     printProfileAndOpen(target.dataset.profile);
+    return;
+  }
+
+  if (target.dataset.action === "profile-download") {
+    downloadProfileText(target.dataset.profile || activeProfile);
     return;
   }
 
