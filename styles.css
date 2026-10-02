@@ -4407,6 +4407,35 @@ body.is-command-open {
   text-transform: uppercase;
 }
 
+.detail-github-topics {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 16px;
+  align-items: baseline;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.detail-github-topics small,
+.detail-github-topics span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--mono);
+  font-size: 8px;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.detail-github-topics small {
+  color: var(--ink-faint);
+}
+
+.detail-github-topics span {
+  color: var(--ink-soft);
+  text-align: right;
+}
+
 .detail-github-pending {
   grid-column: 1 / -1;
   padding-top: 9px;
@@ -4554,6 +4583,15 @@ body.is-command-open {
 
   .detail-github-stat:nth-child(n + 3) {
     border-top: 1px solid var(--line);
+  }
+
+  .detail-github-topics {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .detail-github-topics span {
+    text-align: start;
   }
 
   .research-timeline-entry {

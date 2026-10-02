@@ -88,6 +88,7 @@ const translations = {
     "detail.repositoryKey": "REPOSITORY",
     "detail.githubSource": "PUBLIC API",
     "detail.githubLanguage": "LANGUAGE",
+    "detail.githubTopics": "TOPICS",
     "detail.relatedWork": "RELATED PUBLIC WORK",
     "detail.evidence": "SELECTED EVIDENCE",
     "detail.artifactLabel": "THESIS ARTIFACT",
@@ -325,6 +326,7 @@ const translations = {
     "detail.repositoryKey": "مخزن",
     "detail.githubSource": "منبع عمومی",
     "detail.githubLanguage": "زبان",
+    "detail.githubTopics": "موضوع‌ها",
     "detail.relatedWork": "کارهای عمومی مرتبط",
     "detail.evidence": "شواهد منتخب",
     "detail.artifactLabel": "اثر پایان‌نامه",
@@ -635,7 +637,7 @@ const portfolioCatalog = content.en.build.items.map((item, index) => ({
 
 const projectRepositorySlugs = portfolioCatalog.map(({ repo }) => repo);
 const githubUsername = "Soheil-Aghayani";
-const githubMetadataCacheKey = "soheil-studio-github-metadata-v1";
+const githubMetadataCacheKey = "soheil-studio-github-metadata-v2";
 const githubMetadataCacheTtl = 1000 * 60 * 60;
 const githubMetadata = new Map();
 let githubSyncState = "idle";
@@ -900,6 +902,11 @@ function renderGithubSignal(itemIndex) {
       [translate("detail.githubUpdated"), formatGithubDate(record.updatedAt) || translate("detail.notAvailable")],
     ]
     : [];
+  const topics = record?.topics?.filter(Boolean).slice(0, 6) || [];
+  const remainingTopicCount = Math.max((record?.topics?.length || 0) - topics.length, 0);
+  const topicText = topics.length
+    ? `${topics.join(" / ")}${remainingTopicCount ? ` / +${remainingTopicCount}` : ""}`
+    : translate("detail.notAvailable");
 
   return `
     <section class="detail-github-signal" data-github-signal="${itemIndex}" aria-label="${escapeHtml(translate("detail.githubData"))}">
@@ -917,6 +924,12 @@ function renderGithubSignal(itemIndex) {
           `).join("")
           : `<span class="detail-github-pending">${escapeHtml(["idle", "loading"].includes(githubSyncState) ? translate("detail.githubLoading") : translate("detail.githubUnavailable"))}</span>`}
       </div>
+      ${record ? `
+        <div class="detail-github-topics">
+          <small>${escapeHtml(translate("detail.githubTopics"))}</small>
+          <span>${escapeHtml(topicText)}</span>
+        </div>
+      ` : ""}
     </section>
   `;
 }
@@ -927,6 +940,13 @@ function refreshGithubMetadataUI() {
     const replacement = renderGithubSignal(itemIndex);
     if (replacement) element.outerHTML = replacement.trim();
   });
+
+  document.querySelectorAll('[data-section-list="build"] [data-item]').forEach((button) => {
+    const itemIndex = Number(button.dataset.item);
+    const item = content[currentLang].build.items[itemIndex];
+    if (item) button.dataset.search = sectionSearchText("build", itemIndex, item);
+  });
+  if (currentSection === "build") filterSectionList("build", sectionFilterQueries.build || "");
 }
 
 async function syncGithubMetadata() {
@@ -963,6 +983,7 @@ async function syncGithubMetadata() {
         stars: Number(repository.stargazers_count) || 0,
         forks: Number(repository.forks_count) || 0,
         updatedAt: repository.pushed_at || repository.updated_at || "",
+        topics: Array.isArray(repository.topics) ? repository.topics : [],
       }));
 
     saveGithubMetadataCache(records);
@@ -1874,6 +1895,7 @@ function commandEntries() {
       const englishItem = content.en[view]?.items?.[itemIndex] || item;
       const persianItem = content.fa[view]?.items?.[itemIndex] || item;
       const repository = view === "build" ? projectRepositorySlugs[itemIndex] || "" : "";
+      const topics = view === "build" ? githubRecordFor(itemIndex)?.topics || [] : [];
 
       return {
         id: `command-${view}-${itemIndex}`,
@@ -1894,6 +1916,7 @@ function commandEntries() {
           persianItem.meta,
           persianItem.detail,
           repository,
+          ...topics,
         ].join(" "),
       };
     });
@@ -2559,6 +2582,7 @@ function sectionSearchText(section, index, item) {
   const languageItems = [content.en[section]?.items[index], content.fa[section]?.items[index]].filter(Boolean);
   const repository = section === "build" ? projectRecord(index)?.repo || "" : "";
   const liveUrl = section === "build" ? projectLiveUrl(section, index) : "";
+  const topics = section === "build" ? githubRecordFor(index)?.topics || [] : [];
 
   return [
     section,
@@ -2568,6 +2592,7 @@ function sectionSearchText(section, index, item) {
     item.meta,
     item.detail,
     item.href || "",
+    ...topics,
     ...languageItems.flatMap((record) => [record.title, record.meta, record.detail]),
   ].join(" ");
 }

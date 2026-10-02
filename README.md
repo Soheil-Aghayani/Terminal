@@ -8,7 +8,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 
 - **Live research departure board** - animated, character-by-character signal changes with pause controls and reduced-motion support.
 - **Project archive** - all public projects in one searchable index, with live links where available.
-- **Project case studies** - each project has a focused brief, format, repository metadata, live/API facts, related public work, and a visible share/copy route action.
+- **Project case studies** - each project has a focused brief, repository metadata, live/API facts, public GitHub topics, related public work, and a visible share/copy route action.
 - **Research timeline** - chronological research threads that open into the existing detail view instead of duplicating content.
 - **Field notes bridge** - the Archive exposes a separate public writing space without copying its content into the portfolio.
 - **Thesis artifact** - the public research detail can reveal a metadata-stripped visual summary of the thesis workflow without placing it on the first screen.
