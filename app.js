@@ -106,6 +106,9 @@ const translations = {
     "detail.brief": "BRIEF",
     "detail.format": "FORMAT",
     "detail.repositoryKey": "REPOSITORY",
+    "detail.publicSurface": "PUBLIC SURFACE",
+    "detail.liveSurface": "LIVE DEMO",
+    "detail.sourceOnly": "SOURCE ONLY",
     "detail.githubSource": "PUBLIC API",
     "detail.githubLanguage": "LANGUAGE",
     "detail.githubTopics": "TOPICS",
@@ -377,6 +380,9 @@ const translations = {
     "detail.brief": "خلاصه",
     "detail.format": "نوع کار",
     "detail.repositoryKey": "مخزن",
+    "detail.publicSurface": "سطح عمومی",
+    "detail.liveSurface": "نسخه‌ی زنده",
+    "detail.sourceOnly": "فقط منبع",
     "detail.githubSource": "منبع عمومی",
     "detail.githubLanguage": "زبان",
     "detail.githubTopics": "موضوع‌ها",
@@ -3164,6 +3170,9 @@ function renderSection(section) {
 function renderProjectCaseStudy(item, itemIndex) {
   const project = projectRecord(itemIndex);
   if (!project) return "";
+  const publicSurface = project.live
+    ? translate("detail.liveSurface")
+    : translate("detail.sourceOnly");
 
   return `
     <section class="project-case-study" aria-label="${escapeHtml(translate("detail.caseStudyAria"))}">
@@ -3182,6 +3191,10 @@ function renderProjectCaseStudy(item, itemIndex) {
         <div>
           <dt>${escapeHtml(translate("detail.repositoryKey"))}</dt>
           <dd>${escapeHtml(project.repo)}</dd>
+        </div>
+        <div>
+          <dt>${escapeHtml(translate("detail.publicSurface"))}</dt>
+          <dd>${escapeHtml(publicSurface)}</dd>
         </div>
       </dl>
     </section>
