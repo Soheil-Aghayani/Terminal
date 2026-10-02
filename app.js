@@ -64,6 +64,11 @@ const translations = {
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
+    "surface.commandStatus": "STUDIO: {{view}} / {{language}} / GITHUB {{sync}}",
+    "surface.commandSync": "GITHUB SYNC: {{state}}",
+    "surface.commandSyncLoading": "LOADING",
+    "surface.commandSyncReady": "READY",
+    "surface.commandSyncUnavailable": "UNAVAILABLE",
     "surface.commandResized": "TERMINAL {{state}}",
     "surface.commandBoard": "LIVE BOARD {{state}}",
     "surface.commandLanguage": "LANGUAGE: {{language}}",
@@ -325,6 +330,11 @@ const translations = {
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
+    "surface.commandStatus": "استودیو: {{view}} / {{language}} / گیت‌هاب {{sync}}",
+    "surface.commandSync": "همگام‌سازی گیت‌هاب: {{state}}",
+    "surface.commandSyncLoading": "در حال بارگذاری",
+    "surface.commandSyncReady": "آماده",
+    "surface.commandSyncUnavailable": "در دسترس نیست",
     "surface.commandResized": "ترمینال: {{state}}",
     "surface.commandBoard": "بورد زنده: {{state}}",
     "surface.commandLanguage": "زبان: {{language}}",
@@ -1889,6 +1899,15 @@ function moveSurfaceCommandHistory(direction) {
   }
 }
 
+function githubSyncStatusLabel() {
+  const statusKeys = {
+    loading: "surface.commandSyncLoading",
+    ready: "surface.commandSyncReady",
+    unavailable: "surface.commandSyncUnavailable",
+  };
+  return translate(statusKeys[githubSyncState] || "surface.commandSyncLoading");
+}
+
 function runSurfaceCommand(rawCommand) {
   const normalized = normalizeSearchText(rawCommand).trim().replace(/\s+/g, " ");
   if (!normalized) {
@@ -1912,6 +1931,23 @@ function runSurfaceCommand(rawCommand) {
   if (verb === "history") {
     const commands = surfaceCommandHistory.slice(-5).join(" / ") || translate("surface.commandHistoryEmpty");
     setSurfaceCommandStatus("surface.commandHistory", { commands });
+    return;
+  }
+
+  if (verb === "status") {
+    setSurfaceCommandStatus("surface.commandStatus", {
+      view: viewLabel(currentMode),
+      language: currentLang === "fa" ? "فارسی" : "ENGLISH",
+      sync: githubSyncStatusLabel(),
+    });
+    return;
+  }
+
+  if (verb === "sync" || verb === "refresh") {
+    setSurfaceCommandStatus("surface.commandSync", { state: githubSyncStatusLabel() });
+    syncGithubMetadata().then(() => {
+      setSurfaceCommandStatus("surface.commandSync", { state: githubSyncStatusLabel() });
+    });
     return;
   }
 
