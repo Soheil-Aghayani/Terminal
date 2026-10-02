@@ -2933,6 +2933,7 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
   activeProfile = nextProfile;
   renderPrintProfile(nextProfile);
   renderProfilePreviewSwitch(nextProfile);
+  profilePreviewContent?.scrollTo({ top: 0, left: 0, behavior: "auto" });
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   profilePreviewDownload?.setAttribute("aria-label", localizeDigits(translate("profile.downloadAria")));
   profilePreviewOpen = true;
@@ -2957,6 +2958,7 @@ function switchProfilePreview(profile) {
   activeProfile = profile;
   renderPrintProfile(activeProfile);
   renderProfilePreviewSwitch(activeProfile);
+  profilePreviewContent?.scrollTo({ top: 0, left: 0, behavior: "auto" });
   profilePreviewPrint?.setAttribute("data-profile", activeProfile);
   profilePreviewDownload?.setAttribute("data-profile", activeProfile);
   syncProfilePreviewHistory(activeProfile, "replace");
