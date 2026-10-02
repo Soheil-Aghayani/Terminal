@@ -3460,6 +3460,10 @@ body.is-terminal-maximized {
   overflow: hidden;
 }
 
+html.is-terminal-maximized {
+  overflow: hidden;
+}
+
 body.is-terminal-maximized::before {
   position: fixed;
   z-index: 20;

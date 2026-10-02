@@ -2115,6 +2115,7 @@ function setSurfaceMaximized(maximized, { restoreFocus = false } = {}) {
   surfaceMaximized = Boolean(maximized);
   surface?.classList.toggle("is-maximized", surfaceMaximized);
   document.body.classList.toggle("is-terminal-maximized", surfaceMaximized);
+  root.classList.toggle("is-terminal-maximized", surfaceMaximized);
   updateSurfaceMaximizeControl();
 
   if (!surfaceMaximized && restoreFocus) {
