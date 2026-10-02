@@ -3094,6 +3094,15 @@ function renderSectionItem(section, item, index) {
 }
 
 function renderResearchTimeline(items) {
+  const timelineItems = items
+    .map((item, index) => ({ item, index }))
+    .sort((left, right) => {
+      const englishItems = content.en.research.items;
+      const firstYear = (record) => Number(String(record?.period || "").match(/\d{4}/)?.[0] || 0);
+      const yearDifference = firstYear(englishItems[left.index]) - firstYear(englishItems[right.index]);
+      return yearDifference || left.index - right.index;
+    });
+
   return `
     <section class="research-timeline" aria-label="${escapeHtml(translate("research.timelineAria"))}">
       <div class="research-timeline-topline">
@@ -3101,7 +3110,7 @@ function renderResearchTimeline(items) {
         <span>${localizeDigits(items.length)} ${escapeHtml(translate("research.timelineCount"))}</span>
       </div>
       <div class="research-timeline-list" data-section-list="research">
-        ${items.map((item, index) => `
+        ${timelineItems.map(({ item, index }) => `
           <button class="research-timeline-entry" type="button" data-item="${index}" data-live="false" data-search="${escapeRawHtml(sectionSearchText("research", index, item))}">
             <time class="research-timeline-period">${escapeHtml(localizeDigits(item.period || item.meta))}</time>
             <span class="research-timeline-body">
