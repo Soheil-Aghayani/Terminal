@@ -154,6 +154,7 @@ const translations = {
     "projects.sortUpdated": "RECENTLY UPDATED",
     "projects.sortStars": "MOST STARRED",
     "projects.sortAlpha": "A–Z",
+    "projects.githubMetaAria": "GitHub metadata",
     "board.openBuild": "Open projects",
     "board.openResearch": "Open research",
     "board.openEducation": "Open education",
@@ -440,6 +441,7 @@ const translations = {
     "projects.sortUpdated": "تازه‌ترین به‌روزرسانی",
     "projects.sortStars": "بیشترین ستاره",
     "projects.sortAlpha": "الفبا",
+    "projects.githubMetaAria": "فراداده‌ی گیت‌هاب",
     "board.openBuild": "باز کردن پروژه‌ها",
     "board.openResearch": "باز کردن پژوهش",
     "board.openEducation": "باز کردن تحصیلات",
@@ -1057,6 +1059,17 @@ function githubStarCount(itemIndex) {
   return Number.isFinite(stars) ? stars : -1;
 }
 
+function projectGithubSummary(itemIndex) {
+  const record = githubRecordFor(itemIndex);
+  if (!record) return "";
+
+  const stars = Number(record.stars);
+  return [
+    record.language || "",
+    Number.isFinite(stars) ? `★ ${localizeDigits(stars)}` : "",
+  ].filter(Boolean).join(" · ");
+}
+
 function sortProjectEntries(entries) {
   if (projectSortMode === "catalog") return entries;
 
@@ -1179,6 +1192,11 @@ function refreshGithubMetadataUI() {
     const itemIndex = Number(button.dataset.item);
     const item = content[currentLang].build.items[itemIndex];
     if (item) button.dataset.search = sectionSearchText("build", itemIndex, item);
+  });
+  document.querySelectorAll("[data-project-github-meta]").forEach((element) => {
+    const summary = projectGithubSummary(Number(element.dataset.projectGithubMeta));
+    element.textContent = summary;
+    element.hidden = !summary;
   });
   if (currentSection === "build" && currentItem === null && projectSortMode !== "catalog") {
     const activeElement = document.activeElement;
@@ -3296,6 +3314,7 @@ function renderSectionFilter(section, itemCount) {
 
 function renderSectionItem(section, item, index, displayIndex = index) {
   const liveUrl = projectLiveUrl(section, index);
+  const githubSummary = section === "build" ? projectGithubSummary(index) : "";
   const searchableText = [sectionSearchText(section, index, item), liveUrl ? translate("projects.liveDemo") : ""].join(" ");
 
   return `
@@ -3305,6 +3324,7 @@ function renderSectionItem(section, item, index, displayIndex = index) {
         <small>
           <span>${escapeHtml(item.meta)}</span>
           ${liveUrl ? `<span class="project-live-mark" aria-label="${escapeHtml(translate("projects.liveDemo"))}"><i aria-hidden="true"></i>${escapeHtml(translate("projects.liveDemo"))}</span>` : ""}
+          ${section === "build" ? `<span class="project-record-github-meta" data-project-github-meta="${index}" aria-label="${escapeHtml(translate("projects.githubMetaAria"))}"${githubSummary ? "" : " hidden"}>${escapeHtml(githubSummary)}</span>` : ""}
         </small>
       ${section === "build" ? "</span>" : ""}
     </button>

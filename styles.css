@@ -3830,6 +3830,15 @@ body.is-terminal-maximized .command-palette-layer {
   white-space: nowrap;
 }
 
+.surface-list-projects .project-record-github-meta {
+  min-width: 0;
+  max-width: 42%;
+  overflow: hidden;
+  color: var(--ink-faint);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (min-width: 961px) {
   .surface-list-projects {
     grid-template-columns: minmax(0, 1fr);
@@ -3856,6 +3865,10 @@ body.is-terminal-maximized .command-palette-layer {
 
   .surface-list-projects .project-record strong {
     font-size: 14px;
+  }
+
+  .surface-list-projects .project-record-github-meta {
+    display: none;
   }
 }
 
