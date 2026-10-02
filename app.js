@@ -94,6 +94,12 @@ const translations = {
     "detail.artifactLabel": "THESIS ARTIFACT",
     "detail.artifactAlt": "Thesis infographic showing waste cooking oil converted to biodiesel with a catalyst made from waste seashells.",
     "detail.artifactCaption": "A visual map of the waste cooking oil to biodiesel workflow and the waste-shell catalyst route.",
+    "detail.ftirPeaksLabel": "FTIR / PEAK SIGNAL",
+    "detail.ftirPeaksAlt": "FTIR spectrum with labeled wavenumber peaks from the public thesis artifact.",
+    "detail.ftirPeaksCaption": "A metadata-stripped peak view kept as a public visual reference for the thesis workflow.",
+    "detail.ftirSearchLabel": "FTIR / LIBRARY MATCH",
+    "detail.ftirSearchAlt": "FTIR library comparison showing calcium carbonate reference matches.",
+    "detail.ftirSearchCaption": "A public library-comparison view with no raw project identifiers or private source files.",
     "board.title": "RESEARCH DEPARTURES",
     "board.live": "LIVE",
     "board.paused": "PAUSED",
@@ -332,6 +338,12 @@ const translations = {
     "detail.artifactLabel": "اثر پایان‌نامه",
     "detail.artifactAlt": "اینفوگرافیک پایان‌نامه درباره‌ی تبدیل روغن پخت‌وپز به بیودیزل با کاتالیستی ساخته‌شده از پوسته‌ی دورریختنی صدف.",
     "detail.artifactCaption": "نقشه‌ای بصری از مسیر روغن پخت‌وپز تا بیودیزل و مسیر کاتالیست حاصل از پسماند صدف.",
+    "detail.ftirPeaksLabel": "FTIR / سیگنال قله‌ها",
+    "detail.ftirPeaksAlt": "طیف FTIR با قله‌های عددگذاری‌شده از اثر عمومی پایان‌نامه.",
+    "detail.ftirPeaksCaption": "نمایی بدون فراداده‌ی خصوصی از قله‌ها که به‌عنوان مرجع بصری جریان پایان‌نامه نگه داشته شده است.",
+    "detail.ftirSearchLabel": "FTIR / تطبیق کتابخانه‌ای",
+    "detail.ftirSearchAlt": "مقایسه‌ی کتابخانه‌ای FTIR با تطبیق‌های مرجع کربنات کلسیم.",
+    "detail.ftirSearchCaption": "نمایی عمومی از مقایسه‌ی کتابخانه‌ای، بدون شناسه‌ی خام پروژه یا فایل خصوصی.",
     "board.title": "حرکت‌های پژوهش",
     "board.live": "زنده",
     "board.paused": "مکث",
@@ -764,7 +776,26 @@ const detailEvidenceSources = {
 
 const publicArtifacts = Object.freeze({
   research: Object.freeze({
-    0: "assets/thesis-infographic.jpg",
+    0: [
+      {
+        src: "assets/thesis-infographic.jpg",
+        labelKey: "detail.artifactLabel",
+        altKey: "detail.artifactAlt",
+        captionKey: "detail.artifactCaption",
+      },
+      {
+        src: "assets/thesis-ftir-peaks.png",
+        labelKey: "detail.ftirPeaksLabel",
+        altKey: "detail.ftirPeaksAlt",
+        captionKey: "detail.ftirPeaksCaption",
+      },
+      {
+        src: "assets/thesis-ftir-library-search.png",
+        labelKey: "detail.ftirSearchLabel",
+        altKey: "detail.ftirSearchAlt",
+        captionKey: "detail.ftirSearchCaption",
+      },
+    ],
   }),
 });
 
@@ -1035,19 +1066,26 @@ function renderEvidenceRow(evidence) {
 }
 
 function renderPublicArtifact(section, itemIndex) {
-  const src = publicArtifacts[section]?.[itemIndex];
-  if (!src) return "";
+  const artifactRecords = publicArtifacts[section]?.[itemIndex];
+  if (!artifactRecords) return "";
+  const artifacts = Array.isArray(artifactRecords)
+    ? artifactRecords
+    : [{ src: artifactRecords, labelKey: "detail.artifactLabel", altKey: "detail.artifactAlt", captionKey: "detail.artifactCaption" }];
 
   return `
-    <figure class="detail-artifact">
-      <div class="detail-artifact-topline">
-        <span>${escapeHtml(translate("detail.artifactLabel"))}</span>
-      </div>
-      <div class="detail-artifact-frame">
-        <img src="${escapeRawHtml(src)}" alt="${escapeRawHtml(translate("detail.artifactAlt"))}" loading="lazy" decoding="async" />
-      </div>
-      <figcaption>${escapeHtml(translate("detail.artifactCaption"))}</figcaption>
-    </figure>
+    <div class="detail-artifacts">
+      ${artifacts.map(({ src, labelKey, altKey, captionKey }) => `
+        <figure class="detail-artifact">
+          <div class="detail-artifact-topline">
+            <span>${escapeHtml(translate(labelKey))}</span>
+          </div>
+          <div class="detail-artifact-frame">
+            <img src="${escapeRawHtml(src)}" alt="${escapeRawHtml(translate(altKey))}" loading="lazy" decoding="async" />
+          </div>
+          <figcaption>${escapeHtml(translate(captionKey))}</figcaption>
+        </figure>
+      `).join("")}
+    </div>
   `;
 }
 

@@ -1297,6 +1297,18 @@ html[dir="rtl"] .project-filter input {
   border-top: 1px solid var(--line);
 }
 
+.detail-artifacts {
+  max-width: 720px;
+}
+
+.detail-artifacts .detail-artifact {
+  max-width: none;
+}
+
+.detail-artifacts .detail-artifact + .detail-artifact {
+  margin-top: 22px;
+}
+
 .detail-artifact-topline {
   display: flex;
   align-items: baseline;
