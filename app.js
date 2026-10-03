@@ -232,6 +232,8 @@ const translations = {
     "palette.actionPrintAcademicMeta": "Research and education dossier",
     "palette.actionPrintTechnical": "Open software profile",
     "palette.actionPrintTechnicalMeta": "Projects and working stack",
+    "palette.actionMarkdown": "Download profile Markdown",
+    "palette.actionMarkdownMeta": "Public export from the active profile",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
     "palette.actionLinkedin": "Open LinkedIn",
@@ -522,6 +524,8 @@ const translations = {
     "palette.actionPrintAcademicMeta": "پرونده‌ی پژوهش و تحصیلات",
     "palette.actionPrintTechnical": "باز کردن پروفایل نرم‌افزار",
     "palette.actionPrintTechnicalMeta": "پروژه‌ها و جعبه‌ابزار کاری",
+    "palette.actionMarkdown": "دانلود Markdown پروفایل",
+    "palette.actionMarkdownMeta": "خروجی عمومی از پروفایل فعال",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
     "palette.actionLinkedin": "باز کردن لینکدین",
@@ -2378,6 +2382,13 @@ const commandActionDefinitions = [
     searchKeys: [paletteTitleKey, paletteMetaKey, ...searchKeys],
   })),
   {
+    id: "profile-markdown",
+    icon: "pixel-download",
+    titleKey: "palette.actionMarkdown",
+    metaKey: "palette.actionMarkdownMeta",
+    searchKeys: ["palette.actionMarkdown", "palette.actionMarkdownMeta", "markdown", "md", "export", "download"],
+  },
+  {
     id: "github",
     icon: "pixel-github",
     titleKey: "palette.actionGithub",
@@ -3890,6 +3901,13 @@ function activateCommandAction(actionId) {
 
   if (actionId === "share-route") {
     shareCurrentRoute();
+    return;
+  }
+
+  if (actionId === "profile-markdown") {
+    const profile = profilePreviewOpen ? activeProfile : "general";
+    if (!profilePreviewOpen) openProfilePreview(profile);
+    downloadProfileMarkdown(profile);
     return;
   }
 
