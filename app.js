@@ -60,7 +60,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "RUN",
     "surface.commandReady": "READY / TYPE HELP",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / DOWNLOAD BIBTEX / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
@@ -76,6 +76,7 @@ const translations = {
     "surface.commandShareFailed": "ROUTE COPY FAILED",
     "surface.commandContactDownloaded": "CONTACT CARD DOWNLOADED",
     "surface.commandBibtex": "BIBTEX READY / PUBLIC RECORDS COPIED",
+    "surface.commandBibtexDownloaded": "BIBTEX FILE DOWNLOADED",
     "surface.commandBibtexUnavailable": "NO BIBTEX RECORDS AVAILABLE",
     "surface.commandOpenedProject": "PROJECT OPENED: {{project}}",
     "surface.commandProjectUnknown": "PROJECT SIGNAL NOT FOUND: {{project}}",
@@ -249,6 +250,8 @@ const translations = {
     "palette.actionContactCardMeta": "Download a public vCard",
     "palette.actionBibtex": "Copy public BibTeX",
     "palette.actionBibtexMeta": "Research records / current detail when available",
+    "palette.actionBibtexDownload": "Download public BibTeX",
+    "palette.actionBibtexDownloadMeta": "Save the current public records as a .bib file",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
     "palette.actionLinkedin": "Open LinkedIn",
@@ -286,6 +289,7 @@ const translations = {
     "toast.citationCopyFailed": "CITATION COPY FAILED",
     "toast.bibtexCopied": "BIBTEX COPIED",
     "toast.bibtexCopyFailed": "BIBTEX COPY FAILED",
+    "toast.bibtexDownloaded": "BIBTEX FILE DOWNLOADED",
     "toast.bibtexUnavailable": "NO BIBTEX RECORDS AVAILABLE",
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
@@ -373,7 +377,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "اجرا",
     "surface.commandReady": "آماده / HELP را بنویس",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / DOWNLOAD BIBTEX / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
@@ -389,6 +393,7 @@ const translations = {
     "surface.commandShareFailed": "کپی مسیر ناموفق بود",
     "surface.commandContactDownloaded": "کارت تماس دانلود شد",
     "surface.commandBibtex": "BibTeX آماده شد / رکوردهای عمومی کپی شدند",
+    "surface.commandBibtexDownloaded": "فایل BibTeX دانلود شد",
     "surface.commandBibtexUnavailable": "رکورد BibTeX در دسترس نیست",
     "surface.commandOpenedProject": "پروژه باز شد: {{project}}",
     "surface.commandProjectUnknown": "سیگنال پروژه پیدا نشد: {{project}}",
@@ -562,6 +567,8 @@ const translations = {
     "palette.actionContactCardMeta": "دانلود vCard عمومی",
     "palette.actionBibtex": "کپی BibTeX عمومی",
     "palette.actionBibtexMeta": "رکوردهای پژوهشی / جزئیات فعلی در صورت وجود",
+    "palette.actionBibtexDownload": "دانلود BibTeX عمومی",
+    "palette.actionBibtexDownloadMeta": "ذخیره‌ی رکوردهای عمومی فعلی به‌صورت فایل bib.",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
     "palette.actionLinkedin": "باز کردن لینکدین",
@@ -599,6 +606,7 @@ const translations = {
     "toast.citationCopyFailed": "کپی استناد انجام نشد",
     "toast.bibtexCopied": "BibTeX کپی شد",
     "toast.bibtexCopyFailed": "کپی BibTeX انجام نشد",
+    "toast.bibtexDownloaded": "فایل BibTeX دانلود شد",
     "toast.bibtexUnavailable": "رکورد BibTeX در دسترس نیست",
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
@@ -2389,7 +2397,18 @@ function runSurfaceCommand(rawCommand) {
     return;
   }
 
-  if (["bibtex", "copy bibtex", "export bibtex", "download bibtex"].includes(normalized)) {
+  if (normalized === "download bibtex") {
+    const records = currentCitationRecords();
+    if (!records.length) {
+      setSurfaceCommandStatus("surface.commandBibtexUnavailable");
+      return;
+    }
+    downloadBibtex(records);
+    setSurfaceCommandStatus("surface.commandBibtexDownloaded");
+    return;
+  }
+
+  if (["bibtex", "copy bibtex", "export bibtex"].includes(normalized)) {
     const records = currentCitationRecords();
     if (!records.length) {
       setSurfaceCommandStatus("surface.commandBibtexUnavailable");
@@ -2570,6 +2589,13 @@ const commandActionDefinitions = [
     titleKey: "palette.actionBibtex",
     metaKey: "palette.actionBibtexMeta",
     searchKeys: ["palette.actionBibtex", "palette.actionBibtexMeta", "bibtex", "bib", "references", "citation", "export"],
+  },
+  {
+    id: "bibtex-download",
+    icon: "pixel-download",
+    titleKey: "palette.actionBibtexDownload",
+    metaKey: "palette.actionBibtexDownloadMeta",
+    searchKeys: ["palette.actionBibtexDownload", "palette.actionBibtexDownloadMeta", "download bibtex", "bib file", "references", "export"],
   },
   {
     id: "github",
@@ -3210,6 +3236,15 @@ async function copyBibtex(records) {
   } catch (error) {
     showToast(translate("toast.bibtexCopyFailed"));
   }
+}
+
+function downloadBibtex(records) {
+  downloadFile({
+    content: formatBibtex(records),
+    fileName: `soheil-aghayani-public-research-${currentLang}.bib`,
+    mimeType: "application/x-bibtex",
+    toastKey: "toast.bibtexDownloaded",
+  });
 }
 
 async function shareCurrentRoute() {
@@ -4173,6 +4208,16 @@ function activateCommandAction(actionId) {
       return;
     }
     copyBibtex(records);
+    return;
+  }
+
+  if (actionId === "bibtex-download") {
+    const records = currentCitationRecords();
+    if (!records.length) {
+      showToast(translate("toast.bibtexUnavailable"));
+      return;
+    }
+    downloadBibtex(records);
     return;
   }
 
