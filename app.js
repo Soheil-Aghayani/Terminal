@@ -190,6 +190,8 @@ const translations = {
     "profile.printAria": "Print or save this profile as PDF",
     "profile.download": "DOWNLOAD .TXT",
     "profile.downloadAria": "Download this public profile as text",
+    "profile.downloadMarkdown": "DOWNLOAD .MD",
+    "profile.downloadMarkdownAria": "Download this public profile as Markdown",
     "profile.switchLabel": "PROFILE VIEW",
     "profile.switchAria": "Choose profile output",
     "profile.general": "General",
@@ -266,6 +268,7 @@ const translations = {
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
     "toast.profileDownloaded": "PROFILE TEXT DOWNLOADED",
+    "toast.profileMarkdownDownloaded": "PROFILE MARKDOWN DOWNLOADED",
     "print.label": "PROFILE / PRINT",
     "print.title": "Soheil Aghayani",
     "print.subtitle": "Environmental engineer / researcher / builder",
@@ -477,6 +480,8 @@ const translations = {
     "profile.printAria": "چاپ یا ذخیره‌ی این پروفایل به‌صورت PDF",
     "profile.download": "دانلود TXT.",
     "profile.downloadAria": "دانلود متن این پروفایل عمومی",
+    "profile.downloadMarkdown": "دانلود MD.",
+    "profile.downloadMarkdownAria": "دانلود این پروفایل عمومی به‌صورت Markdown",
     "profile.switchLabel": "نمایش پروفایل",
     "profile.switchAria": "انتخاب خروجی پروفایل",
     "profile.general": "عمومی",
@@ -553,6 +558,7 @@ const translations = {
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
     "toast.profileDownloaded": "متن پروفایل دانلود شد",
+    "toast.profileMarkdownDownloaded": "Markdown پروفایل دانلود شد",
     "print.label": "پروفایل / چاپ",
     "print.title": "سهیل آقایانی",
     "print.subtitle": "مهندس محیط‌زیست / پژوهشگر / سازنده",
@@ -1529,6 +1535,7 @@ const profilePreviewSwitch = document.getElementById("profilePreviewSwitch");
 const profilePreviewContent = document.getElementById("profilePreviewContent");
 const profilePreviewPrint = document.getElementById("profilePreviewPrint");
 const profilePreviewDownload = document.getElementById("profilePreviewDownload");
+const profilePreviewMarkdown = document.getElementById("profilePreviewMarkdown");
 const artifactPreview = document.getElementById("artifactPreview");
 const artifactPreviewClose = document.getElementById("artifactPreviewClose");
 const artifactPreviewImage = document.getElementById("artifactPreviewImage");
@@ -2667,9 +2674,16 @@ function applyTranslations() {
     renderPrintProfile(activeProfile);
     renderProfilePreviewSwitch(activeProfile);
   }
+  syncProfilePreviewControls(activeProfile);
+  updateDocumentTitle();
+}
+
+function syncProfilePreviewControls(profile = activeProfile) {
+  const controls = [profilePreviewPrint, profilePreviewDownload, profilePreviewMarkdown];
+  controls.forEach((control) => control?.setAttribute("data-profile", profile));
   profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
   profilePreviewDownload?.setAttribute("aria-label", localizeDigits(translate("profile.downloadAria")));
-  updateDocumentTitle();
+  profilePreviewMarkdown?.setAttribute("aria-label", localizeDigits(translate("profile.downloadMarkdownAria")));
 }
 
 function setSurfaceHomeButtonVisible(visible) {
@@ -3116,24 +3130,121 @@ function resetProfilePreviewScroll({ defer = false } = {}) {
   }
 }
 
-function downloadProfileText(profile = activeProfile) {
+function createProfileExportData(profile = activeProfile) {
   const definition = profileOutputDefinitions.find(({ id }) => id === profile) || profileOutputDefinitions[0];
   const source = document.createElement("div");
   source.innerHTML = renderProfileMarkup(definition.id);
-  const lines = [...source.querySelectorAll("h1, h2, p, li, a")]
-    .map((element) => element.textContent.replace(/\s+/g, " ").trim())
-    .filter(Boolean);
-  const text = `${lines.join("\n")}\n`;
-  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const readText = (element) => element?.textContent.replace(/\s+/g, " ").trim() || "";
+
+  return {
+    definition,
+    label: readText(source.querySelector(".print-profile-label")),
+    title: readText(source.querySelector("h1")),
+    subtitle: readText(source.querySelector(".print-profile-subtitle")),
+    summary: readText(source.querySelector(".print-profile-summary")),
+    contactLabel: readText(source.querySelector(".print-profile-contact-label")),
+    contacts: [...source.querySelectorAll(".print-profile-contact-links > a")].map((link) => ({
+      label: readText(link.querySelector("strong")),
+      value: readText(link.querySelector("span")),
+      href: link.getAttribute("href") || "",
+    })),
+    sections: [...source.querySelectorAll(".print-profile-grid > section")].map((section) => ({
+      title: readText(section.querySelector("h2")),
+      items: [...section.querySelectorAll("li")].map((item) => ({
+        title: readText(item.querySelector("strong")),
+        meta: readText(item.querySelector("span")),
+        href: item.querySelector("a")?.getAttribute("href") || "",
+      })),
+    })),
+  };
+}
+
+function profileExportText(data) {
+  const lines = [data.label, data.title, data.subtitle, data.summary];
+  if (data.contactLabel) {
+    lines.push("", data.contactLabel);
+    data.contacts.forEach(({ label, value }) => lines.push(`${label}: ${value}`));
+  }
+  data.sections.forEach(({ title, items }) => {
+    lines.push("", title);
+    items.forEach(({ title: itemTitle, meta }) => lines.push(meta ? `${itemTitle} — ${meta}` : itemTitle));
+  });
+  return `${lines.filter((line) => line !== undefined && line !== null).join("\n")}\n`;
+}
+
+function escapeMarkdownText(value) {
+  return String(value)
+    .replaceAll("\\", "\\\\")
+    .replaceAll("`", "\\`")
+    .replaceAll("*", "\\*")
+    .replaceAll("_", "\\_")
+    .replaceAll("[", "\\[")
+    .replaceAll("]", "\\]");
+}
+
+function escapeMarkdownUrl(value) {
+  return String(value).replaceAll(")", "%29");
+}
+
+function profileExportMarkdown(data) {
+  const lines = [];
+  if (data.label) lines.push(`> ${escapeMarkdownText(data.label)}`);
+  if (data.title) lines.push(`# ${escapeMarkdownText(data.title)}`);
+  if (data.subtitle) lines.push(`_${escapeMarkdownText(data.subtitle)}_`);
+  if (data.summary) lines.push("", escapeMarkdownText(data.summary));
+  if (data.contactLabel) {
+    lines.push("", `## ${escapeMarkdownText(data.contactLabel)}`);
+    data.contacts.forEach(({ label, value, href }) => {
+      const display = escapeMarkdownText(value || href);
+      const linkedValue = href ? `[${display}](${escapeMarkdownUrl(href)})` : display;
+      lines.push(`- **${escapeMarkdownText(label)}:** ${linkedValue}`);
+    });
+  }
+  data.sections.forEach(({ title, items }) => {
+    lines.push("", `## ${escapeMarkdownText(title)}`);
+    items.forEach(({ title: itemTitle, meta, href }) => {
+      const linkedTitle = href
+        ? `[**${escapeMarkdownText(itemTitle)}**](${escapeMarkdownUrl(href)})`
+        : `**${escapeMarkdownText(itemTitle)}**`;
+      lines.push(`- ${linkedTitle}${meta ? ` — ${escapeMarkdownText(meta)}` : ""}`);
+    });
+  });
+  return `${lines.join("\n")}\n`;
+}
+
+function downloadProfileExport({ definition, content, extension, mimeType, toastKey }) {
+  const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
   const objectUrl = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = objectUrl;
-  link.download = `soheil-aghayani-${definition.id}-profile-${currentLang}.txt`;
+  link.download = `soheil-aghayani-${definition.id}-profile-${currentLang}.${extension}`;
   document.body.append(link);
   link.click();
   link.remove();
   window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
-  showToast(translate("toast.profileDownloaded"));
+  showToast(translate(toastKey));
+}
+
+function downloadProfileText(profile = activeProfile) {
+  const data = createProfileExportData(profile);
+  downloadProfileExport({
+    definition: data.definition,
+    content: profileExportText(data),
+    extension: "txt",
+    mimeType: "text/plain",
+    toastKey: "toast.profileDownloaded",
+  });
+}
+
+function downloadProfileMarkdown(profile = activeProfile) {
+  const data = createProfileExportData(profile);
+  downloadProfileExport({
+    definition: data.definition,
+    content: profileExportMarkdown(data),
+    extension: "md",
+    mimeType: "text/markdown",
+    toastKey: "toast.profileMarkdownDownloaded",
+  });
 }
 
 function dialogFocusableElements(dialog) {
@@ -3163,13 +3274,10 @@ function openProfilePreview(profile = "general", { historyMode = "push" } = {}) 
   renderPrintProfile(nextProfile);
   renderProfilePreviewSwitch(nextProfile);
   resetProfilePreviewScroll({ defer: true });
-  profilePreviewPrint?.setAttribute("aria-label", localizeDigits(translate("profile.printAria")));
-  profilePreviewDownload?.setAttribute("aria-label", localizeDigits(translate("profile.downloadAria")));
+  syncProfilePreviewControls(nextProfile);
   profilePreviewOpen = true;
   profilePreview.hidden = false;
   profilePreview.setAttribute("aria-hidden", "false");
-  profilePreviewPrint?.setAttribute("data-profile", nextProfile);
-  profilePreviewDownload?.setAttribute("data-profile", nextProfile);
   syncProfilePreviewHistory(nextProfile, historyMode);
   studioShell.inert = true;
   document.body.classList.add("is-profile-preview-open");
@@ -3188,8 +3296,7 @@ function switchProfilePreview(profile) {
   renderPrintProfile(activeProfile);
   renderProfilePreviewSwitch(activeProfile);
   resetProfilePreviewScroll();
-  profilePreviewPrint?.setAttribute("data-profile", activeProfile);
-  profilePreviewDownload?.setAttribute("data-profile", activeProfile);
+  syncProfilePreviewControls(activeProfile);
   syncProfilePreviewHistory(activeProfile, "replace");
   updateDocumentTitle();
   profilePreviewSwitch?.querySelector(`[data-profile="${activeProfile}"]`)?.focus({ preventScroll: true });
@@ -3280,8 +3387,7 @@ function syncProfilePreviewFromLocation({ restoreFocus = false } = {}) {
     renderPrintProfile(profile);
     renderProfilePreviewSwitch(profile);
     resetProfilePreviewScroll({ defer: true });
-    profilePreviewPrint?.setAttribute("data-profile", profile);
-    profilePreviewDownload?.setAttribute("data-profile", profile);
+    syncProfilePreviewControls(profile);
     updateDocumentTitle();
   }
 }
@@ -3964,6 +4070,11 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "profile-download") {
     downloadProfileText(target.dataset.profile || activeProfile);
+    return;
+  }
+
+  if (target.dataset.action === "profile-markdown") {
+    downloadProfileMarkdown(target.dataset.profile || activeProfile);
     return;
   }
 

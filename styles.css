@@ -3484,9 +3484,11 @@ html[dir="rtl"] .project-filter input {
 .profile-preview-actions {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 18px;
   justify-content: flex-end;
   padding: 0 18px;
+  padding-block: 4px;
   border-top: 1px solid var(--line);
 }
 
