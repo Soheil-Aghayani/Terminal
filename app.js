@@ -2377,6 +2377,7 @@ function runSurfaceCommand(rawCommand) {
   const argument = rest.join(" ");
 
   if (verb === "help" || verb === "?") {
+    setSurfaceHelpOpen(true);
     setSurfaceCommandStatus("surface.commandHelp");
     return;
   }
