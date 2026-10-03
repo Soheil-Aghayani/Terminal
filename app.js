@@ -1379,6 +1379,13 @@ function readSavedLanguage() {
   }
 }
 
+function readInitialLanguage() {
+  const requestedLanguage = new URL(window.location.href).searchParams.get("lang");
+  return requestedLanguage === "fa" || requestedLanguage === "en"
+    ? requestedLanguage
+    : readSavedLanguage();
+}
+
 function saveLanguage(language) {
   try {
     window.localStorage.setItem(languageStorageKey, language);
@@ -1387,7 +1394,7 @@ function saveLanguage(language) {
   }
 }
 
-let currentLang = readSavedLanguage();
+let currentLang = readInitialLanguage();
 let currentMode = "home";
 let currentSection = "home";
 let currentItem = null;
@@ -1431,6 +1438,17 @@ function syncProjectFilterHistory() {
   window.history.replaceState({
     ...(window.history.state || {}),
     projectFilter: query,
+  }, "", nextUrl);
+}
+
+function syncLanguageHistory() {
+  const nextUrl = new URL(window.location.href);
+  if (currentLang === "fa") nextUrl.searchParams.set("lang", "fa");
+  else nextUrl.searchParams.delete("lang");
+
+  window.history.replaceState({
+    ...(window.history.state || {}),
+    language: currentLang,
   }, "", nextUrl);
 }
 
@@ -2795,7 +2813,9 @@ function prepareSurfaceContentView(section, options = {}) {
 function toggleLanguage() {
   currentLang = currentLang === "en" ? "fa" : "en";
   saveLanguage(currentLang);
+  syncLanguageHistory();
   Object.keys(sectionFilterQueries).forEach((section) => { sectionFilterQueries[section] = ""; });
+  syncProjectFilterHistory();
   applyTranslations();
 
   if (currentMode === "contact") renderContact();

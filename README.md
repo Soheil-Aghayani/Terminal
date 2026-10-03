@@ -85,7 +85,7 @@ Then open `http://127.0.0.1:4174/`.
 
 ## SEO and sharing
 
-The document includes route-aware descriptions and titles, a canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person`, `WebSite`, project, and public research JSON-LD, social identity links, a sitemap, and an `llms.txt` retrieval summary. The initial HTML carries a static public-work JSON-LD fallback, then client-side GitHub metadata enriches the same block with programming language, topics, license, update date, and repository/live-surface links from the shared catalog. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `llms.txt`, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
+The document includes route-aware descriptions and titles, a canonical URL, robots directives, Open Graph and Twitter metadata, bilingual language hints, `Person`, `WebSite`, project, and public research JSON-LD, social identity links, a sitemap, and an `llms.txt` retrieval summary. The initial HTML carries a static public-work JSON-LD fallback, then client-side GitHub metadata enriches the same block with programming language, topics, license, update date, and repository/live-surface links from the shared catalog. Shared routes can preserve the selected Persian view with `lang=fa` alongside project `sort` and `filter` state. If the deployment URL changes, update the canonical URL, Open Graph URL, JSON-LD URLs, `llms.txt`, `robots.txt`, and `sitemap.xml` together so search engines receive one consistent identity.
 
 Profile preview deep links also update the document title and social description for the selected general, academic, or software output.
 
