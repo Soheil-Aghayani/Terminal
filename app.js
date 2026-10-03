@@ -4729,6 +4729,11 @@ boardRows.forEach((row) => {
 updateBoardProjectCount();
 applyTranslations();
 const restoreViewFromLocation = ({ focus = false } = {}) => {
+  // Artifact previews are transient UI and have no URL state of their own.
+  // Always dismiss one before applying a browser/hash route so it cannot leave
+  // the shell inert after navigation (and block the command palette).
+  if (artifactPreviewOpen) closeArtifactPreview({ restoreFocus: false });
+
   const { view, itemIndex } = routeStateFromLocation();
   renderView(view, {
     historyMode: "none",
