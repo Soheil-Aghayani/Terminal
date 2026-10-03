@@ -988,9 +988,11 @@ function updatePortfolioStructuredData() {
       "@type": "ScholarlyArticle",
       name: record.en.title,
       url: record.href,
+      sameAs: [record.href, ...(record.doi ? [`https://doi.org/${record.doi}`] : [])],
       datePublished: record.year,
       isPartOf: { "@type": "Periodical", name: record.venue },
       author: { "@id": "https://agseyl.ir/#person" },
+      inLanguage: "en",
     };
 
     if (record.doi) {
