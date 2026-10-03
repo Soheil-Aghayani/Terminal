@@ -60,7 +60,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "RUN",
     "surface.commandReady": "READY / TYPE HELP",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
@@ -74,6 +74,7 @@ const translations = {
     "surface.commandLanguage": "LANGUAGE: {{language}}",
     "surface.commandShared": "ROUTE COPIED",
     "surface.commandShareFailed": "ROUTE COPY FAILED",
+    "surface.commandContactDownloaded": "CONTACT CARD DOWNLOADED",
     "surface.commandOpenedProject": "PROJECT OPENED: {{project}}",
     "surface.commandProjectUnknown": "PROJECT SIGNAL NOT FOUND: {{project}}",
     "surface.commandUnknown": "COMMAND NOT FOUND: {{command}}",
@@ -357,7 +358,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "اجرا",
     "surface.commandReady": "آماده / HELP را بنویس",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
@@ -371,6 +372,7 @@ const translations = {
     "surface.commandLanguage": "زبان: {{language}}",
     "surface.commandShared": "مسیر کپی شد",
     "surface.commandShareFailed": "کپی مسیر ناموفق بود",
+    "surface.commandContactDownloaded": "کارت تماس دانلود شد",
     "surface.commandOpenedProject": "پروژه باز شد: {{project}}",
     "surface.commandProjectUnknown": "سیگنال پروژه پیدا نشد: {{project}}",
     "surface.commandUnknown": "فرمان پیدا نشد: {{command}}",
@@ -2245,6 +2247,12 @@ function runSurfaceCommand(rawCommand) {
       language: currentLang === "fa" ? "فارسی" : "ENGLISH",
       sync: githubSyncStatusLabel(),
     });
+    return;
+  }
+
+  if (["vcard", "vcf", "contact card", "save contact", "download contact", "download vcard"].includes(normalized)) {
+    downloadContactCard();
+    setSurfaceCommandStatus("surface.commandContactDownloaded");
     return;
   }
 
