@@ -178,6 +178,8 @@ const translations = {
     "contact.academicProfile": "Academic profile",
     "contact.technicalProfile": "Software profile",
     "contact.profilePrintMeta": "VIEW / PRINT",
+    "contact.saveContact": "SAVE CONTACT",
+    "contact.saveContactAria": "Download a public contact card",
     "contact.generalProfileAria": "Open the general profile",
     "contact.academicProfileAria": "Open the academic profile",
     "contact.technicalProfileAria": "Open the software profile",
@@ -234,6 +236,8 @@ const translations = {
     "palette.actionPrintTechnicalMeta": "Projects and working stack",
     "palette.actionMarkdown": "Download profile Markdown",
     "palette.actionMarkdownMeta": "Public export from the active profile",
+    "palette.actionContactCard": "Save contact card",
+    "palette.actionContactCardMeta": "Download a public vCard",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
     "palette.actionLinkedin": "Open LinkedIn",
@@ -271,6 +275,7 @@ const translations = {
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
     "toast.profileDownloaded": "PROFILE TEXT DOWNLOADED",
     "toast.profileMarkdownDownloaded": "PROFILE MARKDOWN DOWNLOADED",
+    "toast.contactDownloaded": "CONTACT CARD DOWNLOADED",
     "print.label": "PROFILE / PRINT",
     "print.title": "Soheil Aghayani",
     "print.subtitle": "Environmental engineer / researcher / builder",
@@ -470,6 +475,8 @@ const translations = {
     "contact.academicProfile": "پروفایل دانشگاهی",
     "contact.technicalProfile": "پروفایل نرم‌افزار",
     "contact.profilePrintMeta": "مشاهده / چاپ",
+    "contact.saveContact": "ذخیره‌ی تماس",
+    "contact.saveContactAria": "دانلود کارت تماس عمومی",
     "contact.generalProfileAria": "باز کردن پروفایل عمومی",
     "contact.academicProfileAria": "باز کردن پروفایل دانشگاهی",
     "contact.technicalProfileAria": "باز کردن پروفایل نرم‌افزار",
@@ -526,6 +533,8 @@ const translations = {
     "palette.actionPrintTechnicalMeta": "پروژه‌ها و جعبه‌ابزار کاری",
     "palette.actionMarkdown": "دانلود Markdown پروفایل",
     "palette.actionMarkdownMeta": "خروجی عمومی از پروفایل فعال",
+    "palette.actionContactCard": "ذخیره‌ی کارت تماس",
+    "palette.actionContactCardMeta": "دانلود vCard عمومی",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
     "palette.actionLinkedin": "باز کردن لینکدین",
@@ -563,6 +572,7 @@ const translations = {
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
     "toast.profileDownloaded": "متن پروفایل دانلود شد",
     "toast.profileMarkdownDownloaded": "Markdown پروفایل دانلود شد",
+    "toast.contactDownloaded": "کارت تماس دانلود شد",
     "print.label": "پروفایل / چاپ",
     "print.title": "سهیل آقایانی",
     "print.subtitle": "مهندس محیط‌زیست / پژوهشگر / سازنده",
@@ -1937,6 +1947,13 @@ function renderProfileActions() {
             <small>${escapeHtml(translate("contact.profilePrintMeta"))}</small>
           </button>
         `).join("")}
+        <button class="contact-profile-button contact-save-button" type="button" data-action="contact-vcard" aria-label="${escapeHtml(translate("contact.saveContactAria"))}">
+          <span class="contact-profile-button-label">
+            <svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-envelope"></use></svg>
+            <span>${escapeHtml(translate("contact.saveContact"))}</span>
+          </span>
+          <small>VCARD</small>
+        </button>
       </div>
     </section>
   `;
@@ -2387,6 +2404,13 @@ const commandActionDefinitions = [
     titleKey: "palette.actionMarkdown",
     metaKey: "palette.actionMarkdownMeta",
     searchKeys: ["palette.actionMarkdown", "palette.actionMarkdownMeta", "markdown", "md", "export", "download"],
+  },
+  {
+    id: "contact-card",
+    icon: "pixel-envelope",
+    titleKey: "palette.actionContactCard",
+    metaKey: "palette.actionContactCardMeta",
+    searchKeys: ["palette.actionContactCard", "palette.actionContactCardMeta", "contact", "vcard", "vcf", "save"],
   },
   {
     id: "github",
@@ -3225,17 +3249,26 @@ function profileExportMarkdown(data) {
   return `${lines.join("\n")}\n`;
 }
 
-function downloadProfileExport({ definition, content, extension, mimeType, toastKey }) {
+function downloadFile({ content, fileName, mimeType, toastKey }) {
   const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
   const objectUrl = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = objectUrl;
-  link.download = `soheil-aghayani-${definition.id}-profile-${currentLang}.${extension}`;
+  link.download = fileName;
   document.body.append(link);
   link.click();
   link.remove();
   window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
-  showToast(translate(toastKey));
+  if (toastKey) showToast(translate(toastKey));
+}
+
+function downloadProfileExport({ definition, content, extension, mimeType, toastKey }) {
+  downloadFile({
+    content,
+    fileName: `soheil-aghayani-${definition.id}-profile-${currentLang}.${extension}`,
+    mimeType,
+    toastKey,
+  });
 }
 
 function downloadProfileText(profile = activeProfile) {
@@ -3257,6 +3290,43 @@ function downloadProfileMarkdown(profile = activeProfile) {
     extension: "md",
     mimeType: "text/markdown",
     toastKey: "toast.profileMarkdownDownloaded",
+  });
+}
+
+function escapeVCardValue(value) {
+  return String(value)
+    .replaceAll("\\", "\\\\")
+    .replaceAll(";", "\\;")
+    .replaceAll(",", "\\,")
+    .replaceAll(/\r?\n/g, "\\n");
+}
+
+function publicContactCard() {
+  const links = Object.fromEntries(contactLinks.map(({ key, href }) => [key, href]));
+  const email = (links.email || "").replace(/^mailto:/i, "");
+  const socialFields = contactLinks
+    .filter(({ key, href }) => key !== "email" && key !== "portfolio" && href)
+    .map(({ key, href }) => `X-SOCIALPROFILE;TYPE=${key.toUpperCase()}:${escapeVCardValue(href)}`);
+  const lines = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "FN:Soheil Aghayani",
+    "N:Aghayani;Soheil;;;",
+    "TITLE:Environmental engineer / researcher / software builder",
+    links.portfolio ? `URL:${escapeVCardValue(links.portfolio)}` : "",
+    email ? `EMAIL;TYPE=INTERNET:${escapeVCardValue(email)}` : "",
+    ...socialFields,
+    "END:VCARD",
+  ].filter(Boolean);
+  return `${lines.join("\r\n")}\r\n`;
+}
+
+function downloadContactCard() {
+  downloadFile({
+    content: publicContactCard(),
+    fileName: "soheil-aghayani-contact.vcf",
+    mimeType: "text/vcard",
+    toastKey: "toast.contactDownloaded",
   });
 }
 
@@ -3911,6 +3981,11 @@ function activateCommandAction(actionId) {
     return;
   }
 
+  if (actionId === "contact-card") {
+    downloadContactCard();
+    return;
+  }
+
   const profileOutput = profileOutputDefinitions.find(({ commandId }) => commandId === actionId);
   if (profileOutput) {
     openProfilePreview(profileOutput.id);
@@ -4095,6 +4170,11 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "profile-markdown") {
     downloadProfileMarkdown(target.dataset.profile || activeProfile);
+    return;
+  }
+
+  if (target.dataset.action === "contact-vcard") {
+    downloadContactCard();
     return;
   }
 

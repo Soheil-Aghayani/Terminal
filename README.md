@@ -17,6 +17,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 - **Command palette** - keyboard-friendly global search across routes, projects, research evidence, share/copy links, public-profile previews, Markdown export, and external links with `Ctrl`/`⌘` + `K`.
 - **Terminal command line** - the Help surface accepts direct commands such as `help`, `ls`, `history`, `status`, `sync`, `open projects`, `open Coffpen`, `cv`, `academic`, `software`, `max`, `min`, `pause`, `resume`, `lang fa`, and `share`, with ↑/↓ history navigation. Project names resolve from the shared bilingual catalog.
 - **Public evidence** - selected publications, courses, field practice, recognition, and Google Scholar links.
+- **Public contact card** - Contact can download a privacy-safe vCard built from the shared public identity links, without publishing a phone number or private application data.
 - **Profile outputs** - general, academic, and software-focused dossiers are discoverable from Contact, open in an in-terminal preview, switch without leaving the preview, share the selected `?profile=` deep link, and can be printed/saved as PDF or downloaded as plain text or Markdown, with shared public contact links and no private application data. Direct public routes are `?profile=general`, `?profile=academic`, and `?profile=technical`.
 - **Installable shell** - web app metadata lets mobile visitors add the terminal portfolio to a home screen without claiming offline support.
 
