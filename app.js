@@ -1645,11 +1645,15 @@ function localizeDigits(value) {
 }
 
 const root = document.documentElement;
+const publicSiteUrl = "https://agseyl.ir/";
 const descriptionMeta = document.querySelector('meta[name="description"]');
+const canonicalLink = document.querySelector('link[rel="canonical"]');
 const openGraphTitleMeta = document.querySelector('meta[property="og:title"]');
+const openGraphUrlMeta = document.querySelector('meta[property="og:url"]');
 const openGraphDescriptionMeta = document.querySelector('meta[property="og:description"]');
 const openGraphLocaleMeta = document.querySelector('meta[property="og:locale"]');
 const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]');
+const twitterUrlMeta = document.querySelector('meta[name="twitter:url"]');
 const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
 const homeView = document.querySelector('[data-view-panel="home"]');
 const surface = document.getElementById("studioSurface");
@@ -3111,6 +3115,16 @@ function clipMetadata(value, maxLength = 160) {
   return `${normalized.slice(0, maxLength - 3).trim()}...`;
 }
 
+function seoDocumentUrl() {
+  const url = new URL(publicSiteUrl);
+  const locationUrl = new URL(window.location.href);
+  const profile = locationUrl.searchParams.get("profile");
+  const language = locationUrl.searchParams.get("lang");
+  if (profile && profileOutputDefinitions.some(({ id }) => id === profile)) url.searchParams.set("profile", profile);
+  if (language === "fa") url.searchParams.set("lang", "fa");
+  return url.toString();
+}
+
 function updateDocumentTitle() {
   let title;
   let description;
@@ -3141,11 +3155,15 @@ function updateDocumentTitle() {
 
   document.title = title;
   const clippedDescription = clipMetadata(description);
+  const documentUrl = seoDocumentUrl();
   descriptionMeta?.setAttribute("content", clippedDescription);
+  canonicalLink?.setAttribute("href", documentUrl);
   openGraphTitleMeta?.setAttribute("content", title);
+  openGraphUrlMeta?.setAttribute("content", documentUrl);
   openGraphDescriptionMeta?.setAttribute("content", clippedDescription);
   openGraphLocaleMeta?.setAttribute("content", currentLang === "fa" ? "fa_IR" : "en_US");
   twitterTitleMeta?.setAttribute("content", title);
+  twitterUrlMeta?.setAttribute("content", documentUrl);
   twitterDescriptionMeta?.setAttribute("content", clippedDescription);
 }
 
