@@ -118,6 +118,10 @@ const translations = {
     "detail.relatedWork": "RELATED PUBLIC WORK",
     "detail.evidence": "SELECTED EVIDENCE",
     "detail.scholarRecord": "PUBLIC SCHOLAR RECORD",
+    "detail.copyCitation": "COPY CITATION",
+    "detail.copyCitations": "COPY CITATIONS",
+    "detail.copyCitationAria": "Copy this citation",
+    "detail.copyCitationsAria": "Copy these citations",
     "detail.artifactLabel": "THESIS ARTIFACT",
     "detail.artifactOpen": "OPEN",
     "detail.artifactOpenAria": "Open public artifact full view",
@@ -272,6 +276,8 @@ const translations = {
     "toast.routeCopied": "ROUTE COPIED",
     "toast.routeShared": "ROUTE READY TO SHARE",
     "toast.routeCopyFailed": "COPY FAILED",
+    "toast.citationCopied": "CITATION COPIED",
+    "toast.citationCopyFailed": "CITATION COPY FAILED",
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
     "toast.profileDownloaded": "PROFILE TEXT DOWNLOADED",
@@ -416,6 +422,10 @@ const translations = {
     "detail.relatedWork": "کارهای عمومی مرتبط",
     "detail.evidence": "شواهد منتخب",
     "detail.scholarRecord": "رکورد عمومی اسکالر",
+    "detail.copyCitation": "کپی استناد",
+    "detail.copyCitations": "کپی استنادها",
+    "detail.copyCitationAria": "کپی کردن این استناد",
+    "detail.copyCitationsAria": "کپی کردن این استنادها",
     "detail.artifactLabel": "اثر پایان‌نامه",
     "detail.artifactOpen": "باز کردن",
     "detail.artifactOpenAria": "باز کردن نمای کامل اثر عمومی",
@@ -570,6 +580,8 @@ const translations = {
     "toast.routeCopied": "مسیر کپی شد",
     "toast.routeShared": "مسیر آماده‌ی اشتراک‌گذاری است",
     "toast.routeCopyFailed": "کپی انجام نشد",
+    "toast.citationCopied": "استناد کپی شد",
+    "toast.citationCopyFailed": "کپی استناد انجام نشد",
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
     "toast.profileDownloaded": "متن پروفایل دانلود شد",
@@ -850,6 +862,7 @@ const scholarEvidence = Object.fromEntries(
       ...record[language],
       href: record.href,
       sourceKey: "detail.scholarRecord",
+      citation: `${record[language].title}. ${record[language].meta}. ${record.href}`,
     })),
   ]),
 );
@@ -916,11 +929,11 @@ const researchEvidence = {
       { title: "Waste cooking oil to biofuel", meta: "Transesterification / waste-shell catalyst" },
     ],
     [
-      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026", href: publicEvidenceLinks.biomass },
-      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026", href: publicEvidenceLinks.landfill },
+      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026", href: publicEvidenceLinks.biomass, citation: scholarEvidence.en[0].citation },
+      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026", href: publicEvidenceLinks.landfill, citation: scholarEvidence.en[1].citation },
     ],
     [
-      { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024", href: publicEvidenceLinks.transfer },
+      { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024", href: publicEvidenceLinks.transfer, citation: scholarEvidence.en[2].citation },
       { title: "Conference writing", meta: "Biofuel, pharmaceutical, textile and steel systems" },
     ],
   ],
@@ -930,11 +943,11 @@ const researchEvidence = {
       { title: "روغن پخت‌وپز تا سوخت زیستی", meta: "ترانس‌استریفیکاسیون / کاتالیست پوسته‌ی صدف" },
     ],
     [
-      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.biomass },
-      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.landfill },
+      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.biomass, citation: scholarEvidence.fa[0].citation },
+      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.landfill, citation: scholarEvidence.fa[1].citation },
     ],
     [
-      { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳", href: publicEvidenceLinks.transfer },
+      { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳", href: publicEvidenceLinks.transfer, citation: scholarEvidence.fa[2].citation },
       { title: "نوشتن مقاله‌های کنفرانسی", meta: "سوخت زیستی، پسماند دارویی، نساجی و فولاد" },
     ],
   ],
@@ -1346,6 +1359,12 @@ function detailEvidenceItems(section, itemIndex) {
   return detailEvidenceSources[section]?.[currentLang]?.[itemIndex] || [];
 }
 
+function detailCitationItems(section, itemIndex) {
+  return detailEvidenceItems(section, itemIndex)
+    .map((evidence) => evidence.citation)
+    .filter(Boolean);
+}
+
 function renderEvidenceRow(evidence) {
   const content = `
     <strong>${escapeHtml(evidence.title)}</strong>
@@ -1362,6 +1381,19 @@ function renderEvidenceRow(evidence) {
     <a class="detail-evidence-row" href="${escapeRawHtml(evidence.href)}" target="_blank" rel="noreferrer">
       ${content}
     </a>
+  `;
+}
+
+function renderCitationCopyAction(citations) {
+  if (!citations.length) return "";
+
+  const plural = citations.length > 1;
+  const labelKey = plural ? "detail.copyCitations" : "detail.copyCitation";
+  const ariaKey = plural ? "detail.copyCitationsAria" : "detail.copyCitationAria";
+  return `
+    <button class="detail-link detail-copy-button" type="button" data-action="copy-citations" data-citations="${escapeRawHtml(JSON.stringify(citations))}" aria-label="${escapeHtml(translate(ariaKey))}">
+      <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-download"></use></svg><span>${escapeHtml(translate(labelKey))}</span></span>
+    </button>
   `;
 }
 
@@ -3043,6 +3075,15 @@ async function copyRouteToClipboard(shareUrl) {
   if (!copied) throw new Error("Clipboard unavailable");
 }
 
+async function copyCitations(citations) {
+  try {
+    await copyRouteToClipboard(citations.join("\n\n"));
+    showToast(translate("toast.citationCopied"));
+  } catch (error) {
+    showToast(translate("toast.citationCopyFailed"));
+  }
+}
+
 async function shareCurrentRoute() {
   const shareUrl = currentShareUrl();
   const supportsNativeShare = typeof navigator.share === "function"
@@ -3724,6 +3765,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
   const publicSourceUrl = item.href || "";
   const relatedProjects = relatedProjectItems(section, itemIndex);
   const evidence = detailEvidenceItems(section, itemIndex);
+  const citations = detailCitationItems(section, itemIndex);
   const detailClass = ["skills", "research", "education", "archive"].includes(section) ? ` ${section}-detail` : "";
   surfaceContent.innerHTML = `
     <div class="detail-copy${detailClass}">
@@ -3754,6 +3796,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
           </div>
         </div>
       ` : ""}
+      ${renderCitationCopyAction(citations)}
       <div class="detail-links">
         <button class="detail-link detail-share-button" type="button" data-action="share-route" aria-label="${escapeHtml(translate("detail.shareRouteAria"))}">
           <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-external"></use></svg><span>${escapeHtml(translate("detail.shareRoute"))}</span></span>
@@ -4153,6 +4196,16 @@ document.addEventListener("click", (event) => {
 
   if (target.dataset.action === "share-route") {
     shareCurrentRoute();
+    return;
+  }
+
+  if (target.dataset.action === "copy-citations") {
+    try {
+      const citations = JSON.parse(target.dataset.citations || "[]");
+      if (Array.isArray(citations) && citations.length) copyCitations(citations);
+    } catch (error) {
+      showToast(translate("toast.citationCopyFailed"));
+    }
     return;
   }
 

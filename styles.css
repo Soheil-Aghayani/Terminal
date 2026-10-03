@@ -3118,7 +3118,8 @@ html[dir="rtl"] .project-filter input {
   transition: color 180ms ease, border-color 180ms ease;
 }
 
-.detail-share-button {
+.detail-share-button,
+.detail-copy-button {
   width: 100%;
   cursor: pointer;
   background: transparent;
