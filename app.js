@@ -60,7 +60,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "RUN",
     "surface.commandReady": "READY / TYPE HELP",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
@@ -75,6 +75,8 @@ const translations = {
     "surface.commandShared": "ROUTE COPIED",
     "surface.commandShareFailed": "ROUTE COPY FAILED",
     "surface.commandContactDownloaded": "CONTACT CARD DOWNLOADED",
+    "surface.commandBibtex": "BIBTEX READY / PUBLIC RECORDS COPIED",
+    "surface.commandBibtexUnavailable": "NO BIBTEX RECORDS AVAILABLE",
     "surface.commandOpenedProject": "PROJECT OPENED: {{project}}",
     "surface.commandProjectUnknown": "PROJECT SIGNAL NOT FOUND: {{project}}",
     "surface.commandUnknown": "COMMAND NOT FOUND: {{command}}",
@@ -122,6 +124,8 @@ const translations = {
     "detail.copyCitations": "COPY CITATIONS",
     "detail.copyCitationAria": "Copy this citation",
     "detail.copyCitationsAria": "Copy these citations",
+    "detail.copyBibtex": "COPY BIBTEX",
+    "detail.copyBibtexAria": "Copy BibTeX for these records",
     "detail.artifactLabel": "THESIS ARTIFACT",
     "detail.artifactOpen": "OPEN",
     "detail.artifactOpenAria": "Open public artifact full view",
@@ -243,6 +247,8 @@ const translations = {
     "palette.actionMarkdownMeta": "Public export from the active profile",
     "palette.actionContactCard": "Save contact card",
     "palette.actionContactCardMeta": "Download a public vCard",
+    "palette.actionBibtex": "Copy public BibTeX",
+    "palette.actionBibtexMeta": "Research records / current detail when available",
     "palette.actionGithub": "Open GitHub",
     "palette.actionGithubMeta": "Public source and projects",
     "palette.actionLinkedin": "Open LinkedIn",
@@ -278,6 +284,9 @@ const translations = {
     "toast.routeCopyFailed": "COPY FAILED",
     "toast.citationCopied": "CITATION COPIED",
     "toast.citationCopyFailed": "CITATION COPY FAILED",
+    "toast.bibtexCopied": "BIBTEX COPIED",
+    "toast.bibtexCopyFailed": "BIBTEX COPY FAILED",
+    "toast.bibtexUnavailable": "NO BIBTEX RECORDS AVAILABLE",
     "toast.shortcutUnavailable": "NO SHORTCUT FOR NUMBER {{shortcut}}",
     "toast.about": "A quiet signal: environmental questions, software, and a habit of looking closer.",
     "toast.profileDownloaded": "PROFILE TEXT DOWNLOADED",
@@ -364,7 +373,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "اجرا",
     "surface.commandReady": "آماده / HELP را بنویس",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
@@ -379,6 +388,8 @@ const translations = {
     "surface.commandShared": "مسیر کپی شد",
     "surface.commandShareFailed": "کپی مسیر ناموفق بود",
     "surface.commandContactDownloaded": "کارت تماس دانلود شد",
+    "surface.commandBibtex": "BibTeX آماده شد / رکوردهای عمومی کپی شدند",
+    "surface.commandBibtexUnavailable": "رکورد BibTeX در دسترس نیست",
     "surface.commandOpenedProject": "پروژه باز شد: {{project}}",
     "surface.commandProjectUnknown": "سیگنال پروژه پیدا نشد: {{project}}",
     "surface.commandUnknown": "فرمان پیدا نشد: {{command}}",
@@ -426,6 +437,8 @@ const translations = {
     "detail.copyCitations": "کپی استنادها",
     "detail.copyCitationAria": "کپی کردن این استناد",
     "detail.copyCitationsAria": "کپی کردن این استنادها",
+    "detail.copyBibtex": "کپی BibTeX",
+    "detail.copyBibtexAria": "کپی BibTeX این رکوردها",
     "detail.artifactLabel": "اثر پایان‌نامه",
     "detail.artifactOpen": "باز کردن",
     "detail.artifactOpenAria": "باز کردن نمای کامل اثر عمومی",
@@ -547,6 +560,8 @@ const translations = {
     "palette.actionMarkdownMeta": "خروجی عمومی از پروفایل فعال",
     "palette.actionContactCard": "ذخیره‌ی کارت تماس",
     "palette.actionContactCardMeta": "دانلود vCard عمومی",
+    "palette.actionBibtex": "کپی BibTeX عمومی",
+    "palette.actionBibtexMeta": "رکوردهای پژوهشی / جزئیات فعلی در صورت وجود",
     "palette.actionGithub": "باز کردن گیت‌هاب",
     "palette.actionGithubMeta": "منبع عمومی و پروژه‌ها",
     "palette.actionLinkedin": "باز کردن لینکدین",
@@ -582,6 +597,9 @@ const translations = {
     "toast.routeCopyFailed": "کپی انجام نشد",
     "toast.citationCopied": "استناد کپی شد",
     "toast.citationCopyFailed": "کپی استناد انجام نشد",
+    "toast.bibtexCopied": "BibTeX کپی شد",
+    "toast.bibtexCopyFailed": "کپی BibTeX انجام نشد",
+    "toast.bibtexUnavailable": "رکورد BibTeX در دسترس نیست",
     "toast.shortcutUnavailable": "برای عدد {{shortcut}} میانبری وجود ندارد",
     "toast.about": "یک سیگنال آرام: پرسش‌های محیط‌زیستی، نرم‌افزار و عادتِ دقیق‌تر نگاه کردن.",
     "toast.profileDownloaded": "متن پروفایل دانلود شد",
@@ -810,6 +828,8 @@ const publicEvidenceLinks = Object.freeze({
 /* Verified public Scholar records feed the archive and structured data from one source. */
 const scholarPublicationRecords = Object.freeze([
   {
+    bibtexKey: "aghayani2026biomass",
+    author: "Aghayani, Soheil and others",
     href: publicEvidenceLinks.biomass,
     year: "2026",
     venue: "Pollution",
@@ -825,6 +845,8 @@ const scholarPublicationRecords = Object.freeze([
     },
   },
   {
+    bibtexKey: "mollasalehi2026landfill",
+    author: "Mollasalehi and others",
     href: publicEvidenceLinks.landfill,
     year: "2026",
     venue: "Advances in Environmental Technology",
@@ -839,6 +861,8 @@ const scholarPublicationRecords = Object.freeze([
     },
   },
   {
+    bibtexKey: "samiee2025transfer",
+    author: "Samiee-Zafarghandi and Aghayani",
     href: publicEvidenceLinks.transfer,
     year: "2025",
     venue: "Pollution",
@@ -863,6 +887,15 @@ const scholarEvidence = Object.fromEntries(
       href: record.href,
       sourceKey: "detail.scholarRecord",
       citation: `${record[language].title}. ${record[language].meta}. ${record.href}`,
+      citationRecord: {
+        key: record.bibtexKey,
+        author: record.author,
+        title: record[language].title,
+        journal: record.venue,
+        year: record.year,
+        url: record.href,
+        doi: record.doi || "",
+      },
     })),
   ]),
 );
@@ -929,11 +962,11 @@ const researchEvidence = {
       { title: "Waste cooking oil to biofuel", meta: "Transesterification / waste-shell catalyst" },
     ],
     [
-      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026", href: publicEvidenceLinks.biomass, citation: scholarEvidence.en[0].citation },
-      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026", href: publicEvidenceLinks.landfill, citation: scholarEvidence.en[1].citation },
+      { title: "Biomass resources and waste-to-energy", meta: "Co-authored research · 2025-2026", href: publicEvidenceLinks.biomass, citation: scholarEvidence.en[0].citation, citationRecord: scholarEvidence.en[0].citationRecord },
+      { title: "Landfill-gas and methane modelling", meta: "Saveh case study · LandGEM · 2025-2026", href: publicEvidenceLinks.landfill, citation: scholarEvidence.en[1].citation, citationRecord: scholarEvidence.en[1].citationRecord },
     ],
     [
-      { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024", href: publicEvidenceLinks.transfer, citation: scholarEvidence.en[2].citation },
+      { title: "Municipal solid-waste transfer-station design", meta: "Karaj Municipality District 6 · 2024", href: publicEvidenceLinks.transfer, citation: scholarEvidence.en[2].citation, citationRecord: scholarEvidence.en[2].citationRecord },
       { title: "Conference writing", meta: "Biofuel, pharmaceutical, textile and steel systems" },
     ],
   ],
@@ -943,11 +976,11 @@ const researchEvidence = {
       { title: "روغن پخت‌وپز تا سوخت زیستی", meta: "ترانس‌استریفیکاسیون / کاتالیست پوسته‌ی صدف" },
     ],
     [
-      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.biomass, citation: scholarEvidence.fa[0].citation },
-      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.landfill, citation: scholarEvidence.fa[1].citation },
+      { title: "منابع زیست‌توده و سوخت از پسماند", meta: "پژوهش مشترک · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.biomass, citation: scholarEvidence.fa[0].citation, citationRecord: scholarEvidence.fa[0].citationRecord },
+      { title: "مدل‌سازی گاز دفنگاه و متان", meta: "مطالعه‌ی ساوه · LandGEM · ۱۴۰۴-۱۴۰۵", href: publicEvidenceLinks.landfill, citation: scholarEvidence.fa[1].citation, citationRecord: scholarEvidence.fa[1].citationRecord },
     ],
     [
-      { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳", href: publicEvidenceLinks.transfer, citation: scholarEvidence.fa[2].citation },
+      { title: "طراحی ایستگاه انتقال پسماند شهری", meta: "منطقه‌ی ۶ شهرداری کرج · ۱۴۰۳", href: publicEvidenceLinks.transfer, citation: scholarEvidence.fa[2].citation, citationRecord: scholarEvidence.fa[2].citationRecord },
       { title: "نوشتن مقاله‌های کنفرانسی", meta: "سوخت زیستی، پسماند دارویی، نساجی و فولاد" },
     ],
   ],
@@ -1365,6 +1398,53 @@ function detailCitationItems(section, itemIndex) {
     .filter(Boolean);
 }
 
+function detailCitationRecords(section, itemIndex) {
+  return detailEvidenceItems(section, itemIndex)
+    .map((evidence) => evidence.citationRecord)
+    .filter(Boolean);
+}
+
+function currentCitationRecords() {
+  const detailRecords = currentItem === null
+    ? []
+    : detailCitationRecords(currentSection, currentItem);
+  if (detailRecords.length) return detailRecords;
+  return scholarEvidence[currentLang]
+    .map((evidence) => evidence.citationRecord)
+    .filter(Boolean);
+}
+
+function escapeBibtexText(value) {
+  const replacements = {
+    "\\": "\\textbackslash{}",
+    "{": "\\{",
+    "}": "\\}",
+    "&": "\\&",
+    "%": "\\%",
+    "#": "\\#",
+    "_": "\\_",
+  };
+  return String(value).replace(/[\\{}&%#_]/g, (character) => replacements[character]);
+}
+
+function escapeBibtexKey(value) {
+  return String(value || "record").replace(/[^a-zA-Z0-9:-]+/g, "-");
+}
+
+function formatBibtex(records) {
+  return `${records.map((record) => {
+    const fields = [
+      `  author = {${escapeBibtexText(record.author)}}`,
+      `  title = {${escapeBibtexText(record.title)}}`,
+      `  journal = {${escapeBibtexText(record.journal)}}`,
+      `  year = {${escapeBibtexText(record.year)}}`,
+      `  url = {${String(record.url || "").replaceAll("{", "\\{").replaceAll("}", "\\}")}}`,
+      record.doi ? `  doi = {${escapeBibtexText(record.doi)}}` : "",
+    ].filter(Boolean);
+    return `@article{${escapeBibtexKey(record.key)},\n${fields.join(",\n")}\n}`;
+  }).join("\n\n")}\n`;
+}
+
 function renderEvidenceRow(evidence) {
   const content = `
     <strong>${escapeHtml(evidence.title)}</strong>
@@ -1384,16 +1464,37 @@ function renderEvidenceRow(evidence) {
   `;
 }
 
-function renderCitationCopyAction(citations) {
-  if (!citations.length) return "";
+function renderCitationCopyAction(citations, citationRecords = []) {
+  const actions = [];
+  if (citations.length) {
+    const plural = citations.length > 1;
+    actions.push({
+      action: "copy-citations",
+      dataName: "citations",
+      payload: citations,
+      labelKey: plural ? "detail.copyCitations" : "detail.copyCitation",
+      ariaKey: plural ? "detail.copyCitationsAria" : "detail.copyCitationAria",
+    });
+  }
+  if (citationRecords.length) {
+    actions.push({
+      action: "copy-bibtex",
+      dataName: "citation-records",
+      payload: citationRecords,
+      labelKey: "detail.copyBibtex",
+      ariaKey: "detail.copyBibtexAria",
+    });
+  }
+  if (!actions.length) return "";
 
-  const plural = citations.length > 1;
-  const labelKey = plural ? "detail.copyCitations" : "detail.copyCitation";
-  const ariaKey = plural ? "detail.copyCitationsAria" : "detail.copyCitationAria";
   return `
-    <button class="detail-link detail-copy-button" type="button" data-action="copy-citations" data-citations="${escapeRawHtml(JSON.stringify(citations))}" aria-label="${escapeHtml(translate(ariaKey))}">
-      <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-download"></use></svg><span>${escapeHtml(translate(labelKey))}</span></span>
-    </button>
+    <div class="detail-citation-actions">
+      ${actions.map(({ action, dataName, payload, labelKey, ariaKey }) => `
+        <button class="detail-link detail-copy-button" type="button" data-action="${action}" data-${dataName}="${escapeRawHtml(JSON.stringify(payload))}" aria-label="${escapeHtml(translate(ariaKey))}">
+          <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-download"></use></svg><span>${escapeHtml(translate(labelKey))}</span></span>
+        </button>
+      `).join("")}
+    </div>
   `;
 }
 
@@ -2288,6 +2389,17 @@ function runSurfaceCommand(rawCommand) {
     return;
   }
 
+  if (["bibtex", "copy bibtex", "export bibtex", "download bibtex"].includes(normalized)) {
+    const records = currentCitationRecords();
+    if (!records.length) {
+      setSurfaceCommandStatus("surface.commandBibtexUnavailable");
+      return;
+    }
+    copyBibtex(records);
+    setSurfaceCommandStatus("surface.commandBibtex");
+    return;
+  }
+
   if (verb === "sync" || verb === "refresh") {
     setSurfaceCommandStatus("surface.commandSync", { state: githubSyncStatusLabel() });
     syncGithubMetadata().then(() => {
@@ -2451,6 +2563,13 @@ const commandActionDefinitions = [
     titleKey: "palette.actionContactCard",
     metaKey: "palette.actionContactCardMeta",
     searchKeys: ["palette.actionContactCard", "palette.actionContactCardMeta", "contact", "vcard", "vcf", "save"],
+  },
+  {
+    id: "bibtex",
+    icon: "pixel-download",
+    titleKey: "palette.actionBibtex",
+    metaKey: "palette.actionBibtexMeta",
+    searchKeys: ["palette.actionBibtex", "palette.actionBibtexMeta", "bibtex", "bib", "references", "citation", "export"],
   },
   {
     id: "github",
@@ -3081,6 +3200,15 @@ async function copyCitations(citations) {
     showToast(translate("toast.citationCopied"));
   } catch (error) {
     showToast(translate("toast.citationCopyFailed"));
+  }
+}
+
+async function copyBibtex(records) {
+  try {
+    await copyRouteToClipboard(formatBibtex(records));
+    showToast(translate("toast.bibtexCopied"));
+  } catch (error) {
+    showToast(translate("toast.bibtexCopyFailed"));
   }
 }
 
@@ -3766,6 +3894,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
   const relatedProjects = relatedProjectItems(section, itemIndex);
   const evidence = detailEvidenceItems(section, itemIndex);
   const citations = detailCitationItems(section, itemIndex);
+  const citationRecords = detailCitationRecords(section, itemIndex);
   const detailClass = ["skills", "research", "education", "archive"].includes(section) ? ` ${section}-detail` : "";
   surfaceContent.innerHTML = `
     <div class="detail-copy${detailClass}">
@@ -3796,7 +3925,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
           </div>
         </div>
       ` : ""}
-      ${renderCitationCopyAction(citations)}
+      ${renderCitationCopyAction(citations, citationRecords)}
       <div class="detail-links">
         <button class="detail-link detail-share-button" type="button" data-action="share-route" aria-label="${escapeHtml(translate("detail.shareRouteAria"))}">
           <span class="contact-link-label"><svg class="pixel-icon" aria-hidden="true" focusable="false"><use href="#pixel-external"></use></svg><span>${escapeHtml(translate("detail.shareRoute"))}</span></span>
@@ -4037,6 +4166,16 @@ function activateCommandAction(actionId) {
     return;
   }
 
+  if (actionId === "bibtex") {
+    const records = currentCitationRecords();
+    if (!records.length) {
+      showToast(translate("toast.bibtexUnavailable"));
+      return;
+    }
+    copyBibtex(records);
+    return;
+  }
+
   const profileOutput = profileOutputDefinitions.find(({ commandId }) => commandId === actionId);
   if (profileOutput) {
     openProfilePreview(profileOutput.id);
@@ -4205,6 +4344,16 @@ document.addEventListener("click", (event) => {
       if (Array.isArray(citations) && citations.length) copyCitations(citations);
     } catch (error) {
       showToast(translate("toast.citationCopyFailed"));
+    }
+    return;
+  }
+
+  if (target.dataset.action === "copy-bibtex") {
+    try {
+      const records = JSON.parse(target.dataset.citationRecords || "[]");
+      if (Array.isArray(records) && records.length) copyBibtex(records);
+    } catch (error) {
+      showToast(translate("toast.bibtexCopyFailed"));
     }
     return;
   }

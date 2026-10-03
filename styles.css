@@ -3102,6 +3102,13 @@ html[dir="rtl"] .project-filter input {
   color: var(--accent);
 }
 
+.detail-citation-actions {
+  display: grid;
+  gap: 0;
+  max-width: 640px;
+  margin-top: 22px;
+}
+
 .detail-link {
   display: inline-flex;
   min-width: min(100%, 440px);
@@ -3124,6 +3131,10 @@ html[dir="rtl"] .project-filter input {
   cursor: pointer;
   background: transparent;
   text-align: start;
+}
+
+.detail-citation-actions .detail-link + .detail-link {
+  border-top: 0;
 }
 
 .detail-link:hover,

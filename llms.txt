@@ -55,7 +55,7 @@ The Projects route in the portfolio is the authoritative index of public reposit
 ## Public evidence
 
 - Selected publication records and public evidence: https://agseyl.ir/
-- Research detail surfaces expose the public record links and can copy the selected citation set without publishing private manuscript files.
+- Research detail surfaces expose the public record links and can copy the selected citation set or BibTeX without publishing private manuscript files.
 - Google Scholar public snapshot: 3 indexed papers and h-index 1.
 - Biomass resources paper: 2026, Pollution, 2 citations, DOI 10.22059/poll.2025.393545.2928 — https://jpoll.ut.ac.ir/article_105139.html
 - Landfill-gas assessment: 2026, Advances in Environmental Technology — https://aet.irost.ir/article_1686.html
