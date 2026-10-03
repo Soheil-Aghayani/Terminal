@@ -1686,6 +1686,12 @@ const boardProjectCount = document.getElementById("boardProjectCount");
 const boardLiveToggle = document.getElementById("boardLiveToggle");
 const boardLiveLabel = document.getElementById("boardLiveLabel");
 const studioShell = document.querySelector(".studio-shell");
+const maximizeBackgroundNodes = [
+  document.querySelector(".site-header"),
+  document.querySelector(".intro-column"),
+  document.querySelector(".surface-meta"),
+  document.querySelector(".site-footer"),
+].filter(Boolean);
 const commandPalette = document.getElementById("commandPalette");
 const commandPaletteClose = document.getElementById("commandPaletteClose");
 const commandSearch = document.getElementById("commandSearch");
@@ -2945,10 +2951,26 @@ function updateSurfaceMaximizeControl() {
   );
 }
 
+function setMaximizedBackgroundInert(inert) {
+  maximizeBackgroundNodes.forEach((node) => {
+    node.inert = inert;
+  });
+}
+
+function maximizedFocusableElements() {
+  return dialogFocusableElements(surface)
+    .filter((element) => element.getClientRects().length > 0);
+}
+
 function setSurfaceMaximized(maximized, { restoreFocus = false } = {}) {
   const nextState = Boolean(maximized);
   const wasMaximized = surfaceMaximized;
-  if (nextState && !wasMaximized) surfaceMaximizedScrollY = window.scrollY;
+  if (nextState && !wasMaximized) {
+    surfaceMaximizedScrollY = window.scrollY;
+    if (indexOpen) closeIndex();
+    setMaximizedBackgroundInert(true);
+  }
+  if (!nextState && wasMaximized) setMaximizedBackgroundInert(false);
   surfaceMaximized = nextState;
   surface?.classList.toggle("is-maximized", surfaceMaximized);
   document.body.classList.toggle("is-terminal-maximized", surfaceMaximized);
@@ -2968,6 +2990,12 @@ function setSurfaceMaximized(maximized, { restoreFocus = false } = {}) {
 
   if (!surfaceMaximized && restoreFocus) {
     surfaceMaximizeButton?.focus({ preventScroll: true });
+  }
+
+  if (surfaceMaximized && !wasMaximized) {
+    window.requestAnimationFrame(() => {
+      if (surfaceMaximized) surfaceMaximizeButton?.focus({ preventScroll: true });
+    });
   }
 }
 
@@ -4303,6 +4331,13 @@ function toggleIndex() {
   else openIndex();
 }
 
+document.addEventListener("focusin", (event) => {
+  if (!surfaceMaximized || commandPaletteOpen || profilePreviewOpen || artifactPreviewOpen) return;
+  if (surface?.contains(event.target)) return;
+
+  surfaceMaximizeButton?.focus({ preventScroll: true });
+});
+
 surfaceCommandForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const command = surfaceCommandInput?.value || "";
@@ -4606,6 +4641,20 @@ document.addEventListener("keydown", (event) => {
       return;
     }
 
+    return;
+  }
+
+  if (surfaceMaximized && event.key === "Tab") {
+    const focusableElements = maximizedFocusableElements();
+    if (!focusableElements.length) return;
+
+    const currentFocusIndex = focusableElements.indexOf(document.activeElement);
+    const nextFocusIndex = event.shiftKey
+      ? (currentFocusIndex <= 0 ? focusableElements.length - 1 : currentFocusIndex - 1)
+      : (currentFocusIndex === focusableElements.length - 1 ? 0 : currentFocusIndex + 1);
+
+    event.preventDefault();
+    focusableElements[nextFocusIndex]?.focus({ preventScroll: true });
     return;
   }
 
