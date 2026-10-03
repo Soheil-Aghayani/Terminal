@@ -1396,7 +1396,6 @@ let helpOpen = false;
 let commandPaletteOpen = false;
 let surfaceMaximized = false;
 const filterableSections = new Set(["build", "skills", "archive"]);
-const sectionFilterQueries = { build: "", skills: "", archive: "" };
 const projectSortModes = new Set(["catalog", "updated", "stars", "alpha"]);
 
 function projectSortModeFromLocation() {
@@ -1404,7 +1403,13 @@ function projectSortModeFromLocation() {
   return projectSortModes.has(requestedSort) ? requestedSort : "catalog";
 }
 
+function projectFilterFromLocation() {
+  return new URL(window.location.href).searchParams.get("filter")?.trim() || "";
+}
+
 let projectSortMode = projectSortModeFromLocation();
+const initialProjectFilter = projectFilterFromLocation();
+const sectionFilterQueries = { build: initialProjectFilter, skills: "", archive: "" };
 
 function syncProjectSortHistory() {
   const nextUrl = new URL(window.location.href);
@@ -1416,6 +1421,19 @@ function syncProjectSortHistory() {
     projectSort: projectSortMode,
   }, "", nextUrl);
 }
+
+function syncProjectFilterHistory() {
+  const nextUrl = new URL(window.location.href);
+  const query = sectionFilterQueries.build.trim();
+  if (query) nextUrl.searchParams.set("filter", query);
+  else nextUrl.searchParams.delete("filter");
+
+  window.history.replaceState({
+    ...(window.history.state || {}),
+    projectFilter: query,
+  }, "", nextUrl);
+}
+
 let indexReturnFocus = null;
 let helpReturnFocus = null;
 let commandPaletteReturnFocus = null;
@@ -3962,6 +3980,7 @@ document.addEventListener("input", (event) => {
   const section = target.dataset.sectionFilter;
   if (!filterableSections.has(section)) return;
   sectionFilterQueries[section] = target.value;
+  if (section === "build") syncProjectFilterHistory();
   filterSectionList(section, target.value);
 });
 
@@ -4097,6 +4116,7 @@ document.addEventListener("keydown", (event) => {
     event.target.value = "";
     const section = event.target.dataset.sectionFilter;
     sectionFilterQueries[section] = "";
+    if (section === "build") syncProjectFilterHistory();
     filterSectionList(section, "");
     return;
   }
