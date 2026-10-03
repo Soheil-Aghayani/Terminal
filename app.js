@@ -2957,7 +2957,13 @@ function setSurfaceMaximized(maximized, { restoreFocus = false } = {}) {
 
   if (wasMaximized && !surfaceMaximized) {
     const scrollY = surfaceMaximizedScrollY;
-    window.requestAnimationFrame(() => window.scrollTo({ top: scrollY, left: 0, behavior: "auto" }));
+    const restoreScroll = () => window.scrollTo({ top: scrollY, left: 0, behavior: "auto" });
+    window.requestAnimationFrame(() => {
+      restoreScroll();
+      // The fixed surface changing back to normal flow can trigger one more
+      // browser scroll-anchor adjustment after the first frame.
+      window.requestAnimationFrame(restoreScroll);
+    });
   }
 
   if (!surfaceMaximized && restoreFocus) {
