@@ -1398,7 +1398,24 @@ let surfaceMaximized = false;
 const filterableSections = new Set(["build", "skills", "archive"]);
 const sectionFilterQueries = { build: "", skills: "", archive: "" };
 const projectSortModes = new Set(["catalog", "updated", "stars", "alpha"]);
-let projectSortMode = "catalog";
+
+function projectSortModeFromLocation() {
+  const requestedSort = new URL(window.location.href).searchParams.get("sort");
+  return projectSortModes.has(requestedSort) ? requestedSort : "catalog";
+}
+
+let projectSortMode = projectSortModeFromLocation();
+
+function syncProjectSortHistory() {
+  const nextUrl = new URL(window.location.href);
+  if (projectSortMode === "catalog") nextUrl.searchParams.delete("sort");
+  else nextUrl.searchParams.set("sort", projectSortMode);
+
+  window.history.replaceState({
+    ...(window.history.state || {}),
+    projectSort: projectSortMode,
+  }, "", nextUrl);
+}
 let indexReturnFocus = null;
 let helpReturnFocus = null;
 let commandPaletteReturnFocus = null;
@@ -3953,6 +3970,7 @@ document.addEventListener("change", (event) => {
   if (!target.matches("[data-project-sort]")) return;
 
   projectSortMode = projectSortModes.has(target.value) ? target.value : "catalog";
+  syncProjectSortHistory();
   renderSection("build");
   window.requestAnimationFrame(() => document.querySelector("[data-project-sort]")?.focus({ preventScroll: true }));
 });
