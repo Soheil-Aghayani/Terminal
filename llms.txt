@@ -45,7 +45,7 @@ The Projects route in the portfolio is the authoritative index of public reposit
 
 ## Profile outputs
 
-- The Contact route exposes general, academic, and software profile outputs designed for shareable deep links, print/PDF, or plain-text export.
+- The Contact route exposes general, academic, and software profile outputs designed for shareable deep links, print/PDF, plain-text export, or Markdown export.
 - General profile: https://agseyl.ir/?profile=general
 - Academic profile: https://agseyl.ir/?profile=academic
 - Software profile: https://agseyl.ir/?profile=technical
