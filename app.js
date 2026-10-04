@@ -60,7 +60,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "RUN",
     "surface.commandReady": "READY / TYPE HELP",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / DOWNLOAD BIBTEX / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / DOWNLOAD CV / VCARD / BIBTEX / DOWNLOAD BIBTEX / MAX / MIN",
     "surface.commandList": "FILES: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "HISTORY: {{commands}}",
     "surface.commandHistoryEmpty": "EMPTY",
@@ -75,6 +75,7 @@ const translations = {
     "surface.commandShared": "ROUTE COPIED",
     "surface.commandShareFailed": "ROUTE COPY FAILED",
     "surface.commandContactDownloaded": "CONTACT CARD DOWNLOADED",
+    "surface.commandProfileDownloaded": "PROFILE DOWNLOADED: {{profile}} / {{format}}",
     "surface.commandBibtex": "BIBTEX READY / PUBLIC RECORDS COPIED",
     "surface.commandBibtexDownloaded": "BIBTEX FILE DOWNLOADED",
     "surface.commandBibtexUnavailable": "NO BIBTEX RECORDS AVAILABLE",
@@ -163,7 +164,7 @@ const translations = {
     "projects.sortCatalog": "STUDIO ORDER",
     "projects.sortUpdated": "RECENTLY UPDATED",
     "projects.sortStars": "MOST STARRED",
-    "projects.sortAlpha": "A–Z",
+    "projects.sortAlpha": "A-Z",
     "projects.githubMetaAria": "GitHub metadata: {{summary}}",
     "board.openBuild": "Open projects",
     "board.openResearch": "Open research",
@@ -183,16 +184,17 @@ const translations = {
     "contact.linkedin": "LinkedIn",
     "contact.telegram": "Telegram",
     "contact.scholar": "Google Scholar",
-    "contact.profileOutputs": "PROFILE OUTPUTS",
-    "contact.generalProfile": "General profile",
-    "contact.academicProfile": "Academic profile",
-    "contact.technicalProfile": "Software profile",
-    "contact.profilePrintMeta": "VIEW / PRINT",
+    "contact.profileOutputs": "PUBLIC DOCUMENTS",
+    "contact.publicProfileNote": "Public links and selected work only. No phone number, referee contacts, or application files.",
+    "contact.generalProfile": "Public dossier",
+    "contact.academicProfile": "Academic CV",
+    "contact.technicalProfile": "Software resume",
+    "contact.profilePrintMeta": "VIEW / EXPORT",
     "contact.saveContact": "SAVE CONTACT",
     "contact.saveContactAria": "Download a public contact card",
-    "contact.generalProfileAria": "Open the general profile",
-    "contact.academicProfileAria": "Open the academic profile",
-    "contact.technicalProfileAria": "Open the software profile",
+    "contact.generalProfileAria": "Open the public dossier",
+    "contact.academicProfileAria": "Open the academic CV",
+    "contact.technicalProfileAria": "Open the software resume",
     "profile.previewLabel": "PROFILE / VIEW",
     "profile.previewHint": "PUBLIC PROFILE / SHARE, EXPORT OR PRINT",
     "profile.close": "CLOSE",
@@ -206,7 +208,7 @@ const translations = {
     "profile.downloadMarkdownAria": "Download this public profile as Markdown",
     "profile.switchLabel": "PROFILE VIEW",
     "profile.switchAria": "Choose profile output",
-    "profile.general": "General",
+    "profile.general": "Public dossier",
     "palette.label": "Command palette",
     "palette.title": "Find a signal.",
     "palette.close": "Close",
@@ -238,11 +240,11 @@ const translations = {
     "palette.actionMinimizeMeta": "Restore the surface size",
     "palette.actionShareRoute": "Share current route",
     "palette.actionShareRouteMeta": "Native share on mobile / copy on desktop",
-    "palette.actionPrint": "Open profile / PDF",
+    "palette.actionPrint": "Open public dossier / PDF",
     "palette.actionPrintMeta": "Public dossier preview",
-    "palette.actionPrintAcademic": "Open academic profile",
+    "palette.actionPrintAcademic": "Open academic CV",
     "palette.actionPrintAcademicMeta": "Research and education dossier",
-    "palette.actionPrintTechnical": "Open software profile",
+    "palette.actionPrintTechnical": "Open software resume",
     "palette.actionPrintTechnicalMeta": "Projects and working stack",
     "palette.actionMarkdown": "Download profile Markdown",
     "palette.actionMarkdownMeta": "Public export from the active profile",
@@ -377,7 +379,7 @@ const translations = {
     "surface.commandPlaceholder": "help / open projects / max",
     "surface.commandRun": "اجرا",
     "surface.commandReady": "آماده / HELP را بنویس",
-    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / VCARD / BIBTEX / DOWNLOAD BIBTEX / MAX / MIN",
+    "surface.commandHelp": "HELP / LS / OPEN ROUTE / OPEN PROJECT / CV / DOWNLOAD CV / VCARD / BIBTEX / DOWNLOAD BIBTEX / MAX / MIN",
     "surface.commandList": "فایل‌ها: README / SIGNALS / FIELD NOTES / SKILLS / CONTACT",
     "surface.commandHistory": "تاریخچه: {{commands}}",
     "surface.commandHistoryEmpty": "خالی",
@@ -392,6 +394,7 @@ const translations = {
     "surface.commandShared": "مسیر کپی شد",
     "surface.commandShareFailed": "کپی مسیر ناموفق بود",
     "surface.commandContactDownloaded": "کارت تماس دانلود شد",
+    "surface.commandProfileDownloaded": "پروفایل دانلود شد: {{profile}} / {{format}}",
     "surface.commandBibtex": "BibTeX آماده شد / رکوردهای عمومی کپی شدند",
     "surface.commandBibtexDownloaded": "فایل BibTeX دانلود شد",
     "surface.commandBibtexUnavailable": "رکورد BibTeX در دسترس نیست",
@@ -500,16 +503,17 @@ const translations = {
     "contact.linkedin": "لینکدین",
     "contact.telegram": "تلگرام",
     "contact.scholar": "گوگل اسکالر",
-    "contact.profileOutputs": "خروجی پروفایل",
-    "contact.generalProfile": "پروفایل عمومی",
-    "contact.academicProfile": "پروفایل دانشگاهی",
-    "contact.technicalProfile": "پروفایل نرم‌افزار",
-    "contact.profilePrintMeta": "مشاهده / چاپ",
+    "contact.profileOutputs": "اسناد عمومی",
+    "contact.publicProfileNote": "فقط لینک‌های عمومی و کارهای منتخب. بدون شماره تلفن، اطلاعات معرف‌ها یا فایل‌های اپلای.",
+    "contact.generalProfile": "پرونده‌ی عمومی",
+    "contact.academicProfile": "رزومه‌ی پژوهشی",
+    "contact.technicalProfile": "رزومه‌ی نرم‌افزار",
+    "contact.profilePrintMeta": "مشاهده / خروجی",
     "contact.saveContact": "ذخیره‌ی تماس",
     "contact.saveContactAria": "دانلود کارت تماس عمومی",
-    "contact.generalProfileAria": "باز کردن پروفایل عمومی",
-    "contact.academicProfileAria": "باز کردن پروفایل دانشگاهی",
-    "contact.technicalProfileAria": "باز کردن پروفایل نرم‌افزار",
+    "contact.generalProfileAria": "باز کردن پرونده‌ی عمومی",
+    "contact.academicProfileAria": "باز کردن رزومه‌ی پژوهشی",
+    "contact.technicalProfileAria": "باز کردن رزومه‌ی نرم‌افزار",
     "profile.previewLabel": "پروفایل / مشاهده",
     "profile.previewHint": "پروفایل عمومی / اشتراک، خروجی یا چاپ",
     "profile.close": "بستن",
@@ -523,7 +527,7 @@ const translations = {
     "profile.downloadMarkdownAria": "دانلود این پروفایل عمومی به‌صورت Markdown",
     "profile.switchLabel": "نمایش پروفایل",
     "profile.switchAria": "انتخاب خروجی پروفایل",
-    "profile.general": "عمومی",
+    "profile.general": "پرونده‌ی عمومی",
     "palette.label": "پالت فرمان",
     "palette.title": "یک سیگنال پیدا کن.",
     "palette.close": "بستن",
@@ -555,11 +559,11 @@ const translations = {
     "palette.actionMinimizeMeta": "برگرداندن اندازه‌ی سطح",
     "palette.actionShareRoute": "اشتراک‌گذاری مسیر فعلی",
     "palette.actionShareRouteMeta": "اشتراک‌گذاری در گوشی / کپی در دسکتاپ",
-    "palette.actionPrint": "باز کردن پروفایل / PDF",
+    "palette.actionPrint": "باز کردن پرونده‌ی عمومی / PDF",
     "palette.actionPrintMeta": "پیش‌نمایش پرونده‌ی عمومی",
-    "palette.actionPrintAcademic": "باز کردن پروفایل دانشگاهی",
+    "palette.actionPrintAcademic": "باز کردن رزومه‌ی پژوهشی",
     "palette.actionPrintAcademicMeta": "پرونده‌ی پژوهش و تحصیلات",
-    "palette.actionPrintTechnical": "باز کردن پروفایل نرم‌افزار",
+    "palette.actionPrintTechnical": "باز کردن رزومه‌ی نرم‌افزار",
     "palette.actionPrintTechnicalMeta": "پروژه‌ها و جعبه‌ابزار کاری",
     "palette.actionMarkdown": "دانلود Markdown پروفایل",
     "palette.actionMarkdownMeta": "خروجی عمومی از پروفایل فعال",
@@ -2090,6 +2094,7 @@ function renderProfileActions() {
   return `
     <section class="contact-profile-actions" aria-label="${escapeHtml(translate("contact.profileOutputs"))}">
       <p class="contact-profile-label">${escapeHtml(translate("contact.profileOutputs"))}</p>
+      <p class="contact-profile-note">${escapeHtml(translate("contact.publicProfileNote"))}</p>
       <div class="contact-profile-list">
         ${profiles.map(({ id, contactKey, icon }) => `
           <button class="contact-profile-button" type="button" data-action="profile-preview" data-profile="${id}" aria-label="${escapeHtml(translate(`contact.${contactKey}Aria`))}">
@@ -2281,13 +2286,19 @@ const terminalCommandProfiles = Object.freeze({
   cv: "general",
   resume: "general",
   dossier: "general",
+  profile: "general",
+  "public dossier": "general",
   general: "general",
   academic: "academic",
+  "academic cv": "academic",
   "academic profile": "academic",
   "research profile": "academic",
   software: "technical",
   technical: "technical",
   developer: "technical",
+  "software cv": "technical",
+  "software resume": "technical",
+  "developer resume": "technical",
   "software profile": "technical",
 });
 
@@ -2417,6 +2428,22 @@ function runSurfaceCommand(rawCommand) {
     downloadBibtex(records);
     setSurfaceCommandStatus("surface.commandBibtexDownloaded");
     return;
+  }
+
+  if (verb === "download") {
+    const markdown = /(?:^|\s)(?:markdown|md)$/i.test(argument);
+    const profileQuery = argument.replace(/\s+(?:markdown|md)$/i, "").trim();
+    const profile = resolveTerminalCommandProfile(profileQuery);
+    if (profile) {
+      if (markdown) downloadProfileMarkdown(profile);
+      else downloadProfileText(profile);
+      const definition = profileOutputDefinitions.find(({ id }) => id === profile) || profileOutputDefinitions[0];
+      setSurfaceCommandStatus("surface.commandProfileDownloaded", {
+        profile: translate(definition.switchLabelKey),
+        format: markdown ? "MD" : "TXT",
+      });
+      return;
+    }
   }
 
   if (["bibtex", "copy bibtex", "export bibtex"].includes(normalized)) {
@@ -3469,7 +3496,7 @@ function profileExportText(data) {
   }
   data.sections.forEach(({ title, items }) => {
     lines.push("", title);
-    items.forEach(({ title: itemTitle, meta }) => lines.push(meta ? `${itemTitle} — ${meta}` : itemTitle));
+    items.forEach(({ title: itemTitle, meta }) => lines.push(meta ? `${itemTitle} - ${meta}` : itemTitle));
   });
   return `${lines.filter((line) => line !== undefined && line !== null).join("\n")}\n`;
 }
@@ -3508,7 +3535,7 @@ function profileExportMarkdown(data) {
       const linkedTitle = href
         ? `[**${escapeMarkdownText(itemTitle)}**](${escapeMarkdownUrl(href)})`
         : `**${escapeMarkdownText(itemTitle)}**`;
-      lines.push(`- ${linkedTitle}${meta ? ` — ${escapeMarkdownText(meta)}` : ""}`);
+      lines.push(`- ${linkedTitle}${meta ? ` - ${escapeMarkdownText(meta)}` : ""}`);
     });
   });
   return `${lines.join("\n")}\n`;

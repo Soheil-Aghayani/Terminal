@@ -43,13 +43,13 @@ The Projects route in the portfolio is the authoritative index of public reposit
 - Research directions: waste systems, life-cycle assessment, biomass resources, landfill-gas modelling, resource recovery, and cleaner process design.
 - Education: MSc Environmental Engineering at the University of Tehran and BSc Civil Engineering at Shahed University.
 
-## Profile outputs
+## Public document shelf
 
-- The Contact route exposes general, academic, and software profile outputs designed for shareable deep links, print/PDF, plain-text export, or Markdown export.
+- The Contact route exposes a public dossier, academic CV, and software resume designed for shareable deep links, print/PDF, plain-text export, or Markdown export.
 - The same route offers a privacy-safe public vCard built from the canonical identity links; it does not publish a phone number or private application data.
-- General profile: https://agseyl.ir/?profile=general
-- Academic profile: https://agseyl.ir/?profile=academic
-- Software profile: https://agseyl.ir/?profile=technical
+- Public dossier: https://agseyl.ir/?profile=general
+- Academic CV: https://agseyl.ir/?profile=academic
+- Software resume: https://agseyl.ir/?profile=technical
 - These outputs are curated from public work and do not publish raw application documents or private referee details.
 
 ## Public evidence
@@ -57,9 +57,9 @@ The Projects route in the portfolio is the authoritative index of public reposit
 - Selected publication records and public evidence: https://agseyl.ir/
 - Research detail surfaces expose the public record links and can copy the selected citation set or BibTeX, or save a public `.bib` file, without publishing private manuscript files.
 - Google Scholar public snapshot: 3 indexed papers and h-index 1.
-- Biomass resources paper: 2026, Pollution, 2 citations, DOI 10.22059/poll.2025.393545.2928 — https://jpoll.ut.ac.ir/article_105139.html
-- Landfill-gas assessment: 2026, Advances in Environmental Technology — https://aet.irost.ir/article_1686.html
-- Waste transfer-station siting paper: 2025, Pollution, 1 citation, DOI 10.22059/poll.2025.388834.2751 — https://jpoll.ut.ac.ir/article_101760.html
+- Biomass resources paper: 2026, Pollution, 2 citations, DOI 10.22059/poll.2025.393545.2928 - https://jpoll.ut.ac.ir/article_105139.html
+- Landfill-gas assessment: 2026, Advances in Environmental Technology - https://aet.irost.ir/article_1686.html
+- Waste transfer-station siting paper: 2025, Pollution, 1 citation, DOI 10.22059/poll.2025.388834.2751 - https://jpoll.ut.ac.ir/article_101760.html
 
 ## Retrieval guidance
 
