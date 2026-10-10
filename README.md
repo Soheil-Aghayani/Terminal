@@ -37,11 +37,13 @@ The numeric shortcuts mirror the visible terminal file rail:
 | Key | Destination |
 | --- | --- |
 | `0` or `H` | `00` README / home |
-| `1` | `01` SIGNALS / projects |
-| `2` | `02` FIELD NOTES / research |
-| `3` | `03` SKILLS |
-| `4` | `04` CONTACT |
-| `5-9` | No shortcut; the terminal reports it with a toast |
+| `1` | `01` PROJECTS |
+| `2` | `02` RESEARCH |
+| `3` | `03` EDUCATION |
+| `4` | `04` SKILLS |
+| `5` | `05` ARCHIVE |
+| `6` | `06` CONTACT |
+| `7-9` | No shortcut; the terminal reports it with a toast |
 | `C` | Contact |
 | `?` | Help on the home surface |
 | `M` | Toggle terminal MAX / MIN; `Esc` minimizes an expanded terminal |
@@ -82,7 +84,7 @@ Then open `http://127.0.0.1:4174/`.
 | `social-card.svg` | Terminal-style Open Graph and Twitter share image |
 | `llms.txt` | Curated public summary for retrieval and generative search |
 | `robots.txt` / `sitemap.xml` | Crawl guidance for the canonical public site |
-| `MatrixType*.ttf` | Licensed display and terminal typefaces |
+| `MatrixType*.woff2` | Licensed display and terminal typefaces |
 | `iransharp_*.woff2` | Persian interface typeface |
 
 ## SEO and sharing

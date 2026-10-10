@@ -1,6 +1,6 @@
 @font-face {
   font-family: "MatrixType";
-  src: url("MatrixType-Regular.ttf") format("truetype");
+  src: url("MatrixType-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: "MatrixType";
-  src: url("MatrixType-Bold.ttf") format("truetype");
+  src: url("MatrixType-Bold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 700;
@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: "MatrixType Display";
-  src: url("MatrixTypeDisplay-Regular.ttf") format("truetype");
+  src: url("MatrixTypeDisplay-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: "MatrixType Display";
-  src: url("MatrixTypeDisplay-Bold.ttf") format("truetype");
+  src: url("MatrixTypeDisplay-Bold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 700;
@@ -162,7 +162,7 @@ a:focus-visible {
   color: var(--night);
   background: var(--accent);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
@@ -236,7 +236,7 @@ a {
 .wordmark small {
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -343,7 +343,7 @@ a {
 .kicker {
   margin: 0;
   color: var(--accent);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -383,7 +383,7 @@ a {
 .index-nav button span {
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .index-nav button strong {
@@ -397,7 +397,7 @@ a {
   max-width: 250px;
   margin: 26px 0 0;
   color: var(--ink-faint);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.6;
 }
 
@@ -507,9 +507,9 @@ a {
   grid-template-columns: minmax(0, 1fr) 60px;
   gap: 18px;
   align-items: center;
-  max-width: 340px;
+  max-width: 440px;
   color: var(--ink-faint);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.55;
 }
 
@@ -531,7 +531,7 @@ a {
   gap: 24px;
   margin-bottom: 12px;
   color: var(--ink-faint);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -563,7 +563,7 @@ a {
   align-items: center;
   gap: 20px;
   color: var(--ink-soft);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -582,7 +582,7 @@ a {
   color: var(--accent);
   background: transparent;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -673,7 +673,7 @@ a {
   gap: 12px;
   min-width: 0;
   color: var(--ink-faint);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.13em;
   line-height: 1.4;
 }
@@ -693,7 +693,7 @@ a {
 
 .board-count {
   color: var(--ink-soft);
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.08em;
 }
 
@@ -747,7 +747,7 @@ a {
 .board-columns {
   padding: 11px 0 7px;
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.09em;
   line-height: 1.3;
 }
@@ -767,7 +767,7 @@ a {
   padding: 0;
   border-inline: 0;
   background: transparent;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.25;
   text-align: start;
   appearance: none;
@@ -896,7 +896,7 @@ html[dir="rtl"] .flap-char {
 
 html[dir="rtl"] .flap-word {
   font-family: "IRANSharp", var(--body);
-  font-size: 10px;
+  font-size: 11px;
   text-align: right;
 }
 
@@ -908,7 +908,7 @@ html[dir="rtl"] .flap-word {
 .board-state {
   min-width: 44px;
   color: var(--accent);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.07em;
   text-align: right;
 }
@@ -916,7 +916,7 @@ html[dir="rtl"] .flap-word {
 .board-bottom {
   padding-top: 10px;
   border-top: 1px solid var(--line);
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .board-source {
@@ -1109,7 +1109,7 @@ html[dir="rtl"] .flap-word {
   min-width: 0;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -1138,7 +1138,7 @@ html[dir="rtl"] .flap-word {
   color: var(--ink);
   background: #080b0c;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   line-height: 1.4;
 }
@@ -1162,7 +1162,7 @@ html[dir="rtl"] .flap-word {
 .project-sort-label {
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -1178,7 +1178,7 @@ html[dir="rtl"] .flap-word {
   color: var(--ink);
   background: #080b0c;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   line-height: 1.4;
 }
@@ -1193,7 +1193,7 @@ html[dir="rtl"] .flap-word {
   margin: 0;
   color: var(--accent);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -1243,7 +1243,7 @@ html[dir="rtl"] .project-filter input {
   gap: 8px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .project-live-mark {
@@ -1251,7 +1251,7 @@ html[dir="rtl"] .project-filter input {
   align-items: center;
   gap: 4px;
   color: var(--accent);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   white-space: nowrap;
 }
@@ -1280,7 +1280,7 @@ html[dir="rtl"] .project-filter input {
   border-bottom: 1px solid var(--line);
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -1361,7 +1361,7 @@ html[dir="rtl"] .project-filter input {
   gap: 16px;
   margin-bottom: 10px;
   color: var(--ink-faint);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.5;
   text-transform: uppercase;
@@ -1377,7 +1377,7 @@ html[dir="rtl"] .project-filter input {
   align-items: center;
   gap: 5px;
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   white-space: nowrap;
 }
@@ -1440,7 +1440,7 @@ html[dir="rtl"] .project-filter input {
   color: var(--accent);
   background: transparent;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1494,7 +1494,7 @@ html[dir="rtl"] .project-filter input {
   padding: 0 clamp(20px, 4vw, 62px);
   border-top: 1px solid var(--line);
   color: var(--ink-faint);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -1775,7 +1775,7 @@ html[dir="rtl"] .project-filter input {
     gap: 4px;
     max-width: 100%;
     overflow: hidden;
-    font-size: 8px;
+    font-size: 11px;
     line-height: 1.25;
     white-space: nowrap;
   }
@@ -1845,7 +1845,7 @@ html[dir="rtl"] .project-filter input {
   }
 
   .surface-list-projects small {
-    font-size: 7px;
+    font-size: 11px;
   }
 
   .skills-detail h2,
@@ -1861,7 +1861,7 @@ html[dir="rtl"] .project-filter input {
   .research-detail > p,
   .archive-detail > p {
     margin-bottom: 8px;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.55;
   }
 
@@ -1954,7 +1954,7 @@ html[dir="rtl"] .project-filter input {
 
   .header-link,
   .language-toggle {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   /* Keep the terminal typography compact while giving touch controls a reliable hit area. */
@@ -2054,13 +2054,14 @@ html[dir="rtl"] .project-filter input {
   }
 
   .board-columns {
-    font-size: 6px;
+    font-size: 11px;
   }
 
   .board-row {
-    font-size: 9px;
+    font-size: 11px;
   }
 
+  /* Split-flap glyphs stay small on phones so the longest signal fits its slot row. */
   .board-value {
     padding: 4px 5px;
     font-size: 9px;
@@ -2068,12 +2069,12 @@ html[dir="rtl"] .project-filter input {
 
   .board-state {
     min-width: 37px;
-    font-size: 7px;
+    font-size: 11px;
   }
 
   .board-bottom,
   .board-topline {
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .board-live {
@@ -2204,12 +2205,12 @@ html[dir="rtl"] .project-filter input {
 
   .header-link,
   .language-toggle {
-    font-size: 9px;
+    font-size: 11px;
     flex: 0 0 44px;
   }
 
   .header-link {
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .language-toggle {
@@ -2272,7 +2273,7 @@ html[dir="rtl"] .project-filter input {
 
 @media (min-width: 1200px) {
   .studio-surface {
-    --terminal-rail-width: clamp(138px, 21%, 180px);
+    --terminal-rail-width: clamp(176px, 24%, 216px);
     padding-left: calc(var(--terminal-rail-width) + clamp(18px, 2.2vw, 32px));
   }
 
@@ -2301,7 +2302,7 @@ html[dir="rtl"] .project-filter input {
     background: transparent;
     overflow: hidden;
     color: var(--ink-soft);
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.02em;
     line-height: 1.4;
     text-align: start;
@@ -2340,7 +2341,7 @@ html[dir="rtl"] .project-filter input {
     border-bottom: 1px solid var(--line);
     background: transparent;
     color: var(--ink-soft);
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.08em;
     line-height: 1.4;
     text-align: start;
@@ -2367,7 +2368,7 @@ html[dir="rtl"] .project-filter input {
 
   .surface-rail-command small {
     color: var(--ink-faint);
-    font-size: 7px;
+    font-size: 11px;
     white-space: nowrap;
   }
 
@@ -2376,7 +2377,7 @@ html[dir="rtl"] .project-filter input {
     justify-content: space-between;
     margin: 0;
     color: var(--ink-faint);
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.14em;
     line-height: 1.4;
     text-transform: uppercase;
@@ -2399,7 +2400,7 @@ html[dir="rtl"] .project-filter input {
     color: var(--ink-faint);
     background: transparent;
     font-family: inherit;
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.04em;
     line-height: 1.35;
     text-align: left;
@@ -2435,7 +2436,7 @@ html[dir="rtl"] .project-filter input {
   .surface-rail-entry small {
     overflow: hidden;
     color: var(--ink-faint);
-    font-size: 6px;
+    font-size: 11px;
     letter-spacing: 0.04em;
     line-height: 1.3;
     text-overflow: ellipsis;
@@ -2451,7 +2452,7 @@ html[dir="rtl"] .project-filter input {
     gap: 8px;
     margin-top: auto;
     color: var(--ink-faint);
-    font-size: 8px;
+    font-size: 11px;
     letter-spacing: 0.12em;
     line-height: 1.4;
     text-transform: uppercase;
@@ -2518,7 +2519,7 @@ html[dir="rtl"] .project-filter input {
   color: var(--ink-faint);
   background: transparent;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -2543,7 +2544,7 @@ html[dir="rtl"] .project-filter input {
 .surface-command-key {
   color: var(--accent);
   direction: ltr;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.04em;
 }
 
@@ -2590,7 +2591,7 @@ html[dir="rtl"] .project-filter input {
   justify-content: space-between;
   gap: 16px;
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   line-height: 1.5;
   text-transform: uppercase;
@@ -2652,7 +2653,7 @@ html[dir="rtl"] .project-filter input {
 
 .surface-help-line > span {
   color: var(--ink-faint);
-  font-size: 9px;
+  font-size: 11px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -2681,7 +2682,7 @@ html[dir="rtl"] .project-filter input {
 
 .surface-command-line > label {
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -2742,7 +2743,7 @@ html[dir="rtl"] .project-filter input {
   min-height: 1.3em;
   margin: 0;
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   line-height: 1.4;
   overflow-wrap: anywhere;
@@ -2817,7 +2818,7 @@ html[dir="rtl"] .project-filter input {
   padding: 8px 0;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -2829,7 +2830,7 @@ html[dir="rtl"] .project-filter input {
   padding: 0 0 10px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.55;
 }
 
@@ -2879,7 +2880,7 @@ html[dir="rtl"] .project-filter input {
   flex: 0 0 auto;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.35;
   text-transform: uppercase;
@@ -2977,7 +2978,7 @@ html[dir="rtl"] .project-filter input {
   margin: 0 0 7px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -3005,7 +3006,7 @@ html[dir="rtl"] .project-filter input {
   min-width: 0;
   overflow-wrap: anywhere;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.3;
@@ -3015,7 +3016,7 @@ html[dir="rtl"] .project-filter input {
 .detail-related-link small {
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.3;
   text-align: right;
 }
@@ -3035,7 +3036,7 @@ html[dir="rtl"] .project-filter input {
   margin: 0 0 7px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -3063,7 +3064,7 @@ html[dir="rtl"] .project-filter input {
   overflow-wrap: break-word;
   word-break: normal;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.3;
@@ -3075,7 +3076,7 @@ html[dir="rtl"] .project-filter input {
   overflow-wrap: anywhere;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.3;
   text-align: right;
 }
@@ -3092,7 +3093,7 @@ html[dir="rtl"] .project-filter input {
 .detail-evidence-source {
   color: var(--accent);
   font-family: var(--mono);
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.3;
   text-transform: uppercase;
@@ -3130,7 +3131,7 @@ html[dir="rtl"] .project-filter input {
   border-bottom: 1px solid var(--line);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   text-decoration: none;
   transition: color 180ms ease, border-color 180ms ease;
 }
@@ -3170,7 +3171,7 @@ html[dir="rtl"] .project-filter input {
   background: #101416;
   box-shadow: 0 12px 30px rgb(0 0 0 / 28%);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.4;
   opacity: 0;
@@ -3232,7 +3233,7 @@ html[dir="rtl"] .project-filter input {
   border-bottom: 1px solid var(--line);
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -3254,7 +3255,7 @@ html[dir="rtl"] .project-filter input {
   color: var(--ink-faint);
   background: transparent;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
@@ -3283,7 +3284,7 @@ html[dir="rtl"] .project-filter input {
   padding: 12px 18px 0;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.5;
   text-transform: uppercase;
@@ -3300,7 +3301,7 @@ html[dir="rtl"] .project-filter input {
 .profile-preview-switch-label {
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -3323,7 +3324,7 @@ html[dir="rtl"] .project-filter input {
   color: var(--ink-faint);
   background: transparent;
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -3366,7 +3367,7 @@ html[dir="rtl"] .project-filter input {
 .profile-preview-content .print-profile-label {
   margin: 0 0 10px;
   color: var(--accent);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -3385,7 +3386,7 @@ html[dir="rtl"] .project-filter input {
 .profile-preview-content .print-profile-subtitle {
   margin: 8px 0 0;
   color: var(--ink-soft);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.5;
   text-transform: uppercase;
@@ -3408,7 +3409,7 @@ html[dir="rtl"] .project-filter input {
 .profile-preview-content .print-profile-contact-label,
 .profile-preview-content .print-profile-grid h2 {
   color: var(--accent);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -3432,7 +3433,7 @@ html[dir="rtl"] .project-filter input {
   gap: 5px;
   color: var(--ink-soft);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.4;
   text-decoration: none;
 }
@@ -3486,14 +3487,14 @@ html[dir="rtl"] .project-filter input {
   overflow-wrap: anywhere;
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1.4;
 }
 
 .profile-preview-content .print-profile-grid li span {
   overflow-wrap: anywhere;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.4;
 }
 
@@ -3557,7 +3558,7 @@ html[dir="rtl"] .project-filter input {
   border-bottom: 1px solid var(--line);
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -3576,7 +3577,7 @@ html[dir="rtl"] .project-filter input {
   color: var(--ink-faint);
   background: transparent;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
@@ -3646,7 +3647,7 @@ html[dir="rtl"] .profile-preview-content .print-profile-contact-links a {
   .surface-content > p,
   .section-copy > p,
   .detail-copy p {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.9;
   }
 
@@ -3808,7 +3809,7 @@ body.is-terminal-maximized .command-palette-layer {
   padding-top: 2px;
   color: var(--section-tone, var(--ink-faint));
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.2;
 }
@@ -3843,7 +3844,7 @@ body.is-terminal-maximized .command-palette-layer {
   overflow: hidden;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.25;
   white-space: nowrap;
 }
@@ -3920,7 +3921,7 @@ body.is-terminal-maximized .command-palette-layer {
 
   .section-copy:not(.projects-copy) > p {
     margin-bottom: 10px;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.45;
   }
 
@@ -3935,7 +3936,7 @@ body.is-terminal-maximized .command-palette-layer {
   }
 
   .section-copy:not(.projects-copy) .surface-list small {
-    font-size: 8px;
+    font-size: 11px;
     line-height: 1.3;
   }
 
@@ -3946,13 +3947,13 @@ body.is-terminal-maximized .command-palette-layer {
 
   .surface-list-projects strong {
     font-family: var(--mono);
-    font-size: clamp(10px, 0.75vw, 12px);
+    font-size: clamp(11px, 0.75vw, 13px);
     letter-spacing: 0.06em;
     line-height: 1.15;
   }
 
   .surface-list-projects small {
-    font-size: 7px;
+    font-size: 11px;
     line-height: 1.2;
   }
 
@@ -3963,13 +3964,13 @@ body.is-terminal-maximized .command-palette-layer {
 
     [dir="rtl"] .surface-list-projects strong {
       font-family: var(--mono);
-      font-size: clamp(10px, 0.75vw, 12px);
+      font-size: clamp(11px, 0.75vw, 13px);
       letter-spacing: 0;
       line-height: 1.25;
     }
 
     [dir="rtl"] .surface-list-projects small {
-      font-size: 7px;
+      font-size: 11px;
       line-height: 1.25;
     }
 }
@@ -3983,7 +3984,7 @@ body.is-terminal-maximized .command-palette-layer {
 
   [dir="rtl"] .projects-copy > p {
     margin-bottom: 8px;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.45;
   }
 
@@ -3993,12 +3994,12 @@ body.is-terminal-maximized .command-palette-layer {
   }
 
   [dir="rtl"] .surface-list-projects strong {
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.1;
   }
 
   [dir="rtl"] .surface-list-projects small {
-    font-size: 6px;
+    font-size: 11px;
     line-height: 1.15;
   }
 }
@@ -4047,7 +4048,7 @@ body.is-terminal-maximized .command-palette-layer {
 
   .header-link:first-child {
     display: inline-flex;
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .intro-copy h1 {
@@ -4089,10 +4090,6 @@ body.is-terminal-maximized .command-palette-layer {
     justify-content: center;
   }
 
-  .surface-help-label {
-    display: none;
-  }
-
   .surface-help {
     gap: 2px;
     padding: 0;
@@ -4119,7 +4116,7 @@ body.is-terminal-maximized .command-palette-layer {
   }
 
   .surface-help-line strong {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.15;
   }
 
@@ -4148,7 +4145,7 @@ body.is-terminal-maximized .command-palette-layer {
   .projects-copy > p {
     max-width: 100%;
     margin-bottom: 8px;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.55;
   }
 
@@ -4242,7 +4239,7 @@ body.is-terminal-maximized .command-palette-layer {
   padding: 14px 18px 12px;
   border-bottom: 1px solid var(--line);
   color: var(--ink-faint);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -4262,7 +4259,7 @@ body.is-terminal-maximized .command-palette-layer {
   color: var(--ink-faint);
   background: transparent;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
@@ -4294,7 +4291,7 @@ body.is-terminal-maximized .command-palette-layer {
   display: block;
   padding: 0 18px 6px;
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -4346,7 +4343,7 @@ body.is-terminal-maximized .command-palette-layer {
   border: 1px solid var(--line);
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -4356,7 +4353,7 @@ body.is-terminal-maximized .command-palette-layer {
 .command-palette-hint {
   margin: 9px 18px 12px;
   color: var(--ink-faint);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -4433,7 +4430,7 @@ body.is-terminal-maximized .command-palette-layer {
   overflow-wrap: anywhere;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.35;
 }
 
@@ -4442,7 +4439,7 @@ body.is-terminal-maximized .command-palette-layer {
   padding-top: 2px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   line-height: 1.3;
   text-align: right;
@@ -4454,7 +4451,7 @@ body.is-terminal-maximized .command-palette-layer {
   margin: 0;
   padding: 18px 0;
   color: var(--accent);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.5;
   text-transform: uppercase;
@@ -4497,7 +4494,8 @@ body.is-command-open {
 }
 
 @media (max-width: 960px) {
-  .surface-command-label {
+  /* Touch layouts have no keyboard: keep the word, drop the key hint. */
+  .surface-command-key {
     display: none;
   }
 
@@ -4584,7 +4582,7 @@ body.is-command-open {
   padding: 8px 0;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.35;
   text-transform: uppercase;
@@ -4612,7 +4610,7 @@ body.is-command-open {
 .project-case-study-label {
   color: var(--accent);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.35;
   text-transform: uppercase;
@@ -4650,7 +4648,7 @@ body.is-command-open {
   margin: 0 0 5px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   line-height: 1.35;
   text-transform: uppercase;
@@ -4661,7 +4659,7 @@ body.is-command-open {
   overflow-wrap: anywhere;
   color: var(--ink);
   font-family: "MatrixType", var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.45;
   text-transform: uppercase;
 }
@@ -4675,7 +4673,7 @@ body.is-command-open {
   border-bottom: 1px solid var(--line);
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   line-height: 1.4;
   text-transform: uppercase;
@@ -4716,7 +4714,7 @@ body.is-command-open {
   display: block;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.3;
   text-transform: uppercase;
 }
@@ -4727,7 +4725,7 @@ body.is-command-open {
   overflow-wrap: anywhere;
   color: var(--accent);
   font-family: "MatrixType", var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1.4;
   text-transform: uppercase;
@@ -4748,7 +4746,7 @@ body.is-command-open {
   min-width: 0;
   overflow-wrap: anywhere;
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.45;
   text-transform: uppercase;
 }
@@ -4767,7 +4765,7 @@ body.is-command-open {
   padding-top: 9px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.4;
 }
 
@@ -4833,7 +4831,7 @@ body.is-command-open {
 .research-timeline-period {
   color: var(--section-tone, var(--ink-faint));
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   line-height: 1.35;
   text-transform: uppercase;
@@ -4874,7 +4872,7 @@ body.is-command-open {
   margin-top: 5px;
   color: var(--ink-faint);
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.35;
 }
 
@@ -5001,7 +4999,7 @@ body.is-command-open {
   .print-profile-label {
     margin: 0 0 18px;
     color: #b2382d;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -5043,7 +5041,7 @@ body.is-command-open {
     margin-bottom: 8px;
     color: #b2382d;
     font-family: "MatrixType", "Courier New", monospace;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
@@ -5061,7 +5059,7 @@ body.is-command-open {
     gap: 5px;
     color: #333;
     font-family: "MatrixType", "Courier New", monospace;
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.35;
     text-decoration: none;
   }
@@ -5092,7 +5090,7 @@ body.is-command-open {
     padding-bottom: 7px;
     border-bottom: 1px solid #999;
     color: #b2382d;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -5136,7 +5134,7 @@ body.is-command-open {
   .print-profile-grid li span {
     overflow-wrap: anywhere;
     color: #666;
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.35;
   }
 
@@ -5238,4 +5236,76 @@ body.is-command-open {
     border-color: var(--line);
     color: var(--ink);
   }
+}
+
+/* An open route owns the stage: the hero belongs to the home board only. */
+.view-home:has(.studio-surface.is-open) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.view-home:has(.studio-surface.is-open) .intro-column {
+  display: none;
+}
+
+.view-home:has(.studio-surface.is-open) .surface-column {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+@media (min-width: 961px) {
+  .view-home:has(.studio-surface.is-open) {
+    padding-block: clamp(20px, 3vw, 40px);
+  }
+
+  .view-home:has(.studio-surface.is-open) .studio-surface {
+    flex: 1;
+  }
+}
+
+/* Long copy reads in the body face; MatrixType stays for labels and headings. */
+.studio-surface .surface-content > p,
+.studio-surface .section-copy > p,
+.studio-surface .detail-copy p,
+.studio-surface .contact-copy .plain-description {
+  font-family: var(--body);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+[dir="rtl"] .studio-surface .section-copy > p,
+[dir="rtl"] .studio-surface .detail-copy p,
+[dir="rtl"] .studio-surface .contact-copy .plain-description {
+  line-height: 1.9;
+}
+
+/* Static fallbacks: the no-JavaScript summary and the 404 page. */
+.noscript-summary,
+.not-found {
+  max-width: 720px;
+  padding: 24px clamp(20px, 7vw, 122px);
+  color: var(--ink-soft);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.noscript-summary {
+  grid-column: 1 / -1;
+}
+
+.not-found h1 {
+  margin: 18px 0;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: clamp(34px, 5vw, 62px);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.noscript-summary a,
+.not-found a {
+  color: var(--accent);
 }

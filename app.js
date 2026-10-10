@@ -20,7 +20,7 @@ const translations = {
     "home.kicker": "Environmental systems",
     "home.titleA": "I study systems.",
     "home.titleB": "I build useful things.",
-    "home.description": "Environmental engineer, researcher, and builder. I move between real-world questions and digital tools.",
+    "home.description": "Environmental engineer (MSc, University of Tehran) working on waste valorization, biofuel, and life-cycle assessment, and building the digital tools around that research.",
     "home.identity": "{{projectCount}} public signals / {{terminalFileCount}} terminal files.",
     "surface.label": "Studio terminal",
     "surface.hint": "Live board",
@@ -89,10 +89,14 @@ const translations = {
     "surface.railEntries": "{{terminalFileCount}} ENTRIES",
     "surface.railReadme": "README",
     "surface.railReadmeMeta": "profile",
-    "surface.railSignals": "SIGNALS",
-    "surface.railSignalsMeta": "live output",
-    "surface.railFieldNotes": "FIELD NOTES",
-    "surface.railFieldNotesMeta": "observations",
+    "surface.railProjects": "PROJECTS",
+    "surface.railProjectsMeta": "public work",
+    "surface.railResearch": "RESEARCH",
+    "surface.railResearchMeta": "questions",
+    "surface.railEducation": "EDUCATION",
+    "surface.railEducationMeta": "route",
+    "surface.railArchive": "ARCHIVE",
+    "surface.railArchiveMeta": "records",
     "surface.railSkills": "SKILLS",
     "surface.railSkillsMeta": "working stack",
     "surface.railContact": "CONTACT",
@@ -339,7 +343,7 @@ const translations = {
     "home.kicker": "سیستم‌های محیط‌زیستی",
     "home.titleA": "سیستم‌ها را مطالعه می‌کنم.",
     "home.titleB": "چیزهای مفید می‌سازم.",
-    "home.description": "مهندس محیط‌زیست، پژوهشگر و سازنده. بین پرسش‌های واقعی و ابزارهای دیجیتال حرکت می‌کنم.",
+    "home.description": "مهندس محیط‌زیست (کارشناسی ارشد، دانشگاه تهران)؛ کار روی ارزش‌افزایی پسماند، سوخت زیستی و ارزیابی چرخه‌ی عمر، و ساخت ابزارهای دیجیتال پیرامون همین پژوهش.",
     "home.identity": "{{projectCount}} سیگنال عمومی / {{terminalFileCount}} فایل ترمینال.",
     "surface.label": "ترمینال استودیو",
     "surface.hint": "بورد زنده",
@@ -408,10 +412,14 @@ const translations = {
     "surface.railEntries": "{{terminalFileCount}} فایل",
     "surface.railReadme": "README.md",
     "surface.railReadmeMeta": "پروفایل",
-    "surface.railSignals": "signals.log",
-    "surface.railSignalsMeta": "خروجی زنده",
-    "surface.railFieldNotes": "field-notes/",
-    "surface.railFieldNotesMeta": "مشاهده‌ها",
+    "surface.railProjects": "پروژه‌ها",
+    "surface.railProjectsMeta": "کارهای عمومی",
+    "surface.railResearch": "پژوهش",
+    "surface.railResearchMeta": "پرسش‌ها",
+    "surface.railEducation": "تحصیلات",
+    "surface.railEducationMeta": "مسیر",
+    "surface.railArchive": "آرشیو",
+    "surface.railArchiveMeta": "سوابق",
     "surface.railSkills": "مهارت‌ها",
     "surface.railSkillsMeta": "جعبه‌ابزار",
     "surface.railContact": "contact.txt",
@@ -666,7 +674,7 @@ const content = {
         { title: "pahlavan", repo: "pahlavan", live: "https://soheil-aghayani.github.io/pahlavan/", meta: "Musical web", detail: "An atmospheric 3D musical manuscript inspired by Persian mythology, epic storytelling, and immersive web audio." },
         { title: "x-clone", repo: "x-clone", meta: "Java client", detail: "A native JavaFX social client inspired by X, backed by a shared Java API and Turso/libSQL." },
         { title: "iriswa", repo: "iriswa", live: "https://soheil-aghayani.github.io/iriswa/", meta: "Publishing system", detail: "A static publishing system and website for the Iranian Solid Waste Management Association." },
-        { title: "Terminal", repo: "Terminal", live: "https://agseyl.ir/", meta: "This portfolio", detail: "The bilingual terminal portfolio itself: a public research studio for environmental systems, software, and selected evidence." }
+        { title: "Terminal", repo: "Terminal", live: "https://soheil-aghayani.github.io/Terminal/", meta: "This portfolio", detail: "The bilingual terminal portfolio itself: a public research studio for environmental systems, software, and selected evidence." }
       ]
     },
     research: {
@@ -682,8 +690,9 @@ const content = {
       title: "The route so far.",
       description: "A civil engineering foundation moving toward environmental research and computational tools.",
       items: [
-        { title: "MSc Environmental Engineering (in progress)", meta: "University of Tehran · 2024-present", detail: "Focused on solid waste management and a thesis on waste-derived catalyst systems for biofuel." },
+        { title: "MSc Environmental Engineering", meta: "University of Tehran · GPA 19.06/20", detail: "Solid Waste Management. Expected completion August 2026; final certificate pending issuance. Thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells." },
         { title: "BSc Civil Engineering", meta: "Shahed University", detail: "The starting point for a path that connects infrastructure, materials, and environmental responsibility." },
+        { title: "TOEFL iBT 90/120", meta: "July 2026 · CEFR B2", detail: "English proficiency evidence: TOEFL iBT overall score of 90 out of 120, taken in July 2026." },
         { title: "Methods in progress", meta: "LCA / Python / modelling", detail: "Building a practical toolkit across LCA software, Python, environmental models, and visual explanation." }
       ]
     },
@@ -691,21 +700,22 @@ const content = {
       title: "Tools I use.",
       description: "A working stack across software, research workflows, visual systems, and environmental methods. The list follows public work, not a keyword cloud.",
       items: [
+        { title: "SimaPro / LandGEM", meta: "Environmental models", detail: "Using life-cycle assessment workflows and landfill-gas modelling to turn environmental questions into traceable estimates." },
+        { title: "ChemDraw / OpenLCA", meta: "Research tooling", detail: "Working across chemical diagrams and open life-cycle workflows alongside environmental research." },
+        { title: "LCA / waste systems", meta: "Environmental methods", detail: "Connecting software and research practice to solid waste, biofuel, life-cycle thinking, and cleaner systems." },
+        { title: "GIS / spatial analysis", meta: "Siting studies", detail: "Using GIS for spatial questions in environmental siting and waste-system studies." },
         { title: "JavaScript / TypeScript", meta: "Web systems", detail: "Building browser tools, interactive interfaces, visual experiments, and TypeScript products." },
         { title: "Python / PyQt5", meta: "Research + desktop", detail: "Turning research workflows and small utilities into practical desktop tools and explainers." },
         { title: "React / PWA / RTL", meta: "Product interfaces", detail: "Designing responsive, bilingual experiences where content, state, and interaction stay clear." },
         { title: "SVG / UI systems", meta: "Visual tooling", detail: "Working with icons, visual generators, interface patterns, and precise small-scale graphics." },
-        { title: "Java / JavaFX", meta: "Native clients", detail: "Exploring structured desktop clients, shared APIs, and data-backed application surfaces." },
-        { title: "SimaPro / LandGEM", meta: "Environmental models", detail: "Using life-cycle assessment workflows and landfill-gas modelling to turn environmental questions into traceable estimates." },
-        { title: "ChemDraw / OpenLCA", meta: "Research tooling", detail: "Working across chemical diagrams and open life-cycle workflows alongside environmental research." },
-        { title: "LCA / waste systems", meta: "Environmental methods", detail: "Connecting software and research practice to solid waste, biofuel, life-cycle thinking, and cleaner systems." }
+        { title: "Java / JavaFX", meta: "Native clients", detail: "Exploring structured desktop clients, shared APIs, and data-backed application surfaces." }
       ]
     },
     archive: {
       title: "The deeper record.",
       description: "Selected publications, field practice, learning records, and public recognitions for people who want to look closer.",
       items: [
-        { title: "12 publications", meta: "4 journal / 8 conf.", detail: "A concise view of four journal papers and eight conference papers, with selected public records linked below." },
+        { title: "11 publications", meta: "3 journal / 8 conf.", detail: "Three published journal papers and eight conference papers, with selected public records linked below. One further journal manuscript is in preparation." },
         { title: "Field practice", meta: "HSE / R&D / construction", detail: "Technical practice across HSE training, energy-efficient building research and construction supervision for industrial systems." },
         { title: "Research recognition", meta: "University of Tehran / Dec 2025", detail: "A certificate of appreciation from the 26th Exhibition of Research, Technology, and Tech-Market Achievements." },
         { title: "2 verified courses", meta: "LCA / sustainable regions", detail: "Two verified learning records covering life-cycle assessment, SimaPro, sustainable planning, and regional principles." },
@@ -754,8 +764,9 @@ const content = {
       title: "مسیر تا اینجا.",
       description: "پایه‌ای در مهندسی عمران که به سمت پژوهش محیط‌زیست و ابزارهای محاسباتی حرکت کرده است.",
       items: [
-        { title: "کارشناسی ارشد مهندسی محیط‌زیست (در حال تکمیل)", meta: "دانشگاه تهران · ۱۴۰۳ تا امروز", detail: "با تمرکز بر مدیریت پسماند و پایان‌نامه‌ای درباره‌ی سیستم‌های کاتالیستی حاصل از پسماند برای سوخت زیستی." },
+        { title: "کارشناسی ارشد مهندسی محیط‌زیست", meta: "دانشگاه تهران · معدل ۱۹٫۰۶ از ۲۰", detail: "گرایش مدیریت پسماند. پایان مورد انتظار: اوت ۲۰۲۶؛ مدرک نهایی در انتظار صدور. پایان‌نامه: تولید بیودیزل از روغن پخت‌وپز دورریز با کاتالیست ساخته‌شده از صدف‌های دورریز." },
         { title: "کارشناسی مهندسی عمران", meta: "دانشگاه شاهد", detail: "نقطه‌ی شروع مسیری که زیرساخت، مواد و مسئولیت محیط‌زیستی را به هم وصل می‌کند." },
+        { title: "تافل iBT: ۹۰ از ۱۲۰", meta: "ژوئیه ۲۰۲۶ · سطح B2", detail: "مدرک زبان انگلیسی: نمره‌ی کل ۹۰ از ۱۲۰ در آزمون TOEFL iBT، ژوئیه ۲۰۲۶." },
         { title: "روش‌هایی که در حال توسعه‌اند", meta: "ارزیابی چرخه‌ی عمر / پایتون / مدل‌سازی", detail: "ساختن جعبه‌ابزاری عملی از نرم‌افزارهای ارزیابی چرخه‌ی عمر، پایتون، مدل‌های محیط‌زیستی و توضیح بصری." }
       ]
     },
@@ -763,21 +774,22 @@ const content = {
       title: "ابزارهایی که استفاده می‌کنم.",
       description: "جعبه‌ابزاری در حال کار میان نرم‌افزار، جریان‌های پژوهشی، سیستم‌های بصری و روش‌های محیط‌زیستی؛ برآمده از کارهای عمومی، نه فهرستی از کلیدواژه‌ها.",
       items: [
+        { title: "SimaPro / LandGEM", meta: "مدل‌های محیط‌زیستی", detail: "کار با جریان‌های ارزیابی چرخه‌ی عمر و مدل‌سازی گاز دفنگاه برای تبدیل پرسش‌های محیط‌زیستی به برآوردهای قابل‌ردیابی." },
+        { title: "ChemDraw / OpenLCA", meta: "ابزارهای پژوهشی", detail: "کار میان ترسیم‌های شیمیایی و جریان‌های باز ارزیابی چرخه‌ی عمر در کنار پژوهش محیط‌زیست." },
+        { title: "ارزیابی چرخه‌ی عمر / پسماند", meta: "روش‌های محیط‌زیستی", detail: "وصل کردن نرم‌افزار و تجربه‌ی پژوهشی به پسماند جامد، سوخت زیستی، تفکر چرخه‌ی عمر و سیستم‌های پاک‌تر." },
+        { title: "GIS / تحلیل مکانی", meta: "مطالعات مکان‌یابی", detail: "به‌کارگیری GIS در پرسش‌های مکانیِ مکان‌یابی محیط‌زیستی و مطالعات سیستم پسماند." },
         { title: "جاوااسکریپت / تایپ‌اسکریپت", meta: "سیستم‌های وب", detail: "ساخت ابزارهای مرورگری، رابط‌های تعاملی، آزمایش‌های بصری و محصولات تایپ‌اسکریپتی." },
         { title: "پایتون / PyQt5", meta: "پژوهش و دسکتاپ", detail: "تبدیل جریان‌های پژوهشی و ابزارهای کوچک به برنامه‌های دسکتاپ و توضیح‌دهنده‌های کاربردی." },
         { title: "React / PWA / RTL", meta: "رابط‌های محصول", detail: "طراحی تجربه‌های دوزبانه و واکنش‌گرا که محتوا، وضعیت و تعامل را روشن نگه می‌دارند." },
         { title: "SVG / سیستم‌های رابط", meta: "ابزارهای بصری", detail: "کار با آیکون‌ها، مولدهای بصری، الگوهای رابط و گرافیک‌های دقیق در مقیاس کوچک." },
-        { title: "Java / JavaFX", meta: "کلاینت‌های بومی", detail: "بررسی کلاینت‌های دسکتاپ ساختاریافته، APIهای مشترک و سطوح کاربردی متصل به داده." },
-        { title: "SimaPro / LandGEM", meta: "مدل‌های محیط‌زیستی", detail: "کار با جریان‌های ارزیابی چرخه‌ی عمر و مدل‌سازی گاز دفنگاه برای تبدیل پرسش‌های محیط‌زیستی به برآوردهای قابل‌ردیابی." },
-        { title: "ChemDraw / OpenLCA", meta: "ابزارهای پژوهشی", detail: "کار میان ترسیم‌های شیمیایی و جریان‌های باز ارزیابی چرخه‌ی عمر در کنار پژوهش محیط‌زیست." },
-        { title: "ارزیابی چرخه‌ی عمر / پسماند", meta: "روش‌های محیط‌زیستی", detail: "وصل کردن نرم‌افزار و تجربه‌ی پژوهشی به پسماند جامد، سوخت زیستی، تفکر چرخه‌ی عمر و سیستم‌های پاک‌تر." }
+        { title: "Java / JavaFX", meta: "کلاینت‌های بومی", detail: "بررسی کلاینت‌های دسکتاپ ساختاریافته، APIهای مشترک و سطوح کاربردی متصل به داده." }
       ]
     },
     archive: {
       title: "سابقه‌ی عمیق‌تر.",
       description: "مقاله‌ها، تجربه‌ی حرفه‌ای، سابقه‌های آموزشی و تقدیرنامه‌های عمومی برای کسانی که می‌خواهند دقیق‌تر نگاه کنند.",
       items: [
-        { title: "۱۲ مقاله", meta: "۴ ژورنال / ۸ کنفرانس", detail: "نمایی فشرده از چهار مقاله‌ی ژورنالی و هشت مقاله‌ی کنفرانسی؛ چند رکورد عمومی منتخب در ادامه لینک شده‌اند." },
+        { title: "۱۱ مقاله", meta: "۳ ژورنال / ۸ کنفرانس", detail: "سه مقاله‌ی ژورنالی منتشرشده و هشت مقاله‌ی کنفرانسی؛ چند رکورد عمومی منتخب در ادامه لینک شده‌اند. یک مقاله‌ی ژورنالی دیگر در دست نگارش است." },
         { title: "تجربه‌ی حرفه‌ای", meta: "HSE / تحقیق‌وتوسعه / ساخت", detail: "تجربه‌ی فنی در آموزش HSE، پژوهش ساختمان‌های کم‌مصرف و نظارت بر ساخت سامانه‌های صنعتی." },
         { title: "تقدیر پژوهشی", meta: "دانشگاه تهران / آذر ۱۴۰۴", detail: "گواهی تقدیر از بیست‌وششمین نمایشگاه دستاوردهای پژوهش، فناوری و فن‌بازار دانشگاه تهران." },
         { title: "۲ دوره‌ی تأییدشده", meta: "چرخه‌ی عمر / منطقه‌ی پایدار", detail: "دو سابقه‌ی آموزشی تأییدشده درباره‌ی ارزیابی چرخه‌ی عمر، سیمَپرو، برنامه‌ریزی پایدار و اصول منطقه‌ای." },
@@ -915,7 +927,7 @@ const scholarEvidence = Object.fromEntries(
 const archiveEvidence = {
   en: [
     [
-      { title: "4 journal papers", meta: "2025-2026 / selected record" },
+      { title: "3 journal papers", meta: "2025-2026 / selected record" },
       { title: "8 conference papers", meta: "2023-2025 / selected record" },
       { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: publicEvidenceLinks.scholar },
       ...scholarEvidence.en,
@@ -941,7 +953,7 @@ const archiveEvidence = {
   ],
   fa: [
     [
-      { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
+      { title: "۳ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
       { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲-۱۴۰۴ / رکورد منتخب" },
       { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: publicEvidenceLinks.scholar },
       ...scholarEvidence.fa,
@@ -1041,7 +1053,7 @@ function updatePortfolioStructuredData() {
       description: record.en.detail,
       codeRepository: repositoryUrl,
       url: record.live || repositoryUrl,
-      author: { "@id": "https://agseyl.ir/#person" },
+      author: { "@id": "https://soheil-aghayani.github.io/Terminal/#person" },
       sameAs: [repositoryUrl, ...(record.live ? [record.live] : [])],
     };
 
@@ -1065,7 +1077,7 @@ function updatePortfolioStructuredData() {
       sameAs: [record.href, ...(record.doi ? [`https://doi.org/${record.doi}`] : [])],
       datePublished: record.year,
       isPartOf: { "@type": "Periodical", name: record.venue },
-      author: { "@id": "https://agseyl.ir/#person" },
+      author: { "@id": "https://soheil-aghayani.github.io/Terminal/#person" },
       inLanguage: "en",
     };
 
@@ -1087,12 +1099,12 @@ function updatePortfolioStructuredData() {
   structuredData.textContent = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://agseyl.ir/#public-work",
+    "@id": "https://soheil-aghayani.github.io/Terminal/#public-work",
     name: "Public work by Soheil Aghayani",
-    url: "https://agseyl.ir/",
-    isPartOf: { "@id": "https://agseyl.ir/#website" },
-    about: { "@id": "https://agseyl.ir/#person" },
-    image: { "@id": "https://agseyl.ir/#thesis-artifact" },
+    url: "https://soheil-aghayani.github.io/Terminal/",
+    isPartOf: { "@id": "https://soheil-aghayani.github.io/Terminal/#website" },
+    about: { "@id": "https://soheil-aghayani.github.io/Terminal/#person" },
+    image: { "@id": "https://soheil-aghayani.github.io/Terminal/#thesis-artifact" },
     mainEntity: {
       "@type": "ItemList",
       name: "Public software projects",
@@ -1107,11 +1119,11 @@ function updatePortfolioStructuredData() {
     },
     subjectOf: {
       "@type": "CreativeWork",
-      "@id": "https://agseyl.ir/#thesis",
+      "@id": "https://soheil-aghayani.github.io/Terminal/#thesis",
       name: "Waste cooking oil to biodiesel thesis",
       description: "Research on transesterification using a catalyst synthesized from waste seashells.",
-      author: { "@id": "https://agseyl.ir/#person" },
-      image: { "@id": "https://agseyl.ir/#thesis-artifact" },
+      author: { "@id": "https://soheil-aghayani.github.io/Terminal/#person" },
+      image: { "@id": "https://soheil-aghayani.github.io/Terminal/#thesis-artifact" },
     },
   });
 }
@@ -1148,7 +1160,7 @@ function projectGithubSummary(itemIndex) {
   const stars = Number(record.stars);
   return [
     record.language || "",
-    Number.isFinite(stars) ? `★ ${localizeDigits(stars)}` : "",
+    Number.isFinite(stars) && stars > 0 ? `★ ${localizeDigits(stars)}` : "",
   ].filter(Boolean).join(" · ");
 }
 
@@ -1649,7 +1661,7 @@ function localizeDigits(value) {
 }
 
 const root = document.documentElement;
-const publicSiteUrl = "https://agseyl.ir/";
+const publicSiteUrl = "https://soheil-aghayani.github.io/Terminal/";
 const descriptionMeta = document.querySelector('meta[name="description"]');
 const canonicalLink = document.querySelector('link[rel="canonical"]');
 const openGraphTitleMeta = document.querySelector('meta[property="og:title"]');
@@ -1757,7 +1769,7 @@ const boardCycles = {
       states: ["ROUTE", "ROUTE", "BUILD"],
     },
     {
-      values: ["JAVASCRIPT", "PYTHON", "TYPESCRIPT", "RTL / PWA", "SVG / UI"],
+      values: ["LCA / SIMAPRO", "LANDGEM", "GIS", "PYTHON", "JAVASCRIPT"],
       states: ["INDEXED", "INDEXED", "INDEXED", "INDEXED", "INDEXED"],
     },
     {
@@ -1779,7 +1791,7 @@ const boardCycles = {
       states: ["مسیر", "مسیر", "ساخت"],
     },
     {
-      values: ["جاوااسکریپت", "پایتون", "تایپ‌اسکریپت", "راست‌به‌چپ / PWA", "SVG / رابط"],
+      values: ["چرخه‌ی عمر / SimaPro", "LandGEM", "GIS", "پایتون", "جاوااسکریپت"],
       states: ["نمایه", "نمایه", "نمایه", "نمایه", "نمایه"],
     },
     {
@@ -1898,7 +1910,7 @@ function setBoardValue(value, nextText) {
 }
 
 function updateBoardClock() {
-  if (!boardClock) return;
+  if (!boardClock || document.hidden) return;
 
   const now = new Date();
   const pad = (value) => String(value).padStart(2, "0");
@@ -2020,7 +2032,7 @@ function escapeHtml(value) {
 const contactLinks = [
   { key: "github", href: "https://github.com/Soheil-Aghayani", icon: "pixel-github", external: true },
   { key: "portfolio", href: "https://agseyl.ir/", icon: "pixel-person", external: true },
-  { key: "email", href: "mailto:soheyl.aghayani+github@gmail.com", icon: "pixel-envelope", external: false },
+  { key: "email", href: "mailto:soheyl.aghayani@gmail.com", icon: "pixel-envelope", external: false },
   { key: "orcid", href: "https://orcid.org/0009-0008-4889-920X", icon: "pixel-research", external: true },
   { key: "linkedin", href: "https://www.linkedin.com/in/AgSeyl", icon: "pixel-linkedin", external: true },
   { key: "telegram", href: "https://t.me/agseyl", icon: "pixel-telegram", external: true },
@@ -2132,7 +2144,7 @@ const viewDefinitions = [
     labelKey: "nav.home",
     kindKey: "palette.kindSection",
     isSection: false,
-    rail: { views: ["home", "education"], titleKey: "surface.railReadme", metaKey: "surface.railReadmeMeta" },
+    rail: { views: ["home"], titleKey: "surface.railReadme", metaKey: "surface.railReadmeMeta" },
     render: renderHomeSurface,
   },
   {
@@ -2141,7 +2153,7 @@ const viewDefinitions = [
     labelKey: "nav.build",
     kindKey: "palette.kindProject",
     isSection: true,
-    rail: { views: ["build"], titleKey: "surface.railSignals", metaKey: "surface.railSignalsMeta" },
+    rail: { views: ["build"], titleKey: "surface.railProjects", metaKey: "surface.railProjectsMeta" },
     board: { rowClass: "board-row-projects", openKey: "board.openBuild" },
   },
   {
@@ -2150,7 +2162,7 @@ const viewDefinitions = [
     labelKey: "nav.research",
     kindKey: "palette.kindResearch",
     isSection: true,
-    rail: { views: ["research", "archive"], titleKey: "surface.railFieldNotes", metaKey: "surface.railFieldNotesMeta" },
+    rail: { views: ["research"], titleKey: "surface.railResearch", metaKey: "surface.railResearchMeta" },
     board: { rowClass: "board-row-research", openKey: "board.openResearch" },
   },
   {
@@ -2159,6 +2171,7 @@ const viewDefinitions = [
     labelKey: "nav.education",
     kindKey: "palette.kindEducation",
     isSection: true,
+    rail: { views: ["education"], titleKey: "surface.railEducation", metaKey: "surface.railEducationMeta" },
     board: { rowClass: "board-row-education", openKey: "board.openEducation" },
   },
   {
@@ -2176,6 +2189,7 @@ const viewDefinitions = [
     labelKey: "nav.archive",
     kindKey: "palette.kindArchive",
     isSection: true,
+    rail: { views: ["archive"], titleKey: "surface.railArchive", metaKey: "surface.railArchiveMeta" },
     board: { rowClass: "board-row-archive", openKey: "board.openArchive" },
   },
   {
