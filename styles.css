@@ -5309,3 +5309,38 @@ body.is-command-open {
 .not-found a {
   color: var(--accent);
 }
+
+/* Archive evidence: one readable column, title over meta, sentence-case titles. */
+.archive-detail .detail-evidence {
+  max-width: 760px;
+}
+
+.archive-detail .detail-evidence-list,
+[dir="rtl"] .archive-detail .detail-evidence-list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.archive-detail .detail-evidence-row {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  align-items: start;
+  padding: 9px 0;
+}
+
+.archive-detail .detail-evidence-row strong {
+  font-family: var(--body);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.archive-detail .detail-evidence-meta,
+[dir="rtl"] .archive-detail .detail-evidence-meta {
+  justify-content: flex-start;
+  gap: 8px 12px;
+}
+
+.archive-detail .detail-evidence-row small {
+  text-align: start;
+}
