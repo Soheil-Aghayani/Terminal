@@ -18,7 +18,6 @@ The Projects route in the portfolio is the authoritative index of public reposit
 - Portfolio: https://github.com/Soheil-Aghayani/Portfolio
 - Solid Waste Laboratory: https://github.com/Soheil-Aghayani/Solid-Waste-Laboratory
 - ScholarPulse: https://github.com/Soheil-Aghayani/ScholarPulse
-- Profile hub: https://github.com/Soheil-Aghayani/Soheil-Aghayani
 - MagIranPlus: https://github.com/Soheil-Aghayani/MagIranPlus
 - CivilicaPulse: https://github.com/Soheil-Aghayani/CivilicaPulse
 - Design Suite: https://github.com/Soheil-Aghayani/Design-Suite
@@ -34,6 +33,7 @@ The Projects route in the portfolio is the authoritative index of public reposit
 - Pahlavan: https://github.com/Soheil-Aghayani/pahlavan
 - X Clone: https://github.com/Soheil-Aghayani/x-clone
 - IRISWA: https://github.com/Soheil-Aghayani/iriswa
+- MaxSilver: https://github.com/Soheil-Aghayani/MaxSilver
 - Terminal portfolio: https://github.com/Soheil-Aghayani/Terminal
 
 ## Research
@@ -58,6 +58,7 @@ The Projects route in the portfolio is the authoritative index of public reposit
 - Selected publication records and public evidence: https://soheil-aghayani.github.io/Terminal/
 - Research detail surfaces expose the public record links and can copy the selected citation set or BibTeX, or save a public `.bib` file, without publishing private manuscript files.
 - Google Scholar public snapshot: 3 indexed papers and h-index 1.
+- Journal paper, 2026: Ghoroqi, Aghayani, Kermani Alghorayshi, Abbasi, Imandoust. Design, Analysis, and Optimization of the Thermodynamic, Economic, and Environmental Performance of a Newly Developed Biomass Gasification–Solar Integrated Multi Generation System. No public record link yet.
 - Biomass resources paper: 2026, Pollution, 2 citations, DOI 10.22059/poll.2025.393545.2928 - https://jpoll.ut.ac.ir/article_105139.html
 - Landfill-gas assessment: 2026, Advances in Environmental Technology - https://aet.irost.ir/article_1686.html
 - Waste transfer-station siting paper: 2025, Pollution, 1 citation, DOI 10.22059/poll.2025.388834.2751 - https://jpoll.ut.ac.ir/article_101760.html

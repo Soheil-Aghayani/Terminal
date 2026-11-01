@@ -658,7 +658,6 @@ const content = {
         { title: "Portfolio", repo: "Portfolio", live: "https://agseyl.ir/", meta: "Personal studio", detail: "A living portfolio where environmental research, software architecture, experiments, and visual systems meet." },
         { title: "Solid-Waste-Laboratory", repo: "Solid-Waste-Laboratory", live: "https://soheil-aghayani.github.io/Solid-Waste-Laboratory/", meta: "Lab systems", detail: "A searchable, practical safety manual for chemical, environmental, and catalysis laboratories." },
         { title: "ScholarPulse", repo: "ScholarPulse", live: "https://soheil-aghayani.github.io/ScholarPulse/", meta: "Research toolkit", detail: "A free academic research toolkit for scholar search, profiles, citation formatting, bibliometrics, and exports." },
-        { title: "Soheil-Aghayani", repo: "Soheil-Aghayani", meta: "Profile hub", detail: "A bilingual GitHub profile hub for an environmental engineer, sustainability researcher, and software builder." },
         { title: "MagIranPlus", repo: "MagIranPlus", live: "https://soheil-aghayani.github.io/MagIranPlus/", meta: "Academic tool", detail: "A Persian academic tool for Magiran search results, citation formatting, and Word bibliography exports." },
         { title: "CivilicaPulse", repo: "CivilicaPulse", live: "https://soheil-aghayani.github.io/CivilicaPulse/", meta: "Academic tool", detail: "A Persian academic tool for Civilica researcher profiles, co-author metadata, citation formatting, and Word bibliography exports." },
         { title: "Design-Suite", repo: "Design-Suite", live: "https://soheil-aghayani.github.io/Design-Suite/", meta: "Creative workspace", detail: "A no-build browser workspace for diagrams, visual generators, technical utilities, and fast creative work." },
@@ -674,6 +673,7 @@ const content = {
         { title: "pahlavan", repo: "pahlavan", live: "https://soheil-aghayani.github.io/pahlavan/", meta: "Musical web", detail: "An atmospheric 3D musical manuscript inspired by Persian mythology, epic storytelling, and immersive web audio." },
         { title: "x-clone", repo: "x-clone", meta: "Java client", detail: "A native JavaFX social client inspired by X, backed by a shared Java API and Turso/libSQL." },
         { title: "iriswa", repo: "iriswa", live: "https://soheil-aghayani.github.io/iriswa/", meta: "Publishing system", detail: "A static publishing system and website for the Iranian Solid Waste Management Association." },
+        { title: "MaxSilver", repo: "MaxSilver", live: "https://soheil-aghayani.github.io/MaxSilver/", meta: "Business portal", detail: "A Persian, right-to-left installable web portal for a commercial kitchen-equipment manufacturer: sales dashboard, customer database, proforma invoices, and team chat, built as a static PWA with role-based access." },
         { title: "Terminal", repo: "Terminal", live: "https://soheil-aghayani.github.io/Terminal/", meta: "This portfolio", detail: "The bilingual terminal portfolio itself: a public research studio for environmental systems, software, and selected evidence." }
       ]
     },
@@ -715,7 +715,7 @@ const content = {
       title: "The deeper record.",
       description: "Selected publications, field practice, learning records, and public recognitions for people who want to look closer.",
       items: [
-        { title: "11 publications", meta: "3 journal / 8 conf.", detail: "Three published journal papers and eight conference papers, with selected public records linked below. One further journal manuscript is in preparation." },
+        { title: "12 publications", meta: "4 journal / 8 conf.", detail: "Four journal papers and eight conference papers, with selected public records linked below. One further journal manuscript is in preparation." },
         { title: "Field practice", meta: "HSE / R&D / construction", detail: "Technical practice across HSE training, energy-efficient building research and construction supervision for industrial systems." },
         { title: "Research recognition", meta: "University of Tehran / Dec 2025", detail: "A certificate of appreciation from the 26th Exhibition of Research, Technology, and Tech-Market Achievements." },
         { title: "2 verified courses", meta: "LCA / sustainable regions", detail: "Two verified learning records covering life-cycle assessment, SimaPro, sustainable planning, and regional principles." },
@@ -732,7 +732,6 @@ const content = {
         { title: "پرتفولیو", meta: "استودیوی شخصی", detail: "نمونه‌کاری زنده که پژوهش محیط‌زیست، معماری نرم‌افزار، آزمایش‌ها و سیستم‌های بصری را کنار هم می‌آورد." },
         { title: "آزمایشگاه پسماند جامد", meta: "سیستم آزمایشگاه", detail: "راهنمایی قابل جست‌وجو و کاربردی برای ایمنی آزمایشگاه‌های شیمی، محیط‌زیست و کاتالیز." },
         { title: "اسکالر پلاس", meta: "ابزار پژوهشی", detail: "جعبه‌ابزاری رایگان برای جست‌وجوی پژوهشگر، پروفایل‌ها، قالب‌بندی ارجاع، علم‌سنجی و خروجی گرفتن." },
-        { title: "هاب پروفایل سهیل", meta: "هاب معرفی", detail: "هاب دوزبانه‌ی گیت‌هاب برای معرفی یک مهندس محیط‌زیست، پژوهشگر پایداری و سازنده‌ی نرم‌افزار." },
         { title: "مگ‌ایران پلاس", meta: "ابزار دانشگاهی", detail: "ابزاری فارسی برای نتایج جست‌وجوی مگیران، قالب‌بندی ارجاع و خروجی کتاب‌نامه برای ورد." },
         { title: "سیولیکا پلاس", meta: "ابزار دانشگاهی", detail: "ابزاری فارسی برای پروفایل پژوهشگران سیولیکا، اطلاعات هم‌نویسندگان، قالب‌بندی ارجاع و کتاب‌نامه‌ی ورد." },
         { title: "سوئیت طراحی", meta: "فضای کار خلاق", detail: "فضای کاری مرورگری بدون نیاز به ساخت برای نمودارها، مولدهای بصری، ابزارهای فنی و کار سریع خلاقانه." },
@@ -748,6 +747,7 @@ const content = {
         { title: "پهلوان", meta: "وب موسیقایی", detail: "دستنوشته‌ای موسیقایی و سه‌بعدی با الهام از اسطوره‌شناسی فارسی، روایت حماسی و صدای فراگیر وب." },
         { title: "کلون ایکس", meta: "کلاینت جاوا", detail: "کلاینت اجتماعی بومی JavaFX با الهام از X که به یک API جاوا و Turso/libSQL متصل است." },
         { title: "ایریسوا", meta: "سیستم انتشار", detail: "سیستم انتشار ایستا و وب‌سایت انجمن مدیریت پسماند جامد ایران." },
+        { title: "مکس‌سیلور", meta: "درگاه کسب‌وکار", detail: "درگاه وب فارسی و راست‌به‌چپ و نصب‌پذیر برای یک تولیدکننده‌ی تجهیزات آشپزخانه‌ی صنعتی: داشبورد فروش، پایگاه مشتریان، پیش‌فاکتور و گفت‌وگوی تیم؛ ساخته‌شده به‌صورت PWA ایستا با دسترسی نقش‌محور." },
         { title: "ترمینال", meta: "این پرتفولیو", detail: "خودِ پرتفولیوی ترمینال دوزبانه؛ استودیویی عمومی برای سیستم‌های محیط‌زیستی، نرم‌افزار و شواهد منتخب." }
       ]
     },
@@ -789,7 +789,7 @@ const content = {
       title: "سابقه‌ی عمیق‌تر.",
       description: "مقاله‌ها، تجربه‌ی حرفه‌ای، سابقه‌های آموزشی و تقدیرنامه‌های عمومی برای کسانی که می‌خواهند دقیق‌تر نگاه کنند.",
       items: [
-        { title: "۱۱ مقاله", meta: "۳ ژورنال / ۸ کنفرانس", detail: "سه مقاله‌ی ژورنالی منتشرشده و هشت مقاله‌ی کنفرانسی؛ چند رکورد عمومی منتخب در ادامه لینک شده‌اند. یک مقاله‌ی ژورنالی دیگر در دست نگارش است." },
+        { title: "۱۲ مقاله", meta: "۴ ژورنال / ۸ کنفرانس", detail: "چهار مقاله‌ی ژورنالی و هشت مقاله‌ی کنفرانسی؛ چند رکورد عمومی منتخب در ادامه لینک شده‌اند. یک مقاله‌ی ژورنالی دیگر در دست نگارش است." },
         { title: "تجربه‌ی حرفه‌ای", meta: "HSE / تحقیق‌وتوسعه / ساخت", detail: "تجربه‌ی فنی در آموزش HSE، پژوهش ساختمان‌های کم‌مصرف و نظارت بر ساخت سامانه‌های صنعتی." },
         { title: "تقدیر پژوهشی", meta: "دانشگاه تهران / آذر ۱۴۰۴", detail: "گواهی تقدیر از بیست‌وششمین نمایشگاه دستاوردهای پژوهش، فناوری و فن‌بازار دانشگاه تهران." },
         { title: "۲ دوره‌ی تأییدشده", meta: "چرخه‌ی عمر / منطقه‌ی پایدار", detail: "دو سابقه‌ی آموزشی تأییدشده درباره‌ی ارزیابی چرخه‌ی عمر، سیمَپرو، برنامه‌ریزی پایدار و اصول منطقه‌ای." },
@@ -818,26 +818,27 @@ let githubSyncState = "idle";
 
 const relatedProjectMap = {
   skills: [
-    [0, 6, 7, 9],
-    [1, 11, 15],
-    [0, 9, 10],
-    [6, 7],
-    [17],
-    [1, 18],
+    [0, 5, 6, 8],
+    [1, 10, 14],
+    [0, 8, 9],
+    [5, 6],
+    [16],
+    [1, 17],
   ],
   research: [
     [1],
-    [1, 18],
-    [2, 4, 5],
+    [1, 17],
+    [2, 3, 4],
   ],
 };
 
 const projectRelationGroups = Object.freeze([
-  Object.freeze(["Terminal", "Portfolio", "Soheil-Aghayani", "Design-Suite"]),
+  Object.freeze(["Terminal", "Portfolio", "Design-Suite"]),
   Object.freeze(["ScholarPulse", "MagIranPlus", "CivilicaPulse", "NCBI"]),
   Object.freeze(["Solid-Waste-Laboratory", "IRISWA", "NCBI"]),
   Object.freeze(["Design-Suite", "svg-scrapper", "font-installer", "x-clone"]),
   Object.freeze(["Coffpen", "Deutschly", "Gamify-Garden", "food-recipe", "egg-timer", "dodge-game", "pahlavan"]),
+  Object.freeze(["MaxSilver", "iriswa", "Gamify-Garden"]),
 ]);
 
 const publicEvidenceLinks = Object.freeze({
@@ -927,10 +928,11 @@ const scholarEvidence = Object.fromEntries(
 const archiveEvidence = {
   en: [
     [
-      { title: "3 journal papers", meta: "2025-2026 / selected record" },
+      { title: "4 journal papers", meta: "2025-2026 / selected record" },
       { title: "8 conference papers", meta: "2023-2025 / selected record" },
       { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: publicEvidenceLinks.scholar },
       ...scholarEvidence.en,
+      { title: "Design, Analysis, and Optimization of the Thermodynamic, Economic, and Environmental Performance of a Newly Developed Biomass Gasification–Solar Integrated Multi Generation System", meta: "Journal paper · 2026 · Ghoroqi et al." },
       { title: "Biofuel production from biomass by transesterification", meta: "National conference record · 2025" },
       { title: "Pharmaceutical-waste management strategies", meta: "National conference record · 2025" },
       { title: "Textile-industry pollution assessment", meta: "National conference record · 2024" },
@@ -953,10 +955,11 @@ const archiveEvidence = {
   ],
   fa: [
     [
-      { title: "۳ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
+      { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
       { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲-۱۴۰۴ / رکورد منتخب" },
       { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: publicEvidenceLinks.scholar },
       ...scholarEvidence.fa,
+      { title: "طراحی، تحلیل و بهینه‌سازی عملکرد ترمودینامیکی، اقتصادی و زیست‌محیطی یک سامانه‌ی چندتولیدی نوین یکپارچه‌ی گازی‌سازی زیست‌توده و خورشیدی", meta: "مقاله‌ی ژورنالی · ۲۰۲۶ · Ghoroqi و همکاران" },
       { title: "تولید سوخت زیستی از زیست‌توده با ترانس‌استریفیکاسیون", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "راهبردهای مدیریت پسماند دارویی", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "ارزیابی آلاینده‌های صنعت نساجی", meta: "رکورد کنفرانسی ملی · ۱۴۰۳" },
@@ -1750,8 +1753,8 @@ const projectDepartures = [
   { value: "PAHLAVAN", faValue: "پهلوان", signal: "OPEN", faSignal: "باز" },
   { value: "X CLONE", faValue: "کلون ایکس", signal: "BUILD", faSignal: "ساخت" },
   { value: "IRISWA", faValue: "ایریسوا", signal: "LIVE", faSignal: "زنده" },
+  { value: "MAX SILVER", faValue: "مکس‌سیلور", signal: "LIVE", faSignal: "زنده" },
   { value: "TERMINAL", faValue: "ترمینال", signal: "LIVE", faSignal: "زنده" },
-  { value: "SOHEIL AGHAYANI", faValue: "هاب پروفایل سهیل", signal: "GATE OPEN", faSignal: "درگاه باز" },
 ];
 
 const boardCycles = {
