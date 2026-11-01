@@ -4946,14 +4946,23 @@ body.is-command-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html:not([data-motion="on"]) *,
+  html:not([data-motion="on"]) *::before,
+  html:not([data-motion="on"]) *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
 }
 
 @media print {
@@ -5420,4 +5429,28 @@ body.is-command-open {
 
 .archive-detail .detail-evidence-row small {
   text-align: start;
+}
+
+.motion-toggle {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+
+.motion-toggle:hover,
+.motion-toggle:focus-visible {
+  color: var(--ink);
+}
+
+@media (max-width: 960px) {
+  .motion-toggle {
+    min-height: 44px;
+    text-align: start;
+  }
 }

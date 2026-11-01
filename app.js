@@ -320,7 +320,12 @@ const translations = {
     "print.technicalSubtitle": "Projects / interfaces / research tools",
     "print.technicalSummary": "A practical software profile built from public projects, research tools, and working methods.",
     "footer.left": "Environmental engineer / researcher / builder",
-    "footer.right": "GitHub"
+    "footer.right": "GitHub",
+    "footer.motion": "Motion",
+    "footer.motionOn": "on",
+    "footer.motionOff": "off",
+    "footer.motionSystem": "system setting",
+    "footer.motionAria": "Switch terminal animation on or off"
   },
   fa: {
     "header.studio": "پرتفولیوی پژوهش شخصی",
@@ -643,7 +648,12 @@ const translations = {
     "print.technicalSubtitle": "پروژه‌ها / رابط‌ها / ابزارهای پژوهشی",
     "print.technicalSummary": "پروفایلی عملی از پروژه‌های عمومی، ابزارهای پژوهشی و روش‌های کاری.",
     "footer.left": "مهندس محیط‌زیست / پژوهشگر / سازنده",
-    "footer.right": "گیت‌هاب"
+    "footer.right": "گیت‌هاب",
+    "footer.motion": "حرکت",
+    "footer.motionOn": "روشن",
+    "footer.motionOff": "خاموش",
+    "footer.motionSystem": "تنظیم سیستم",
+    "footer.motionAria": "روشن یا خاموش کردن انیمیشن ترمینال"
   }
 };
 
@@ -1817,6 +1827,45 @@ const boardCycles = {
 
 let boardCursor = 0;
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+/* Motion follows the system setting until the visitor chooses; the footer toggle stores the choice. */
+const motionStorageKey = "soheil-studio-motion";
+const motionToggle = document.getElementById("motionToggle");
+let motionPreference = "auto";
+try {
+  const savedMotion = window.localStorage.getItem(motionStorageKey);
+  if (savedMotion === "on" || savedMotion === "off") motionPreference = savedMotion;
+} catch {
+  // Without storage the toggle still works for this visit.
+}
+document.documentElement.dataset.motion = motionPreference;
+
+function motionReduced() {
+  return motionPreference === "off" || (motionPreference === "auto" && reducedMotionQuery.matches);
+}
+
+function updateMotionToggle() {
+  if (!motionToggle) return;
+  const reduced = motionReduced();
+  const fromSystem = motionPreference === "auto" && reduced;
+  motionToggle.setAttribute("aria-pressed", String(!reduced));
+  motionToggle.textContent = `${translate("footer.motion")}: ${translate(reduced ? "footer.motionOff" : "footer.motionOn")}${fromSystem ? ` (${translate("footer.motionSystem")})` : ""}`;
+}
+
+function setMotionPreference(preference) {
+  motionPreference = preference;
+  document.documentElement.dataset.motion = preference;
+  try {
+    window.localStorage.setItem(motionStorageKey, preference);
+  } catch {
+    // The choice simply lasts for this visit.
+  }
+  updateMotionToggle();
+  syncBoardRotation();
+  syncSurfaceTicker();
+}
+
+motionToggle?.addEventListener("click", () => setMotionPreference(motionReduced() ? "on" : "off"));
 let boardRotationTimer = null;
 let boardPaused = false;
 let boardPointerActive = false;
@@ -1980,7 +2029,7 @@ function stopBoardRotation() {
 function syncBoardRotation() {
   if (
     document.hidden
-    || reducedMotionQuery.matches
+    || motionReduced()
     || currentMode !== "home"
     || indexOpen
     || helpOpen
@@ -2964,6 +3013,7 @@ function applyTranslations() {
   }
   syncProfilePreviewControls(activeProfile);
   updateDocumentTitle();
+  updateMotionToggle();
 }
 
 function syncProfilePreviewControls(profile = activeProfile) {
@@ -3172,7 +3222,7 @@ function focusSurfaceContext() {
     surface?.scrollIntoView({
       block: "start",
       inline: "nearest",
-      behavior: reducedMotionQuery.matches ? "auto" : "smooth",
+      behavior: motionReduced() ? "auto" : "smooth",
     });
   }
 
@@ -4240,7 +4290,7 @@ function revealRows(root) {
 }
 
 function playSurfaceReveal() {
-  if (reducedMotionQuery.matches || currentMode === "home") return;
+  if (motionReduced() || currentMode === "home") return;
 
   revealToken += 1;
   const heading = surfaceContent.querySelector("h2");
@@ -4271,7 +4321,7 @@ function tickSurfaceRow() {
 }
 
 function syncSurfaceTicker() {
-  const active = currentMode !== "home" && !document.hidden && !reducedMotionQuery.matches;
+  const active = currentMode !== "home" && !document.hidden && !motionReduced();
   if (!active) {
     if (surfaceTickerTimer !== null) window.clearInterval(surfaceTickerTimer);
     surfaceTickerTimer = null;
@@ -4994,6 +5044,7 @@ document.addEventListener("visibilitychange", syncSurfaceTicker);
 if (typeof reducedMotionQuery.addEventListener === "function") {
   reducedMotionQuery.addEventListener("change", syncBoardRotation);
   reducedMotionQuery.addEventListener("change", syncSurfaceTicker);
+  reducedMotionQuery.addEventListener("change", updateMotionToggle);
 } else if (typeof reducedMotionQuery.addListener === "function") {
   reducedMotionQuery.addListener(syncBoardRotation);
 }
