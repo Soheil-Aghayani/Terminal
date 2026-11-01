@@ -5454,3 +5454,62 @@ html[data-motion="off"] *::after {
     text-align: start;
   }
 }
+
+/* Board columns: fixed state column so every signal box starts and ends at the same x, and the
+   state is a twin of the signal box. */
+.board-columns,
+.board-row {
+  grid-template-columns: 22px minmax(72px, 0.78fr) minmax(108px, 1.35fr) 88px;
+}
+
+.board-columns span:last-child {
+  text-align: center;
+}
+
+.board-row .board-state {
+  display: flex;
+  min-width: 0;
+  height: calc(1.15em + 12px);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 6px;
+  border: 1px solid rgba(241, 239, 232, 0.2);
+  border-left: 2px solid var(--board-tone);
+  background: #080b0c;
+  box-shadow: inset 0 1px 0 rgba(241, 239, 232, 0.05), inset 0 -5px 10px rgba(0, 0, 0, 0.2), inset 7px 0 12px color-mix(in srgb, var(--board-tone) 8%, transparent);
+  font-family: "MatrixType", var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  line-height: 1.15;
+  text-align: center;
+  white-space: nowrap;
+}
+
+html[dir="rtl"] .board-row .board-state {
+  border-right: 2px solid var(--board-tone);
+  border-left: 1px solid rgba(241, 239, 232, 0.2);
+  font-family: "IRANSharp", var(--body);
+  letter-spacing: 0;
+}
+
+@media (max-width: 540px) {
+  .board-columns,
+  .board-row {
+    grid-template-columns: 19px minmax(64px, 0.76fr) minmax(84px, 1.18fr) 68px;
+  }
+
+  .board-row .board-state {
+    height: calc(1.15em + 10px);
+    padding: 0 3px;
+    font-size: 9px;
+    letter-spacing: 0.03em;
+  }
+}
+
+@media (max-width: 380px) {
+  .board-columns,
+  .board-row {
+    grid-template-columns: 17px minmax(55px, 0.72fr) minmax(74px, 1fr) 58px;
+  }
+}
