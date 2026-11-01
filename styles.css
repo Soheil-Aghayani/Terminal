@@ -5238,28 +5238,105 @@ body.is-command-open {
   }
 }
 
-/* An open route owns the stage: the hero belongs to the home board only. */
-.view-home:has(.studio-surface.is-open) {
-  grid-template-columns: minmax(0, 1fr);
-}
-
+/* An open route owns the stage. On desktop the hero column folds away and the terminal grows into
+   the space; going home reverses it. */
 .view-home:has(.studio-surface.is-open) .intro-column {
   display: none;
 }
 
-.view-home:has(.studio-surface.is-open) .surface-column {
-  width: 100%;
-  max-width: 1180px;
-  margin-inline: auto;
-}
-
 @media (min-width: 961px) {
+  .view-home {
+    grid-template-rows: minmax(0, 1fr);
+    transition:
+      grid-template-columns 720ms var(--ease),
+      column-gap 720ms var(--ease),
+      padding-block 720ms var(--ease);
+  }
+
   .view-home:has(.studio-surface.is-open) {
+    grid-template-columns: minmax(0px, 0fr) minmax(0, 1fr);
+    column-gap: 0;
     padding-block: clamp(20px, 3vw, 40px);
+  }
+
+  .intro-column,
+  .view-home:has(.studio-surface.is-open) .intro-column {
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .intro-column {
+    transition: opacity 360ms ease 300ms, visibility 0s;
+  }
+
+  .view-home:has(.studio-surface.is-open) .intro-column {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms ease, visibility 0s linear 720ms;
   }
 
   .view-home:has(.studio-surface.is-open) .studio-surface {
     flex: 1;
+  }
+}
+
+/* Departure-board reveal inside the terminal. */
+.reveal-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.reveal-char {
+  display: inline-block;
+  backface-visibility: hidden;
+}
+
+.reveal-char.is-flipping {
+  animation: board-character-flap 360ms var(--ease) both;
+}
+
+.is-revealing {
+  transform-origin: 50% 0;
+  animation: board-row-reveal 560ms var(--ease) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.is-ticking {
+  transform-origin: 50% 0;
+  animation: board-row-tick 440ms var(--ease);
+}
+
+@keyframes board-row-reveal {
+  0% {
+    filter: brightness(1.7);
+    opacity: 0;
+    transform: perspective(700px) rotateX(-86deg);
+  }
+  55% {
+    filter: brightness(1.25);
+    opacity: 1;
+  }
+  100% {
+    filter: brightness(1);
+    opacity: 1;
+    transform: perspective(700px) rotateX(0deg);
+  }
+}
+
+@keyframes board-row-tick {
+  0% {
+    filter: brightness(1);
+    transform: perspective(700px) rotateX(0deg);
+  }
+  45% {
+    filter: brightness(1.45);
+    transform: perspective(700px) rotateX(-72deg);
+  }
+  100% {
+    filter: brightness(1);
+    transform: perspective(700px) rotateX(0deg);
   }
 }
 

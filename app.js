@@ -690,9 +690,10 @@ const content = {
       title: "The route so far.",
       description: "A civil engineering foundation moving toward environmental research and computational tools.",
       items: [
-        { title: "MSc Environmental Engineering", meta: "University of Tehran · GPA 19.06/20", detail: "Solid Waste Management. Expected completion August 2026; final certificate pending issuance. Thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells." },
-        { title: "BSc Civil Engineering", meta: "Shahed University", detail: "The starting point for a path that connects infrastructure, materials, and environmental responsibility." },
+        { title: "MSc Environmental Engineering", meta: "University of Tehran · GPA 3.81/4.00 (19.06/20)", detail: "Solid Waste Management, 2023 to expected completion in December 2026. Thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells." },
+        { title: "BSc Civil Engineering", meta: "Shahed University · 2018-2023", detail: "The starting point for a path that connects infrastructure, materials, and environmental responsibility." },
         { title: "TOEFL iBT 90/120", meta: "July 2026 · CEFR B2", detail: "English proficiency evidence: TOEFL iBT overall score of 90 out of 120, taken in July 2026." },
+        { title: "German B2.1", meta: "Language", detail: "German at level B2.1, alongside English and Persian." },
         { title: "Methods in progress", meta: "LCA / Python / modelling", detail: "Building a practical toolkit across LCA software, Python, environmental models, and visual explanation." }
       ]
     },
@@ -706,6 +707,7 @@ const content = {
         { title: "GIS / spatial analysis", meta: "Siting studies", detail: "Using GIS for spatial questions in environmental siting and waste-system studies." },
         { title: "JavaScript / TypeScript", meta: "Web systems", detail: "Building browser tools, interactive interfaces, visual experiments, and TypeScript products." },
         { title: "Python / PyQt5", meta: "Research + desktop", detail: "Turning research workflows and small utilities into practical desktop tools and explainers." },
+        { title: "PHP / Laravel", meta: "Web back end", detail: "Learning Laravel to build company portals, a sales catalog, and a CRM for a real business." },
         { title: "React / PWA / RTL", meta: "Product interfaces", detail: "Designing responsive, bilingual experiences where content, state, and interaction stay clear." },
         { title: "SVG / UI systems", meta: "Visual tooling", detail: "Working with icons, visual generators, interface patterns, and precise small-scale graphics." },
         { title: "Java / JavaFX", meta: "Native clients", detail: "Exploring structured desktop clients, shared APIs, and data-backed application surfaces." }
@@ -715,7 +717,7 @@ const content = {
       title: "The deeper record.",
       description: "Selected publications, field practice, learning records, and public recognitions for people who want to look closer.",
       items: [
-        { title: "12 publications", meta: "4 journal / 8 conf.", detail: "Four journal papers and eight conference papers, with selected public records linked below. One further journal manuscript is in preparation." },
+        { title: "11 publications", meta: "3 journal / 8 conf.", detail: "Three published journal papers and eight conference papers, with selected public records linked below. Two further journal manuscripts are under review." },
         { title: "Field practice", meta: "HSE / R&D / construction", detail: "Technical practice across HSE training, energy-efficient building research and construction supervision for industrial systems." },
         { title: "Research recognition", meta: "University of Tehran / Dec 2025", detail: "A certificate of appreciation from the 26th Exhibition of Research, Technology, and Tech-Market Achievements." },
         { title: "2 verified courses", meta: "LCA / sustainable regions", detail: "Two verified learning records covering life-cycle assessment, SimaPro, sustainable planning, and regional principles." },
@@ -764,9 +766,10 @@ const content = {
       title: "مسیر تا اینجا.",
       description: "پایه‌ای در مهندسی عمران که به سمت پژوهش محیط‌زیست و ابزارهای محاسباتی حرکت کرده است.",
       items: [
-        { title: "کارشناسی ارشد مهندسی محیط‌زیست", meta: "دانشگاه تهران · معدل ۱۹٫۰۶ از ۲۰", detail: "گرایش مدیریت پسماند. پایان مورد انتظار: اوت ۲۰۲۶؛ مدرک نهایی در انتظار صدور. پایان‌نامه: تولید بیودیزل از روغن پخت‌وپز دورریز با کاتالیست ساخته‌شده از صدف‌های دورریز." },
-        { title: "کارشناسی مهندسی عمران", meta: "دانشگاه شاهد", detail: "نقطه‌ی شروع مسیری که زیرساخت، مواد و مسئولیت محیط‌زیستی را به هم وصل می‌کند." },
+        { title: "کارشناسی ارشد مهندسی محیط‌زیست", meta: "دانشگاه تهران · معدل ۳٫۸۱ از ۴ (۱۹٫۰۶ از ۲۰)", detail: "گرایش مدیریت پسماند، از ۲۰۲۳ تا پایان مورد انتظار در دسامبر ۲۰۲۶. پایان‌نامه: تولید بیودیزل از روغن پخت‌وپز دورریز با کاتالیست ساخته‌شده از صدف‌های دورریز." },
+        { title: "کارشناسی مهندسی عمران", meta: "دانشگاه شاهد · ۲۰۱۸ تا ۲۰۲۳", detail: "نقطه‌ی شروع مسیری که زیرساخت، مواد و مسئولیت محیط‌زیستی را به هم وصل می‌کند." },
         { title: "تافل iBT: ۹۰ از ۱۲۰", meta: "ژوئیه ۲۰۲۶ · سطح B2", detail: "مدرک زبان انگلیسی: نمره‌ی کل ۹۰ از ۱۲۰ در آزمون TOEFL iBT، ژوئیه ۲۰۲۶." },
+        { title: "آلمانی B2.1", meta: "زبان", detail: "زبان آلمانی در سطح B2.1، در کنار انگلیسی و فارسی." },
         { title: "روش‌هایی که در حال توسعه‌اند", meta: "ارزیابی چرخه‌ی عمر / پایتون / مدل‌سازی", detail: "ساختن جعبه‌ابزاری عملی از نرم‌افزارهای ارزیابی چرخه‌ی عمر، پایتون، مدل‌های محیط‌زیستی و توضیح بصری." }
       ]
     },
@@ -780,6 +783,7 @@ const content = {
         { title: "GIS / تحلیل مکانی", meta: "مطالعات مکان‌یابی", detail: "به‌کارگیری GIS در پرسش‌های مکانیِ مکان‌یابی محیط‌زیستی و مطالعات سیستم پسماند." },
         { title: "جاوااسکریپت / تایپ‌اسکریپت", meta: "سیستم‌های وب", detail: "ساخت ابزارهای مرورگری، رابط‌های تعاملی، آزمایش‌های بصری و محصولات تایپ‌اسکریپتی." },
         { title: "پایتون / PyQt5", meta: "پژوهش و دسکتاپ", detail: "تبدیل جریان‌های پژوهشی و ابزارهای کوچک به برنامه‌های دسکتاپ و توضیح‌دهنده‌های کاربردی." },
+        { title: "PHP / Laravel", meta: "سمت سرور وب", detail: "یادگیری Laravel برای ساخت درگاه‌های شرکتی، کاتالوگ فروش و سیستم مدیریت ارتباط با مشتری در یک کسب‌وکار واقعی." },
         { title: "React / PWA / RTL", meta: "رابط‌های محصول", detail: "طراحی تجربه‌های دوزبانه و واکنش‌گرا که محتوا، وضعیت و تعامل را روشن نگه می‌دارند." },
         { title: "SVG / سیستم‌های رابط", meta: "ابزارهای بصری", detail: "کار با آیکون‌ها، مولدهای بصری، الگوهای رابط و گرافیک‌های دقیق در مقیاس کوچک." },
         { title: "Java / JavaFX", meta: "کلاینت‌های بومی", detail: "بررسی کلاینت‌های دسکتاپ ساختاریافته، APIهای مشترک و سطوح کاربردی متصل به داده." }
@@ -789,7 +793,7 @@ const content = {
       title: "سابقه‌ی عمیق‌تر.",
       description: "مقاله‌ها، تجربه‌ی حرفه‌ای، سابقه‌های آموزشی و تقدیرنامه‌های عمومی برای کسانی که می‌خواهند دقیق‌تر نگاه کنند.",
       items: [
-        { title: "۱۲ مقاله", meta: "۴ ژورنال / ۸ کنفرانس", detail: "چهار مقاله‌ی ژورنالی و هشت مقاله‌ی کنفرانسی؛ چند رکورد عمومی منتخب در ادامه لینک شده‌اند. یک مقاله‌ی ژورنالی دیگر در دست نگارش است." },
+        { title: "۱۱ مقاله", meta: "۳ ژورنال / ۸ کنفرانس", detail: "سه مقاله‌ی ژورنالی منتشرشده و هشت مقاله‌ی کنفرانسی؛ چند رکورد عمومی منتخب در ادامه لینک شده‌اند. دو نسخه‌ی ژورنالی دیگر در حال داوری است." },
         { title: "تجربه‌ی حرفه‌ای", meta: "HSE / تحقیق‌وتوسعه / ساخت", detail: "تجربه‌ی فنی در آموزش HSE، پژوهش ساختمان‌های کم‌مصرف و نظارت بر ساخت سامانه‌های صنعتی." },
         { title: "تقدیر پژوهشی", meta: "دانشگاه تهران / آذر ۱۴۰۴", detail: "گواهی تقدیر از بیست‌وششمین نمایشگاه دستاوردهای پژوهش، فناوری و فن‌بازار دانشگاه تهران." },
         { title: "۲ دوره‌ی تأییدشده", meta: "چرخه‌ی عمر / منطقه‌ی پایدار", detail: "دو سابقه‌ی آموزشی تأییدشده درباره‌ی ارزیابی چرخه‌ی عمر، سیمَپرو، برنامه‌ریزی پایدار و اصول منطقه‌ای." },
@@ -817,13 +821,18 @@ const githubMetadata = new Map();
 let githubSyncState = "idle";
 
 const relatedProjectMap = {
+  // One entry per skill, in the order the skills are listed.
   skills: [
+    [1, 17],
+    [],
+    [],
+    [],
     [0, 5, 6, 8],
     [1, 10, 14],
+    [18],
     [0, 8, 9],
     [5, 6],
     [16],
-    [1, 17],
   ],
   research: [
     [1],
@@ -928,11 +937,11 @@ const scholarEvidence = Object.fromEntries(
 const archiveEvidence = {
   en: [
     [
-      { title: "4 journal papers", meta: "2025-2026 / selected record" },
+      { title: "3 journal papers", meta: "2025-2026 / selected record" },
       { title: "8 conference papers", meta: "2023-2025 / selected record" },
       { title: "Google Scholar profile", meta: "3 indexed papers · h-index 1 · public snapshot", href: publicEvidenceLinks.scholar },
       ...scholarEvidence.en,
-      { title: "Design, Analysis, and Optimization of the Thermodynamic, Economic, and Environmental Performance of a Newly Developed Biomass Gasification–Solar Integrated Multi Generation System", meta: "Journal paper · 2026 · Ghoroqi et al." },
+      { title: "Design, Analysis, and Optimization of the Thermodynamic, Economic, and Environmental Performance of a Newly Developed Biomass Gasification–Solar Integrated Multi Generation System", meta: "Journal manuscript · 2026 · under review · Ghoroqi et al." },
       { title: "Biofuel production from biomass by transesterification", meta: "National conference record · 2025" },
       { title: "Pharmaceutical-waste management strategies", meta: "National conference record · 2025" },
       { title: "Textile-industry pollution assessment", meta: "National conference record · 2024" },
@@ -940,7 +949,8 @@ const archiveEvidence = {
     ],
     [
       { title: "Arvin Sarouj Pay", meta: "HSE / energy-efficient buildings · 2024-2025" },
-      { title: "Sedna", meta: "Factory construction supervision · 2022-2024" },
+      { title: "Max Silver", meta: "Tech lead · Oct 2026 - present" },
+      { title: "Sedna", meta: "Technical expert · factory construction supervision · May 2022 - Oct 2026" },
     ],
     [
       { title: "Certificate of Appreciation", meta: "26th Research, Technology & Tech-Market Exhibition · Dec 2025" },
@@ -955,11 +965,11 @@ const archiveEvidence = {
   ],
   fa: [
     [
-      { title: "۴ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
+      { title: "۳ مقاله‌ی ژورنالی", meta: "۱۴۰۴-۱۴۰۵ / رکورد منتخب" },
       { title: "۸ مقاله‌ی کنفرانسی", meta: "۱۴۰۲-۱۴۰۴ / رکورد منتخب" },
       { title: "پروفایل گوگل اسکالر", meta: "۳ مقاله‌ی نمایه‌شده · h-index برابر ۱ · snapshot عمومی", href: publicEvidenceLinks.scholar },
       ...scholarEvidence.fa,
-      { title: "طراحی، تحلیل و بهینه‌سازی عملکرد ترمودینامیکی، اقتصادی و زیست‌محیطی یک سامانه‌ی چندتولیدی نوین یکپارچه‌ی گازی‌سازی زیست‌توده و خورشیدی", meta: "مقاله‌ی ژورنالی · ۲۰۲۶ · Ghoroqi و همکاران" },
+      { title: "طراحی، تحلیل و بهینه‌سازی عملکرد ترمودینامیکی، اقتصادی و زیست‌محیطی یک سامانه‌ی چندتولیدی نوین یکپارچه‌ی گازی‌سازی زیست‌توده و خورشیدی", meta: "نسخه‌ی ژورنالی · ۲۰۲۶ · در حال داوری · Ghoroqi و همکاران" },
       { title: "تولید سوخت زیستی از زیست‌توده با ترانس‌استریفیکاسیون", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "راهبردهای مدیریت پسماند دارویی", meta: "رکورد کنفرانسی ملی · ۱۴۰۴" },
       { title: "ارزیابی آلاینده‌های صنعت نساجی", meta: "رکورد کنفرانسی ملی · ۱۴۰۳" },
@@ -967,7 +977,8 @@ const archiveEvidence = {
     ],
     [
       { title: "Arvin Sarouj Pay", meta: "HSE / ساختمان‌های کم‌مصرف · ۱۴۰۳-۱۴۰۴" },
-      { title: "Sedna", meta: "نظارت بر ساخت کارخانه · ۱۴۰۱-۱۴۰۳" },
+      { title: "مکس‌سیلور", meta: "سرپرست فنی · مهر ۱۴۰۵ تا اکنون" },
+      { title: "Sedna", meta: "کارشناس فنی · نظارت بر ساخت کارخانه · اردیبهشت ۱۴۰۱ تا مهر ۱۴۰۵" },
     ],
     [
       { title: "گواهی تقدیر", meta: "بیست‌وششمین نمایشگاه پژوهش، فناوری و فن‌بازار · آذر ۱۴۰۴" },
@@ -3279,6 +3290,7 @@ function renderContact() {
     </div>
   `;
   updateDocumentTitle();
+  playSurfaceReveal();
 }
 
 function showToast(message) {
@@ -3975,6 +3987,7 @@ function renderSection(section) {
   `;
   if (filterableSections.has(section)) filterSectionList(section, sectionFilterQueries[section] || "");
   updateDocumentTitle();
+  playSurfaceReveal();
 }
 
 function renderProjectCaseStudy(item, itemIndex) {
@@ -4087,6 +4100,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
     </div>
   `;
   updateDocumentTitle();
+  playSurfaceReveal();
   if (focus) focusSurfaceContext();
 }
 
@@ -4139,6 +4153,133 @@ function syncViewHistory(view, itemIndex, historyMode) {
   window.history[`${historyMode}State`]({ view, itemIndex }, "", nextUrl);
 }
 
+/* Departure-board behaviour inside the terminal: headings scramble then settle, rows flap in one
+   after another, and a random row flaps now and then so an open route still feels live. */
+const revealGlyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const revealRowSelector = ".surface-list-item, .research-timeline-entry, .contact-link, .detail-evidence-row, .detail-related-link, .contact-profile-button";
+const revealHeadingLimit = 60;
+let revealToken = 0;
+let surfaceTickerTimer = null;
+
+function flashClass(element, className, duration) {
+  element.classList.add(className);
+  window.setTimeout(() => element.classList.remove(className), duration);
+}
+
+function flapHeading(heading, token) {
+  const text = heading.textContent;
+  const slots = [];
+  const step = Math.min(30, 800 / Array.from(text).length);
+  let word = null;
+
+  heading.setAttribute("aria-label", text);
+  heading.textContent = "";
+  Array.from(text).forEach((character) => {
+    if (character === " ") {
+      heading.append(" ");
+      word = null;
+      return;
+    }
+    if (!word) {
+      word = document.createElement("span");
+      word.className = "reveal-word";
+      word.setAttribute("aria-hidden", "true");
+      heading.append(word);
+    }
+    const slot = document.createElement("span");
+    slot.className = "reveal-char";
+    slot.textContent = revealGlyphs[Math.floor(Math.random() * revealGlyphs.length)];
+    word.append(slot);
+    slots.push({ slot, character, settleAt: 90 + slots.length * step, nextSwap: 0, done: false });
+  });
+
+  const lastSettle = slots.length ? slots[slots.length - 1].settleAt : 0;
+  const start = performance.now();
+  let finished = false;
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    heading.textContent = text;
+    heading.removeAttribute("aria-label");
+  };
+  const frame = (now) => {
+    if (token !== revealToken || !heading.isConnected) return;
+    const elapsed = now - start;
+    slots.forEach((item) => {
+      if (item.done) return;
+      if (elapsed >= item.settleAt) {
+        item.done = true;
+        item.slot.textContent = item.character;
+        item.slot.classList.add("is-flipping");
+      } else if (elapsed >= item.nextSwap) {
+        item.slot.textContent = revealGlyphs[Math.floor(Math.random() * revealGlyphs.length)];
+        item.nextSwap = elapsed + 70;
+      }
+    });
+    if (elapsed < lastSettle + 420) {
+      window.requestAnimationFrame(frame);
+      return;
+    }
+    finish();
+  };
+  window.requestAnimationFrame(frame);
+  // Animation frames pause in background tabs; never leave the heading scrambled.
+  window.setTimeout(finish, lastSettle + 1500);
+}
+
+function revealRows(root) {
+  [...root.querySelectorAll(revealRowSelector)].slice(0, 40).forEach((row, index) => {
+    const delay = Math.min(index * 42, 700) + 160;
+    row.style.setProperty("--reveal-delay", `${delay}ms`);
+    row.classList.add("is-revealing");
+    window.setTimeout(() => {
+      row.classList.remove("is-revealing");
+      row.style.removeProperty("--reveal-delay");
+    }, delay + 600);
+  });
+}
+
+function playSurfaceReveal() {
+  if (reducedMotionQuery.matches || currentMode === "home") return;
+
+  revealToken += 1;
+  const heading = surfaceContent.querySelector("h2");
+  if (heading) {
+    const scrambles = currentLang === "en"
+      && !heading.children.length
+      && heading.textContent.trim().length <= revealHeadingLimit;
+    if (scrambles) flapHeading(heading, revealToken);
+    else flashClass(heading, "is-revealing", 700);
+  }
+  revealRows(surfaceContent);
+}
+
+function tickSurfaceRow() {
+  if (document.hidden || profilePreviewOpen || artifactPreviewOpen || commandPaletteOpen) return;
+
+  const bounds = surfaceContent.getBoundingClientRect();
+  const rows = [...surfaceContent.querySelectorAll(revealRowSelector)].filter((row) => {
+    const box = row.getBoundingClientRect();
+    return row.offsetParent
+      && box.top >= bounds.top
+      && box.bottom <= bounds.bottom
+      && !row.matches(":hover, :focus-visible, .is-revealing");
+  });
+  if (!rows.length) return;
+
+  flashClass(rows[Math.floor(Math.random() * rows.length)], "is-ticking", 480);
+}
+
+function syncSurfaceTicker() {
+  const active = currentMode !== "home" && !document.hidden && !reducedMotionQuery.matches;
+  if (!active) {
+    if (surfaceTickerTimer !== null) window.clearInterval(surfaceTickerTimer);
+    surfaceTickerTimer = null;
+    return;
+  }
+  if (surfaceTickerTimer === null) surfaceTickerTimer = window.setInterval(tickSurfaceRow, 3400);
+}
+
 function renderView(view, { historyMode = "push", itemIndex = null, focus = true } = {}) {
   if (commandPaletteOpen) closeCommandPalette();
   const nextView = routableViews.has(view) ? view : "home";
@@ -4156,6 +4297,7 @@ function renderView(view, { historyMode = "push", itemIndex = null, focus = true
   }
 
   syncBoardRotation();
+  syncSurfaceTicker();
   syncRailSelection(nextView);
   closeIndex();
   if (focus) focusSurfaceContext();
@@ -4848,8 +4990,10 @@ restoreViewFromLocation();
 updateBoardClock();
 window.setInterval(updateBoardClock, 1000);
 document.addEventListener("visibilitychange", syncBoardRotation);
+document.addEventListener("visibilitychange", syncSurfaceTicker);
 if (typeof reducedMotionQuery.addEventListener === "function") {
   reducedMotionQuery.addEventListener("change", syncBoardRotation);
+  reducedMotionQuery.addEventListener("change", syncSurfaceTicker);
 } else if (typeof reducedMotionQuery.addListener === "function") {
   reducedMotionQuery.addListener(syncBoardRotation);
 }
