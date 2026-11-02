@@ -124,6 +124,11 @@ const translations = {
     "detail.githubLanguage": "LANGUAGE",
     "detail.githubTopics": "TOPICS",
     "detail.relatedWork": "RELATED PUBLIC WORK",
+    "detail.doorsLabel": "OPEN A DOOR",
+    "detail.doorsCount": "{{open}} / {{total}} OPEN",
+    "detail.doorOpenAria": "Open door {{number}}: {{label}}",
+    "detail.doorGoExternal": "Open source",
+    "detail.doorGoInternal": "See it here",
     "detail.evidence": "SELECTED EVIDENCE",
     "detail.scholarRecord": "PUBLIC SCHOLAR RECORD",
     "detail.copyCitation": "COPY CITATION",
@@ -324,7 +329,6 @@ const translations = {
     "footer.motion": "Motion",
     "footer.motionOn": "on",
     "footer.motionOff": "off",
-    "footer.motionSystem": "system setting",
     "footer.motionAria": "Switch terminal animation on or off"
   },
   fa: {
@@ -452,6 +456,11 @@ const translations = {
     "detail.githubLanguage": "زبان",
     "detail.githubTopics": "موضوع‌ها",
     "detail.relatedWork": "کارهای عمومی مرتبط",
+    "detail.doorsLabel": "یک در را باز کن",
+    "detail.doorsCount": "{{open}} از {{total}} باز",
+    "detail.doorOpenAria": "باز کردن در {{number}}: {{label}}",
+    "detail.doorGoExternal": "باز کردن منبع",
+    "detail.doorGoInternal": "دیدنش اینجا",
     "detail.evidence": "شواهد منتخب",
     "detail.scholarRecord": "رکورد عمومی اسکالر",
     "detail.copyCitation": "کپی استناد",
@@ -652,7 +661,6 @@ const translations = {
     "footer.motion": "حرکت",
     "footer.motionOn": "روشن",
     "footer.motionOff": "خاموش",
-    "footer.motionSystem": "تنظیم سیستم",
     "footer.motionAria": "روشن یا خاموش کردن انیمیشن ترمینال"
   }
 };
@@ -700,8 +708,8 @@ const content = {
       title: "The route so far.",
       description: "A civil engineering foundation moving toward environmental research and computational tools.",
       items: [
-        { title: "MSc Environmental Engineering", meta: "University of Tehran · GPA 3.81/4.00 (19.06/20)", detail: "Solid Waste Management, 2023 to expected completion in December 2026. Thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells." },
-        { title: "BSc Civil Engineering", meta: "Shahed University · 2018-2023", detail: "The starting point for a path that connects infrastructure, materials, and environmental responsibility." },
+        { title: "MSc Environmental Engineering", meta: "University of Tehran · GPA 3.81/4.00 (19.06/20)", detail: "Solid Waste Management, 2023 to expected completion in December 2026. Thesis: biodiesel production from waste cooking oil using a catalyst synthesized from waste seashells.", doors: [{"label": "Thesis", "text": "Biodiesel from waste cooking oil with a waste-seashell catalyst.", "href": "#research/0"}, {"label": "Courses", "text": "Life Cycle Assessment (University of Michigan, 35 hours) and Sustainable Regional Principles (Johns Hopkins University, 7 hours).", "href": "https://coursera.org/verify/TSN51X42BCZR"}, {"label": "COP29", "text": "Delegation at COP29 in Baku, November 2024, with sessions on circular economy, food waste, methane and carbon markets.", "href": "#archive/4"}, {"label": "Papers", "text": "Three published journal papers and eight conference papers.", "href": "#archive/0"}] },
+        { title: "BSc Civil Engineering", meta: "Shahed University · 2018-2023", detail: "The starting point for a path that connects infrastructure, materials, and environmental responsibility.", doors: [{"label": "Papers", "text": "Four conference papers on building facades, 2023, presented in Bangkok and Tehran.", "href": "#archive/0"}, {"label": "Site work", "text": "Construction supervision of a factory for electronic thermal devices at Sedna, May 2022 to October 2026.", "href": "#archive/1"}] },
         { title: "TOEFL iBT 90/120", meta: "July 2026 · CEFR B2", detail: "English proficiency evidence: TOEFL iBT overall score of 90 out of 120, taken in July 2026." },
         { title: "German B2.1", meta: "Language", detail: "German at level B2.1, alongside English and Persian." },
         { title: "Methods in progress", meta: "LCA / Python / modelling", detail: "Building a practical toolkit across LCA software, Python, environmental models, and visual explanation." }
@@ -711,15 +719,15 @@ const content = {
       title: "Tools I use.",
       description: "A working stack across software, research workflows, visual systems, and environmental methods. The list follows public work, not a keyword cloud.",
       items: [
-        { title: "SimaPro / LandGEM", meta: "Environmental models", detail: "Using life-cycle assessment workflows and landfill-gas modelling to turn environmental questions into traceable estimates." },
-        { title: "ChemDraw / OpenLCA", meta: "Research tooling", detail: "Working across chemical diagrams and open life-cycle workflows alongside environmental research." },
-        { title: "LCA / waste systems", meta: "Environmental methods", detail: "Connecting software and research practice to solid waste, biofuel, life-cycle thinking, and cleaner systems." },
-        { title: "GIS / spatial analysis", meta: "Siting studies", detail: "Using GIS for spatial questions in environmental siting and waste-system studies." },
-        { title: "JavaScript / TypeScript", meta: "Web systems", detail: "Building browser tools, interactive interfaces, visual experiments, and TypeScript products." },
-        { title: "Python / PyQt5", meta: "Research + desktop", detail: "Turning research workflows and small utilities into practical desktop tools and explainers." },
-        { title: "PHP / Laravel", meta: "Web back end", detail: "Learning Laravel to build company portals, a sales catalog, and a CRM for a real business." },
-        { title: "React / PWA / RTL", meta: "Product interfaces", detail: "Designing responsive, bilingual experiences where content, state, and interaction stay clear." },
-        { title: "SVG / UI systems", meta: "Visual tooling", detail: "Working with icons, visual generators, interface patterns, and precise small-scale graphics." },
+        { title: "SimaPro / LandGEM", meta: "Environmental models", detail: "Using life-cycle assessment workflows and landfill-gas modelling to turn environmental questions into traceable estimates.", doors: [{"label": "Course", "text": "Life Cycle Assessment, 35 hours, University of Michigan. Verified on Coursera.", "href": "https://coursera.org/verify/TSN51X42BCZR"}, {"label": "Paper", "text": "Assessment of Landfill Gas Production in Saveh City Using the LandGEM Model, Advances in Environmental Technology, 2026.", "href": "https://aet.irost.ir/article_1686.html"}, {"label": "Training", "text": "LCA training course, 4 hours, with the Iranian Society of Waste Engineering and Management, November 2024."}, {"label": "Next", "text": "Deepening SimaPro and mastering openLCA is a stated research goal."}] },
+        { title: "ChemDraw / OpenLCA", meta: "Research tooling", detail: "Working across chemical diagrams and open life-cycle workflows alongside environmental research.", doors: [{"label": "Thesis", "text": "Biodiesel from waste cooking oil, with a catalyst synthesized from waste seashells (TRL 4).", "href": "#research/0"}, {"label": "Evidence", "text": "The thesis visuals, an FTIR peak spectrum and a library comparison, are public without the private source files.", "href": "#research/0"}, {"label": "OpenLCA", "text": "Open-source life-cycle software I am learning to master alongside SimaPro."}] },
+        { title: "LCA / waste systems", meta: "Environmental methods", detail: "Connecting software and research practice to solid waste, biofuel, life-cycle thinking, and cleaner systems.", doors: [{"label": "Siting study", "text": "Siting a waste transfer station in District 6 of Karaj, Pollution, 2025.", "href": "https://jpoll.ut.ac.ir/article_101760.html"}, {"label": "Biomass", "text": "Biomass resources in Iran and worldwide, with a focus on municipal solid waste and livestock manure, Pollution, 2026.", "href": "https://jpoll.ut.ac.ir/article_105139.html"}, {"label": "Workshops", "text": "Waste management in sports complexes (Olympic Academy, November 2024) and industrial and hazardous waste in the oil industry (August 2024)."}, {"label": "Community", "text": "Administrative coordinator at IRISWA, where I redesigned the website, and volunteer coordinator at the Waste Management Winter School.", "href": "#build/17"}] },
+        { title: "GIS / spatial analysis", meta: "Siting studies", detail: "Using GIS for spatial questions in environmental siting and waste-system studies.", doors: [{"label": "Siting study", "text": "Siting a waste transfer station in District 6 of Karaj: the paper behind the project.", "href": "https://jpoll.ut.ac.ir/article_101760.html"}, {"label": "Project", "text": "Collaborator on siting studies and Phase I design of a municipal solid waste transfer station, Karaj Municipality District 6, 2024."}] },
+        { title: "JavaScript / TypeScript", meta: "Web systems", detail: "Building browser tools, interactive interfaces, visual experiments, and TypeScript products.", doors: [{"label": "This site", "text": "A bilingual terminal portfolio with no dependencies and no build step.", "href": "#build/19"}, {"label": "Design Suite", "text": "A no-build browser workspace for diagrams, generators and utilities.", "href": "#build/5"}, {"label": "Deutschly", "text": "A TypeScript flashcard PWA for German, with adaptive review and sync.", "href": "#build/8"}] },
+        { title: "Python / PyQt5", meta: "Research + desktop", detail: "Turning research workflows and small utilities into practical desktop tools and explainers.", doors: [{"label": "Research tools", "text": "MagIranPlus and CivilicaPulse turn academic search results into formatted citations and Word bibliographies.", "href": "#build/3"}, {"label": "Desktop", "text": "Font Installer: a PyQt5 terminal-style font library manager.", "href": "#build/10"}, {"label": "Game", "text": "Ashfall Embers Trial, a PyQt5 arcade survival game.", "href": "#build/14"}] },
+        { title: "PHP / Laravel", meta: "Web back end", detail: "Learning Laravel to build company portals, a sales catalog, and a CRM for a real business.", doors: [{"label": "Role", "text": "Tech Lead at Max Silver since October 2026."}, {"label": "Panels", "text": "A CEO overview panel and a portal for every member of the company, tied into the sales system."}, {"label": "Customers", "text": "A portal where customers see prices in IRR, and a sales catalog for visitors without an account, who are then connected to regional sales staff."}, {"label": "CRM", "text": "A customer relationship management system built for the sales team.", "href": "#build/18"}] },
+        { title: "React / PWA / RTL", meta: "Product interfaces", detail: "Designing responsive, bilingual experiences where content, state, and interaction stay clear.", doors: [{"label": "Deutschly", "text": "A German flashcard PWA with adaptive review and cross-device sync.", "href": "#build/8"}, {"label": "Gamify Garden", "text": "Apricity: a gentle right-to-left daily garden for tiny steps.", "href": "#build/9"}, {"label": "Max Silver", "text": "A Persian right-to-left installable portal for a manufacturer.", "href": "#build/18"}] },
+        { title: "SVG / UI systems", meta: "Visual tooling", detail: "Working with icons, visual generators, interface patterns, and precise small-scale graphics.", doors: [{"label": "SVG Scrapper", "text": "A chrome-styled icon workbench for searching, customizing and batch-downloading Iconify icons.", "href": "#build/6"}, {"label": "Design Suite", "text": "A no-build browser workspace for diagrams, visual generators and utilities.", "href": "#build/5"}] },
         { title: "Java / JavaFX", meta: "Native clients", detail: "Exploring structured desktop clients, shared APIs, and data-backed application surfaces." }
       ]
     },
@@ -776,8 +784,8 @@ const content = {
       title: "مسیر تا اینجا.",
       description: "پایه‌ای در مهندسی عمران که به سمت پژوهش محیط‌زیست و ابزارهای محاسباتی حرکت کرده است.",
       items: [
-        { title: "کارشناسی ارشد مهندسی محیط‌زیست", meta: "دانشگاه تهران · معدل ۳٫۸۱ از ۴ (۱۹٫۰۶ از ۲۰)", detail: "گرایش مدیریت پسماند، از ۲۰۲۳ تا پایان مورد انتظار در دسامبر ۲۰۲۶. پایان‌نامه: تولید بیودیزل از روغن پخت‌وپز دورریز با کاتالیست ساخته‌شده از صدف‌های دورریز." },
-        { title: "کارشناسی مهندسی عمران", meta: "دانشگاه شاهد · ۲۰۱۸ تا ۲۰۲۳", detail: "نقطه‌ی شروع مسیری که زیرساخت، مواد و مسئولیت محیط‌زیستی را به هم وصل می‌کند." },
+        { title: "کارشناسی ارشد مهندسی محیط‌زیست", meta: "دانشگاه تهران · معدل ۳٫۸۱ از ۴ (۱۹٫۰۶ از ۲۰)", detail: "گرایش مدیریت پسماند، از ۲۰۲۳ تا پایان مورد انتظار در دسامبر ۲۰۲۶. پایان‌نامه: تولید بیودیزل از روغن پخت‌وپز دورریز با کاتالیست ساخته‌شده از صدف‌های دورریز.", doors: [{"label": "پایان‌نامه", "text": "بیودیزل از روغن پخت‌وپز دورریز با کاتالیست صدف دورریز.", "href": "#research/0"}, {"label": "دوره‌ها", "text": "ارزیابی چرخه‌ی عمر (دانشگاه میشیگان، ۳۵ ساعت) و اصول منطقه‌ی پایدار (دانشگاه جانز هاپکینز، ۷ ساعت).", "href": "https://coursera.org/verify/TSN51X42BCZR"}, {"label": "COP29", "text": "عضو هیئت اجلاس COP29 در باکو، نوامبر ۲۰۲۴؛ نشست‌هایی درباره‌ی اقتصاد چرخشی، هدررفت غذا، متان و بازار کربن.", "href": "#archive/4"}, {"label": "مقاله‌ها", "text": "سه مقاله‌ی ژورنالی منتشرشده و هشت مقاله‌ی کنفرانسی.", "href": "#archive/0"}] },
+        { title: "کارشناسی مهندسی عمران", meta: "دانشگاه شاهد · ۲۰۱۸ تا ۲۰۲۳", detail: "نقطه‌ی شروع مسیری که زیرساخت، مواد و مسئولیت محیط‌زیستی را به هم وصل می‌کند.", doors: [{"label": "مقاله‌ها", "text": "چهار مقاله‌ی کنفرانسی درباره‌ی نمای ساختمان، ۲۰۲۳، ارائه‌شده در بانکوک و تهران.", "href": "#archive/0"}, {"label": "کارگاه", "text": "نظارت بر ساخت کارخانه‌ی دستگاه‌های حرارتی الکترونیکی در Sedna، می ۲۰۲۲ تا اکتبر ۲۰۲۶.", "href": "#archive/1"}] },
         { title: "تافل iBT: ۹۰ از ۱۲۰", meta: "ژوئیه ۲۰۲۶ · سطح B2", detail: "مدرک زبان انگلیسی: نمره‌ی کل ۹۰ از ۱۲۰ در آزمون TOEFL iBT، ژوئیه ۲۰۲۶." },
         { title: "آلمانی B2.1", meta: "زبان", detail: "زبان آلمانی در سطح B2.1، در کنار انگلیسی و فارسی." },
         { title: "روش‌هایی که در حال توسعه‌اند", meta: "ارزیابی چرخه‌ی عمر / پایتون / مدل‌سازی", detail: "ساختن جعبه‌ابزاری عملی از نرم‌افزارهای ارزیابی چرخه‌ی عمر، پایتون، مدل‌های محیط‌زیستی و توضیح بصری." }
@@ -787,15 +795,15 @@ const content = {
       title: "ابزارهایی که استفاده می‌کنم.",
       description: "جعبه‌ابزاری در حال کار میان نرم‌افزار، جریان‌های پژوهشی، سیستم‌های بصری و روش‌های محیط‌زیستی؛ برآمده از کارهای عمومی، نه فهرستی از کلیدواژه‌ها.",
       items: [
-        { title: "SimaPro / LandGEM", meta: "مدل‌های محیط‌زیستی", detail: "کار با جریان‌های ارزیابی چرخه‌ی عمر و مدل‌سازی گاز دفنگاه برای تبدیل پرسش‌های محیط‌زیستی به برآوردهای قابل‌ردیابی." },
-        { title: "ChemDraw / OpenLCA", meta: "ابزارهای پژوهشی", detail: "کار میان ترسیم‌های شیمیایی و جریان‌های باز ارزیابی چرخه‌ی عمر در کنار پژوهش محیط‌زیست." },
-        { title: "ارزیابی چرخه‌ی عمر / پسماند", meta: "روش‌های محیط‌زیستی", detail: "وصل کردن نرم‌افزار و تجربه‌ی پژوهشی به پسماند جامد، سوخت زیستی، تفکر چرخه‌ی عمر و سیستم‌های پاک‌تر." },
-        { title: "GIS / تحلیل مکانی", meta: "مطالعات مکان‌یابی", detail: "به‌کارگیری GIS در پرسش‌های مکانیِ مکان‌یابی محیط‌زیستی و مطالعات سیستم پسماند." },
-        { title: "جاوااسکریپت / تایپ‌اسکریپت", meta: "سیستم‌های وب", detail: "ساخت ابزارهای مرورگری، رابط‌های تعاملی، آزمایش‌های بصری و محصولات تایپ‌اسکریپتی." },
-        { title: "پایتون / PyQt5", meta: "پژوهش و دسکتاپ", detail: "تبدیل جریان‌های پژوهشی و ابزارهای کوچک به برنامه‌های دسکتاپ و توضیح‌دهنده‌های کاربردی." },
-        { title: "PHP / Laravel", meta: "سمت سرور وب", detail: "یادگیری Laravel برای ساخت درگاه‌های شرکتی، کاتالوگ فروش و سیستم مدیریت ارتباط با مشتری در یک کسب‌وکار واقعی." },
-        { title: "React / PWA / RTL", meta: "رابط‌های محصول", detail: "طراحی تجربه‌های دوزبانه و واکنش‌گرا که محتوا، وضعیت و تعامل را روشن نگه می‌دارند." },
-        { title: "SVG / سیستم‌های رابط", meta: "ابزارهای بصری", detail: "کار با آیکون‌ها، مولدهای بصری، الگوهای رابط و گرافیک‌های دقیق در مقیاس کوچک." },
+        { title: "SimaPro / LandGEM", meta: "مدل‌های محیط‌زیستی", detail: "کار با جریان‌های ارزیابی چرخه‌ی عمر و مدل‌سازی گاز دفنگاه برای تبدیل پرسش‌های محیط‌زیستی به برآوردهای قابل‌ردیابی.", doors: [{"label": "دوره", "text": "ارزیابی چرخه‌ی عمر، ۳۵ ساعت، دانشگاه میشیگان؛ تأییدشده در Coursera.", "href": "https://coursera.org/verify/TSN51X42BCZR"}, {"label": "مقاله", "text": "ارزیابی تولید گاز دفنگاه در شهر ساوه با مدل LandGEM، Advances in Environmental Technology، ۲۰۲۶.", "href": "https://aet.irost.ir/article_1686.html"}, {"label": "آموزش", "text": "دوره‌ی آموزشی ارزیابی چرخه‌ی عمر، ۴ ساعت، انجمن مهندسی و مدیریت پسماند ایران، نوامبر ۲۰۲۴."}, {"label": "قدم بعدی", "text": "تعمیق SimaPro و تسلط بر openLCA از اهداف پژوهشی اعلام‌شده‌ی من است."}] },
+        { title: "ChemDraw / OpenLCA", meta: "ابزارهای پژوهشی", detail: "کار میان ترسیم‌های شیمیایی و جریان‌های باز ارزیابی چرخه‌ی عمر در کنار پژوهش محیط‌زیست.", doors: [{"label": "پایان‌نامه", "text": "بیودیزل از روغن پخت‌وپز دورریز با کاتالیست ساخته‌شده از صدف‌های دورریز (TRL 4).", "href": "#research/0"}, {"label": "شواهد", "text": "تصویرهای پایان‌نامه، طیف FTIR و مقایسه با کتابخانه‌ی طیف، بدون فایل‌های منبع خصوصی منتشر شده‌اند.", "href": "#research/0"}, {"label": "OpenLCA", "text": "نرم‌افزار متن‌باز چرخه‌ی عمر که کنار SimaPro در حال تسلط بر آن هستم."}] },
+        { title: "ارزیابی چرخه‌ی عمر / پسماند", meta: "روش‌های محیط‌زیستی", detail: "وصل کردن نرم‌افزار و تجربه‌ی پژوهشی به پسماند جامد، سوخت زیستی، تفکر چرخه‌ی عمر و سیستم‌های پاک‌تر.", doors: [{"label": "مطالعه‌ی مکان‌یابی", "text": "مکان‌یابی ایستگاه انتقال پسماند در منطقه‌ی ۶ کرج، Pollution، ۲۰۲۵.", "href": "https://jpoll.ut.ac.ir/article_101760.html"}, {"label": "زیست‌توده", "text": "منابع زیست‌توده در ایران و جهان با تمرکز بر پسماند جامد شهری و کود دام، Pollution، ۲۰۲۶.", "href": "https://jpoll.ut.ac.ir/article_105139.html"}, {"label": "کارگاه‌ها", "text": "مدیریت پسماند در مجموعه‌های ورزشی (آکادمی المپیک، نوامبر ۲۰۲۴) و پسماند صنعتی و خطرناک در صنعت نفت (اوت ۲۰۲۴)."}, {"label": "جامعه", "text": "هماهنگ‌کننده‌ی اداری انجمن مهندسی و مدیریت پسماند ایران (بازطراحی وب‌سایت) و هماهنگ‌کننده‌ی داوطلب مدرسه‌ی زمستانی مدیریت پسماند.", "href": "#build/17"}] },
+        { title: "GIS / تحلیل مکانی", meta: "مطالعات مکان‌یابی", detail: "به‌کارگیری GIS در پرسش‌های مکانیِ مکان‌یابی محیط‌زیستی و مطالعات سیستم پسماند.", doors: [{"label": "مطالعه‌ی مکان‌یابی", "text": "مکان‌یابی ایستگاه انتقال پسماند در منطقه‌ی ۶ کرج: مقاله‌ی پشت این پروژه.", "href": "https://jpoll.ut.ac.ir/article_101760.html"}, {"label": "پروژه", "text": "همکار در مطالعات مکان‌یابی و طراحی فاز یک ایستگاه انتقال پسماند جامد شهری، شهرداری کرج منطقه‌ی ۶، ۲۰۲۴."}] },
+        { title: "جاوااسکریپت / تایپ‌اسکریپت", meta: "سیستم‌های وب", detail: "ساخت ابزارهای مرورگری، رابط‌های تعاملی، آزمایش‌های بصری و محصولات تایپ‌اسکریپتی.", doors: [{"label": "همین سایت", "text": "پرتفولیوی ترمینالی دوزبانه بدون وابستگی و بدون مرحله‌ی ساخت.", "href": "#build/19"}, {"label": "سوئیت طراحی", "text": "فضای کاری مرورگری بدون ساخت برای نمودار، مولد و ابزارهای کاربردی.", "href": "#build/5"}, {"label": "دویچلی", "text": "فلش‌کارت PWA با تایپ‌اسکریپت برای آلمانی، با مرور تطبیقی و همگام‌سازی.", "href": "#build/8"}] },
+        { title: "پایتون / PyQt5", meta: "پژوهش و دسکتاپ", detail: "تبدیل جریان‌های پژوهشی و ابزارهای کوچک به برنامه‌های دسکتاپ و توضیح‌دهنده‌های کاربردی.", doors: [{"label": "ابزارهای پژوهشی", "text": "مگ‌ایران پلاس و سیولیکا پلاس نتایج جست‌وجوی دانشگاهی را به ارجاع قالب‌بندی‌شده و کتاب‌نامه‌ی ورد تبدیل می‌کنند.", "href": "#build/3"}, {"label": "دسکتاپ", "text": "نصب‌کننده‌ی فونت: مدیر کتابخانه‌ی فونت با ظاهر ترمینالی و PyQt5.", "href": "#build/10"}, {"label": "بازی", "text": "Ashfall Embers Trial؛ بازی آرکید بقا با PyQt5.", "href": "#build/14"}] },
+        { title: "PHP / Laravel", meta: "سمت سرور وب", detail: "یادگیری Laravel برای ساخت درگاه‌های شرکتی، کاتالوگ فروش و سیستم مدیریت ارتباط با مشتری در یک کسب‌وکار واقعی.", doors: [{"label": "نقش", "text": "سرپرست فنی (Tech Lead) در مکس‌سیلور از اکتبر ۲۰۲۶."}, {"label": "پنل‌ها", "text": "پنل نمای کلی برای مدیرعامل و درگاهی برای همه‌ی اعضای شرکت، متصل به سیستم فروش."}, {"label": "مشتریان", "text": "درگاهی که مشتریان قیمت‌ها را به ریال می‌بینند و کاتالوگ فروش برای بازدیدکنندگان بدون حساب که به پرسنل فروش منطقه وصل می‌شوند."}, {"label": "CRM", "text": "سیستم مدیریت ارتباط با مشتری برای تیم فروش.", "href": "#build/18"}] },
+        { title: "React / PWA / RTL", meta: "رابط‌های محصول", detail: "طراحی تجربه‌های دوزبانه و واکنش‌گرا که محتوا، وضعیت و تعامل را روشن نگه می‌دارند.", doors: [{"label": "دویچلی", "text": "فلش‌کارت آلمانی PWA با مرور تطبیقی و همگام‌سازی بین دستگاه‌ها.", "href": "#build/8"}, {"label": "گیمیفای گاردن", "text": "آپرِسیتی: باغ روزانه‌ی راست‌به‌چپ برای قدم‌های کوچک.", "href": "#build/9"}, {"label": "مکس‌سیلور", "text": "درگاه فارسی راست‌به‌چپ و نصب‌پذیر برای یک تولیدکننده.", "href": "#build/18"}] },
+        { title: "SVG / سیستم‌های رابط", meta: "ابزارهای بصری", detail: "کار با آیکون‌ها، مولدهای بصری، الگوهای رابط و گرافیک‌های دقیق در مقیاس کوچک.", doors: [{"label": "اس‌وی‌جی اسکرپر", "text": "کارگاه آیکون برای جست‌وجو، سفارشی‌سازی و دانلود دسته‌ای آیکون‌های Iconify.", "href": "#build/6"}, {"label": "سوئیت طراحی", "text": "فضای کاری مرورگری برای نمودار، مولد بصری و ابزارهای کاربردی.", "href": "#build/5"}] },
         { title: "Java / JavaFX", meta: "کلاینت‌های بومی", detail: "بررسی کلاینت‌های دسکتاپ ساختاریافته، APIهای مشترک و سطوح کاربردی متصل به داده." }
       ]
     },
@@ -1826,30 +1834,28 @@ const boardCycles = {
 };
 
 let boardCursor = 0;
-const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-/* Motion follows the system setting until the visitor chooses; the footer toggle stores the choice. */
+/* Motion is on by default; the footer toggle lets a visitor turn it off and remembers the choice. */
 const motionStorageKey = "soheil-studio-motion";
 const motionToggle = document.getElementById("motionToggle");
-let motionPreference = "auto";
+let motionPreference = "on";
 try {
   const savedMotion = window.localStorage.getItem(motionStorageKey);
-  if (savedMotion === "on" || savedMotion === "off") motionPreference = savedMotion;
+  if (savedMotion === "off") motionPreference = "off";
 } catch {
   // Without storage the toggle still works for this visit.
 }
 document.documentElement.dataset.motion = motionPreference;
 
 function motionReduced() {
-  return motionPreference === "off" || (motionPreference === "auto" && reducedMotionQuery.matches);
+  return motionPreference === "off";
 }
 
 function updateMotionToggle() {
   if (!motionToggle) return;
   const reduced = motionReduced();
-  const fromSystem = motionPreference === "auto" && reduced;
   motionToggle.setAttribute("aria-pressed", String(!reduced));
-  motionToggle.textContent = `${translate("footer.motion")}: ${translate(reduced ? "footer.motionOff" : "footer.motionOn")}${fromSystem ? ` (${translate("footer.motionSystem")})` : ""}`;
+  motionToggle.textContent = `${translate("footer.motion")}: ${translate(reduced ? "footer.motionOff" : "footer.motionOn")}`;
 }
 
 function setMotionPreference(preference) {
@@ -4074,6 +4080,58 @@ function renderProjectCaseStudy(item, itemIndex) {
   `;
 }
 
+/* Advent-calendar doors: each one is closed and numbered, and swings open to a fact about the page. */
+function renderDetailDoors(item) {
+  const doors = item.doors || [];
+  if (!doors.length) return "";
+
+  return `
+    <section class="detail-doors" aria-label="${escapeHtml(translate("detail.doorsLabel"))}">
+      <p class="detail-doors-topline">
+        <span>${escapeHtml(translate("detail.doorsLabel"))}</span>
+        <span class="detail-doors-count" aria-live="polite">${escapeHtml(translate("detail.doorsCount", { open: 0, total: doors.length }))}</span>
+      </p>
+      <div class="detail-doors-grid">
+        ${doors.map((door, index) => {
+          const number = String(index + 1).padStart(2, "0");
+          const external = door.href && !door.href.startsWith("#");
+          return `
+            <div class="door">
+              <div class="door-back" id="door-back-${index}" tabindex="-1" inert>
+                <strong>${escapeHtml(door.label)}</strong>
+                <p>${escapeHtml(door.text)}</p>
+                ${door.href ? `<a class="door-link" href="${escapeRawHtml(door.href)}"${external ? ' target="_blank" rel="noreferrer"' : ""}>${escapeHtml(translate(external ? "detail.doorGoExternal" : "detail.doorGoInternal"))}</a>` : ""}
+              </div>
+              <button class="door-front" type="button" data-action="door-open" aria-expanded="false" aria-controls="door-back-${index}" aria-label="${escapeHtml(translate("detail.doorOpenAria", { number, label: door.label }))}">
+                <span class="door-number" aria-hidden="true">${number}</span>
+                <span class="door-tease" aria-hidden="true">${escapeHtml(door.label)}</span>
+              </button>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function openDoor(button) {
+  const door = button.closest(".door");
+  const back = door?.querySelector(".door-back");
+  if (!door || !back || door.classList.contains("is-open")) return;
+
+  door.classList.add("is-open");
+  button.setAttribute("aria-expanded", "true");
+  button.setAttribute("aria-hidden", "true");
+  button.tabIndex = -1;
+  back.inert = false;
+  back.focus({ preventScroll: true });
+
+  const section = door.closest(".detail-doors");
+  const total = section.querySelectorAll(".door").length;
+  const open = section.querySelectorAll(".door.is-open").length;
+  section.querySelector(".detail-doors-count").textContent = localizeDigits(translate("detail.doorsCount", { open, total }));
+}
+
 function renderDetail(section, itemIndex, { historyMode = "push", focus = true } = {}) {
   const selected = currentContent(section);
   const item = selected.items[itemIndex];
@@ -4097,6 +4155,7 @@ function renderDetail(section, itemIndex, { historyMode = "push", focus = true }
       ${section === "build" ? renderProjectDetailNavigation(itemIndex) : ""}
       <h2>${escapeHtml(item.title)}</h2>
       ${section === "build" ? renderProjectCaseStudy(item, itemIndex) : `<p>${escapeHtml(item.detail)}</p>`}
+      ${renderDetailDoors(item)}
       ${renderPublicArtifact(section, itemIndex)}
       ${section === "build" ? renderGithubSignal(itemIndex) : ""}
       ${relatedProjects.length ? `
@@ -4206,7 +4265,7 @@ function syncViewHistory(view, itemIndex, historyMode) {
 /* Departure-board behaviour inside the terminal: headings scramble then settle, rows flap in one
    after another, and a random row flaps now and then so an open route still feels live. */
 const revealGlyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const revealRowSelector = ".surface-list-item, .research-timeline-entry, .contact-link, .detail-evidence-row, .detail-related-link, .contact-profile-button";
+const revealRowSelector = ".surface-list-item, .research-timeline-entry, .contact-link, .detail-evidence-row, .detail-related-link, .contact-profile-button, .door";
 const revealHeadingLimit = 60;
 let revealToken = 0;
 let surfaceTickerTimer = null;
@@ -4587,6 +4646,12 @@ surfaceCommandForm?.addEventListener("submit", (event) => {
 });
 
 document.addEventListener("click", (event) => {
+  const doorTarget = event.target.closest("[data-action='door-open']");
+  if (doorTarget) {
+    openDoor(doorTarget);
+    return;
+  }
+
   const artifactCloseTarget = event.target.closest("[data-action='artifact-close']");
   if (artifactCloseTarget) {
     closeArtifactPreview({ restoreFocus: true });
@@ -5041,12 +5106,5 @@ updateBoardClock();
 window.setInterval(updateBoardClock, 1000);
 document.addEventListener("visibilitychange", syncBoardRotation);
 document.addEventListener("visibilitychange", syncSurfaceTicker);
-if (typeof reducedMotionQuery.addEventListener === "function") {
-  reducedMotionQuery.addEventListener("change", syncBoardRotation);
-  reducedMotionQuery.addEventListener("change", syncSurfaceTicker);
-  reducedMotionQuery.addEventListener("change", updateMotionToggle);
-} else if (typeof reducedMotionQuery.addListener === "function") {
-  reducedMotionQuery.addListener(syncBoardRotation);
-}
 syncBoardRotation();
 syncGithubMetadata();

@@ -4945,17 +4945,6 @@ body.is-command-open {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html:not([data-motion="on"]) *,
-  html:not([data-motion="on"]) *::before,
-  html:not([data-motion="on"]) *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}
-
 html[data-motion="off"] *,
 html[data-motion="off"] *::before,
 html[data-motion="off"] *::after {
@@ -5512,4 +5501,164 @@ html[dir="rtl"] .board-row .board-state {
   .board-row {
     grid-template-columns: 17px minmax(55px, 0.72fr) minmax(74px, 1fr) 58px;
   }
+}
+
+/* Advent-calendar doors on detail pages. */
+.detail-doors {
+  max-width: 760px;
+  margin-top: 22px;
+}
+
+.detail-doors-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 10px;
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.detail-doors-count {
+  color: var(--accent);
+}
+
+.detail-doors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  perspective: 900px;
+}
+
+.door {
+  position: relative;
+  display: grid;
+  min-height: 150px;
+}
+
+.door-back,
+.door-front {
+  border: 1px solid var(--line-strong);
+}
+
+.door-back {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: #0b0f10;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.35);
+}
+
+.door-back:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.door-back strong {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.door-back p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--body);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.door-link {
+  margin-top: auto;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.door-link:hover,
+.door-link:focus-visible {
+  color: var(--accent);
+}
+
+.door-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  color: var(--ink);
+  background: linear-gradient(145deg, #1c2326, #12171a);
+  box-shadow: inset 0 1px 0 rgba(241, 239, 232, 0.06);
+  cursor: pointer;
+  text-align: start;
+  transform-origin: 0 50%;
+  transition: transform 700ms var(--ease), opacity 700ms var(--ease), border-color 200ms ease;
+  backface-visibility: hidden;
+}
+
+.door-front::after {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 10px;
+  width: 6px;
+  height: 18px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-raised);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.door-front:hover,
+.door-front:focus-visible {
+  border-color: var(--accent);
+  transform: rotateY(-14deg);
+}
+
+.door-number {
+  font-family: "MatrixType Display", var(--mono);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.door-tease {
+  color: var(--ink-faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.door.is-open .door-front {
+  opacity: 0;
+  pointer-events: none;
+  transform: rotateY(-112deg);
+}
+
+[dir="rtl"] .door-front {
+  transform-origin: 100% 50%;
+}
+
+[dir="rtl"] .door-front:hover,
+[dir="rtl"] .door-front:focus-visible {
+  transform: rotateY(14deg);
+}
+
+[dir="rtl"] .door.is-open .door-front {
+  transform: rotateY(112deg);
+}
+
+[dir="rtl"] .door-back p,
+[dir="rtl"] .door-back strong {
+  line-height: 1.9;
+  letter-spacing: 0;
 }

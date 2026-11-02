@@ -8,6 +8,7 @@ The interface is designed as a quiet research studio rather than a conventional 
 
 - **Live research departure board** - animated, character-by-character signal changes with pause controls and reduced-motion support.
 - **Board-style route changes** - the terminal grows from the home board into an open route (and back) with an animated resize, route headings scramble and settle like departure-board flaps, rows flap in one after another, and a random row flaps now and then while a route is open. All of it stops under `prefers-reduced-motion`.
+- **Advent-calendar doors** - skill and education pages show numbered closed doors; each swings open to a fact about that page (a course, a paper, a project, a role) with a link where one exists. Motion is on by default and can be switched off from the footer.
 - **Project archive** - all public projects in one searchable index, with live links where available, compact desktop GitHub language/star signals, plus stable studio-order, recent-update, star-count, and alphabetical sorting and shareable filters.
 - **Project case studies** - each project has a focused brief, repository metadata, live/API facts, public GitHub topics and license when available, related public work, and a visible share/copy route action.
 - **Research timeline** - chronological research threads that open into the existing detail view instead of duplicating content.
